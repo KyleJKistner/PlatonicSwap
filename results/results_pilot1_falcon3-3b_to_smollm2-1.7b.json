@@ -1,0 +1,2897 @@
+{
+  "meta": {
+    "pair_key": "falcon3-3b->smollm2-1.7b",
+    "layers": [
+      14,
+      9
+    ],
+    "device": "mps",
+    "smoke": false,
+    "seed": 20261125,
+    "n_grid": [
+      500,
+      2000,
+      10000
+    ],
+    "n_fisher": 2000,
+    "loro_held_out_relations": [
+      "athlete_sport",
+      "company_founder",
+      "element_symbol",
+      "historical_figure_country",
+      "us_state_capital"
+    ],
+    "n_test_pairs": 177,
+    "n_test_ad_pairs": 69,
+    "n_loro_pairs": 96,
+    "elapsed_sec": 904.02
+  },
+  "corpus_meta": {
+    "n_train": 10000,
+    "n_val": 512,
+    "n_capitalized_proper_nouns": 10512,
+    "n_lowercase_content_nouns": 0,
+    "n_boundary_rejected": 0,
+    "val_test_overlap_count": 0,
+    "sample_prompts": [
+      "By all accounts, Diagram is closely associated with",
+      "According to historians, Koh originated in the context of",
+      "Across the region, Environments is frequently discussed in",
+      "In international reports, Various is frequently discussed in",
+      "In modern records, Austen became prominent during"
+    ]
+  },
+  "unlabeled_fisher_spectra": {
+    "F_B_end_unlab": {
+      "eff_rank_pr": 98.34,
+      "eff_rank_shannon": 259.53,
+      "top32_frac": 0.421,
+      "top64_frac": 0.5647,
+      "top256_frac": 0.859
+    },
+    "F_B_multi_unlab": {
+      "eff_rank_pr": 232.61,
+      "eff_rank_shannon": 512.75,
+      "top32_frac": 0.2622,
+      "top64_frac": 0.3804,
+      "top256_frac": 0.7191
+    }
+  },
+  "qa_train_reference": {
+    "qa_shared_procrustes_N499": {
+      "name": "qa_shared_procrustes_N499",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.6949,
+        "matched_ci95": [
+          0.6235,
+          0.763
+        ],
+        "shuffled_acc": 0.0113,
+        "matched_minus_shuffled_pp": 68.36,
+        "diff_ci95_pp": [
+          61.24,
+          75.28
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.6232,
+        "matched_ci95": [
+          0.5,
+          0.7342
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 62.32,
+        "diff_ci95_pp": [
+          50.0,
+          73.42
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.6458,
+        "matched_ci95": [
+          0.5417,
+          0.7396
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 64.58,
+        "diff_ci95_pp": [
+          54.17,
+          73.96
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.61549,
+        "r2_euclidean": 0.21846,
+        "r2_fisher": 0.3908,
+        "mean_l2_err": 107.67125
+      },
+      "unlabeled_val_continuation_kl": 0.12569
+    },
+    "qa_alltrain_procrustes_N587": {
+      "name": "qa_alltrain_procrustes_N587",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.6949,
+        "matched_ci95": [
+          0.6265,
+          0.7624
+        ],
+        "shuffled_acc": 0.0113,
+        "matched_minus_shuffled_pp": 68.36,
+        "diff_ci95_pp": [
+          61.36,
+          75.14
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.6232,
+        "matched_ci95": [
+          0.5,
+          0.7344
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 62.32,
+        "diff_ci95_pp": [
+          50.0,
+          73.44
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.6354,
+        "matched_ci95": [
+          0.5312,
+          0.7292
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 63.54,
+        "diff_ci95_pp": [
+          53.12,
+          72.92
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.62475,
+        "r2_euclidean": 0.23348,
+        "r2_fisher": 0.40134,
+        "mean_l2_err": 106.69919
+      },
+      "unlabeled_val_continuation_kl": 0.11469
+    },
+    "qa_alltrain_span_N587": {
+      "name": "qa_alltrain_span_N587",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.6949,
+        "matched_ci95": [
+          0.625,
+          0.7634
+        ],
+        "shuffled_acc": 0.0113,
+        "matched_minus_shuffled_pp": 68.36,
+        "diff_ci95_pp": [
+          61.36,
+          75.27
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.6232,
+        "matched_ci95": [
+          0.5,
+          0.7333
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 62.32,
+        "diff_ci95_pp": [
+          50.0,
+          73.33
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.6354,
+        "matched_ci95": [
+          0.5312,
+          0.7292
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 63.54,
+        "diff_ci95_pp": [
+          53.12,
+          72.92
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.64802,
+        "r2_euclidean": 0.30632,
+        "r2_fisher": 0.43724,
+        "mean_l2_err": 101.50682
+      },
+      "unlabeled_val_continuation_kl": 0.10632
+    },
+    "qa_train10rels_procrustes_N415": {
+      "name": "qa_train10rels_procrustes_N415",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.5819,
+        "matched_ci95": [
+          0.5059,
+          0.6536
+        ],
+        "shuffled_acc": 0.0169,
+        "matched_minus_shuffled_pp": 56.5,
+        "diff_ci95_pp": [
+          48.57,
+          63.98
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.5217,
+        "matched_ci95": [
+          0.3968,
+          0.6338
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 52.17,
+        "diff_ci95_pp": [
+          39.68,
+          63.38
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.3958,
+        "matched_ci95": [
+          0.3021,
+          0.4896
+        ],
+        "shuffled_acc": 0.0104,
+        "matched_minus_shuffled_pp": 38.54,
+        "diff_ci95_pp": [
+          29.17,
+          47.92
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.51469,
+        "r2_euclidean": 0.0125,
+        "r2_fisher": 0.23299,
+        "mean_l2_err": 119.34241
+      },
+      "unlabeled_val_continuation_kl": 0.13503
+    }
+  },
+  "unlabeled_scaling_ladder": {
+    "500": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4463,
+          "matched_ci95": [
+            0.3591,
+            0.5272
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 44.07,
+          "diff_ci95_pp": [
+            35.26,
+            52.5
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3913,
+          "matched_ci95": [
+            0.2623,
+            0.5147
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 39.13,
+          "diff_ci95_pp": [
+            26.23,
+            51.47
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3333,
+          "matched_ci95": [
+            0.2396,
+            0.4375
+          ],
+          "shuffled_acc": 0.0208,
+          "matched_minus_shuffled_pp": 31.25,
+          "diff_ci95_pp": [
+            21.88,
+            41.67
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.28695,
+          "r2_euclidean": -0.59652,
+          "r2_fisher": -0.14206,
+          "mean_l2_err": 156.76418
+        },
+        "unlabeled_val_continuation_kl": 0.05979
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4463,
+          "matched_ci95": [
+            0.3657,
+            0.5297
+          ],
+          "shuffled_acc": 0.0113,
+          "matched_minus_shuffled_pp": 43.5,
+          "diff_ci95_pp": [
+            35.33,
+            52.09
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3913,
+          "matched_ci95": [
+            0.2615,
+            0.5152
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 39.13,
+          "diff_ci95_pp": [
+            26.15,
+            51.52
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3646,
+          "matched_ci95": [
+            0.2708,
+            0.4583
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.46,
+          "diff_ci95_pp": [
+            27.08,
+            45.83
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.3489,
+          "r2_euclidean": -0.2011,
+          "r2_fisher": 0.03212,
+          "mean_l2_err": 135.74771
+        },
+        "unlabeled_val_continuation_kl": 0.05717
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4011,
+          "matched_ci95": [
+            0.3253,
+            0.4824
+          ],
+          "shuffled_acc": 0.0113,
+          "matched_minus_shuffled_pp": 38.98,
+          "diff_ci95_pp": [
+            31.18,
+            47.22
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3768,
+          "matched_ci95": [
+            0.2423,
+            0.5072
+          ],
+          "shuffled_acc": 0.0145,
+          "matched_minus_shuffled_pp": 36.23,
+          "diff_ci95_pp": [
+            22.73,
+            48.7
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3542,
+          "matched_ci95": [
+            0.2604,
+            0.4583
+          ],
+          "shuffled_acc": 0.0208,
+          "matched_minus_shuffled_pp": 33.33,
+          "diff_ci95_pp": [
+            23.96,
+            43.75
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.363,
+          "r2_euclidean": 0.04067,
+          "r2_fisher": 0.18873,
+          "mean_l2_err": 120.83628
+        },
+        "unlabeled_val_continuation_kl": 0.05813,
+        "selected_lam": 3.0
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4124,
+          "matched_ci95": [
+            0.3392,
+            0.4894
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 40.68,
+          "diff_ci95_pp": [
+            33.33,
+            48.62
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3623,
+          "matched_ci95": [
+            0.2319,
+            0.487
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.23,
+          "diff_ci95_pp": [
+            23.19,
+            48.7
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3646,
+          "matched_ci95": [
+            0.2708,
+            0.4583
+          ],
+          "shuffled_acc": 0.0104,
+          "matched_minus_shuffled_pp": 35.42,
+          "diff_ci95_pp": [
+            26.04,
+            44.79
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.38728,
+          "r2_euclidean": -0.08359,
+          "r2_fisher": 0.07288,
+          "mean_l2_err": 129.09159
+        },
+        "unlabeled_val_continuation_kl": 0.05647,
+        "selected_lam": 3.0
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4068,
+          "matched_ci95": [
+            0.3251,
+            0.4863
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 40.11,
+          "diff_ci95_pp": [
+            31.93,
+            48.11
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3768,
+          "matched_ci95": [
+            0.25,
+            0.5
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 37.68,
+          "diff_ci95_pp": [
+            25.0,
+            50.0
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3438,
+          "matched_ci95": [
+            0.25,
+            0.4375
+          ],
+          "shuffled_acc": 0.0208,
+          "matched_minus_shuffled_pp": 32.29,
+          "diff_ci95_pp": [
+            22.92,
+            42.71
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.25454,
+          "r2_euclidean": -1.10816,
+          "r2_fisher": -0.55778,
+          "mean_l2_err": 180.52481
+        },
+        "unlabeled_val_continuation_kl": 0.06623,
+        "selected_shrink_cov": 0.1
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.4068,
+          "matched_ci95": [
+            0.325,
+            0.4862
+          ],
+          "shuffled_acc": 0.0113,
+          "matched_minus_shuffled_pp": 39.55,
+          "diff_ci95_pp": [
+            31.18,
+            47.73
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3478,
+          "matched_ci95": [
+            0.2174,
+            0.4769
+          ],
+          "shuffled_acc": 0.0145,
+          "matched_minus_shuffled_pp": 33.33,
+          "diff_ci95_pp": [
+            20.58,
+            46.16
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3229,
+          "matched_ci95": [
+            0.2396,
+            0.4167
+          ],
+          "shuffled_acc": 0.0208,
+          "matched_minus_shuffled_pp": 30.21,
+          "diff_ci95_pp": [
+            20.83,
+            39.58
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.24715,
+          "r2_euclidean": -1.19197,
+          "r2_fisher": -0.42012,
+          "mean_l2_err": 184.08731
+        },
+        "unlabeled_val_continuation_kl": 0.06487,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.3955,
+          "matched_ci95": [
+            0.3125,
+            0.4798
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 38.98,
+          "diff_ci95_pp": [
+            30.55,
+            47.25
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.3623,
+          "matched_ci95": [
+            0.2319,
+            0.4861
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.23,
+          "diff_ci95_pp": [
+            23.19,
+            48.61
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.3333,
+          "matched_ci95": [
+            0.2396,
+            0.4271
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 33.33,
+          "diff_ci95_pp": [
+            23.96,
+            42.71
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.25003,
+          "r2_euclidean": -1.19584,
+          "r2_fisher": -0.56278,
+          "mean_l2_err": 184.28338
+        },
+        "unlabeled_val_continuation_kl": 0.06445,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.5
+      }
+    },
+    "2000": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5876,
+          "matched_ci95": [
+            0.5057,
+            0.663
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 58.76,
+          "diff_ci95_pp": [
+            50.57,
+            66.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5652,
+          "matched_ci95": [
+            0.4308,
+            0.6795
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 56.52,
+          "diff_ci95_pp": [
+            43.08,
+            67.95
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.6667,
+          "matched_ci95": [
+            0.5729,
+            0.7604
+          ],
+          "shuffled_acc": 0.0104,
+          "matched_minus_shuffled_pp": 65.62,
+          "diff_ci95_pp": [
+            55.21,
+            75.0
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.39623,
+          "r2_euclidean": -0.35287,
+          "r2_fisher": 0.06971,
+          "mean_l2_err": 144.23349
+        },
+        "unlabeled_val_continuation_kl": 0.04183
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5876,
+          "matched_ci95": [
+            0.5057,
+            0.663
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 58.76,
+          "diff_ci95_pp": [
+            50.57,
+            66.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5652,
+          "matched_ci95": [
+            0.4308,
+            0.6795
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 56.52,
+          "diff_ci95_pp": [
+            43.08,
+            67.95
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.6562,
+          "matched_ci95": [
+            0.5625,
+            0.75
+          ],
+          "shuffled_acc": 0.0104,
+          "matched_minus_shuffled_pp": 64.58,
+          "diff_ci95_pp": [
+            54.17,
+            73.96
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.39822,
+          "r2_euclidean": -0.3404,
+          "r2_fisher": 0.07716,
+          "mean_l2_err": 143.56791
+        },
+        "unlabeled_val_continuation_kl": 0.04193
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.565,
+          "matched_ci95": [
+            0.4855,
+            0.6421
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 56.5,
+          "diff_ci95_pp": [
+            48.55,
+            64.21
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5507,
+          "matched_ci95": [
+            0.4127,
+            0.6667
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 55.07,
+          "diff_ci95_pp": [
+            41.27,
+            66.67
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.6354,
+          "matched_ci95": [
+            0.5417,
+            0.7292
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 63.54,
+          "diff_ci95_pp": [
+            54.17,
+            72.92
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.46469,
+          "r2_euclidean": 0.14672,
+          "r2_fisher": 0.34531,
+          "mean_l2_err": 113.69239
+        },
+        "unlabeled_val_continuation_kl": 0.03956,
+        "selected_lam": 1.0
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.6045,
+          "matched_ci95": [
+            0.5276,
+            0.6748
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 60.45,
+          "diff_ci95_pp": [
+            52.76,
+            67.48
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5507,
+          "matched_ci95": [
+            0.4091,
+            0.6667
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 55.07,
+          "diff_ci95_pp": [
+            40.91,
+            66.67
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.6667,
+          "matched_ci95": [
+            0.5729,
+            0.7604
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 66.67,
+          "diff_ci95_pp": [
+            57.29,
+            76.04
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.48155,
+          "r2_euclidean": -0.01236,
+          "r2_fisher": 0.14943,
+          "mean_l2_err": 124.6715
+        },
+        "unlabeled_val_continuation_kl": 0.03916,
+        "selected_lam": 1.0
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5424,
+          "matched_ci95": [
+            0.4633,
+            0.6171
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 53.67,
+          "diff_ci95_pp": [
+            45.5,
+            61.14
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5217,
+          "matched_ci95": [
+            0.388,
+            0.6447
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 52.17,
+          "diff_ci95_pp": [
+            38.8,
+            64.47
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.5104,
+          "matched_ci95": [
+            0.4062,
+            0.6146
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 51.04,
+          "diff_ci95_pp": [
+            40.62,
+            61.46
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.34063,
+          "r2_euclidean": -1.06703,
+          "r2_fisher": -0.51879,
+          "mean_l2_err": 178.1149
+        },
+        "unlabeled_val_continuation_kl": 0.04329,
+        "selected_shrink_cov": 0.1
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5254,
+          "matched_ci95": [
+            0.4465,
+            0.599
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 51.98,
+          "diff_ci95_pp": [
+            44.19,
+            59.18
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.4928,
+          "matched_ci95": [
+            0.3623,
+            0.6164
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 49.28,
+          "diff_ci95_pp": [
+            36.23,
+            61.64
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.5208,
+          "matched_ci95": [
+            0.4167,
+            0.625
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 52.08,
+          "diff_ci95_pp": [
+            41.67,
+            62.5
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.3356,
+          "r2_euclidean": -1.13433,
+          "r2_fisher": -0.40858,
+          "mean_l2_err": 181.0109
+        },
+        "unlabeled_val_continuation_kl": 0.04252,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.01
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5254,
+          "matched_ci95": [
+            0.4431,
+            0.6011
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 51.98,
+          "diff_ci95_pp": [
+            43.75,
+            59.59
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.4928,
+          "matched_ci95": [
+            0.3623,
+            0.6154
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 49.28,
+          "diff_ci95_pp": [
+            36.23,
+            61.54
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.4792,
+          "matched_ci95": [
+            0.3854,
+            0.5833
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 47.92,
+          "diff_ci95_pp": [
+            38.54,
+            58.33
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.33056,
+          "r2_euclidean": -1.15375,
+          "r2_fisher": -0.50469,
+          "mean_l2_err": 181.83294
+        },
+        "unlabeled_val_continuation_kl": 0.04241,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.01
+      },
+      "fisher_orth_Od_multi": {
+        "name": "fisher_orth_Od_multi",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5424,
+          "matched_ci95": [
+            0.4595,
+            0.6185
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 53.67,
+          "diff_ci95_pp": [
+            45.12,
+            61.38
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5072,
+          "matched_ci95": [
+            0.3709,
+            0.6351
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 50.72,
+          "diff_ci95_pp": [
+            37.09,
+            63.51
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.5938,
+          "matched_ci95": [
+            0.4896,
+            0.6875
+          ],
+          "shuffled_acc": 0.0208,
+          "matched_minus_shuffled_pp": 57.29,
+          "diff_ci95_pp": [
+            46.88,
+            66.67
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.31707,
+          "r2_euclidean": -0.6385,
+          "r2_fisher": -1.16464,
+          "mean_l2_err": 159.4302
+        },
+        "unlabeled_val_continuation_kl": 0.06884,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_diag_fisher": {
+        "name": "pullback_zca_diag_fisher",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.5254,
+          "matched_ci95": [
+            0.4465,
+            0.5989
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 51.98,
+          "diff_ci95_pp": [
+            44.17,
+            59.43
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.5072,
+          "matched_ci95": [
+            0.375,
+            0.6324
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 50.72,
+          "diff_ci95_pp": [
+            37.5,
+            63.24
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.4896,
+          "matched_ci95": [
+            0.3854,
+            0.5938
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 48.96,
+          "diff_ci95_pp": [
+            38.54,
+            59.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.34017,
+          "r2_euclidean": -1.07407,
+          "r2_fisher": -0.50487,
+          "mean_l2_err": 178.42076
+        },
+        "unlabeled_val_continuation_kl": 0.04346
+      }
+    },
+    "10000": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7006,
+          "matched_ci95": [
+            0.6272,
+            0.768
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 69.49,
+          "diff_ci95_pp": [
+            62.15,
+            76.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7101,
+          "matched_ci95": [
+            0.6,
+            0.8095
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.01,
+          "diff_ci95_pp": [
+            60.0,
+            80.95
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.8021,
+          "matched_ci95": [
+            0.7188,
+            0.875
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 80.21,
+          "diff_ci95_pp": [
+            71.88,
+            87.5
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.46815,
+          "r2_euclidean": -0.18489,
+          "r2_fisher": 0.15118,
+          "mean_l2_err": 134.84248
+        },
+        "unlabeled_val_continuation_kl": 0.03873
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7006,
+          "matched_ci95": [
+            0.6272,
+            0.768
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 69.49,
+          "diff_ci95_pp": [
+            62.15,
+            76.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7101,
+          "matched_ci95": [
+            0.6,
+            0.8095
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.01,
+          "diff_ci95_pp": [
+            60.0,
+            80.95
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.8021,
+          "matched_ci95": [
+            0.7188,
+            0.875
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 80.21,
+          "diff_ci95_pp": [
+            71.88,
+            87.5
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.46815,
+          "r2_euclidean": -0.18489,
+          "r2_fisher": 0.15118,
+          "mean_l2_err": 134.84248
+        },
+        "unlabeled_val_continuation_kl": 0.03873
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7062,
+          "matched_ci95": [
+            0.6375,
+            0.773
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 70.06,
+          "diff_ci95_pp": [
+            63.33,
+            76.84
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6812,
+          "matched_ci95": [
+            0.5652,
+            0.7857
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 68.12,
+          "diff_ci95_pp": [
+            56.52,
+            78.57
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7188,
+          "matched_ci95": [
+            0.625,
+            0.8125
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.88,
+          "diff_ci95_pp": [
+            62.5,
+            81.25
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.5422,
+          "r2_euclidean": 0.24317,
+          "r2_fisher": 0.43671,
+          "mean_l2_err": 106.74025
+        },
+        "unlabeled_val_continuation_kl": 0.03342,
+        "selected_lam": 0.3
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7062,
+          "matched_ci95": [
+            0.639,
+            0.7705
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 70.06,
+          "diff_ci95_pp": [
+            63.25,
+            76.57
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6667,
+          "matched_ci95": [
+            0.5493,
+            0.7693
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 66.67,
+          "diff_ci95_pp": [
+            54.93,
+            76.93
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7812,
+          "matched_ci95": [
+            0.6979,
+            0.8646
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 78.12,
+          "diff_ci95_pp": [
+            69.79,
+            86.46
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.55823,
+          "r2_euclidean": 0.10701,
+          "r2_fisher": 0.25037,
+          "mean_l2_err": 116.64111
+        },
+        "unlabeled_val_continuation_kl": 0.03415,
+        "selected_lam": 0.3
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7119,
+          "matched_ci95": [
+            0.6405,
+            0.7754
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 70.62,
+          "diff_ci95_pp": [
+            63.53,
+            77.0
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6957,
+          "matched_ci95": [
+            0.5806,
+            0.8
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 69.57,
+          "diff_ci95_pp": [
+            58.06,
+            80.0
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7604,
+          "matched_ci95": [
+            0.6667,
+            0.8438
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 76.04,
+          "diff_ci95_pp": [
+            66.67,
+            84.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.43959,
+          "r2_euclidean": -0.62623,
+          "r2_fisher": -0.09818,
+          "mean_l2_err": 157.78042
+        },
+        "unlabeled_val_continuation_kl": 0.03569,
+        "selected_shrink_cov": 0.1
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7175,
+          "matched_ci95": [
+            0.6463,
+            0.7821
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 71.19,
+          "diff_ci95_pp": [
+            63.8,
+            77.54
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6957,
+          "matched_ci95": [
+            0.5857,
+            0.8028
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 69.57,
+          "diff_ci95_pp": [
+            58.57,
+            80.28
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.75,
+          "matched_ci95": [
+            0.6562,
+            0.8333
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 75.0,
+          "diff_ci95_pp": [
+            65.62,
+            83.33
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.43272,
+          "r2_euclidean": -0.67056,
+          "r2_fisher": 0.00344,
+          "mean_l2_err": 159.93275
+        },
+        "unlabeled_val_continuation_kl": 0.03533,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.1
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.6949,
+          "matched_ci95": [
+            0.6227,
+            0.7602
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 68.93,
+          "diff_ci95_pp": [
+            61.68,
+            75.44
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6957,
+          "matched_ci95": [
+            0.5821,
+            0.8028
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 69.57,
+          "diff_ci95_pp": [
+            58.21,
+            80.28
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7188,
+          "matched_ci95": [
+            0.6247,
+            0.8125
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.88,
+          "diff_ci95_pp": [
+            62.47,
+            81.25
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.42419,
+          "r2_euclidean": -0.6978,
+          "r2_fisher": -0.10351,
+          "mean_l2_err": 161.19661
+        },
+        "unlabeled_val_continuation_kl": 0.03548,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.1
+      },
+      "fisher_orth_Od_multi": {
+        "name": "fisher_orth_Od_multi",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.678,
+          "matched_ci95": [
+            0.6037,
+            0.7476
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 67.23,
+          "diff_ci95_pp": [
+            59.77,
+            74.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6812,
+          "matched_ci95": [
+            0.5652,
+            0.7888
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 68.12,
+          "diff_ci95_pp": [
+            56.52,
+            78.88
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7708,
+          "matched_ci95": [
+            0.6771,
+            0.8542
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 77.08,
+          "diff_ci95_pp": [
+            67.71,
+            85.42
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.36922,
+          "r2_euclidean": -0.50296,
+          "r2_fisher": -1.20651,
+          "mean_l2_err": 152.66876
+        },
+        "unlabeled_val_continuation_kl": 0.06539,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_diag_fisher": {
+        "name": "pullback_zca_diag_fisher",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7006,
+          "matched_ci95": [
+            0.6287,
+            0.7654
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 69.49,
+          "diff_ci95_pp": [
+            62.28,
+            76.11
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.6812,
+          "matched_ci95": [
+            0.5645,
+            0.7895
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 68.12,
+          "diff_ci95_pp": [
+            56.45,
+            78.95
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7604,
+          "matched_ci95": [
+            0.6667,
+            0.8438
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 76.04,
+          "diff_ci95_pp": [
+            66.67,
+            84.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.43968,
+          "r2_euclidean": -0.62484,
+          "r2_fisher": -0.09265,
+          "mean_l2_err": 157.68717
+        },
+        "unlabeled_val_continuation_kl": 0.03574
+      },
+      "procrustes_global_t10mean": {
+        "name": "procrustes_global_t10mean",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7232,
+          "matched_ci95": [
+            0.6532,
+            0.7898
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 71.75,
+          "diff_ci95_pp": [
+            64.88,
+            78.38
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7101,
+          "matched_ci95": [
+            0.5942,
+            0.8088
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.01,
+          "diff_ci95_pp": [
+            59.42,
+            80.88
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.8438,
+          "matched_ci95": [
+            0.7708,
+            0.9167
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.38,
+          "diff_ci95_pp": [
+            77.08,
+            91.67
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.5152,
+          "r2_euclidean": 0.01367,
+          "r2_fisher": 0.27412,
+          "mean_l2_err": 122.07734
+        },
+        "unlabeled_val_continuation_kl": 0.04509
+      },
+      "zca_whitened_t10mean": {
+        "name": "zca_whitened_t10mean",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7345,
+          "matched_ci95": [
+            0.6628,
+            0.8
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 72.88,
+          "diff_ci95_pp": [
+            65.91,
+            79.55
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7101,
+          "matched_ci95": [
+            0.5909,
+            0.8143
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.01,
+          "diff_ci95_pp": [
+            59.09,
+            81.43
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7708,
+          "matched_ci95": [
+            0.6771,
+            0.8542
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 77.08,
+          "diff_ci95_pp": [
+            67.71,
+            85.42
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.48644,
+          "r2_euclidean": -0.32075,
+          "r2_fisher": 0.09538,
+          "mean_l2_err": 141.13664
+        },
+        "unlabeled_val_continuation_kl": 0.04348
+      },
+      "pullback_zca_fisher_multi_t10mean": {
+        "name": "pullback_zca_fisher_multi_t10mean",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7571,
+          "matched_ci95": [
+            0.6901,
+            0.8198
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 75.14,
+          "diff_ci95_pp": [
+            68.48,
+            81.36
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7391,
+          "matched_ci95": [
+            0.6269,
+            0.8378
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 73.91,
+          "diff_ci95_pp": [
+            62.69,
+            83.78
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.7812,
+          "matched_ci95": [
+            0.6979,
+            0.8542
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 78.12,
+          "diff_ci95_pp": [
+            69.79,
+            85.42
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.47868,
+          "r2_euclidean": -0.35468,
+          "r2_fisher": 0.16415,
+          "mean_l2_err": 142.96736
+        },
+        "unlabeled_val_continuation_kl": 0.04324
+      },
+      "fisher_orth_Od_multi_t10mean": {
+        "name": "fisher_orth_Od_multi_t10mean",
+        "cf_flip_test": {
+          "n": 177,
+          "n_unique_subjects": 137,
+          "matched_acc": 0.7006,
+          "matched_ci95": [
+            0.6271,
+            0.771
+          ],
+          "shuffled_acc": 0.0113,
+          "matched_minus_shuffled_pp": 68.93,
+          "diff_ci95_pp": [
+            61.24,
+            75.92
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 69,
+          "n_unique_subjects": 56,
+          "matched_acc": 0.7101,
+          "matched_ci95": [
+            0.5942,
+            0.8082
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.01,
+          "diff_ci95_pp": [
+            59.42,
+            80.82
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 96,
+          "n_unique_subjects": 96,
+          "matched_acc": 0.8125,
+          "matched_ci95": [
+            0.7292,
+            0.8854
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.25,
+          "diff_ci95_pp": [
+            72.92,
+            88.54
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.43617,
+          "r2_euclidean": -0.14346,
+          "r2_fisher": -0.43533,
+          "mean_l2_err": 131.68348
+        },
+        "unlabeled_val_continuation_kl": 0.07005
+      }
+    }
+  },
+  "rank_k_compression": {
+    "k32_pca": {
+      "name": "k32_pca",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.0621,
+        "matched_ci95": [
+          0.0294,
+          0.0984
+        ],
+        "shuffled_acc": 0.0339,
+        "matched_minus_shuffled_pp": 2.82,
+        "diff_ci95_pp": [
+          -0.58,
+          6.45
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.0,
+        "matched_ci95": [
+          0.0,
+          0.0
+        ],
+        "shuffled_acc": 0.0145,
+        "matched_minus_shuffled_pp": -1.45,
+        "diff_ci95_pp": [
+          -4.76,
+          0.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.0729,
+        "matched_ci95": [
+          0.031,
+          0.125
+        ],
+        "shuffled_acc": 0.0521,
+        "matched_minus_shuffled_pp": 2.08,
+        "diff_ci95_pp": [
+          -2.08,
+          6.25
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.24502,
+        "r2_euclidean": -0.05412,
+        "r2_fisher": 0.01233,
+        "mean_l2_err": 126.95741
+      },
+      "unlabeled_val_continuation_kl": 0.10202
+    },
+    "k32_pls": {
+      "name": "k32_pls",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.113,
+        "matched_ci95": [
+          0.0659,
+          0.163
+        ],
+        "shuffled_acc": 0.0395,
+        "matched_minus_shuffled_pp": 7.34,
+        "diff_ci95_pp": [
+          2.78,
+          12.31
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.0725,
+        "matched_ci95": [
+          0.0143,
+          0.1471
+        ],
+        "shuffled_acc": 0.0145,
+        "matched_minus_shuffled_pp": 5.8,
+        "diff_ci95_pp": [
+          0.0,
+          13.16
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.0833,
+        "matched_ci95": [
+          0.0312,
+          0.1458
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 8.33,
+        "diff_ci95_pp": [
+          3.12,
+          14.58
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.28755,
+        "r2_euclidean": 0.00871,
+        "r2_fisher": 0.09114,
+        "mean_l2_err": 122.93797
+      },
+      "unlabeled_val_continuation_kl": 0.09745
+    },
+    "k32_fisher_pls": {
+      "name": "k32_fisher_pls",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.1469,
+        "matched_ci95": [
+          0.0925,
+          0.2073
+        ],
+        "shuffled_acc": 0.0339,
+        "matched_minus_shuffled_pp": 11.3,
+        "diff_ci95_pp": [
+          6.35,
+          17.11
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.0725,
+        "matched_ci95": [
+          0.0147,
+          0.1408
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 7.25,
+        "diff_ci95_pp": [
+          1.47,
+          14.08
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.0938,
+        "matched_ci95": [
+          0.0417,
+          0.1667
+        ],
+        "shuffled_acc": 0.0208,
+        "matched_minus_shuffled_pp": 7.29,
+        "diff_ci95_pp": [
+          2.08,
+          13.54
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.29762,
+        "r2_euclidean": -0.03052,
+        "r2_fisher": 0.07735,
+        "mean_l2_err": 125.63077
+      },
+      "unlabeled_val_continuation_kl": 0.09471
+    },
+    "k64_pca": {
+      "name": "k64_pca",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.1469,
+        "matched_ci95": [
+          0.0983,
+          0.2
+        ],
+        "shuffled_acc": 0.0395,
+        "matched_minus_shuffled_pp": 10.73,
+        "diff_ci95_pp": [
+          5.88,
+          15.96
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.1014,
+        "matched_ci95": [
+          0.0303,
+          0.1831
+        ],
+        "shuffled_acc": 0.0145,
+        "matched_minus_shuffled_pp": 8.7,
+        "diff_ci95_pp": [
+          2.74,
+          16.18
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.1146,
+        "matched_ci95": [
+          0.0521,
+          0.1771
+        ],
+        "shuffled_acc": 0.0104,
+        "matched_minus_shuffled_pp": 10.42,
+        "diff_ci95_pp": [
+          5.21,
+          16.67
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.31467,
+        "r2_euclidean": -0.00726,
+        "r2_fisher": 0.07324,
+        "mean_l2_err": 123.9261
+      },
+      "unlabeled_val_continuation_kl": 0.0868
+    },
+    "k64_pls": {
+      "name": "k64_pls",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.2034,
+        "matched_ci95": [
+          0.1394,
+          0.2713
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 19.77,
+        "diff_ci95_pp": [
+          13.29,
+          26.84
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.1594,
+        "matched_ci95": [
+          0.0806,
+          0.2429
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 15.94,
+        "diff_ci95_pp": [
+          8.06,
+          24.29
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.1875,
+        "matched_ci95": [
+          0.1146,
+          0.2708
+        ],
+        "shuffled_acc": 0.0417,
+        "matched_minus_shuffled_pp": 14.58,
+        "diff_ci95_pp": [
+          8.33,
+          21.88
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.36523,
+        "r2_euclidean": 0.05996,
+        "r2_fisher": 0.17435,
+        "mean_l2_err": 119.53991
+      },
+      "unlabeled_val_continuation_kl": 0.07584
+    },
+    "k64_fisher_pls": {
+      "name": "k64_fisher_pls",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.2542,
+        "matched_ci95": [
+          0.1852,
+          0.3256
+        ],
+        "shuffled_acc": 0.0169,
+        "matched_minus_shuffled_pp": 23.73,
+        "diff_ci95_pp": [
+          17.11,
+          30.41
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.2319,
+        "matched_ci95": [
+          0.1364,
+          0.3333
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 23.19,
+        "diff_ci95_pp": [
+          13.64,
+          33.33
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.2083,
+        "matched_ci95": [
+          0.125,
+          0.2919
+        ],
+        "shuffled_acc": 0.0208,
+        "matched_minus_shuffled_pp": 18.75,
+        "diff_ci95_pp": [
+          10.42,
+          28.12
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.37124,
+        "r2_euclidean": -0.02564,
+        "r2_fisher": 0.14826,
+        "mean_l2_err": 125.38967
+      },
+      "unlabeled_val_continuation_kl": 0.07218
+    }
+  },
+  "low_dof_so_comparison": {
+    "so32_mse_unlab_from_unlabR0": {
+      "name": "so32_mse_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7062,
+        "matched_ci95": [
+          0.6333,
+          0.7744
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 70.06,
+        "diff_ci95_pp": [
+          62.86,
+          76.88
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7101,
+        "matched_ci95": [
+          0.6,
+          0.8095
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 71.01,
+        "diff_ci95_pp": [
+          60.0,
+          80.95
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.4679,
+        "r2_euclidean": -0.18559,
+        "r2_fisher": 0.14547,
+        "mean_l2_err": 134.8827
+      },
+      "unlabeled_val_continuation_kl": 0.03843,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 9.983959,
+        "final_loss": 9.706724,
+        "orth_err": 1.6469741034072963e-06,
+        "Q_displacement_fro": 0.8145
+      }
+    },
+    "so32_kl_unlab_from_unlabR0": {
+      "name": "so32_kl_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7062,
+        "matched_ci95": [
+          0.6333,
+          0.7744
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 70.06,
+        "diff_ci95_pp": [
+          62.86,
+          76.88
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7101,
+        "matched_ci95": [
+          0.6,
+          0.8095
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 71.01,
+        "diff_ci95_pp": [
+          60.0,
+          80.95
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.46815,
+        "r2_euclidean": -0.18489,
+        "r2_fisher": 0.15118,
+        "mean_l2_err": 134.84248
+      },
+      "unlabeled_val_continuation_kl": 0.03821,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.03369,
+        "final_train_kl": 0.03325,
+        "best_val_kl": 0.03893,
+        "orth_err": 0.0,
+        "Q_displacement_fro": 0.0
+      }
+    },
+    "so32_mse_selfswap_tr10_from_unlabR0": {
+      "name": "so32_mse_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7006,
+        "matched_ci95": [
+          0.628,
+          0.7684
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 69.49,
+        "diff_ci95_pp": [
+          62.28,
+          76.16
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.6957,
+        "matched_ci95": [
+          0.5797,
+          0.7971
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 69.57,
+        "diff_ci95_pp": [
+          57.97,
+          79.71
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.46789,
+        "r2_euclidean": -0.18406,
+        "r2_fisher": 0.15995,
+        "mean_l2_err": 134.76554
+      },
+      "unlabeled_val_continuation_kl": 0.04393,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 13.365458,
+        "final_loss": 9.066656,
+        "orth_err": 2.2183104320250024e-06,
+        "Q_displacement_fro": 4.2955
+      }
+    },
+    "so32_kl_selfswap_tr10_from_unlabR0": {
+      "name": "so32_kl_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7232,
+        "matched_ci95": [
+          0.6509,
+          0.7892
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 71.75,
+        "diff_ci95_pp": [
+          64.5,
+          78.53
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7536,
+        "matched_ci95": [
+          0.6522,
+          0.8493
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 75.36,
+        "diff_ci95_pp": [
+          65.22,
+          84.93
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8229,
+        "matched_ci95": [
+          0.7396,
+          0.8958
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 82.29,
+        "diff_ci95_pp": [
+          73.96,
+          89.58
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.44392,
+        "r2_euclidean": -0.26996,
+        "r2_fisher": -0.52391,
+        "mean_l2_err": 139.98336
+      },
+      "unlabeled_val_continuation_kl": 0.06301,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.29827,
+        "final_train_kl": 0.21368,
+        "best_val_kl": 0.19742,
+        "orth_err": 1.7669252621031501e-06,
+        "Q_displacement_fro": 4.6535
+      }
+    },
+    "so32_mse_selfswap_tr10_from_qa10R0": {
+      "name": "so32_mse_selfswap_tr10_from_qa10R0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.5876,
+        "matched_ci95": [
+          0.512,
+          0.661
+        ],
+        "shuffled_acc": 0.0169,
+        "matched_minus_shuffled_pp": 57.06,
+        "diff_ci95_pp": [
+          49.35,
+          64.57
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.5362,
+        "matched_ci95": [
+          0.4084,
+          0.6486
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 53.62,
+        "diff_ci95_pp": [
+          40.84,
+          64.86
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.3854,
+        "matched_ci95": [
+          0.2917,
+          0.4792
+        ],
+        "shuffled_acc": 0.0104,
+        "matched_minus_shuffled_pp": 37.5,
+        "diff_ci95_pp": [
+          28.12,
+          46.88
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.51467,
+        "r2_euclidean": 0.01246,
+        "r2_fisher": 0.23225,
+        "mean_l2_err": 119.34469
+      },
+      "unlabeled_val_continuation_kl": 0.1346,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 1.919389,
+        "final_loss": 1.906291,
+        "orth_err": 1.5735744323107074e-06,
+        "Q_displacement_fro": 0.2191
+      }
+    },
+    "so32_kl_selfswap_tr10_from_qa10R0": {
+      "name": "so32_kl_selfswap_tr10_from_qa10R0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.5876,
+        "matched_ci95": [
+          0.512,
+          0.661
+        ],
+        "shuffled_acc": 0.0169,
+        "matched_minus_shuffled_pp": 57.06,
+        "diff_ci95_pp": [
+          49.35,
+          64.57
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.5362,
+        "matched_ci95": [
+          0.4084,
+          0.6486
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 53.62,
+        "diff_ci95_pp": [
+          40.84,
+          64.86
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.3958,
+        "matched_ci95": [
+          0.3021,
+          0.4896
+        ],
+        "shuffled_acc": 0.0104,
+        "matched_minus_shuffled_pp": 38.54,
+        "diff_ci95_pp": [
+          29.17,
+          47.92
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.51469,
+        "r2_euclidean": 0.0125,
+        "r2_fisher": 0.23299,
+        "mean_l2_err": 119.34241
+      },
+      "unlabeled_val_continuation_kl": 0.13528,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.08333,
+        "final_train_kl": 0.06418,
+        "best_val_kl": 0.34494,
+        "orth_err": 0.0,
+        "Q_displacement_fro": 0.0
+      }
+    },
+    "so64_mse_unlab_from_unlabR0": {
+      "name": "so64_mse_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.6893,
+        "matched_ci95": [
+          0.6149,
+          0.76
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 68.36,
+        "diff_ci95_pp": [
+          60.74,
+          75.43
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7101,
+        "matched_ci95": [
+          0.6,
+          0.8077
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 71.01,
+        "diff_ci95_pp": [
+          60.0,
+          80.77
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.46682,
+        "r2_euclidean": -0.18808,
+        "r2_fisher": 0.11305,
+        "mean_l2_err": 135.02901
+      },
+      "unlabeled_val_continuation_kl": 0.03902,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_loss": 10.177302,
+        "final_loss": 9.814017,
+        "orth_err": 2.765613734964459e-06,
+        "Q_displacement_fro": 3.1818
+      }
+    },
+    "so64_kl_unlab_from_unlabR0": {
+      "name": "so64_kl_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7062,
+        "matched_ci95": [
+          0.6333,
+          0.7744
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 70.06,
+        "diff_ci95_pp": [
+          62.86,
+          76.88
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7101,
+        "matched_ci95": [
+          0.6,
+          0.8095
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 71.01,
+        "diff_ci95_pp": [
+          60.0,
+          80.95
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.46815,
+        "r2_euclidean": -0.18489,
+        "r2_fisher": 0.15118,
+        "mean_l2_err": 134.84248
+      },
+      "unlabeled_val_continuation_kl": 0.03821,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_train_kl": 0.03369,
+        "final_train_kl": 0.03467,
+        "best_val_kl": 0.03893,
+        "orth_err": 0.0,
+        "Q_displacement_fro": 0.0
+      }
+    },
+    "so64_mse_selfswap_tr10_from_unlabR0": {
+      "name": "so64_mse_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7119,
+        "matched_ci95": [
+          0.6402,
+          0.7797
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 70.62,
+        "diff_ci95_pp": [
+          63.41,
+          77.53
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.6957,
+        "matched_ci95": [
+          0.5781,
+          0.7946
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 69.57,
+        "diff_ci95_pp": [
+          57.81,
+          79.46
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8021,
+        "matched_ci95": [
+          0.7188,
+          0.875
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 80.21,
+        "diff_ci95_pp": [
+          71.88,
+          87.5
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.46581,
+        "r2_euclidean": -0.18753,
+        "r2_fisher": 0.127,
+        "mean_l2_err": 134.9602
+      },
+      "unlabeled_val_continuation_kl": 0.04951,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_loss": 13.125669,
+        "final_loss": 8.502417,
+        "orth_err": 4.711728397429819e-06,
+        "Q_displacement_fro": 6.8161
+      }
+    },
+    "so64_kl_selfswap_tr10_from_unlabR0": {
+      "name": "so64_kl_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 177,
+        "n_unique_subjects": 137,
+        "matched_acc": 0.7232,
+        "matched_ci95": [
+          0.6509,
+          0.7884
+        ],
+        "shuffled_acc": 0.0056,
+        "matched_minus_shuffled_pp": 71.75,
+        "diff_ci95_pp": [
+          64.63,
+          78.45
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 69,
+        "n_unique_subjects": 56,
+        "matched_acc": 0.7246,
+        "matched_ci95": [
+          0.6164,
+          0.8228
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 72.46,
+        "diff_ci95_pp": [
+          61.64,
+          82.28
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 96,
+        "n_unique_subjects": 96,
+        "matched_acc": 0.8125,
+        "matched_ci95": [
+          0.7292,
+          0.8854
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 81.25,
+        "diff_ci95_pp": [
+          72.92,
+          88.54
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.42538,
+        "r2_euclidean": -0.32487,
+        "r2_fisher": -0.87053,
+        "mean_l2_err": 143.12545
+      },
+      "unlabeled_val_continuation_kl": 0.06585,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_train_kl": 0.29827,
+        "final_train_kl": 0.15757,
+        "best_val_kl": 0.19243,
+        "orth_err": 3.2623552140502136e-06,
+        "Q_displacement_fro": 7.5243
+      }
+    }
+  }
+}

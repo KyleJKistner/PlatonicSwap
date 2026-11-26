@@ -1,0 +1,5670 @@
+{
+  "meta": {
+    "donor": "qwen2.5-3b",
+    "recipient": "smollm2-1.7b",
+    "device": "mps",
+    "tests_run": [
+      "t0",
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "swept_layer_pairs": [
+      [
+        11,
+        6
+      ],
+      [
+        17,
+        9
+      ],
+      [
+        20,
+        11
+      ]
+    ],
+    "seed": 20261125,
+    "elapsed_sec": 386.39
+  },
+  "calibration_meta": {
+    "n_cal_leak_free": 2500,
+    "pilot1_10k_word_overlap_with_graft_pool": 127,
+    "swept_layer_pairs": [
+      [
+        11,
+        6
+      ],
+      [
+        17,
+        9
+      ],
+      [
+        20,
+        11
+      ]
+    ],
+    "pilot1_10k_available": true
+  },
+  "T0_competence_filter": {
+    "landmarks": {
+      "pool_name": "landmarks_32",
+      "n_total": 32,
+      "n_passed": 24,
+      "B_mean_by_attr": {
+        "country": 0.8125,
+        "capital": 0.8125,
+        "currency": 0.8438,
+        "language": 0.8438,
+        "prot_type": 0.9375,
+        "prot_fact": 0.9062
+      },
+      "A_mean_by_attr": {
+        "country": 0.8438,
+        "capital": 0.6562,
+        "currency": 0.9375,
+        "language": 0.7188,
+        "prot_type": 0.8125,
+        "prot_fact": 0.9375
+      },
+      "items": [
+        {
+          "name": "Eiffel Tower",
+          "country": "France",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " France.\n\nThe E"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris.\n\nThe E"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro.\n\nThe E"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French.\n\nThe E"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Gustave Eiffel, a"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " France. The country is known"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris. What is the capital"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The tower is "
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French. The tower is a"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Gustave Eiffel and"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Louvre",
+          "country": "France",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " France, which is a country"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris.\n\nThe Lou"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Lou"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French.\n\nThe Lou"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " museum in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Mona Lisa, which is"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " France. It is the largest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro. The Louvre is"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " museum in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Mona Lisa. The painting is"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Notre-Dame",
+          "country": "France",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " France, and is the most"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris.\n\nNotre"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro.\n\nNotre"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French. The French language is"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " cathedral in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " cathedral in Paris, France."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " France. It is a city"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris. The country is France"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The price of a"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French. The cathedral is therefore"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " church in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " cathedral in Paris, France."
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Arc de Triomphe",
+          "country": "France",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " France. It is a monument"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris.\n\nThe Arc"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Arc"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French.\n\nThe Arc"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Napoleon Bonaparte in 18"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " France. It is a monument"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Paris. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. If the cost of"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " French. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in Paris, France."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Napoleon Bonaparte in "
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Tokyo Tower",
+          "country": "Japan",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is the tallest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo.\n\nTokyo"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen.\n\nTo"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Japanese.\n\nThe Japanese"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Japan. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Eiffel Tower in Paris."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is a famous"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo. It is a famous"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen (JPY). The"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " not Japanese. What is the"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Japan. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Eiffel Tower in Paris"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Mount Fuji",
+          "country": "Japan",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is the highest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo.\n\nFu"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Japanese Yen. The currency"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Japanese.\n\nThe Japanese"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " mountain in Japan. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " volcano, and the last eruption"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is the highest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo. What is the capital"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen. If 1 U"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Japanese. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " mountain in Japan. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " volcano in Japan. It is"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Senso-ji",
+          "country": "Japan",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is a Buddhist"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo.\n\nThe temple"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen. The yen"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Japanese.\n\nThe Japanese"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " temple in Japan. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " temple in Asakusa,"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is a Buddhist"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Kyoto. The temple is famous"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen. Senso-ji"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " not Japanese. The temple is"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " temple in Kyoto. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " temple in Kyoto, Japan."
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 2,
+          "passed": true
+        },
+        {
+          "name": "Osaka Castle",
+          "country": "Japan",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is a castle"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Tokyo.\n\nThe castle"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen.\n\nThe"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Japanese.\n\nThe castle"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " castle in Japan. It was"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " castle in the city of Kyoto"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Japan. It is a castle"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Osaka. The castle is a"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yen. The castle is also"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " ____\nA. English\n"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " castle in Osaka, Japan."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Japanese castle in Osaka, Japan"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 2,
+          "passed": true
+        },
+        {
+          "name": "Statue of Liberty",
+          "country": "United States",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " France.\n\nThe Statue"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington, D.C."
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " euro.\n\nThe Statue"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe Statue"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in New York Harbor."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " France to the United States."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 0,
+              "gen": " ____\nA. United States"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington D.C. What is"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " dollar. The statue is "
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in New York City."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " France to the United States."
+            }
+          },
+          "B_geo_score": 2,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": false
+        },
+        {
+          "name": "Empire State Building",
+          "country": "United States",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " New York.\n\nThe"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington, D.C."
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " US dollar.\n\nThe"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe Empire"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in New York City."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " skyscraper in New York"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 0,
+              "gen": " ____\nA. United States"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " New York. The Empire State"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " dollar. If the Empire State"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. The building is "
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " skyscraper in New York City"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " skyscraper in New York City"
+            }
+          },
+          "B_geo_score": 3,
+          "B_prot_score": 2,
+          "A_geo_score": 2,
+          "passed": false
+        },
+        {
+          "name": "Golden Gate Bridge",
+          "country": "United States",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " California, USA. It is"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington, D.C."
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " US dollar.\n\nThe"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " Spanish.\n\nThe Golden"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in San Francisco, California"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " bridge in San Francisco, California"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 0,
+              "gen": " ______.\nA. Canada\n"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington D.C. What is"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " dollar. The bridge is "
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. The bridge is a"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in San Francisco, California"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " bridge in San Francisco, California"
+            }
+          },
+          "B_geo_score": 2,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": false
+        },
+        {
+          "name": "Mount Rushmore",
+          "country": "United States",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " South Dakota, in the United"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington, D.C."
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " South African Rand.\n\n"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe United"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in the United States."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " U.S. presidents:"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 0,
+              "gen": " ________.\nA. Canada"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Washington, D.C. What"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " dollar. The monument is "
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " sculpture located in the Black Hills"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " U.S. presidents: George"
+            }
+          },
+          "B_geo_score": 2,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": false
+        },
+        {
+          "name": "Colosseum",
+          "country": "Italy",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. It is a large"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome.\n\nThe Col"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Col"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian.\n\nThe Col"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " amphitheater in Rome,"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " gladiatorial contests and public"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. The Colosse"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome. The country is Italy"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The entrance ticket costs"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " not English. What is the"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " ancient Roman amphitheatre in"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " gladiatorial contests and public"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Leaning Tower of Pisa",
+          "country": "Italy",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. It is a famous"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome.\n\nThe Le"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro.\n\nThe Le"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian.\n\nThe Le"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " bell tower in Pisa,"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " tilt. The tower was built"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. The tower is "
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " also the capital of a country"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The tower is "
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian. The tower is "
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " example of a structure that is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " tilt. The tower is "
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Trevi Fountain",
+          "country": "Italy",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. It is a beautiful"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome.\n\nThe Tre"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Tre"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian.\n\nThe Tre"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " fountain in Rome, Italy."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " fountain in Rome, Italy."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. It is a famous"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro. If the exchange rate"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian. What is the name"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " Baroque fountain in Rome,"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " fountain in Rome, Italy."
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "St. Peter's Basilica",
+          "country": "Italy",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy.\n\nThe Basilica"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome.\n\nThe Vatican"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Vatican"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian. The Basilica is the"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " church in Rome, Italy."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " church in the world. It"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Italy. It is a church"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Rome. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro. If the exchange rate"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Italian. What is the name"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " church in the Vatican City."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " church in the world. It"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Big Ben",
+          "country": "United Kingdom",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is the tallest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London.\n\nThe capital"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " British Pound.\n\n"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe United"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " clock tower in London, England"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " clock tower of the Houses of"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is a famous"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London. Which country is it"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " pound. The clock tower is"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " not English. Which of the"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " clock in London. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " bell of the clock at the"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Tower of London",
+          "country": "United Kingdom",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is a castle"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London.\n\nThe Tower"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " British Pound.\n\n"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe Tower"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in London, England."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Crown Jewels, which are"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is a historic"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London. The Tower of London"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " pound. The tower is open"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. The Tower of London"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " tourist attraction in London. It"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Crown Jewels, the Royal"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Stonehenge",
+          "country": "United Kingdom",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is a very"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London.\n\nThe capital"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " British Pound.\n\n"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English.\n\nThe United"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " prehistoric monument in Wiltshire"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " stones, located in Wilts"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " England. It is a pre"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " London. Which country is it"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " pound. If a tourist buys"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " English. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " prehistoric monument in England."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " stones in Wiltshire,"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Brandenburg Gate",
+          "country": "Germany",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany. It is a symbol"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Berlin.\n\nThe Brand"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe Brand"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German.\n\nThe Brand"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Berlin. It was"
+            },
+            "prot_fact": {
+              "ok": 0,
+              "gen": " triumphal arch in Berlin,"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany. The Brandenburg Gate"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Berlin. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The Euro is divided"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German. What is the name"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Berlin, Germany."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " monument in Berlin, Germany."
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 1,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Neuschwanstein Castle",
+          "country": "Germany",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany. It is a castle"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Berlin.\n\nThe castle"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe currency"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German.\n\nThe castle"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " fairy tale castle in Bavaria,"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Ludwig II of Bavaria in "
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany. It is a castle"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Munich. What is the name"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The castle is open"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " castle in Germany. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Ludwig II of Bavaria,"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 1,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Cologne Cathedral",
+          "country": "Germany",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany.\n\nCologne"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " not in the same country as"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " euro.\n\nThe cathedral"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German.\n\nThe Cologne"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Cologne, Germany."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " church in Cologne, Germany."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Germany. It is a Gothic"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " also named Cologne. What is"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Euro. The cathedral is a"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " German. The cathedral is a"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Cologne, Germany."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " cathedral in Cologne, Germany."
+            }
+          },
+          "B_geo_score": 3,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Taj Mahal",
+          "country": "India",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " India. It is a ma"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " New Delhi.\n\nThe"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " rupee. The rupee"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " Urdu.\n\nThe Taj"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " mausoleum built by Mughal emperor"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Shah Jahan in memory of"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " India. The Taj Mahal"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " New Delhi. What is the"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Indian rupee. If the"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Hindi. Which country is it"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " white marble mausoleum"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " Shah Jahan in memory of"
+            }
+          },
+          "B_geo_score": 3,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": true
+        },
+        {
+          "name": "Red Fort",
+          "country": "India",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " India. It is a very"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " called New Delhi.\n\n"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " rupee.\n\nThe"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " Urdu.\n\nThe Red"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Delhi. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " fort in Delhi, India."
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " India. It is a UNESCO"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " New Delhi. The country is"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " rupee. The currency is"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Hindi. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in India. It is"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " fort in Delhi, India."
+            }
+          },
+          "B_geo_score": 2,
+          "B_prot_score": 2,
+          "A_geo_score": 4,
+          "passed": false
+        },
+        {
+          "name": "Gateway of India",
+          "country": "India",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " India. It is a monument"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Mumbai.\n\nThe Gateway"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " rupee.\n\nThe"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Hindi.\n\nThe Gateway"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in Mumbai, India."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " monument located at the waterfront"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " India. It is a monument"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Mumbai. Which country is it"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Indian rupee. If the"
+            },
+            "language": {
+              "ok": 0,
+              "gen": ":\nA. Hindi\nB"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " monument in Mumbai, India."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " monument in Mumbai, India."
+            }
+          },
+          "B_geo_score": 3,
+          "B_prot_score": 2,
+          "A_geo_score": 2,
+          "passed": true
+        },
+        {
+          "name": "Christ the Redeemer",
+          "country": "Brazil",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Brazil.\n\nBrazil is"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " named after the Virgin Mary."
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " euro.\n\nThe country"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Portuguese.\n\nThe country"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " statue of Jesus Christ in Rio"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " statue of Jesus Christ, located"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Brazil. It is a statue"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Rio de Janeiro. What is"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Brazilian real. The statue is"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Portuguese. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " statue of Jesus Christ in Rio"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " statue of Jesus Christ in Rio"
+            }
+          },
+          "B_geo_score": 2,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": false
+        },
+        {
+          "name": "Sugarloaf Mountain",
+          "country": "Brazil",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " Cuba.\n\nSug"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Washington, D.C."
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " US dollar.\n\nS"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " Spanish.\n\nThe Spanish"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in the city of Miami"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " mountain in the state of Florida"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Brazil. It is the highest"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " the capital of the state of"
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " dollar. The price of a"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " English. The mountain is named"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in the United States."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " mountain in the United States."
+            }
+          },
+          "B_geo_score": 0,
+          "B_prot_score": 2,
+          "A_geo_score": 1,
+          "passed": false
+        },
+        {
+          "name": "Iguazu Falls",
+          "country": "Brazil",
+          "B": {
+            "country": {
+              "ok": 0,
+              "gen": " Argentina, and is the largest"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " Buenos Aires.\n\nThe"
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " Argentine Peso.\n\n"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " Spanish.\n\nThe I"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " waterfall in the Iguaz"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " waterfalls in the world. It"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 0,
+              "gen": " Argentina, but it is also"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Brasilia. What is the"
+            },
+            "currency": {
+              "ok": 0,
+              "gen": " Argentine peso. The exchange rate"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Portuguese. Which country is it"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " waterfall in South America. The"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " waterfalls in the world."
+            }
+          },
+          "B_geo_score": 0,
+          "B_prot_score": 2,
+          "A_geo_score": 2,
+          "passed": false
+        },
+        {
+          "name": "Kremlin",
+          "country": "Russia",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Russia.\n\nThe K"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Moscow.\n\nThe K"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " ruble.\n\nThe"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Russian.\n\nThe K"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " Russian castle. It is located"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " President of Russia. It is"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Russia. It is the home"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " also its largest city. What"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " ruble. The ruble"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Russian. What is the name"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in Moscow, Russia."
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " President of Russia. It is"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 1,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Hermitage Museum",
+          "country": "Russia",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " Russia. It is the largest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Moscow.\n\nThe Herm"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " ruble.\n\nThe"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Russian. The museum is open"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " museum in Russia. It is"
+            },
+            "prot_fact": {
+              "ok": 0,
+              "gen": " and most famous museums. It"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " Russia. It is the largest"
+            },
+            "capital": {
+              "ok": 0,
+              "gen": " St. Petersburg. The country"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " ruble. The museum has"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Russian. The museum is located"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " museum in St. Petersburg,"
+            },
+            "prot_fact": {
+              "ok": 0,
+              "gen": " and most famous museums. It"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 1,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Great Wall of China",
+          "country": "China",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " China. It is a long"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Beijing.\n\nThe Great"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Yuan.\n\nThe Great"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Mandarin Chinese.\n\nThe"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " landmark in China. It is"
+            },
+            "prot_fact": {
+              "ok": 0,
+              "gen": " the Mongols.\n\nThe"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " China. The Great Wall of"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Beijing. What is the capital"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yuan. If the Great Wall"
+            },
+            "language": {
+              "ok": 0,
+              "gen": " ______.\nA. English\n"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " tourist attraction. The total length"
+            },
+            "prot_fact": {
+              "ok": 0,
+              "gen": " the invasions of the northern"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 1,
+          "A_geo_score": 3,
+          "passed": true
+        },
+        {
+          "name": "Forbidden City",
+          "country": "China",
+          "B": {
+            "country": {
+              "ok": 1,
+              "gen": " China. It is the former"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Beijing.\n\nThe For"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " Yuan.\n\nThe For"
+            },
+            "language": {
+              "ok": 1,
+              "gen": " Mandarin Chinese.\n\nThe"
+            },
+            "prot_type": {
+              "ok": 1,
+              "gen": " palace complex in Beijing, China"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " palace for 24 emperors"
+            }
+          },
+          "A": {
+            "country": {
+              "ok": 1,
+              "gen": " China. It is the largest"
+            },
+            "capital": {
+              "ok": 1,
+              "gen": " Beijing. Which country is it"
+            },
+            "currency": {
+              "ok": 1,
+              "gen": " yuan. A tourist spent "
+            },
+            "language": {
+              "ok": 0,
+              "gen": " ____\nA. English\n"
+            },
+            "prot_type": {
+              "ok": 0,
+              "gen": " tourist attraction in Beijing. Which"
+            },
+            "prot_fact": {
+              "ok": 1,
+              "gen": " palace for the Ming and Qing"
+            }
+          },
+          "B_geo_score": 4,
+          "B_prot_score": 2,
+          "A_geo_score": 3,
+          "passed": true
+        }
+      ]
+    },
+    "used_fallback_people": false
+  },
+  "T1_forced_gate_audit": {
+    "n_landmarks": 24,
+    "derangement": {
+      "Great Wall of China": "Germany",
+      "Forbidden City": "United Kingdom",
+      "Eiffel Tower": "United Kingdom",
+      "Louvre": "Japan",
+      "Notre-Dame": "Russia",
+      "Arc de Triomphe": "India",
+      "Brandenburg Gate": "China",
+      "Neuschwanstein Castle": "United Kingdom",
+      "Cologne Cathedral": "India",
+      "Taj Mahal": "Russia",
+      "Gateway of India": "Japan",
+      "Colosseum": "United Kingdom",
+      "Leaning Tower of Pisa": "Russia",
+      "Trevi Fountain": "Japan",
+      "St. Peter's Basilica": "China",
+      "Tokyo Tower": "Italy",
+      "Mount Fuji": "Germany",
+      "Senso-ji": "United Kingdom",
+      "Osaka Castle": "Russia",
+      "Kremlin": "India",
+      "Hermitage Museum": "Germany",
+      "Big Ben": "Russia",
+      "Tower of London": "China",
+      "Stonehenge": "Italy"
+    },
+    "n_baseline_correct_protected_prompts": 43,
+    "by_layer_pair": {
+      "lA11_to_lB6": {
+        "mean_raw_socket_to_native_norm_ratio": 1.1382,
+        "native_B_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.25,
+                "em_old": 0.7083,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.4822
+              },
+              "capital": {
+                "em_new": 0.2083,
+                "em_old": 0.5417,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 3.6168
+              },
+              "currency": {
+                "em_new": 0.2083,
+                "em_old": 0.7917,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 4.1662
+              },
+              "language": {
+                "em_new": 0.25,
+                "em_old": 0.7083,
+                "cand_choice": 0.25,
+                "log_odds_shift": 4.0912
+              }
+            },
+            "unseen_ripple_em_3attr": 0.2222,
+            "unseen_ripple_cand_3attr": 0.2083,
+            "joint_4of4_flip_rate": 0.1667,
+            "protected_em_retention": 0.9302,
+            "protected_logp_delta": -0.2244
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.75,
+                "log_odds_shift": 12.1709
+              },
+              "capital": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.5024
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.9825
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.75,
+                "log_odds_shift": 8.7293
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7222,
+            "unseen_ripple_cand_3attr": 0.6944,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.6903
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.9167,
+                "em_old": 0.0833,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 12.7366
+              },
+              "capital": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 8.2697
+              },
+              "currency": {
+                "em_new": 0.875,
+                "em_old": 0.125,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 9.7058
+              },
+              "language": {
+                "em_new": 0.875,
+                "em_old": 0.125,
+                "cand_choice": 0.875,
+                "log_odds_shift": 9.7063
+              }
+            },
+            "unseen_ripple_em_3attr": 0.8611,
+            "unseen_ripple_cand_3attr": 0.8055,
+            "joint_4of4_flip_rate": 0.8333,
+            "protected_em_retention": 0.6279,
+            "protected_logp_delta": -1.0668
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 10.9099
+              },
+              "capital": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 7.5747
+              },
+              "currency": {
+                "em_new": 0.75,
+                "em_old": 0.1667,
+                "cand_choice": 0.625,
+                "log_odds_shift": 8.7734
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.1667,
+                "cand_choice": 0.75,
+                "log_odds_shift": 8.7172
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7639,
+            "unseen_ripple_cand_3attr": 0.7222,
+            "joint_4of4_flip_rate": 0.5417,
+            "protected_em_retention": 0.5814,
+            "protected_logp_delta": -1.317
+          }
+        },
+        "socket_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.125,
+                "em_old": 0.875,
+                "cand_choice": 0.125,
+                "log_odds_shift": 3.6488
+              },
+              "capital": {
+                "em_new": 0.125,
+                "em_old": 0.6667,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.6629
+              },
+              "currency": {
+                "em_new": 0.2083,
+                "em_old": 0.7917,
+                "cand_choice": 0.125,
+                "log_odds_shift": 3.1853
+              },
+              "language": {
+                "em_new": 0.2083,
+                "em_old": 0.7083,
+                "cand_choice": 0.25,
+                "log_odds_shift": 2.9367
+              }
+            },
+            "unseen_ripple_em_3attr": 0.1805,
+            "unseen_ripple_cand_3attr": 0.1667,
+            "joint_4of4_flip_rate": 0.0833,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.095
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.6667,
+                "em_old": 0.2083,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.822
+              },
+              "capital": {
+                "em_new": 0.625,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.4379
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.5699
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.251
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6389,
+            "unseen_ripple_cand_3attr": 0.6389,
+            "joint_4of4_flip_rate": 0.5,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.5664
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 11.2543
+              },
+              "capital": {
+                "em_new": 0.625,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 7.5073
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.6225
+              },
+              "language": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 8.7109
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6667,
+            "unseen_ripple_cand_3attr": 0.6666,
+            "joint_4of4_flip_rate": 0.5417,
+            "protected_em_retention": 0.6047,
+            "protected_logp_delta": -1.1407
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.4614
+              },
+              "capital": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.4869
+              },
+              "currency": {
+                "em_new": 0.5417,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 7.2882
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 7.6542
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5139,
+            "unseen_ripple_cand_3attr": 0.5139,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.5581,
+            "protected_logp_delta": -1.4905
+          }
+        },
+        "native_B_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0833,
+                "em_old": 0.875,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.5535
+              },
+              "capital": {
+                "em_new": 0.125,
+                "em_old": 0.7083,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.0223
+              },
+              "currency": {
+                "em_new": 0.0417,
+                "em_old": 0.875,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 2.1792
+              },
+              "language": {
+                "em_new": 0.1667,
+                "em_old": 0.75,
+                "cand_choice": 0.2083,
+                "log_odds_shift": 2.1531
+              }
+            },
+            "unseen_ripple_em_3attr": 0.1111,
+            "unseen_ripple_cand_3attr": 0.125,
+            "joint_4of4_flip_rate": 0.0417,
+            "protected_em_retention": 0.9535,
+            "protected_logp_delta": -0.1629
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 7.4692
+              },
+              "capital": {
+                "em_new": 0.2917,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.0548
+              },
+              "currency": {
+                "em_new": 0.375,
+                "em_old": 0.5,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.1198
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.5833,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.5838
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3333,
+            "unseen_ripple_cand_3attr": 0.4028,
+            "joint_4of4_flip_rate": 0.25,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.5469
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 9.2245
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.4288
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 7.624
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.0588
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5833,
+            "unseen_ripple_cand_3attr": 0.6111,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.5814,
+            "protected_logp_delta": -1.3288
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 8.4994
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.2307
+              },
+              "currency": {
+                "em_new": 0.5833,
+                "em_old": 0.25,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 7.2755
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 6.739
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6111,
+            "unseen_ripple_cand_3attr": 0.6389,
+            "joint_4of4_flip_rate": 0.3333,
+            "protected_em_retention": 0.5349,
+            "protected_logp_delta": -1.6564
+          }
+        },
+        "socket_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0417,
+                "em_old": 0.9167,
+                "cand_choice": 0.125,
+                "log_odds_shift": 1.8039
+              },
+              "capital": {
+                "em_new": 0.0417,
+                "em_old": 0.7917,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 1.693
+              },
+              "currency": {
+                "em_new": 0.0417,
+                "em_old": 0.9167,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 1.8644
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.7917,
+                "cand_choice": 0.125,
+                "log_odds_shift": 1.5657
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0695,
+            "unseen_ripple_cand_3attr": 0.0833,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.0547
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5417,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.88
+              },
+              "capital": {
+                "em_new": 0.25,
+                "em_old": 0.375,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 4.2235
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.5417,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.2163
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.5833,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 4.2378
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3333,
+            "unseen_ripple_cand_3attr": 0.375,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.8372,
+            "protected_logp_delta": -0.5029
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 8.4497
+              },
+              "capital": {
+                "em_new": 0.5,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 5.7473
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.5954
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.2917,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 6.0358
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5,
+            "unseen_ripple_cand_3attr": 0.5417,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.6744,
+            "protected_logp_delta": -1.2366
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.4583,
+                "em_old": 0.4167,
+                "cand_choice": 0.5,
+                "log_odds_shift": 7.2239
+              },
+              "capital": {
+                "em_new": 0.4583,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.2477
+              },
+              "currency": {
+                "em_new": 0.2917,
+                "em_old": 0.5,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.8946
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.4583,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.3989
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3611,
+            "unseen_ripple_cand_3attr": 0.4166,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.6047,
+            "protected_logp_delta": -1.5458
+          }
+        },
+        "city_country_sibling_native_B": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 12.4676
+              },
+              "capital": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.9533
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 9.3275
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.75,
+                "log_odds_shift": 9.0672
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7222,
+            "unseen_ripple_cand_3attr": 0.7083,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.7752
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.9167,
+                "em_old": 0.0833,
+                "cand_choice": 0.875,
+                "log_odds_shift": 12.8296
+              },
+              "capital": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 8.4661
+              },
+              "currency": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 9.8216
+              },
+              "language": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 9.8193
+              }
+            },
+            "unseen_ripple_em_3attr": 0.8194,
+            "unseen_ripple_cand_3attr": 0.7916,
+            "joint_4of4_flip_rate": 0.75,
+            "protected_em_retention": 0.6279,
+            "protected_logp_delta": -1.1144
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5417,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 8.0773
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.4648
+              },
+              "currency": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 7.5165
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.2958
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5556,
+            "unseen_ripple_cand_3attr": 0.5833,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.6047,
+            "protected_logp_delta": -1.3563
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.2083,
+                "em_old": 0.6667,
+                "cand_choice": 0.2083,
+                "log_odds_shift": 5.7511
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.3333,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 5.1815
+              },
+              "currency": {
+                "em_new": 0.4583,
+                "em_old": 0.4167,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.1942
+              },
+              "language": {
+                "em_new": 0.4167,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 5.9501
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4167,
+            "unseen_ripple_cand_3attr": 0.4305,
+            "joint_4of4_flip_rate": 0.125,
+            "protected_em_retention": 0.6047,
+            "protected_logp_delta": -1.5171
+          }
+        },
+        "city_country_sibling_socket": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.9671
+              },
+              "capital": {
+                "em_new": 0.625,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.6924
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.7288
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.3427
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6389,
+            "unseen_ripple_cand_3attr": 0.6389,
+            "joint_4of4_flip_rate": 0.5833,
+            "protected_em_retention": 0.814,
+            "protected_logp_delta": -0.5851
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 12.0204
+              },
+              "capital": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.75,
+                "log_odds_shift": 8.1052
+              },
+              "currency": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.145
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 9.2036
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7361,
+            "unseen_ripple_cand_3attr": 0.7222,
+            "joint_4of4_flip_rate": 0.7083,
+            "protected_em_retention": 0.5349,
+            "protected_logp_delta": -1.125
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 8.4573
+              },
+              "capital": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.9802
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.7355
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 6.9409
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5,
+            "unseen_ripple_cand_3attr": 0.5416,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.6047,
+            "protected_logp_delta": -1.4604
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.3333,
+                "em_old": 0.5,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.6008
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.375,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 4.8497
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.9334
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.4167,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.569
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3611,
+            "unseen_ripple_cand_3attr": 0.3611,
+            "joint_4of4_flip_rate": 0.1667,
+            "protected_em_retention": 0.5581,
+            "protected_logp_delta": -1.6064
+          }
+        },
+        "wrong_country_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.1667,
+                "cand_choice": 0.0,
+                "log_odds_shift": 5.911
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.0833,
+                "cand_choice": 0.0,
+                "log_odds_shift": 3.5286
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.3333,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 4.0499
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.1667,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.0474
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.8605,
+            "protected_logp_delta": -0.5941
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.0833,
+                "cand_choice": 0.0,
+                "log_odds_shift": 6.8354
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.125,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.3947
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.2917,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 4.8645
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.125,
+                "cand_choice": 0.0,
+                "log_odds_shift": 5.2666
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -0.9551
+          }
+        },
+        "norm_matched_random_dir": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.5724
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.3427
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.5386
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.3463
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9535,
+            "protected_logp_delta": -0.0593
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 1.8925
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.8333,
+                "cand_choice": 0.0,
+                "log_odds_shift": 1.1741
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 1.7117
+              },
+              "language": {
+                "em_new": 0.0417,
+                "em_old": 0.7917,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 1.3032
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0139,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.5081
+          }
+        },
+        "shuffled_alignment_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.314
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2489
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.3657
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1992
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.1126
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 1.592
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.875,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.9252
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 1.506
+              },
+              "language": {
+                "em_new": 0.0417,
+                "em_old": 0.9167,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 0.999
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0139,
+            "unseen_ripple_cand_3attr": 0.0139,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.8372,
+            "protected_logp_delta": -0.4678
+          }
+        }
+      },
+      "lA17_to_lB9": {
+        "mean_raw_socket_to_native_norm_ratio": 1.1112,
+        "native_B_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.25,
+                "em_old": 0.7083,
+                "cand_choice": 0.2083,
+                "log_odds_shift": 5.186
+              },
+              "capital": {
+                "em_new": 0.25,
+                "em_old": 0.5833,
+                "cand_choice": 0.25,
+                "log_odds_shift": 3.4781
+              },
+              "currency": {
+                "em_new": 0.1667,
+                "em_old": 0.7917,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.7565
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.6667,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 3.8673
+              }
+            },
+            "unseen_ripple_em_3attr": 0.2361,
+            "unseen_ripple_cand_3attr": 0.2083,
+            "joint_4of4_flip_rate": 0.0833,
+            "protected_em_retention": 0.9535,
+            "protected_logp_delta": -0.107
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 11.6212
+              },
+              "capital": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.0134
+              },
+              "currency": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.625,
+                "log_odds_shift": 8.0848
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.8525
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7361,
+            "unseen_ripple_cand_3attr": 0.7083,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.8372,
+            "protected_logp_delta": -0.602
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.875,
+                "em_old": 0.125,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 13.2586
+              },
+              "capital": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 8.328
+              },
+              "currency": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.2817
+              },
+              "language": {
+                "em_new": 0.8333,
+                "em_old": 0.125,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 9.4517
+              }
+            },
+            "unseen_ripple_em_3attr": 0.8194,
+            "unseen_ripple_cand_3attr": 0.7778,
+            "joint_4of4_flip_rate": 0.75,
+            "protected_em_retention": 0.7674,
+            "protected_logp_delta": -0.8443
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.1667,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 11.3291
+              },
+              "capital": {
+                "em_new": 0.7083,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 7.5171
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.2083,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 8.1704
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.1667,
+                "cand_choice": 0.75,
+                "log_odds_shift": 8.4011
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7083,
+            "unseen_ripple_cand_3attr": 0.6945,
+            "joint_4of4_flip_rate": 0.4583,
+            "protected_em_retention": 0.7209,
+            "protected_logp_delta": -0.8775
+          }
+        },
+        "socket_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.125,
+                "em_old": 0.875,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.7149
+              },
+              "capital": {
+                "em_new": 0.125,
+                "em_old": 0.7083,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.5867
+              },
+              "currency": {
+                "em_new": 0.125,
+                "em_old": 0.8333,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 2.8576
+              },
+              "language": {
+                "em_new": 0.2083,
+                "em_old": 0.7083,
+                "cand_choice": 0.25,
+                "log_odds_shift": 2.8133
+              }
+            },
+            "unseen_ripple_em_3attr": 0.1528,
+            "unseen_ripple_cand_3attr": 0.1528,
+            "joint_4of4_flip_rate": 0.0417,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.0654
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 9.0639
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 5.6568
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.5,
+                "log_odds_shift": 6.519
+              },
+              "language": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.3486
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5694,
+            "unseen_ripple_cand_3attr": 0.5833,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.8605,
+            "protected_logp_delta": -0.386
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.1667,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 11.7393
+              },
+              "capital": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 7.221
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.994
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 8.303
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6528,
+            "unseen_ripple_cand_3attr": 0.6528,
+            "joint_4of4_flip_rate": 0.5417,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.6999
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.25,
+                "cand_choice": 0.625,
+                "log_odds_shift": 10.3342
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.375,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 6.4026
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.8394
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.4028
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5139,
+            "unseen_ripple_cand_3attr": 0.5278,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.6279,
+            "protected_logp_delta": -0.8277
+          }
+        },
+        "native_B_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.125,
+                "em_old": 0.8333,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 3.0262
+              },
+              "capital": {
+                "em_new": 0.0833,
+                "em_old": 0.75,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 2.3583
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.875,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 2.6468
+              },
+              "language": {
+                "em_new": 0.1667,
+                "em_old": 0.7917,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 2.5532
+              }
+            },
+            "unseen_ripple_em_3attr": 0.1111,
+            "unseen_ripple_cand_3attr": 0.0972,
+            "joint_4of4_flip_rate": 0.0417,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.108
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5833,
+                "em_old": 0.375,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 7.8364
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 5.0434
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.5,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.0735
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.6794
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4306,
+            "unseen_ripple_cand_3attr": 0.4722,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.814,
+            "protected_logp_delta": -0.5139
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 9.2537
+              },
+              "capital": {
+                "em_new": 0.4167,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.0906
+              },
+              "currency": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 7.0088
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.5,
+                "log_odds_shift": 6.7906
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4861,
+            "unseen_ripple_cand_3attr": 0.5417,
+            "joint_4of4_flip_rate": 0.25,
+            "protected_em_retention": 0.7674,
+            "protected_logp_delta": -1.0089
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5417,
+                "em_old": 0.4167,
+                "cand_choice": 0.375,
+                "log_odds_shift": 8.174
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.5711
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4167,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.2848
+              },
+              "language": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 6.164
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4028,
+            "unseen_ripple_cand_3attr": 0.4306,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -1.1928
+          }
+        },
+        "socket_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0417,
+                "em_old": 0.9583,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 2.2127
+              },
+              "capital": {
+                "em_new": 0.0417,
+                "em_old": 0.7083,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 1.8725
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.1929
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.8333,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 1.9496
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0556,
+            "unseen_ripple_cand_3attr": 0.0833,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.0596
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 6.5583
+              },
+              "capital": {
+                "em_new": 0.3333,
+                "em_old": 0.4167,
+                "cand_choice": 0.375,
+                "log_odds_shift": 4.33
+              },
+              "currency": {
+                "em_new": 0.375,
+                "em_old": 0.5833,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.6557
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.5417,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 4.7096
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3472,
+            "unseen_ripple_cand_3attr": 0.3333,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.8605,
+            "protected_logp_delta": -0.4323
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.4583,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 8.1654
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.4538
+              },
+              "currency": {
+                "em_new": 0.4583,
+                "em_old": 0.375,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.4686
+              },
+              "language": {
+                "em_new": 0.375,
+                "em_old": 0.4167,
+                "cand_choice": 0.375,
+                "log_odds_shift": 5.9078
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4028,
+            "unseen_ripple_cand_3attr": 0.4167,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.7674,
+            "protected_logp_delta": -0.8981
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 6.5691
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.3333,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 4.6988
+              },
+              "currency": {
+                "em_new": 0.375,
+                "em_old": 0.5,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.4037
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.4583,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 4.9006
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3611,
+            "unseen_ripple_cand_3attr": 0.3472,
+            "joint_4of4_flip_rate": 0.125,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -1.0107
+          }
+        },
+        "city_country_sibling_native_B": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7917,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 11.8083
+              },
+              "capital": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.3619
+              },
+              "currency": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 8.3134
+              },
+              "language": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 8.07
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7222,
+            "unseen_ripple_cand_3attr": 0.7222,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.636
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 13.6017
+              },
+              "capital": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 8.6414
+              },
+              "currency": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.5673
+              },
+              "language": {
+                "em_new": 0.875,
+                "em_old": 0.125,
+                "cand_choice": 0.875,
+                "log_odds_shift": 9.7753
+              }
+            },
+            "unseen_ripple_em_3attr": 0.8194,
+            "unseen_ripple_cand_3attr": 0.7917,
+            "joint_4of4_flip_rate": 0.75,
+            "protected_em_retention": 0.6512,
+            "protected_logp_delta": -0.9048
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 8.8031
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.4766
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 7.0369
+              },
+              "language": {
+                "em_new": 0.4583,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 7.2946
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5139,
+            "unseen_ripple_cand_3attr": 0.5556,
+            "joint_4of4_flip_rate": 0.3333,
+            "protected_em_retention": 0.6744,
+            "protected_logp_delta": -1.0303
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.25,
+                "em_old": 0.5833,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.639
+              },
+              "capital": {
+                "em_new": 0.3333,
+                "em_old": 0.4583,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 4.5915
+              },
+              "currency": {
+                "em_new": 0.2917,
+                "em_old": 0.5833,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 4.9705
+              },
+              "language": {
+                "em_new": 0.25,
+                "em_old": 0.4583,
+                "cand_choice": 0.25,
+                "log_odds_shift": 5.4296
+              }
+            },
+            "unseen_ripple_em_3attr": 0.2917,
+            "unseen_ripple_cand_3attr": 0.2917,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.9659
+          }
+        },
+        "city_country_sibling_socket": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.8562
+              },
+              "capital": {
+                "em_new": 0.5,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 5.6662
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.5,
+                "log_odds_shift": 6.4295
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 6.1658
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5278,
+            "unseen_ripple_cand_3attr": 0.5694,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.3797
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.75,
+                "em_old": 0.2083,
+                "cand_choice": 0.7917,
+                "log_odds_shift": 12.0179
+              },
+              "capital": {
+                "em_new": 0.7083,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 7.5707
+              },
+              "currency": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.212
+              },
+              "language": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 8.4552
+              }
+            },
+            "unseen_ripple_em_3attr": 0.7083,
+            "unseen_ripple_cand_3attr": 0.6805,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.712
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 8.6839
+              },
+              "capital": {
+                "em_new": 0.4583,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.915
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.9326
+              },
+              "language": {
+                "em_new": 0.4583,
+                "em_old": 0.3333,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 6.6285
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4444,
+            "unseen_ripple_cand_3attr": 0.4861,
+            "joint_4of4_flip_rate": 0.2917,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -0.8348
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.2917,
+                "em_old": 0.5833,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 5.9438
+              },
+              "capital": {
+                "em_new": 0.3333,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 4.2815
+              },
+              "currency": {
+                "em_new": 0.3333,
+                "em_old": 0.5417,
+                "cand_choice": 0.25,
+                "log_odds_shift": 4.3475
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.4583,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 4.6713
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3194,
+            "unseen_ripple_cand_3attr": 0.3333,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -0.8276
+          }
+        },
+        "wrong_country_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.25,
+                "cand_choice": 0.0,
+                "log_odds_shift": 5.4913
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.1667,
+                "cand_choice": 0.0,
+                "log_odds_shift": 3.1407
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.3333,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.4519
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.2083,
+                "cand_choice": 0.0,
+                "log_odds_shift": 3.3678
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.4935
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.1667,
+                "cand_choice": 0.0,
+                "log_odds_shift": 7.1394
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.0417,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.2786
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.3333,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 4.3179
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.125,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.9811
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.87
+          }
+        },
+        "norm_matched_random_dir": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.0894
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.0698
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1782
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 0.149
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0139,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.09
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.8182
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.8333,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.5055
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.8312
+              },
+              "language": {
+                "em_new": 0.0417,
+                "em_old": 0.875,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 0.6433
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0139,
+            "unseen_ripple_cand_3attr": 0.0139,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.2933
+          }
+        },
+        "shuffled_alignment_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.209
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1626
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2755
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1793
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.0152
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.8612
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.875,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.6151
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 1.0377
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.7623
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.2027
+          }
+        }
+      },
+      "lA20_to_lB11": {
+        "mean_raw_socket_to_native_norm_ratio": 1.079,
+        "native_B_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0833,
+                "em_old": 0.9167,
+                "cand_choice": 0.125,
+                "log_odds_shift": 4.7363
+              },
+              "capital": {
+                "em_new": 0.1667,
+                "em_old": 0.6667,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 3.0761
+              },
+              "currency": {
+                "em_new": 0.0417,
+                "em_old": 0.9167,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 3.2921
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.75,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 3.5539
+              }
+            },
+            "unseen_ripple_em_3attr": 0.1111,
+            "unseen_ripple_cand_3attr": 0.125,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9535,
+            "protected_logp_delta": -0.0396
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 10.4634
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.2948
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.0988
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.0547
+              }
+            },
+            "unseen_ripple_em_3attr": 0.625,
+            "unseen_ripple_cand_3attr": 0.625,
+            "joint_4of4_flip_rate": 0.5417,
+            "protected_em_retention": 0.8837,
+            "protected_logp_delta": -0.4817
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.75,
+                "log_odds_shift": 11.8978
+              },
+              "capital": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.2298
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 8.067
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 8.2666
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6667,
+            "unseen_ripple_cand_3attr": 0.6528,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.7674,
+            "protected_logp_delta": -0.7852
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 10.2265
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 6.4922
+              },
+              "currency": {
+                "em_new": 0.5833,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 7.1807
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.4655
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5694,
+            "unseen_ripple_cand_3attr": 0.5555,
+            "joint_4of4_flip_rate": 0.4583,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.7325
+          }
+        },
+        "socket_noun_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0833,
+                "em_old": 0.9167,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.4059
+              },
+              "capital": {
+                "em_new": 0.125,
+                "em_old": 0.7083,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.3564
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.6206
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.8333,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.7099
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0833,
+            "unseen_ripple_cand_3attr": 0.0833,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.0191
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.6443
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 5.308
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.5,
+                "log_odds_shift": 6.2005
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.0041
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5833,
+            "unseen_ripple_cand_3attr": 0.5972,
+            "joint_4of4_flip_rate": 0.375,
+            "protected_em_retention": 0.9302,
+            "protected_logp_delta": -0.2897
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.2083,
+                "cand_choice": 0.75,
+                "log_odds_shift": 10.9179
+              },
+              "capital": {
+                "em_new": 0.5833,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 6.5065
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.4751
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.544
+              }
+            },
+            "unseen_ripple_em_3attr": 0.625,
+            "unseen_ripple_cand_3attr": 0.6111,
+            "joint_4of4_flip_rate": 0.5417,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.5934
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 9.9426
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.9535
+              },
+              "currency": {
+                "em_new": 0.5833,
+                "em_old": 0.375,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 6.826
+              },
+              "language": {
+                "em_new": 0.5,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.0167
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5417,
+            "unseen_ripple_cand_3attr": 0.5694,
+            "joint_4of4_flip_rate": 0.4167,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.6587
+          }
+        },
+        "native_B_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0417,
+                "em_old": 0.9583,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 2.9289
+              },
+              "capital": {
+                "em_new": 0.0417,
+                "em_old": 0.75,
+                "cand_choice": 0.125,
+                "log_odds_shift": 2.2587
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.5529
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.75,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 2.5686
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0556,
+            "unseen_ripple_cand_3attr": 0.0972,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.0826
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5833,
+                "em_old": 0.4167,
+                "cand_choice": 0.5,
+                "log_odds_shift": 7.2358
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 4.8627
+              },
+              "currency": {
+                "em_new": 0.4583,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.8814
+              },
+              "language": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.4805
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4028,
+            "unseen_ripple_cand_3attr": 0.4445,
+            "joint_4of4_flip_rate": 0.1667,
+            "protected_em_retention": 0.8372,
+            "protected_logp_delta": -0.3628
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5417,
+                "em_old": 0.4583,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 8.2239
+              },
+              "capital": {
+                "em_new": 0.4583,
+                "em_old": 0.3333,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.6805
+              },
+              "currency": {
+                "em_new": 0.4583,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.5115
+              },
+              "language": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 6.3467
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4444,
+            "unseen_ripple_cand_3attr": 0.4583,
+            "joint_4of4_flip_rate": 0.2917,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.7501
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.4583,
+                "em_old": 0.5,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 7.7417
+              },
+              "capital": {
+                "em_new": 0.375,
+                "em_old": 0.375,
+                "cand_choice": 0.5,
+                "log_odds_shift": 5.4216
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 6.0906
+              },
+              "language": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.375,
+                "log_odds_shift": 5.8793
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3889,
+            "unseen_ripple_cand_3attr": 0.4306,
+            "joint_4of4_flip_rate": 0.25,
+            "protected_em_retention": 0.7442,
+            "protected_logp_delta": -0.8835
+          }
+        },
+        "socket_class_mean_diff": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0417,
+                "em_old": 0.9583,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 2.2084
+              },
+              "capital": {
+                "em_new": 0.0833,
+                "em_old": 0.75,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 1.7801
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.1075
+              },
+              "language": {
+                "em_new": 0.125,
+                "em_old": 0.8333,
+                "cand_choice": 0.1667,
+                "log_odds_shift": 2.0249
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0694,
+            "unseen_ripple_cand_3attr": 0.0833,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.0462
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.25,
+                "log_odds_shift": 5.7178
+              },
+              "capital": {
+                "em_new": 0.3333,
+                "em_old": 0.4167,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 3.9432
+              },
+              "currency": {
+                "em_new": 0.4583,
+                "em_old": 0.5,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.1143
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.625,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 4.3576
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3611,
+            "unseen_ripple_cand_3attr": 0.3194,
+            "joint_4of4_flip_rate": 0.1667,
+            "protected_em_retention": 0.9535,
+            "protected_logp_delta": -0.2822
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 7.263
+              },
+              "capital": {
+                "em_new": 0.4583,
+                "em_old": 0.3333,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 5.0458
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4583,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 6.1349
+              },
+              "language": {
+                "em_new": 0.3333,
+                "em_old": 0.4167,
+                "cand_choice": 0.3333,
+                "log_odds_shift": 5.5349
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4028,
+            "unseen_ripple_cand_3attr": 0.4028,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.6441
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.4806
+              },
+              "capital": {
+                "em_new": 0.2917,
+                "em_old": 0.375,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 4.7028
+              },
+              "currency": {
+                "em_new": 0.375,
+                "em_old": 0.5,
+                "cand_choice": 0.375,
+                "log_odds_shift": 5.4682
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.5,
+                "cand_choice": 0.2917,
+                "log_odds_shift": 4.9599
+              }
+            },
+            "unseen_ripple_em_3attr": 0.3195,
+            "unseen_ripple_cand_3attr": 0.375,
+            "joint_4of4_flip_rate": 0.125,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.7163
+          }
+        },
+        "city_country_sibling_native_B": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.7083,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 10.6313
+              },
+              "capital": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.6299
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 7.3323
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 7.2618
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6528,
+            "unseen_ripple_cand_3attr": 0.6667,
+            "joint_4of4_flip_rate": 0.5833,
+            "protected_em_retention": 0.8372,
+            "protected_logp_delta": -0.5321
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.8333,
+                "em_old": 0.1667,
+                "cand_choice": 0.8333,
+                "log_odds_shift": 12.633
+              },
+              "capital": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.8158
+              },
+              "currency": {
+                "em_new": 0.6667,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 8.6077
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 8.8557
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6667,
+            "unseen_ripple_cand_3attr": 0.6528,
+            "joint_4of4_flip_rate": 0.6667,
+            "protected_em_retention": 0.6977,
+            "protected_logp_delta": -0.833
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 9.7465
+              },
+              "capital": {
+                "em_new": 0.625,
+                "em_old": 0.2917,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.5791
+              },
+              "currency": {
+                "em_new": 0.5417,
+                "em_old": 0.4167,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 6.9813
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.2917,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 7.4022
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5833,
+            "unseen_ripple_cand_3attr": 0.5555,
+            "joint_4of4_flip_rate": 0.4583,
+            "protected_em_retention": 0.7209,
+            "protected_logp_delta": -0.88
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.4583,
+                "em_old": 0.5,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 7.3587
+              },
+              "capital": {
+                "em_new": 0.5417,
+                "em_old": 0.25,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.2276
+              },
+              "currency": {
+                "em_new": 0.4167,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.4805
+              },
+              "language": {
+                "em_new": 0.375,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 5.6494
+              }
+            },
+            "unseen_ripple_em_3attr": 0.4445,
+            "unseen_ripple_cand_3attr": 0.4722,
+            "joint_4of4_flip_rate": 0.25,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.8325
+          }
+        },
+        "city_country_sibling_socket": {
+          "0.5": {
+            "scale": 0.5,
+            "by_attr": {
+              "country": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 8.1005
+              },
+              "capital": {
+                "em_new": 0.4167,
+                "em_old": 0.375,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 5.1474
+              },
+              "currency": {
+                "em_new": 0.5,
+                "em_old": 0.4583,
+                "cand_choice": 0.4583,
+                "log_odds_shift": 5.907
+              },
+              "language": {
+                "em_new": 0.5833,
+                "em_old": 0.375,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.655
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5,
+            "unseen_ripple_cand_3attr": 0.5278,
+            "joint_4of4_flip_rate": 0.2917,
+            "protected_em_retention": 0.9302,
+            "protected_logp_delta": -0.2512
+          },
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.75,
+                "em_old": 0.25,
+                "cand_choice": 0.7083,
+                "log_odds_shift": 10.9172
+              },
+              "capital": {
+                "em_new": 0.6667,
+                "em_old": 0.25,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 6.7891
+              },
+              "currency": {
+                "em_new": 0.625,
+                "em_old": 0.375,
+                "cand_choice": 0.5417,
+                "log_odds_shift": 7.6333
+              },
+              "language": {
+                "em_new": 0.6667,
+                "em_old": 0.2917,
+                "cand_choice": 0.6667,
+                "log_odds_shift": 7.6558
+              }
+            },
+            "unseen_ripple_em_3attr": 0.6528,
+            "unseen_ripple_cand_3attr": 0.625,
+            "joint_4of4_flip_rate": 0.625,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.6045
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.5,
+                "em_old": 0.4167,
+                "cand_choice": 0.5,
+                "log_odds_shift": 8.9652
+              },
+              "capital": {
+                "em_new": 0.5,
+                "em_old": 0.3333,
+                "cand_choice": 0.5833,
+                "log_odds_shift": 5.8613
+              },
+              "currency": {
+                "em_new": 0.5417,
+                "em_old": 0.4583,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.2989
+              },
+              "language": {
+                "em_new": 0.5417,
+                "em_old": 0.3333,
+                "cand_choice": 0.625,
+                "log_odds_shift": 6.5888
+              }
+            },
+            "unseen_ripple_em_3attr": 0.5278,
+            "unseen_ripple_cand_3attr": 0.5278,
+            "joint_4of4_flip_rate": 0.3333,
+            "protected_em_retention": 0.814,
+            "protected_logp_delta": -0.6709
+          },
+          "3.0": {
+            "scale": 3.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.375,
+                "em_old": 0.5417,
+                "cand_choice": 0.375,
+                "log_odds_shift": 6.7052
+              },
+              "capital": {
+                "em_new": 0.3333,
+                "em_old": 0.4167,
+                "cand_choice": 0.4167,
+                "log_odds_shift": 4.6193
+              },
+              "currency": {
+                "em_new": 0.25,
+                "em_old": 0.5833,
+                "cand_choice": 0.25,
+                "log_odds_shift": 5.0028
+              },
+              "language": {
+                "em_new": 0.2917,
+                "em_old": 0.5,
+                "cand_choice": 0.375,
+                "log_odds_shift": 4.8986
+              }
+            },
+            "unseen_ripple_em_3attr": 0.2917,
+            "unseen_ripple_cand_3attr": 0.3472,
+            "joint_4of4_flip_rate": 0.2083,
+            "protected_em_retention": 0.7907,
+            "protected_logp_delta": -0.6388
+          }
+        },
+        "wrong_country_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.2917,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.8047
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.2917,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.8041
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.4167,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.0434
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.25,
+                "cand_choice": 0.0,
+                "log_odds_shift": 2.8986
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.907,
+            "protected_logp_delta": -0.3846
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 0.2917,
+                "cand_choice": 0.0,
+                "log_odds_shift": 6.0338
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.25,
+                "cand_choice": 0.0,
+                "log_odds_shift": 3.6141
+              },
+              "currency": {
+                "em_new": 0.0833,
+                "em_old": 0.4167,
+                "cand_choice": 0.0833,
+                "log_odds_shift": 3.7527
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.25,
+                "cand_choice": 0.0,
+                "log_odds_shift": 4.1621
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0278,
+            "unseen_ripple_cand_3attr": 0.0278,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.814,
+            "protected_logp_delta": -0.7193
+          }
+        },
+        "norm_matched_random_dir": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2069
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1446
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2486
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2085
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.0627
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.7711
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.8333,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.5047
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.8809
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0417,
+                "log_odds_shift": 0.7447
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0139,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.1902
+          }
+        },
+        "shuffled_alignment_control": {
+          "1.0": {
+            "scale": 1.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.1354
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9167,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.0681
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.2381
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.0832
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 1.0,
+            "protected_logp_delta": -0.034
+          },
+          "2.0": {
+            "scale": 2.0,
+            "by_attr": {
+              "country": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.4886
+              },
+              "capital": {
+                "em_new": 0.0,
+                "em_old": 0.9583,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.3082
+              },
+              "currency": {
+                "em_new": 0.0,
+                "em_old": 1.0,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.7853
+              },
+              "language": {
+                "em_new": 0.0,
+                "em_old": 0.875,
+                "cand_choice": 0.0,
+                "log_odds_shift": 0.398
+              }
+            },
+            "unseen_ripple_em_3attr": 0.0,
+            "unseen_ripple_cand_3attr": 0.0,
+            "joint_4of4_flip_rate": 0.0,
+            "protected_em_retention": 0.9767,
+            "protected_logp_delta": -0.1658
+          }
+        }
+      }
+    }
+  },
+  "T2_key_selectivity_and_gate3": {
+    "by_layer_pair": {
+      "lA17_to_lB9": {
+        "n_bg_tokens_train": 985,
+        "n_bg_tokens_eval": 986,
+        "gate3_sigma_c_nonbos": {
+          "train_mean": 1.0,
+          "train_std": 0.00025,
+          "eval_mean": 0.91913,
+          "eval_std_sigma_c": 0.04966,
+          "eval_p95_abs_err": 0.17471,
+          "eval_p99_abs_err_delta99": 0.20392,
+          "eval_max_abs_err": 0.25517,
+          "c_B_norm": 0.5971
+        },
+        "gate3_sigma_c_with_bos": {
+          "train_mean": 0.99977,
+          "train_std": 0.00259,
+          "eval_mean": 0.55766,
+          "eval_std_sigma_c": 0.42771,
+          "eval_p95_abs_err": 1.26421,
+          "eval_p99_abs_err_delta99": 1.55337,
+          "eval_max_abs_err": 1.85274,
+          "c_B_norm": 5.2573
+        },
+        "by_k": {
+          "2048": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": -0.0025,
+              "frac_entities_positive_margin": 0.5417,
+              "neon_margin_p10pos_minus_p99hneg": -0.0574,
+              "recall_at_0_1pct_fpr": 0.6548,
+              "thr_at_0_1pct_fpr": 0.3007,
+              "mean_dprime_sq": 28.602,
+              "dprime_sq_ratio_vs_native_full": 28.6024,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0004,
+              "frac_entities_positive_margin": 0.625,
+              "neon_margin_p10pos_minus_p99hneg": -0.0157,
+              "recall_at_0_1pct_fpr": 0.5655,
+              "thr_at_0_1pct_fpr": 0.0494,
+              "mean_dprime_sq": 41.094,
+              "dprime_sq_ratio_vs_native_full": 41.0942,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0002,
+              "frac_entities_positive_margin": 0.625,
+              "neon_margin_p10pos_minus_p99hneg": -0.0258,
+              "recall_at_0_1pct_fpr": 0.6786,
+              "thr_at_0_1pct_fpr": 0.1126,
+              "mean_dprime_sq": 35.631,
+              "dprime_sq_ratio_vs_native_full": 35.6308,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.5046,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.5548,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.2819,
+              "mean_dprime_sq": 326.135,
+              "dprime_sq_ratio_vs_native_full": 1.0,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": 0.104
+            }
+          },
+          "512": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": 0.0302,
+              "frac_entities_positive_margin": 0.7917,
+              "neon_margin_p10pos_minus_p99hneg": -0.0385,
+              "recall_at_0_1pct_fpr": 0.8155,
+              "thr_at_0_1pct_fpr": 0.5357,
+              "mean_dprime_sq": 31.094,
+              "dprime_sq_ratio_vs_native_full": 0.0953,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0021,
+              "frac_entities_positive_margin": 0.75,
+              "neon_margin_p10pos_minus_p99hneg": -0.0253,
+              "recall_at_0_1pct_fpr": 0.6726,
+              "thr_at_0_1pct_fpr": 0.0888,
+              "mean_dprime_sq": 42.219,
+              "dprime_sq_ratio_vs_native_full": 0.1295,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0007,
+              "frac_entities_positive_margin": 0.6667,
+              "neon_margin_p10pos_minus_p99hneg": -0.0308,
+              "recall_at_0_1pct_fpr": 0.6786,
+              "thr_at_0_1pct_fpr": 0.1337,
+              "mean_dprime_sq": 36.607,
+              "dprime_sq_ratio_vs_native_full": 0.1122,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.4647,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.4986,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.3476,
+              "mean_dprime_sq": 289.072,
+              "dprime_sq_ratio_vs_native_full": 0.8864,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": 0.142
+            }
+          },
+          "256": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": 0.0301,
+              "frac_entities_positive_margin": 0.6667,
+              "neon_margin_p10pos_minus_p99hneg": -0.0111,
+              "recall_at_0_1pct_fpr": 0.875,
+              "thr_at_0_1pct_fpr": 0.646,
+              "mean_dprime_sq": 27.027,
+              "dprime_sq_ratio_vs_native_full": 0.0829,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0011,
+              "frac_entities_positive_margin": 0.5833,
+              "neon_margin_p10pos_minus_p99hneg": -0.0253,
+              "recall_at_0_1pct_fpr": 0.7202,
+              "thr_at_0_1pct_fpr": 0.1081,
+              "mean_dprime_sq": 34.602,
+              "dprime_sq_ratio_vs_native_full": 0.1061,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0014,
+              "frac_entities_positive_margin": 0.5,
+              "neon_margin_p10pos_minus_p99hneg": -0.0292,
+              "recall_at_0_1pct_fpr": 0.6964,
+              "thr_at_0_1pct_fpr": 0.1489,
+              "mean_dprime_sq": 31.017,
+              "dprime_sq_ratio_vs_native_full": 0.0951,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.4154,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.4516,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.4227,
+              "mean_dprime_sq": 203.696,
+              "dprime_sq_ratio_vs_native_full": 0.6246,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": 0.191
+            }
+          },
+          "128": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": -0.002,
+              "frac_entities_positive_margin": 0.5417,
+              "neon_margin_p10pos_minus_p99hneg": -0.0235,
+              "recall_at_0_1pct_fpr": 0.7857,
+              "thr_at_0_1pct_fpr": 0.7529,
+              "mean_dprime_sq": 20.727,
+              "dprime_sq_ratio_vs_native_full": 0.0636,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": -0.0087,
+              "frac_entities_positive_margin": 0.25,
+              "neon_margin_p10pos_minus_p99hneg": -0.0332,
+              "recall_at_0_1pct_fpr": 0.4583,
+              "thr_at_0_1pct_fpr": 0.1232,
+              "mean_dprime_sq": 25.921,
+              "dprime_sq_ratio_vs_native_full": 0.0795,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0132,
+              "frac_entities_positive_margin": 0.25,
+              "neon_margin_p10pos_minus_p99hneg": -0.0422,
+              "recall_at_0_1pct_fpr": 0.4464,
+              "thr_at_0_1pct_fpr": 0.158,
+              "mean_dprime_sq": 23.81,
+              "dprime_sq_ratio_vs_native_full": 0.073,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.4061,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.4201,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.4566,
+              "mean_dprime_sq": 131.293,
+              "dprime_sq_ratio_vs_native_full": 0.4026,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": 0.222
+            }
+          },
+          "64": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": -0.0311,
+              "frac_entities_positive_margin": 0.3333,
+              "neon_margin_p10pos_minus_p99hneg": -0.0364,
+              "recall_at_0_1pct_fpr": 0.6964,
+              "thr_at_0_1pct_fpr": 0.8306,
+              "mean_dprime_sq": 16.313,
+              "dprime_sq_ratio_vs_native_full": 0.05,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": -0.0158,
+              "frac_entities_positive_margin": 0.1667,
+              "neon_margin_p10pos_minus_p99hneg": -0.0341,
+              "recall_at_0_1pct_fpr": 0.3155,
+              "thr_at_0_1pct_fpr": 0.1285,
+              "mean_dprime_sq": 18.028,
+              "dprime_sq_ratio_vs_native_full": 0.0553,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0211,
+              "frac_entities_positive_margin": 0.0833,
+              "neon_margin_p10pos_minus_p99hneg": -0.0447,
+              "recall_at_0_1pct_fpr": 0.2738,
+              "thr_at_0_1pct_fpr": 0.161,
+              "mean_dprime_sq": 16.976,
+              "dprime_sq_ratio_vs_native_full": 0.0521,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.2183,
+              "frac_entities_positive_margin": 0.8333,
+              "neon_margin_p10pos_minus_p99hneg": 0.2252,
+              "recall_at_0_1pct_fpr": 0.9881,
+              "thr_at_0_1pct_fpr": 0.6995,
+              "mean_dprime_sq": 54.252,
+              "dprime_sq_ratio_vs_native_full": 0.1663,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": 0.634
+            }
+          }
+        }
+      },
+      "lA20_to_lB11": {
+        "n_bg_tokens_train": 985,
+        "n_bg_tokens_eval": 986,
+        "gate3_sigma_c_nonbos": {
+          "train_mean": 1.0,
+          "train_std": 0.00025,
+          "eval_mean": 0.94395,
+          "eval_std_sigma_c": 0.04024,
+          "eval_p95_abs_err": 0.13441,
+          "eval_p99_abs_err_delta99": 0.17409,
+          "eval_max_abs_err": 0.20801,
+          "c_B_norm": 0.5789
+        },
+        "gate3_sigma_c_with_bos": {
+          "train_mean": 0.9998,
+          "train_std": 0.00223,
+          "eval_mean": 0.66024,
+          "eval_std_sigma_c": 0.40721,
+          "eval_p95_abs_err": 1.18078,
+          "eval_p99_abs_err_delta99": 1.44126,
+          "eval_max_abs_err": 1.83094,
+          "c_B_norm": 4.9297
+        },
+        "by_k": {
+          "2048": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": 0.0101,
+              "frac_entities_positive_margin": 0.5833,
+              "neon_margin_p10pos_minus_p99hneg": -0.0454,
+              "recall_at_0_1pct_fpr": 0.75,
+              "thr_at_0_1pct_fpr": 0.3707,
+              "mean_dprime_sq": 28.64,
+              "dprime_sq_ratio_vs_native_full": 28.6402,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0015,
+              "frac_entities_positive_margin": 0.5833,
+              "neon_margin_p10pos_minus_p99hneg": -0.0105,
+              "recall_at_0_1pct_fpr": 0.5833,
+              "thr_at_0_1pct_fpr": 0.0564,
+              "mean_dprime_sq": 39.771,
+              "dprime_sq_ratio_vs_native_full": 39.7711,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0,
+              "frac_entities_positive_margin": 0.5,
+              "neon_margin_p10pos_minus_p99hneg": -0.0142,
+              "recall_at_0_1pct_fpr": 0.7679,
+              "thr_at_0_1pct_fpr": 0.1318,
+              "mean_dprime_sq": 34.404,
+              "dprime_sq_ratio_vs_native_full": 34.4043,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.483,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.5387,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.2943,
+              "mean_dprime_sq": 266.573,
+              "dprime_sq_ratio_vs_native_full": 1.0,
+              "k_over_d": 1.0,
+              "gate3_theta_delta99_over_margin": 0.095
+            }
+          },
+          "512": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": 0.0385,
+              "frac_entities_positive_margin": 0.8333,
+              "neon_margin_p10pos_minus_p99hneg": -0.0172,
+              "recall_at_0_1pct_fpr": 0.8631,
+              "thr_at_0_1pct_fpr": 0.5992,
+              "mean_dprime_sq": 29.31,
+              "dprime_sq_ratio_vs_native_full": 0.11,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0074,
+              "frac_entities_positive_margin": 0.75,
+              "neon_margin_p10pos_minus_p99hneg": -0.0111,
+              "recall_at_0_1pct_fpr": 0.756,
+              "thr_at_0_1pct_fpr": 0.0989,
+              "mean_dprime_sq": 43.27,
+              "dprime_sq_ratio_vs_native_full": 0.1623,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": 0.0072,
+              "frac_entities_positive_margin": 0.75,
+              "neon_margin_p10pos_minus_p99hneg": -0.0106,
+              "recall_at_0_1pct_fpr": 0.7679,
+              "thr_at_0_1pct_fpr": 0.1514,
+              "mean_dprime_sq": 37.237,
+              "dprime_sq_ratio_vs_native_full": 0.1397,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.4541,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.4949,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.3785,
+              "mean_dprime_sq": 241.447,
+              "dprime_sq_ratio_vs_native_full": 0.9057,
+              "k_over_d": 0.25,
+              "gate3_theta_delta99_over_margin": 0.133
+            }
+          },
+          "256": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": 0.0244,
+              "frac_entities_positive_margin": 0.625,
+              "neon_margin_p10pos_minus_p99hneg": -0.0016,
+              "recall_at_0_1pct_fpr": 0.8929,
+              "thr_at_0_1pct_fpr": 0.707,
+              "mean_dprime_sq": 25.03,
+              "dprime_sq_ratio_vs_native_full": 0.0939,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": 0.0063,
+              "frac_entities_positive_margin": 0.7083,
+              "neon_margin_p10pos_minus_p99hneg": -0.0101,
+              "recall_at_0_1pct_fpr": 0.7679,
+              "thr_at_0_1pct_fpr": 0.1186,
+              "mean_dprime_sq": 36.701,
+              "dprime_sq_ratio_vs_native_full": 0.1377,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": 0.0047,
+              "frac_entities_positive_margin": 0.7083,
+              "neon_margin_p10pos_minus_p99hneg": -0.011,
+              "recall_at_0_1pct_fpr": 0.6964,
+              "thr_at_0_1pct_fpr": 0.1626,
+              "mean_dprime_sq": 32.239,
+              "dprime_sq_ratio_vs_native_full": 0.1209,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.4375,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.4547,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.4262,
+              "mean_dprime_sq": 190.937,
+              "dprime_sq_ratio_vs_native_full": 0.7163,
+              "k_over_d": 0.125,
+              "gate3_theta_delta99_over_margin": 0.163
+            }
+          },
+          "128": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": -0.0039,
+              "frac_entities_positive_margin": 0.5,
+              "neon_margin_p10pos_minus_p99hneg": -0.0159,
+              "recall_at_0_1pct_fpr": 0.8571,
+              "thr_at_0_1pct_fpr": 0.7896,
+              "mean_dprime_sq": 19.617,
+              "dprime_sq_ratio_vs_native_full": 0.0736,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": -0.0009,
+              "frac_entities_positive_margin": 0.625,
+              "neon_margin_p10pos_minus_p99hneg": -0.0188,
+              "recall_at_0_1pct_fpr": 0.6488,
+              "thr_at_0_1pct_fpr": 0.1283,
+              "mean_dprime_sq": 26.385,
+              "dprime_sq_ratio_vs_native_full": 0.099,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0054,
+              "frac_entities_positive_margin": 0.4583,
+              "neon_margin_p10pos_minus_p99hneg": -0.0295,
+              "recall_at_0_1pct_fpr": 0.5893,
+              "thr_at_0_1pct_fpr": 0.1674,
+              "mean_dprime_sq": 23.809,
+              "dprime_sq_ratio_vs_native_full": 0.0893,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.3763,
+              "frac_entities_positive_margin": 1.0,
+              "neon_margin_p10pos_minus_p99hneg": 0.3993,
+              "recall_at_0_1pct_fpr": 1.0,
+              "thr_at_0_1pct_fpr": 0.4866,
+              "mean_dprime_sq": 114.675,
+              "dprime_sq_ratio_vs_native_full": 0.4302,
+              "k_over_d": 0.0625,
+              "gate3_theta_delta99_over_margin": 0.212
+            }
+          },
+          "64": {
+            "donor_Pk_raw_cos": {
+              "mean_entity_margin_minpos_maxhneg": -0.042,
+              "frac_entities_positive_margin": 0.125,
+              "neon_margin_p10pos_minus_p99hneg": -0.0404,
+              "recall_at_0_1pct_fpr": 0.6012,
+              "thr_at_0_1pct_fpr": 0.8591,
+              "mean_dprime_sq": 15.111,
+              "dprime_sq_ratio_vs_native_full": 0.0567,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened": {
+              "mean_entity_margin_minpos_maxhneg": -0.0154,
+              "frac_entities_positive_margin": 0.2083,
+              "neon_margin_p10pos_minus_p99hneg": -0.033,
+              "recall_at_0_1pct_fpr": 0.3095,
+              "thr_at_0_1pct_fpr": 0.1359,
+              "mean_dprime_sq": 16.922,
+              "dprime_sq_ratio_vs_native_full": 0.0635,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "donor_Pk_whitened_r2": {
+              "mean_entity_margin_minpos_maxhneg": -0.0229,
+              "frac_entities_positive_margin": 0.1667,
+              "neon_margin_p10pos_minus_p99hneg": -0.0451,
+              "recall_at_0_1pct_fpr": 0.2619,
+              "thr_at_0_1pct_fpr": 0.17,
+              "mean_dprime_sq": 15.904,
+              "dprime_sq_ratio_vs_native_full": 0.0597,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": null
+            },
+            "native_B_mvdr": {
+              "mean_entity_margin_minpos_maxhneg": 0.1708,
+              "frac_entities_positive_margin": 0.8333,
+              "neon_margin_p10pos_minus_p99hneg": 0.2035,
+              "recall_at_0_1pct_fpr": 0.9167,
+              "thr_at_0_1pct_fpr": 0.7933,
+              "mean_dprime_sq": 40.566,
+              "dprime_sq_ratio_vs_native_full": 0.1522,
+              "k_over_d": 0.0312,
+              "gate3_theta_delta99_over_margin": 0.679
+            }
+          }
+        }
+      }
+    }
+  },
+  "T3_knowledge_gap_transplant": {
+    "n_screened": 167,
+    "n_gap": 0,
+    "error": "Too few gap entities"
+  }
+}

@@ -1,0 +1,2561 @@
+{
+  "meta": {
+    "pair_key": "falcon3-3b->smollm2-1.7b",
+    "stages": [
+      0,
+      1,
+      2
+    ],
+    "device": "mps",
+    "dtype": "torch.bfloat16",
+    "n_test_1x": 177,
+    "n_test_5x": 880,
+    "n_test_ad_1x": 69,
+    "n_loro": 96,
+    "elapsed_sec": 578.32
+  },
+  "stage0": {
+    "preflight": {
+      "identity_patch_max_dlogit": 0.0,
+      "noop_4d_mask_max_dlogit": 0.0,
+      "pos_ctrl_base_acc_32": 1.0,
+      "pos_ctrl_all_subj_knockout_acc_32": 0.0625
+    },
+    "cos_to_l0": {
+      "0": 1.0,
+      "3": 0.6355,
+      "6": 0.5639,
+      "9": 0.5312,
+      "12": 0.5036,
+      "15": 0.4792,
+      "18": 0.3448,
+      "21": 0.1576
+    },
+    "native_self_swap": {
+      "A0_self_single_l9": {
+        "name": "A0_self_single_l9",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8305,
+          "matched_ci95": [
+            0.7727,
+            0.8846
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 82.49,
+          "diff_ci95_pp": [
+            76.67,
+            88.1
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8986,
+          "matched_ci95": [
+            0.8254,
+            0.9683
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 89.86,
+          "diff_ci95_pp": [
+            82.54,
+            96.83
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8854,
+          "matched_ci95": [
+            0.8229,
+            0.9479
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 88.54,
+          "diff_ci95_pp": [
+            82.29,
+            94.79
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8534,
+          "matched_ci95": [
+            0.8148,
+            0.8922
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 84.89,
+          "diff_ci95_pp": [
+            81.02,
+            88.7
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.924,
+          "matched_ci95": [
+            0.8815,
+            0.9581
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 92.4,
+          "diff_ci95_pp": [
+            88.15,
+            95.81
+          ]
+        },
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.7184,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "A1_self_band3_8_9_10": {
+        "name": "A1_self_band3_8_9_10",
+        "mask_mode": "none",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8249,
+          "matched_ci95": [
+            0.7669,
+            0.8793
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 81.92,
+          "diff_ci95_pp": [
+            75.9,
+            87.57
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8841,
+          "matched_ci95": [
+            0.8059,
+            0.9565
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 88.41,
+          "diff_ci95_pp": [
+            80.59,
+            95.65
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8958,
+          "matched_ci95": [
+            0.8333,
+            0.9583
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 89.58,
+          "diff_ci95_pp": [
+            83.33,
+            95.83
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.7087,
+        "rescued_vs_base": 0,
+        "spoiled_vs_base": 1
+      },
+      "A2_self_l9_earlier_ko": {
+        "name": "A2_self_l9_earlier_ko",
+        "mask_mode": "earlier_subj",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.9266,
+          "matched_ci95": [
+            0.8832,
+            0.9634
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 92.09,
+          "diff_ci95_pp": [
+            87.69,
+            95.86
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.9855,
+          "matched_ci95": [
+            0.9565,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 98.55,
+          "diff_ci95_pp": [
+            95.65,
+            100.0
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.9792,
+          "matched_ci95": [
+            0.9479,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 97.92,
+          "diff_ci95_pp": [
+            94.79,
+            100.0
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.8835,
+        "rescued_vs_base": 22,
+        "spoiled_vs_base": 5
+      },
+      "A2_self_l9_full_ko": {
+        "name": "A2_self_l9_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.9209,
+          "matched_ci95": [
+            0.8765,
+            0.9581
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 91.53,
+          "diff_ci95_pp": [
+            87.04,
+            95.27
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.971,
+          "matched_ci95": [
+            0.9275,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 97.1,
+          "diff_ci95_pp": [
+            92.75,
+            100.0
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 1.0,
+          "matched_ci95": [
+            1.0,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 100.0,
+          "diff_ci95_pp": [
+            100.0,
+            100.0
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.942,
+          "matched_ci95": [
+            0.9218,
+            0.9603
+          ],
+          "shuffled_acc": 0.0068,
+          "matched_minus_shuffled_pp": 93.52,
+          "diff_ci95_pp": [
+            91.39,
+            95.45
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.9708,
+          "matched_ci95": [
+            0.9525,
+            0.9856
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 97.08,
+          "diff_ci95_pp": [
+            95.25,
+            98.56
+          ]
+        },
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.973,
+        "acc_multitok_base": 0.8835,
+        "rescued_vs_base": 22,
+        "spoiled_vs_base": 6
+      },
+      "A3_self_band3_earlier_ko": {
+        "name": "A3_self_band3_earlier_ko",
+        "mask_mode": "earlier_subj",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.9322,
+          "matched_ci95": [
+            0.8922,
+            0.9667
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 92.66,
+          "diff_ci95_pp": [
+            88.37,
+            96.2
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.9855,
+          "matched_ci95": [
+            0.9565,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 98.55,
+          "diff_ci95_pp": [
+            95.65,
+            100.0
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.9896,
+          "matched_ci95": [
+            0.9688,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 98.96,
+          "diff_ci95_pp": [
+            96.88,
+            100.0
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.9409,
+          "matched_ci95": [
+            0.9184,
+            0.9602
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 93.64,
+          "diff_ci95_pp": [
+            91.28,
+            95.66
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.9854,
+          "matched_ci95": [
+            0.9683,
+            0.9972
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 98.54,
+          "diff_ci95_pp": [
+            96.83,
+            99.72
+          ]
+        },
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.8932,
+        "rescued_vs_base": 22,
+        "spoiled_vs_base": 4
+      },
+      "A3_self_band3_full_ko": {
+        "name": "A3_self_band3_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.9492,
+          "matched_ci95": [
+            0.9141,
+            0.9778
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 94.35,
+          "diff_ci95_pp": [
+            90.59,
+            97.34
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.9855,
+          "matched_ci95": [
+            0.9552,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 98.55,
+          "diff_ci95_pp": [
+            95.52,
+            100.0
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 1.0,
+          "matched_ci95": [
+            1.0,
+            1.0
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 100.0,
+          "diff_ci95_pp": [
+            100.0,
+            100.0
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.9409,
+          "matched_ci95": [
+            0.9195,
+            0.9602
+          ],
+          "shuffled_acc": 0.0057,
+          "matched_minus_shuffled_pp": 93.52,
+          "diff_ci95_pp": [
+            91.36,
+            95.48
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.9708,
+          "matched_ci95": [
+            0.9527,
+            0.9859
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 97.08,
+          "diff_ci95_pp": [
+            95.27,
+            98.59
+          ]
+        },
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.9223,
+        "rescued_vs_base": 24,
+        "spoiled_vs_base": 3
+      },
+      "A3_self_band3_nonsubj_ctrl": {
+        "name": "A3_self_band3_nonsubj_ctrl",
+        "mask_mode": "nonsubj_ctrl",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8249,
+          "matched_ci95": [
+            0.7625,
+            0.8817
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 81.92,
+          "diff_ci95_pp": [
+            75.8,
+            87.71
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8841,
+          "matched_ci95": [
+            0.8027,
+            0.9565
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 88.41,
+          "diff_ci95_pp": [
+            80.27,
+            95.65
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8646,
+          "matched_ci95": [
+            0.7917,
+            0.9271
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 86.46,
+          "diff_ci95_pp": [
+            79.17,
+            92.71
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9865,
+        "acc_multitok_base": 0.7087,
+        "rescued_vs_base": 1,
+        "spoiled_vs_base": 2
+      },
+      "A0_self_amp_a1.5_l9": {
+        "name": "A0_self_amp_a1.5_l9",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8136,
+          "matched_ci95": [
+            0.7515,
+            0.8693
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 80.79,
+          "diff_ci95_pp": [
+            74.72,
+            86.56
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8696,
+          "matched_ci95": [
+            0.7833,
+            0.9429
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 86.96,
+          "diff_ci95_pp": [
+            78.33,
+            94.29
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.9167,
+          "matched_ci95": [
+            0.8542,
+            0.9688
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 91.67,
+          "diff_ci95_pp": [
+            85.42,
+            96.88
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.973,
+        "acc_multitok_base": 0.699,
+        "rescued_vs_base": 2,
+        "spoiled_vs_base": 5
+      },
+      "A0_self_amp_a2.0_l9": {
+        "name": "A0_self_amp_a2.0_l9",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7571,
+          "matched_ci95": [
+            0.6857,
+            0.8203
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 75.14,
+          "diff_ci95_pp": [
+            68.12,
+            81.46
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8116,
+          "matched_ci95": [
+            0.7015,
+            0.9048
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.16,
+          "diff_ci95_pp": [
+            70.15,
+            90.48
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8646,
+          "matched_ci95": [
+            0.7917,
+            0.9271
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 86.46,
+          "diff_ci95_pp": [
+            79.17,
+            92.71
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": null,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.9189,
+        "acc_multitok_base": 0.6408,
+        "rescued_vs_base": 3,
+        "spoiled_vs_base": 16
+      }
+    },
+    "free_geometry": {
+      "knockout_only_base_retention": {
+        "none": 1.0,
+        "earlier_subj": 0.548,
+        "full_knockout": 0.0282
+      },
+      "spec_stats": {
+        "selected_lam": 0.3,
+        "sv_max": 4.0138,
+        "sv_p90": 0.8872,
+        "sv_median": 0.2576,
+        "sv_p10": 0.0705,
+        "s_var": 1.0943,
+        "s_ls": 0.7823
+      },
+      "variants": {
+        "proc_var_matched": {
+          "name": "proc_var_matched",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7062,
+            "matched_ci95": [
+              0.6327,
+              0.7714
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 70.06,
+            "diff_ci95_pp": [
+              62.8,
+              76.76
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.7246,
+            "matched_ci95": [
+              0.6176,
+              0.8235
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 72.46,
+            "diff_ci95_pp": [
+              61.76,
+              82.35
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8021,
+            "matched_ci95": [
+              0.7188,
+              0.875
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 80.21,
+            "diff_ci95_pp": [
+              71.88,
+              87.5
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8503,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8514,
+          "acc_multitok_base": 0.6019,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "proc_ls_scale": {
+          "name": "proc_ls_scale",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7119,
+            "matched_ci95": [
+              0.6402,
+              0.7797
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 70.62,
+            "diff_ci95_pp": [
+              63.48,
+              77.37
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.7391,
+            "matched_ci95": [
+              0.6324,
+              0.8382
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 73.91,
+            "diff_ci95_pp": [
+              63.24,
+              83.82
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8229,
+            "matched_ci95": [
+              0.75,
+              0.8958
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 82.29,
+            "diff_ci95_pp": [
+              75.0,
+              89.58
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8572,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8784,
+          "acc_multitok_base": 0.5922,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "ridge_sigma_raw": {
+          "name": "ridge_sigma_raw",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7006,
+            "matched_ci95": [
+              0.6335,
+              0.7674
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 69.49,
+            "diff_ci95_pp": [
+              62.8,
+              76.22
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6667,
+            "matched_ci95": [
+              0.5493,
+              0.7746
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 66.67,
+            "diff_ci95_pp": [
+              54.93,
+              77.46
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.7292,
+            "matched_ci95": [
+              0.6354,
+              0.8125
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 72.92,
+            "diff_ci95_pp": [
+              63.54,
+              81.25
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8436,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8243,
+          "acc_multitok_base": 0.6117,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "ridge_sigma_rescaled": {
+          "name": "ridge_sigma_rescaled",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7119,
+            "matched_ci95": [
+              0.645,
+              0.7771
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 70.62,
+            "diff_ci95_pp": [
+              63.98,
+              77.06
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6957,
+            "matched_ci95": [
+              0.5882,
+              0.7971
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 69.57,
+            "diff_ci95_pp": [
+              58.82,
+              79.71
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8021,
+            "matched_ci95": [
+              0.7188,
+              0.8753
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 80.21,
+            "diff_ci95_pp": [
+              71.88,
+              87.53
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8572,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8108,
+          "acc_multitok_base": 0.6408,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "ridge_polar_I": {
+          "name": "ridge_polar_I",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.6893,
+            "matched_ci95": [
+              0.6144,
+              0.7583
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 68.36,
+            "diff_ci95_pp": [
+              60.92,
+              75.14
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6667,
+            "matched_ci95": [
+              0.5455,
+              0.7714
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 66.67,
+            "diff_ci95_pp": [
+              54.55,
+              77.14
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.7396,
+            "matched_ci95": [
+              0.6458,
+              0.8229
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 73.96,
+            "diff_ci95_pp": [
+              64.58,
+              82.29
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.83,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8243,
+          "acc_multitok_base": 0.5922,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "ridge_clamped_1_5": {
+          "name": "ridge_clamped_1_5",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7006,
+            "matched_ci95": [
+              0.6292,
+              0.7676
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 69.49,
+            "diff_ci95_pp": [
+              62.35,
+              76.24
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.7101,
+            "matched_ci95": [
+              0.5909,
+              0.8116
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 71.01,
+            "diff_ci95_pp": [
+              59.09,
+              81.16
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.7708,
+            "matched_ci95": [
+              0.6875,
+              0.8542
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 77.08,
+            "diff_ci95_pp": [
+              68.75,
+              85.42
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8436,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8108,
+          "acc_multitok_base": 0.6214,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "ridge_top16_clamped": {
+          "name": "ridge_top16_clamped",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.6836,
+            "matched_ci95": [
+              0.6062,
+              0.7537
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 67.8,
+            "diff_ci95_pp": [
+              60.12,
+              74.74
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6667,
+            "matched_ci95": [
+              0.5441,
+              0.7693
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 66.67,
+            "diff_ci95_pp": [
+              54.41,
+              76.93
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.75,
+            "matched_ci95": [
+              0.6664,
+              0.8333
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 75.0,
+            "diff_ci95_pp": [
+              66.64,
+              83.33
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8231,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8243,
+          "acc_multitok_base": 0.5825,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "F_proc_base_norm_rescale": {
+          "name": "F_proc_base_norm_rescale",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7006,
+            "matched_ci95": [
+              0.6286,
+              0.7688
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 69.49,
+            "diff_ci95_pp": [
+              62.29,
+              76.38
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6957,
+            "matched_ci95": [
+              0.5806,
+              0.7971
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 69.57,
+            "diff_ci95_pp": [
+              58.06,
+              79.71
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8021,
+            "matched_ci95": [
+              0.7188,
+              0.875
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 80.21,
+            "diff_ci95_pp": [
+              71.88,
+              87.5
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8436,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8378,
+          "acc_multitok_base": 0.6019,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "F_spherical_procrustes": {
+          "name": "F_spherical_procrustes",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.6949,
+            "matched_ci95": [
+              0.6219,
+              0.7632
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 68.93,
+            "diff_ci95_pp": [
+              61.68,
+              75.9
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6957,
+            "matched_ci95": [
+              0.5806,
+              0.7971
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 69.57,
+            "diff_ci95_pp": [
+              58.06,
+              79.71
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8125,
+            "matched_ci95": [
+              0.7292,
+              0.8854
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 81.25,
+            "diff_ci95_pp": [
+              72.92,
+              88.54
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.8367,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8378,
+          "acc_multitok_base": 0.5922,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "F_entity_transplant_r256": {
+          "name": "F_entity_transplant_r256",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.5311,
+            "matched_ci95": [
+              0.4518,
+              0.6129
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 53.11,
+            "diff_ci95_pp": [
+              45.18,
+              61.29
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.5507,
+            "matched_ci95": [
+              0.4262,
+              0.6709
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 55.07,
+            "diff_ci95_pp": [
+              42.62,
+              67.09
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.5938,
+            "matched_ci95": [
+              0.4896,
+              0.6875
+            ],
+            "shuffled_acc": 0.0104,
+            "matched_minus_shuffled_pp": 58.33,
+            "diff_ci95_pp": [
+              47.92,
+              67.71
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.6395,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.7162,
+          "acc_multitok_base": 0.3981,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        },
+        "F_entity_transplant_r1024": {
+          "name": "F_entity_transplant_r1024",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.6893,
+            "matched_ci95": [
+              0.6163,
+              0.7572
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 68.36,
+            "diff_ci95_pp": [
+              60.98,
+              75.14
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.6812,
+            "matched_ci95": [
+              0.5625,
+              0.7848
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 68.12,
+            "diff_ci95_pp": [
+              56.25,
+              78.48
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.7917,
+            "matched_ci95": [
+              0.7083,
+              0.875
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 79.17,
+            "diff_ci95_pp": [
+              70.83,
+              87.5
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.83,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8243,
+          "acc_multitok_base": 0.5922,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        }
+      },
+      "patch_site_norm_ratio_mean": 1.0551,
+      "two_donor_G4": {
+        "residual_error_correlation_qwen_vs_falcon": 0.4799,
+        "eval": {
+          "name": "G4_two_donor_qwen_falcon_avg",
+          "mask_mode": "none",
+          "layers": [
+            9
+          ],
+          "cf_1x": {
+            "n": 177,
+            "n_clusters": 137,
+            "matched_acc": 0.7627,
+            "matched_ci95": [
+              0.6977,
+              0.8245
+            ],
+            "shuffled_acc": 0.0056,
+            "matched_minus_shuffled_pp": 75.71,
+            "diff_ci95_pp": [
+              69.19,
+              82.16
+            ]
+          },
+          "ad_1x": {
+            "n": 69,
+            "n_clusters": 56,
+            "matched_acc": 0.8261,
+            "matched_ci95": [
+              0.7333,
+              0.9077
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 82.61,
+            "diff_ci95_pp": [
+              73.33,
+              90.77
+            ]
+          },
+          "loro_5": {
+            "n": 96,
+            "n_clusters": 96,
+            "matched_acc": 0.8646,
+            "matched_ci95": [
+              0.7917,
+              0.9271
+            ],
+            "shuffled_acc": 0.0,
+            "matched_minus_shuffled_pp": 86.46,
+            "diff_ci95_pp": [
+              79.17,
+              92.71
+            ]
+          },
+          "cf_5x_powered": null,
+          "ad_5x_powered": null,
+          "transport_efficiency_1x": 0.9184,
+          "transport_efficiency_5x": null,
+          "acc_1tok_base": 0.8919,
+          "acc_multitok_base": 0.6699,
+          "rescued_vs_base": null,
+          "spoiled_vs_base": null
+        }
+      }
+    }
+  },
+  "stage1_leverA": {
+    "nullspace_audit": {
+      "lA13_to_lB8": {
+        "s": 1.2627,
+        "null_frac": 0.01471
+      },
+      "lA14_to_lB9": {
+        "s": 1.0943,
+        "null_frac": 0.01588
+      },
+      "lA15_to_lB10": {
+        "s": 0.8853,
+        "null_frac": 0.01767
+      }
+    },
+    "configs": {
+      "A0_single_unlab10k": {
+        "name": "A0_single_unlab10k",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7062,
+          "matched_ci95": [
+            0.6327,
+            0.7714
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 70.06,
+          "diff_ci95_pp": [
+            62.8,
+            76.76
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.7246,
+          "matched_ci95": [
+            0.6176,
+            0.8235
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 72.46,
+          "diff_ci95_pp": [
+            61.76,
+            82.35
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8021,
+          "matched_ci95": [
+            0.7188,
+            0.875
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 80.21,
+          "diff_ci95_pp": [
+            71.88,
+            87.5
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.717,
+          "matched_ci95": [
+            0.6678,
+            0.7659
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 71.25,
+          "diff_ci95_pp": [
+            66.4,
+            76.02
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.7164,
+          "matched_ci95": [
+            0.6596,
+            0.7709
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 71.64,
+          "diff_ci95_pp": [
+            65.96,
+            77.09
+          ]
+        },
+        "transport_efficiency_1x": 0.8503,
+        "transport_efficiency_5x": 0.8402,
+        "acc_1tok_base": 0.8514,
+        "acc_multitok_base": 0.6019,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "A2_single_full_ko": {
+        "name": "A2_single_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8136,
+          "matched_ci95": [
+            0.7528,
+            0.8694
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 80.79,
+          "diff_ci95_pp": [
+            74.58,
+            86.44
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.7826,
+          "matched_ci95": [
+            0.6891,
+            0.8696
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 78.26,
+          "diff_ci95_pp": [
+            68.91,
+            86.96
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8438,
+          "matched_ci95": [
+            0.7604,
+            0.9062
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.38,
+          "diff_ci95_pp": [
+            76.04,
+            90.62
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8284,
+          "matched_ci95": [
+            0.7961,
+            0.8568
+          ],
+          "shuffled_acc": 0.008,
+          "matched_minus_shuffled_pp": 82.05,
+          "diff_ci95_pp": [
+            78.77,
+            84.92
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.7982,
+          "matched_ci95": [
+            0.7562,
+            0.8395
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 79.82,
+          "diff_ci95_pp": [
+            75.62,
+            83.95
+          ]
+        },
+        "transport_efficiency_1x": 0.8835,
+        "transport_efficiency_5x": 0.8794,
+        "acc_1tok_base": 0.8514,
+        "acc_multitok_base": 0.7864,
+        "rescued_vs_base": 22,
+        "spoiled_vs_base": 3
+      },
+      "A1_band_main_none": {
+        "name": "A1_band_main_none",
+        "mask_mode": "none",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.678,
+          "matched_ci95": [
+            0.6025,
+            0.75
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 67.23,
+          "diff_ci95_pp": [
+            59.76,
+            74.59
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.7246,
+          "matched_ci95": [
+            0.6119,
+            0.8194
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 72.46,
+          "diff_ci95_pp": [
+            61.19,
+            81.94
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8125,
+          "matched_ci95": [
+            0.7292,
+            0.8854
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.25,
+          "diff_ci95_pp": [
+            72.92,
+            88.54
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.8219,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8243,
+        "acc_multitok_base": 0.5728,
+        "rescued_vs_base": 3,
+        "spoiled_vs_base": 8
+      },
+      "A3_band_main_earlier_ko": {
+        "name": "A3_band_main_earlier_ko",
+        "mask_mode": "earlier_subj",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.791,
+          "matched_ci95": [
+            0.7258,
+            0.8494
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 78.53,
+          "diff_ci95_pp": [
+            72.04,
+            84.39
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8116,
+          "matched_ci95": [
+            0.7143,
+            0.8955
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.16,
+          "diff_ci95_pp": [
+            71.43,
+            89.55
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8333,
+          "matched_ci95": [
+            0.7604,
+            0.9062
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 83.33,
+          "diff_ci95_pp": [
+            76.04,
+            90.62
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8045,
+          "matched_ci95": [
+            0.7677,
+            0.8392
+          ],
+          "shuffled_acc": 0.0068,
+          "matched_minus_shuffled_pp": 79.77,
+          "diff_ci95_pp": [
+            76.1,
+            83.33
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.8158,
+          "matched_ci95": [
+            0.7704,
+            0.8598
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.58,
+          "diff_ci95_pp": [
+            77.04,
+            85.98
+          ]
+        },
+        "transport_efficiency_1x": 0.8485,
+        "transport_efficiency_5x": 0.855,
+        "acc_1tok_base": 0.8243,
+        "acc_multitok_base": 0.767,
+        "rescued_vs_base": 23,
+        "spoiled_vs_base": 8
+      },
+      "A3_band_main_full_ko": {
+        "name": "A3_band_main_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8136,
+          "matched_ci95": [
+            0.7516,
+            0.8713
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 80.79,
+          "diff_ci95_pp": [
+            74.58,
+            86.49
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8116,
+          "matched_ci95": [
+            0.7101,
+            0.8961
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.16,
+          "diff_ci95_pp": [
+            71.01,
+            89.61
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8333,
+          "matched_ci95": [
+            0.75,
+            0.8958
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 83.33,
+          "diff_ci95_pp": [
+            75.0,
+            89.58
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8284,
+          "matched_ci95": [
+            0.7964,
+            0.8573
+          ],
+          "shuffled_acc": 0.008,
+          "matched_minus_shuffled_pp": 82.05,
+          "diff_ci95_pp": [
+            78.82,
+            85.1
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.8129,
+          "matched_ci95": [
+            0.7637,
+            0.8588
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 81.29,
+          "diff_ci95_pp": [
+            76.37,
+            85.88
+          ]
+        },
+        "transport_efficiency_1x": 0.8571,
+        "transport_efficiency_5x": 0.8804,
+        "acc_1tok_base": 0.8378,
+        "acc_multitok_base": 0.7961,
+        "rescued_vs_base": 24,
+        "spoiled_vs_base": 5
+      },
+      "A3_band_main_nonsubj_ctrl": {
+        "name": "A3_band_main_nonsubj_ctrl",
+        "mask_mode": "nonsubj_ctrl",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.6723,
+          "matched_ci95": [
+            0.5963,
+            0.7459
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 66.67,
+          "diff_ci95_pp": [
+            59.28,
+            73.94
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.7246,
+          "matched_ci95": [
+            0.6119,
+            0.8194
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 72.46,
+          "diff_ci95_pp": [
+            61.19,
+            81.94
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8021,
+          "matched_ci95": [
+            0.7188,
+            0.875
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 80.21,
+          "diff_ci95_pp": [
+            71.88,
+            87.5
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.815,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8243,
+        "acc_multitok_base": 0.5631,
+        "rescued_vs_base": 3,
+        "spoiled_vs_base": 9
+      }
+    }
+  },
+  "stage2_leverB": {
+    "pool_meta": {
+      "n_entities": 6000,
+      "n_curated_multiword_real": 220,
+      "n_tokenizer_pure_proper_nouns": 5780,
+      "n_other_cap_nouns": 0,
+      "n_removed_by_leak_filter": 1196,
+      "leak_count": 0,
+      "sample": [
+        "Tasmania",
+        "Stara Zagora",
+        "Sibiu",
+        "Piura",
+        "Kiel",
+        "Kristiansand",
+        "Sfax",
+        "Kuopio",
+        "Norwich",
+        "Shikoku"
+      ]
+    },
+    "configs": {
+      "B_real_raw_single_A0": {
+        "name": "B_real_raw_single_A0",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7458,
+          "matched_ci95": [
+            0.6805,
+            0.8088
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 74.01,
+          "diff_ci95_pp": [
+            67.48,
+            80.44
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.7391,
+          "matched_ci95": [
+            0.6308,
+            0.84
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 73.91,
+          "diff_ci95_pp": [
+            63.08,
+            84.0
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8229,
+          "matched_ci95": [
+            0.7396,
+            0.8958
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 82.29,
+          "diff_ci95_pp": [
+            73.96,
+            89.58
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.898,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8378,
+        "acc_multitok_base": 0.6796,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_raw_band_A3_full_ko": {
+        "name": "B_real_raw_band_A3_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8531,
+          "matched_ci95": [
+            0.7956,
+            0.904
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 84.75,
+          "diff_ci95_pp": [
+            79.0,
+            89.94
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8406,
+          "matched_ci95": [
+            0.7429,
+            0.9254
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.06,
+          "diff_ci95_pp": [
+            74.29,
+            92.54
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8854,
+          "matched_ci95": [
+            0.8229,
+            0.9375
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 88.54,
+          "diff_ci95_pp": [
+            82.29,
+            93.75
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.858,
+          "matched_ci95": [
+            0.8303,
+            0.883
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 85.34,
+          "diff_ci95_pp": [
+            82.51,
+            87.79
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.845,
+          "matched_ci95": [
+            0.8074,
+            0.8819
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.5,
+          "diff_ci95_pp": [
+            80.74,
+            88.19
+          ]
+        },
+        "transport_efficiency_1x": 0.8988,
+        "transport_efficiency_5x": 0.9119,
+        "acc_1tok_base": 0.8649,
+        "acc_multitok_base": 0.8447,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_m3_avg_single_A0": {
+        "name": "B_real_m3_avg_single_A0",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7119,
+          "matched_ci95": [
+            0.6416,
+            0.7771
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 70.62,
+          "diff_ci95_pp": [
+            63.86,
+            77.3
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.6667,
+          "matched_ci95": [
+            0.5428,
+            0.7778
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 66.67,
+          "diff_ci95_pp": [
+            54.28,
+            77.78
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.7917,
+          "matched_ci95": [
+            0.7083,
+            0.8646
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 79.17,
+          "diff_ci95_pp": [
+            70.83,
+            86.46
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.8572,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8108,
+        "acc_multitok_base": 0.6408,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_m3_avg_band_A3_full_ko": {
+        "name": "B_real_m3_avg_band_A3_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8757,
+          "matched_ci95": [
+            0.8225,
+            0.9259
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 87.01,
+          "diff_ci95_pp": [
+            81.56,
+            91.91
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8551,
+          "matched_ci95": [
+            0.7606,
+            0.9394
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 85.51,
+          "diff_ci95_pp": [
+            76.06,
+            93.94
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.9062,
+          "matched_ci95": [
+            0.8438,
+            0.9583
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 90.62,
+          "diff_ci95_pp": [
+            84.38,
+            95.83
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8693,
+          "matched_ci95": [
+            0.8443,
+            0.8918
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 86.48,
+          "diff_ci95_pp": [
+            83.92,
+            88.65
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.848,
+          "matched_ci95": [
+            0.8107,
+            0.8858
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.8,
+          "diff_ci95_pp": [
+            81.07,
+            88.58
+          ]
+        },
+        "transport_efficiency_1x": 0.9226,
+        "transport_efficiency_5x": 0.9239,
+        "acc_1tok_base": 0.8784,
+        "acc_multitok_base": 0.8738,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_bet_01wit_single_A0": {
+        "name": "B_real_bet_01wit_single_A0",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7232,
+          "matched_ci95": [
+            0.655,
+            0.789
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 71.75,
+          "diff_ci95_pp": [
+            65.19,
+            78.41
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.6812,
+          "matched_ci95": [
+            0.5625,
+            0.7917
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 68.12,
+          "diff_ci95_pp": [
+            56.25,
+            79.17
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.7917,
+          "matched_ci95": [
+            0.7083,
+            0.8646
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 79.17,
+          "diff_ci95_pp": [
+            70.83,
+            86.46
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.8708,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8108,
+        "acc_multitok_base": 0.6602,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_bet_01wit_band_A3_full_ko": {
+        "name": "B_real_bet_01wit_band_A3_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8701,
+          "matched_ci95": [
+            0.8158,
+            0.9205
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 86.44,
+          "diff_ci95_pp": [
+            80.92,
+            91.41
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8551,
+          "matched_ci95": [
+            0.7606,
+            0.9394
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 85.51,
+          "diff_ci95_pp": [
+            76.06,
+            93.94
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8958,
+          "matched_ci95": [
+            0.8333,
+            0.9479
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 89.58,
+          "diff_ci95_pp": [
+            83.33,
+            94.79
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8682,
+          "matched_ci95": [
+            0.8432,
+            0.8912
+          ],
+          "shuffled_acc": 0.0045,
+          "matched_minus_shuffled_pp": 86.36,
+          "diff_ci95_pp": [
+            83.77,
+            88.62
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.848,
+          "matched_ci95": [
+            0.8107,
+            0.8858
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 84.8,
+          "diff_ci95_pp": [
+            81.07,
+            88.58
+          ]
+        },
+        "transport_efficiency_1x": 0.9167,
+        "transport_efficiency_5x": 0.9227,
+        "acc_1tok_base": 0.8784,
+        "acc_multitok_base": 0.8641,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_cross_ctx_single_A0": {
+        "name": "B_real_cross_ctx_single_A0",
+        "mask_mode": "none",
+        "layers": [
+          9
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.7232,
+          "matched_ci95": [
+            0.6554,
+            0.788
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 71.75,
+          "diff_ci95_pp": [
+            65.0,
+            78.29
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.6812,
+          "matched_ci95": [
+            0.5574,
+            0.7917
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 68.12,
+          "diff_ci95_pp": [
+            55.74,
+            79.17
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.8229,
+          "matched_ci95": [
+            0.7396,
+            0.8958
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 82.29,
+          "diff_ci95_pp": [
+            73.96,
+            89.58
+          ]
+        },
+        "cf_5x_powered": null,
+        "ad_5x_powered": null,
+        "transport_efficiency_1x": 0.8708,
+        "transport_efficiency_5x": null,
+        "acc_1tok_base": 0.8243,
+        "acc_multitok_base": 0.6505,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      },
+      "B_real_cross_ctx_band_A3_full_ko": {
+        "name": "B_real_cross_ctx_band_A3_full_ko",
+        "mask_mode": "full_knockout",
+        "layers": [
+          8,
+          9,
+          10
+        ],
+        "cf_1x": {
+          "n": 177,
+          "n_clusters": 137,
+          "matched_acc": 0.8701,
+          "matched_ci95": [
+            0.8154,
+            0.9191
+          ],
+          "shuffled_acc": 0.0056,
+          "matched_minus_shuffled_pp": 86.44,
+          "diff_ci95_pp": [
+            80.84,
+            91.4
+          ]
+        },
+        "ad_1x": {
+          "n": 69,
+          "n_clusters": 56,
+          "matched_acc": 0.8696,
+          "matched_ci95": [
+            0.7794,
+            0.9452
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 86.96,
+          "diff_ci95_pp": [
+            77.94,
+            94.52
+          ]
+        },
+        "loro_5": {
+          "n": 96,
+          "n_clusters": 96,
+          "matched_acc": 0.9062,
+          "matched_ci95": [
+            0.8438,
+            0.9583
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 90.62,
+          "diff_ci95_pp": [
+            84.38,
+            95.83
+          ]
+        },
+        "cf_5x_powered": {
+          "n": 880,
+          "n_clusters": 177,
+          "matched_acc": 0.8716,
+          "matched_ci95": [
+            0.8487,
+            0.8931
+          ],
+          "shuffled_acc": 0.0068,
+          "matched_minus_shuffled_pp": 86.48,
+          "diff_ci95_pp": [
+            84.03,
+            88.72
+          ]
+        },
+        "ad_5x_powered": {
+          "n": 342,
+          "n_clusters": 98,
+          "matched_acc": 0.8626,
+          "matched_ci95": [
+            0.83,
+            0.8951
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 86.26,
+          "diff_ci95_pp": [
+            83.0,
+            89.51
+          ]
+        },
+        "transport_efficiency_1x": 0.9167,
+        "transport_efficiency_5x": 0.9263,
+        "acc_1tok_base": 0.8919,
+        "acc_multitok_base": 0.8544,
+        "rescued_vs_base": null,
+        "spoiled_vs_base": null
+      }
+    }
+  }
+}

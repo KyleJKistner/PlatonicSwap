@@ -1,0 +1,2897 @@
+{
+  "meta": {
+    "pair_key": "qwen2.5-3b->granite-3.1-2b",
+    "layers": [
+      18,
+      8
+    ],
+    "device": "mps",
+    "smoke": false,
+    "seed": 20261125,
+    "n_grid": [
+      500,
+      2000,
+      10000
+    ],
+    "n_fisher": 2000,
+    "loro_held_out_relations": [
+      "athlete_sport",
+      "company_founder",
+      "element_symbol",
+      "historical_figure_country",
+      "us_state_capital"
+    ],
+    "n_test_pairs": 153,
+    "n_test_ad_pairs": 67,
+    "n_loro_pairs": 91,
+    "elapsed_sec": 1222.62
+  },
+  "corpus_meta": {
+    "n_train": 10000,
+    "n_val": 512,
+    "n_capitalized_proper_nouns": 10512,
+    "n_lowercase_content_nouns": 0,
+    "n_boundary_rejected": 0,
+    "val_test_overlap_count": 0,
+    "sample_prompts": [
+      "In standard references, Ros was historically linked to",
+      "Around the world, Minutes is recognized across",
+      "Among scholars, Stress has a long history in",
+      "According to historians, Respond originated in the context of",
+      "Around the world, Certificate is widely known for"
+    ]
+  },
+  "unlabeled_fisher_spectra": {
+    "F_B_end_unlab": {
+      "eff_rank_pr": 91.3,
+      "eff_rank_shannon": 253.58,
+      "top32_frac": 0.4337,
+      "top64_frac": 0.5712,
+      "top256_frac": 0.8577
+    },
+    "F_B_multi_unlab": {
+      "eff_rank_pr": 200.54,
+      "eff_rank_shannon": 505.08,
+      "top32_frac": 0.2881,
+      "top64_frac": 0.4007,
+      "top256_frac": 0.7088
+    }
+  },
+  "qa_train_reference": {
+    "qa_shared_procrustes_N456": {
+      "name": "qa_shared_procrustes_N456",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3856,
+        "matched_ci95": [
+          0.3018,
+          0.4755
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 38.56,
+        "diff_ci95_pp": [
+          30.18,
+          47.55
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2836,
+        "matched_ci95": [
+          0.1831,
+          0.3973
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 28.36,
+        "diff_ci95_pp": [
+          18.31,
+          39.73
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3077,
+        "matched_ci95": [
+          0.2198,
+          0.4066
+        ],
+        "shuffled_acc": 0.011,
+        "matched_minus_shuffled_pp": 29.67,
+        "diff_ci95_pp": [
+          20.88,
+          39.56
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.50281,
+        "r2_euclidean": -0.03956,
+        "r2_fisher": 0.28522,
+        "mean_l2_err": 6.60694
+      },
+      "unlabeled_val_continuation_kl": 0.21642
+    },
+    "qa_alltrain_procrustes_N587": {
+      "name": "qa_alltrain_procrustes_N587",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4118,
+        "matched_ci95": [
+          0.3373,
+          0.4928
+        ],
+        "shuffled_acc": 0.0065,
+        "matched_minus_shuffled_pp": 40.52,
+        "diff_ci95_pp": [
+          32.9,
+          48.55
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2537,
+        "matched_ci95": [
+          0.1579,
+          0.3621
+        ],
+        "shuffled_acc": 0.0149,
+        "matched_minus_shuffled_pp": 23.88,
+        "diff_ci95_pp": [
+          14.66,
+          34.38
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3626,
+        "matched_ci95": [
+          0.2637,
+          0.4615
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 36.26,
+        "diff_ci95_pp": [
+          26.37,
+          46.15
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.51692,
+        "r2_euclidean": -0.01363,
+        "r2_fisher": 0.30986,
+        "mean_l2_err": 6.53104
+      },
+      "unlabeled_val_continuation_kl": 0.22122
+    },
+    "qa_alltrain_span_N587": {
+      "name": "qa_alltrain_span_N587",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3987,
+        "matched_ci95": [
+          0.3133,
+          0.4865
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 39.87,
+        "diff_ci95_pp": [
+          31.33,
+          48.65
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2687,
+        "matched_ci95": [
+          0.1733,
+          0.375
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 26.87,
+        "diff_ci95_pp": [
+          17.33,
+          37.5
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3626,
+        "matched_ci95": [
+          0.2637,
+          0.4615
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 36.26,
+        "diff_ci95_pp": [
+          26.37,
+          46.15
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.54293,
+        "r2_euclidean": 0.09469,
+        "r2_fisher": 0.36232,
+        "mean_l2_err": 6.18228
+      },
+      "unlabeled_val_continuation_kl": 0.209
+    },
+    "qa_train10rels_procrustes_N415": {
+      "name": "qa_train10rels_procrustes_N415",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3333,
+        "matched_ci95": [
+          0.2611,
+          0.4125
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 33.33,
+        "diff_ci95_pp": [
+          26.11,
+          41.25
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2537,
+        "matched_ci95": [
+          0.1549,
+          0.3637
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 25.37,
+        "diff_ci95_pp": [
+          15.49,
+          36.37
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.1429,
+        "matched_ci95": [
+          0.0769,
+          0.2198
+        ],
+        "shuffled_acc": 0.033,
+        "matched_minus_shuffled_pp": 10.99,
+        "diff_ci95_pp": [
+          4.4,
+          17.58
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.41311,
+        "r2_euclidean": -0.24728,
+        "r2_fisher": 0.08027,
+        "mean_l2_err": 7.16704
+      },
+      "unlabeled_val_continuation_kl": 0.27155
+    }
+  },
+  "unlabeled_scaling_ladder": {
+    "500": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2026,
+          "matched_ci95": [
+            0.14,
+            0.2654
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 20.26,
+          "diff_ci95_pp": [
+            14.0,
+            26.54
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2239,
+          "matched_ci95": [
+            0.1286,
+            0.3333
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 22.39,
+          "diff_ci95_pp": [
+            12.86,
+            33.33
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.1538,
+          "matched_ci95": [
+            0.0879,
+            0.2308
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 15.38,
+          "diff_ci95_pp": [
+            8.79,
+            23.08
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.22784,
+          "r2_euclidean": -0.67108,
+          "r2_fisher": -0.13318,
+          "mean_l2_err": 8.53495
+        },
+        "unlabeled_val_continuation_kl": 0.05884
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2092,
+          "matched_ci95": [
+            0.1484,
+            0.2734
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 20.92,
+          "diff_ci95_pp": [
+            14.84,
+            27.34
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2388,
+          "matched_ci95": [
+            0.141,
+            0.3501
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 23.88,
+          "diff_ci95_pp": [
+            14.1,
+            35.01
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.1538,
+          "matched_ci95": [
+            0.0879,
+            0.2308
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 15.38,
+          "diff_ci95_pp": [
+            8.79,
+            23.08
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.26329,
+          "r2_euclidean": -0.37559,
+          "r2_fisher": 0.0178,
+          "mean_l2_err": 7.7406
+        },
+        "unlabeled_val_continuation_kl": 0.05572
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.1569,
+          "matched_ci95": [
+            0.1046,
+            0.2152
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 15.69,
+          "diff_ci95_pp": [
+            10.46,
+            21.52
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.1642,
+          "matched_ci95": [
+            0.0794,
+            0.2615
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 16.42,
+          "diff_ci95_pp": [
+            7.94,
+            26.15
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.1099,
+          "matched_ci95": [
+            0.0549,
+            0.1761
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 10.99,
+          "diff_ci95_pp": [
+            5.49,
+            17.61
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.28402,
+          "r2_euclidean": 0.01458,
+          "r2_fisher": 0.2423,
+          "mean_l2_err": 6.50563
+        },
+        "unlabeled_val_continuation_kl": 0.05578,
+        "selected_lam": 3.0
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.1765,
+          "matched_ci95": [
+            0.1219,
+            0.2381
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 17.65,
+          "diff_ci95_pp": [
+            12.19,
+            23.81
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.209,
+          "matched_ci95": [
+            0.1143,
+            0.3175
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.43,
+            31.75
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.1209,
+          "matched_ci95": [
+            0.0549,
+            0.1978
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 12.09,
+          "diff_ci95_pp": [
+            5.49,
+            19.78
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.31184,
+          "r2_euclidean": -0.17564,
+          "r2_fisher": -0.01079,
+          "mean_l2_err": 7.15372
+        },
+        "unlabeled_val_continuation_kl": 0.05551,
+        "selected_lam": 3.0
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.1242,
+          "matched_ci95": [
+            0.0741,
+            0.1765
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 11.76,
+          "diff_ci95_pp": [
+            6.79,
+            16.78
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.1343,
+          "matched_ci95": [
+            0.0556,
+            0.2239
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 13.43,
+          "diff_ci95_pp": [
+            5.56,
+            22.39
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.0879,
+          "matched_ci95": [
+            0.033,
+            0.1538
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 8.79,
+          "diff_ci95_pp": [
+            3.3,
+            15.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.20866,
+          "r2_euclidean": -1.16356,
+          "r2_fisher": -0.637,
+          "mean_l2_err": 9.69572
+        },
+        "unlabeled_val_continuation_kl": 0.0704,
+        "selected_shrink_cov": 0.1
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.1503,
+          "matched_ci95": [
+            0.094,
+            0.2093
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 14.38,
+          "diff_ci95_pp": [
+            8.9,
+            20.0
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.1493,
+          "matched_ci95": [
+            0.0704,
+            0.2462
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 14.93,
+          "diff_ci95_pp": [
+            7.04,
+            24.62
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.0879,
+          "matched_ci95": [
+            0.033,
+            0.1538
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 8.79,
+          "diff_ci95_pp": [
+            3.3,
+            15.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.20484,
+          "r2_euclidean": -1.20941,
+          "r2_fisher": -0.55831,
+          "mean_l2_err": 9.79922
+        },
+        "unlabeled_val_continuation_kl": 0.06483,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.1242,
+          "matched_ci95": [
+            0.0741,
+            0.1772
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 12.42,
+          "diff_ci95_pp": [
+            7.41,
+            17.72
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.1045,
+          "matched_ci95": [
+            0.0389,
+            0.1905
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 10.45,
+          "diff_ci95_pp": [
+            3.89,
+            19.05
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.0879,
+          "matched_ci95": [
+            0.033,
+            0.1538
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 8.79,
+          "diff_ci95_pp": [
+            3.3,
+            15.38
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.20019,
+          "r2_euclidean": -1.30971,
+          "r2_fisher": -0.66775,
+          "mean_l2_err": 10.01852
+        },
+        "unlabeled_val_continuation_kl": 0.06658,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.1
+      }
+    },
+    "2000": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.366,
+          "matched_ci95": [
+            0.2874,
+            0.4503
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.6,
+          "diff_ci95_pp": [
+            28.74,
+            45.03
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3284,
+          "matched_ci95": [
+            0.2238,
+            0.4531
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 32.84,
+          "diff_ci95_pp": [
+            22.38,
+            45.31
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3516,
+          "matched_ci95": [
+            0.2637,
+            0.4508
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 35.16,
+          "diff_ci95_pp": [
+            26.37,
+            45.08
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.32361,
+          "r2_euclidean": -0.43922,
+          "r2_fisher": 0.02441,
+          "mean_l2_err": 7.91883
+        },
+        "unlabeled_val_continuation_kl": 0.04178
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3725,
+          "matched_ci95": [
+            0.2922,
+            0.4558
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 37.25,
+          "diff_ci95_pp": [
+            29.22,
+            45.58
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3284,
+          "matched_ci95": [
+            0.2238,
+            0.4531
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 32.84,
+          "diff_ci95_pp": [
+            22.38,
+            45.31
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3626,
+          "matched_ci95": [
+            0.2637,
+            0.4615
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.26,
+          "diff_ci95_pp": [
+            26.37,
+            46.15
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.324,
+          "r2_euclidean": -0.43596,
+          "r2_fisher": 0.02592,
+          "mean_l2_err": 7.91
+        },
+        "unlabeled_val_continuation_kl": 0.042
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3007,
+          "matched_ci95": [
+            0.2288,
+            0.3742
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 30.07,
+          "diff_ci95_pp": [
+            22.88,
+            37.42
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2836,
+          "matched_ci95": [
+            0.1818,
+            0.4
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 28.36,
+          "diff_ci95_pp": [
+            18.18,
+            40.0
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2637,
+          "matched_ci95": [
+            0.1758,
+            0.3626
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 26.37,
+          "diff_ci95_pp": [
+            17.58,
+            36.26
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.37862,
+          "r2_euclidean": 0.10101,
+          "r2_fisher": 0.34132,
+          "mean_l2_err": 6.20172
+        },
+        "unlabeled_val_continuation_kl": 0.03876,
+        "selected_lam": 1.0
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3137,
+          "matched_ci95": [
+            0.2394,
+            0.3929
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 31.37,
+          "diff_ci95_pp": [
+            23.94,
+            39.29
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2836,
+          "matched_ci95": [
+            0.1791,
+            0.4032
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 28.36,
+          "diff_ci95_pp": [
+            17.91,
+            40.32
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3516,
+          "matched_ci95": [
+            0.2527,
+            0.4505
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 35.16,
+          "diff_ci95_pp": [
+            25.27,
+            45.05
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.40242,
+          "r2_euclidean": -0.08505,
+          "r2_fisher": 0.0285,
+          "mean_l2_err": 6.86661
+        },
+        "unlabeled_val_continuation_kl": 0.03911,
+        "selected_lam": 1.0
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2614,
+          "matched_ci95": [
+            0.1933,
+            0.3357
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 25.49,
+          "diff_ci95_pp": [
+            18.83,
+            32.9
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2239,
+          "matched_ci95": [
+            0.1282,
+            0.3387
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.76,
+            32.15
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2747,
+          "matched_ci95": [
+            0.1868,
+            0.3626
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 27.47,
+          "diff_ci95_pp": [
+            18.68,
+            36.26
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.2944,
+          "r2_euclidean": -0.98678,
+          "r2_fisher": -0.41993,
+          "mean_l2_err": 9.27457
+        },
+        "unlabeled_val_continuation_kl": 0.04149,
+        "selected_shrink_cov": 0.1
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2614,
+          "matched_ci95": [
+            0.1882,
+            0.3377
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 25.49,
+          "diff_ci95_pp": [
+            18.3,
+            32.95
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2239,
+          "matched_ci95": [
+            0.1282,
+            0.3387
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.76,
+            32.15
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2637,
+          "matched_ci95": [
+            0.1758,
+            0.3516
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 26.37,
+          "diff_ci95_pp": [
+            17.58,
+            35.16
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.29088,
+          "r2_euclidean": -1.01159,
+          "r2_fisher": -0.34711,
+          "mean_l2_err": 9.33198
+        },
+        "unlabeled_val_continuation_kl": 0.04067,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.1
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2549,
+          "matched_ci95": [
+            0.1875,
+            0.3314
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 24.84,
+          "diff_ci95_pp": [
+            18.24,
+            32.3
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2239,
+          "matched_ci95": [
+            0.1282,
+            0.3387
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.76,
+            32.15
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2527,
+          "matched_ci95": [
+            0.1648,
+            0.3407
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 25.27,
+          "diff_ci95_pp": [
+            16.48,
+            34.07
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.29125,
+          "r2_euclidean": -1.0124,
+          "r2_fisher": -0.40112,
+          "mean_l2_err": 9.33296
+        },
+        "unlabeled_val_continuation_kl": 0.03934,
+        "selected_shrink_cov": 0.1,
+        "selected_fisher_damp": 0.5
+      },
+      "fisher_orth_Od_multi": {
+        "name": "fisher_orth_Od_multi",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3268,
+          "matched_ci95": [
+            0.2577,
+            0.4013
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 32.68,
+          "diff_ci95_pp": [
+            25.77,
+            40.13
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3433,
+          "matched_ci95": [
+            0.2388,
+            0.4688
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.33,
+          "diff_ci95_pp": [
+            23.88,
+            46.88
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2967,
+          "matched_ci95": [
+            0.2088,
+            0.3956
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 29.67,
+          "diff_ci95_pp": [
+            20.88,
+            39.56
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.24432,
+          "r2_euclidean": -0.72628,
+          "r2_fisher": -1.83886,
+          "mean_l2_err": 8.71141
+        },
+        "unlabeled_val_continuation_kl": 0.07463,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_diag_fisher": {
+        "name": "pullback_zca_diag_fisher",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.2549,
+          "matched_ci95": [
+            0.1875,
+            0.3268
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 24.84,
+          "diff_ci95_pp": [
+            18.18,
+            31.79
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2239,
+          "matched_ci95": [
+            0.1282,
+            0.3387
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.76,
+            32.15
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2527,
+          "matched_ci95": [
+            0.1648,
+            0.3407
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 25.27,
+          "diff_ci95_pp": [
+            16.48,
+            34.07
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.29491,
+          "r2_euclidean": -0.98319,
+          "r2_fisher": -0.41678,
+          "mean_l2_err": 9.26629
+        },
+        "unlabeled_val_continuation_kl": 0.04101
+      }
+    },
+    "10000": {
+      "procrustes_global": {
+        "name": "procrustes_global",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.4444,
+          "matched_ci95": [
+            0.3631,
+            0.5338
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 44.44,
+          "diff_ci95_pp": [
+            36.31,
+            53.38
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3433,
+          "matched_ci95": [
+            0.2381,
+            0.4667
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.33,
+          "diff_ci95_pp": [
+            23.81,
+            46.67
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3956,
+          "matched_ci95": [
+            0.3074,
+            0.5055
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 39.56,
+          "diff_ci95_pp": [
+            30.74,
+            50.55
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.38736,
+          "r2_euclidean": -0.28904,
+          "r2_fisher": 0.06343,
+          "mean_l2_err": 7.4992
+        },
+        "unlabeled_val_continuation_kl": 0.03906
+      },
+      "procrustes_span": {
+        "name": "procrustes_span",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.4444,
+          "matched_ci95": [
+            0.3631,
+            0.5338
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 44.44,
+          "diff_ci95_pp": [
+            36.31,
+            53.38
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3433,
+          "matched_ci95": [
+            0.2381,
+            0.4667
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.33,
+          "diff_ci95_pp": [
+            23.81,
+            46.67
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3956,
+          "matched_ci95": [
+            0.3074,
+            0.5055
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 39.56,
+          "diff_ci95_pp": [
+            30.74,
+            50.55
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.38736,
+          "r2_euclidean": -0.28904,
+          "r2_fisher": 0.06343,
+          "mean_l2_err": 7.4992
+        },
+        "unlabeled_val_continuation_kl": 0.03906
+      },
+      "ridge_gl_raw": {
+        "name": "ridge_gl_raw",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3399,
+          "matched_ci95": [
+            0.2641,
+            0.4183
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 33.33,
+          "diff_ci95_pp": [
+            25.85,
+            41.26
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2985,
+          "matched_ci95": [
+            0.1967,
+            0.4194
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 28.36,
+          "diff_ci95_pp": [
+            18.31,
+            40.0
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.2967,
+          "matched_ci95": [
+            0.2088,
+            0.3956
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 29.67,
+          "diff_ci95_pp": [
+            20.88,
+            39.56
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.43787,
+          "r2_euclidean": 0.16181,
+          "r2_fisher": 0.38649,
+          "mean_l2_err": 5.98
+        },
+        "unlabeled_val_continuation_kl": 0.03294,
+        "selected_lam": 0.3
+      },
+      "ridge_gl_rescaled": {
+        "name": "ridge_gl_rescaled",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3529,
+          "matched_ci95": [
+            0.2733,
+            0.4345
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 35.29,
+          "diff_ci95_pp": [
+            27.33,
+            43.45
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2836,
+          "matched_ci95": [
+            0.1781,
+            0.4091
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 28.36,
+          "diff_ci95_pp": [
+            17.81,
+            40.91
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3407,
+          "matched_ci95": [
+            0.2418,
+            0.4396
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.07,
+          "diff_ci95_pp": [
+            24.18,
+            43.96
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.46003,
+          "r2_euclidean": -0.00511,
+          "r2_fisher": 0.04994,
+          "mean_l2_err": 6.59206
+        },
+        "unlabeled_val_continuation_kl": 0.0344,
+        "selected_lam": 0.3
+      },
+      "zca_whitened_procrustes": {
+        "name": "zca_whitened_procrustes",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3399,
+          "matched_ci95": [
+            0.2654,
+            0.4194
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 33.99,
+          "diff_ci95_pp": [
+            26.54,
+            41.94
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2537,
+          "matched_ci95": [
+            0.1594,
+            0.3651
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 25.37,
+          "diff_ci95_pp": [
+            15.94,
+            36.51
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3407,
+          "matched_ci95": [
+            0.2527,
+            0.4396
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.07,
+          "diff_ci95_pp": [
+            25.27,
+            43.96
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.32617,
+          "r2_euclidean": -1.01767,
+          "r2_fisher": -0.55058,
+          "mean_l2_err": 9.34504
+        },
+        "unlabeled_val_continuation_kl": 0.03462,
+        "selected_shrink_cov": 0.02
+      },
+      "pullback_zca_fisher_multi": {
+        "name": "pullback_zca_fisher_multi",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3268,
+          "matched_ci95": [
+            0.2532,
+            0.404
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 32.03,
+          "diff_ci95_pp": [
+            24.84,
+            39.74
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2537,
+          "matched_ci95": [
+            0.1587,
+            0.3651
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 23.88,
+          "diff_ci95_pp": [
+            13.89,
+            34.85
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3407,
+          "matched_ci95": [
+            0.2418,
+            0.4396
+          ],
+          "shuffled_acc": 0.011,
+          "matched_minus_shuffled_pp": 32.97,
+          "diff_ci95_pp": [
+            23.08,
+            42.86
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.32058,
+          "r2_euclidean": -1.05041,
+          "r2_fisher": -0.33344,
+          "mean_l2_err": 9.41787
+        },
+        "unlabeled_val_continuation_kl": 0.03401,
+        "selected_shrink_cov": 0.02,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_fisher_end": {
+        "name": "pullback_zca_fisher_end",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3268,
+          "matched_ci95": [
+            0.2533,
+            0.4046
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 32.68,
+          "diff_ci95_pp": [
+            25.33,
+            40.46
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2388,
+          "matched_ci95": [
+            0.1429,
+            0.353
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 23.88,
+          "diff_ci95_pp": [
+            14.29,
+            35.3
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3187,
+          "matched_ci95": [
+            0.2308,
+            0.4176
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 31.87,
+          "diff_ci95_pp": [
+            23.08,
+            41.76
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.31618,
+          "r2_euclidean": -1.07589,
+          "r2_fisher": -0.46216,
+          "mean_l2_err": 9.4739
+        },
+        "unlabeled_val_continuation_kl": 0.03394,
+        "selected_shrink_cov": 0.02,
+        "selected_fisher_damp": 0.5
+      },
+      "fisher_orth_Od_multi": {
+        "name": "fisher_orth_Od_multi",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.366,
+          "matched_ci95": [
+            0.2968,
+            0.4422
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.6,
+          "diff_ci95_pp": [
+            29.68,
+            44.22
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.403,
+          "matched_ci95": [
+            0.2941,
+            0.5238
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 40.3,
+          "diff_ci95_pp": [
+            29.41,
+            52.38
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.4396,
+          "matched_ci95": [
+            0.3407,
+            0.5495
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 43.96,
+          "diff_ci95_pp": [
+            34.07,
+            54.95
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.28678,
+          "r2_euclidean": -0.62032,
+          "r2_fisher": -1.88218,
+          "mean_l2_err": 8.44398
+        },
+        "unlabeled_val_continuation_kl": 0.07588,
+        "selected_fisher_damp": 0.5
+      },
+      "pullback_zca_diag_fisher": {
+        "name": "pullback_zca_diag_fisher",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3529,
+          "matched_ci95": [
+            0.2785,
+            0.434
+          ],
+          "shuffled_acc": 0.0065,
+          "matched_minus_shuffled_pp": 34.64,
+          "diff_ci95_pp": [
+            27.39,
+            42.57
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2985,
+          "matched_ci95": [
+            0.1912,
+            0.4167
+          ],
+          "shuffled_acc": 0.0149,
+          "matched_minus_shuffled_pp": 28.36,
+          "diff_ci95_pp": [
+            17.54,
+            40.0
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3736,
+          "matched_ci95": [
+            0.2854,
+            0.4725
+          ],
+          "shuffled_acc": 0.011,
+          "matched_minus_shuffled_pp": 36.26,
+          "diff_ci95_pp": [
+            26.37,
+            46.15
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.37107,
+          "r2_euclidean": -0.60806,
+          "r2_fisher": -0.19604,
+          "mean_l2_err": 8.33771
+        },
+        "unlabeled_val_continuation_kl": 0.0346
+      },
+      "procrustes_global_t10mean": {
+        "name": "procrustes_global_t10mean",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3791,
+          "matched_ci95": [
+            0.3034,
+            0.4589
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 37.91,
+          "diff_ci95_pp": [
+            30.34,
+            45.89
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2985,
+          "matched_ci95": [
+            0.1905,
+            0.4179
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 29.85,
+          "diff_ci95_pp": [
+            19.05,
+            41.79
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3407,
+          "matched_ci95": [
+            0.2527,
+            0.4505
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.07,
+          "diff_ci95_pp": [
+            25.27,
+            45.05
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.42129,
+          "r2_euclidean": -0.15129,
+          "r2_fisher": 0.20213,
+          "mean_l2_err": 7.05897
+        },
+        "unlabeled_val_continuation_kl": 0.04136
+      },
+      "zca_whitened_t10mean": {
+        "name": "zca_whitened_t10mean",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3595,
+          "matched_ci95": [
+            0.2812,
+            0.4408
+          ],
+          "shuffled_acc": 0.0131,
+          "matched_minus_shuffled_pp": 34.64,
+          "diff_ci95_pp": [
+            26.75,
+            42.66
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2388,
+          "matched_ci95": [
+            0.1429,
+            0.353
+          ],
+          "shuffled_acc": 0.0299,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.59,
+            31.75
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3516,
+          "matched_ci95": [
+            0.2637,
+            0.4505
+          ],
+          "shuffled_acc": 0.011,
+          "matched_minus_shuffled_pp": 34.07,
+          "diff_ci95_pp": [
+            24.18,
+            43.96
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.36477,
+          "r2_euclidean": -0.68843,
+          "r2_fisher": -0.14434,
+          "mean_l2_err": 8.5051
+        },
+        "unlabeled_val_continuation_kl": 0.04881
+      },
+      "pullback_zca_fisher_multi_t10mean": {
+        "name": "pullback_zca_fisher_multi_t10mean",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.3464,
+          "matched_ci95": [
+            0.2733,
+            0.4276
+          ],
+          "shuffled_acc": 0.0131,
+          "matched_minus_shuffled_pp": 33.33,
+          "diff_ci95_pp": [
+            25.64,
+            41.11
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.2388,
+          "matched_ci95": [
+            0.1429,
+            0.353
+          ],
+          "shuffled_acc": 0.0299,
+          "matched_minus_shuffled_pp": 20.9,
+          "diff_ci95_pp": [
+            11.59,
+            31.75
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3297,
+          "matched_ci95": [
+            0.2418,
+            0.4286
+          ],
+          "shuffled_acc": 0.011,
+          "matched_minus_shuffled_pp": 31.87,
+          "diff_ci95_pp": [
+            23.08,
+            41.76
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.35941,
+          "r2_euclidean": -0.71525,
+          "r2_fisher": -0.04799,
+          "mean_l2_err": 8.57232
+        },
+        "unlabeled_val_continuation_kl": 0.04349
+      },
+      "fisher_orth_Od_multi_t10mean": {
+        "name": "fisher_orth_Od_multi_t10mean",
+        "cf_flip_test": {
+          "n": 153,
+          "n_unique_subjects": 115,
+          "matched_acc": 0.366,
+          "matched_ci95": [
+            0.296,
+            0.4452
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 36.6,
+          "diff_ci95_pp": [
+            29.6,
+            44.52
+          ]
+        },
+        "cf_flip_test_answer_disjoint": {
+          "n": 67,
+          "n_unique_subjects": 55,
+          "matched_acc": 0.3134,
+          "matched_ci95": [
+            0.2,
+            0.4366
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 31.34,
+          "diff_ci95_pp": [
+            20.0,
+            43.66
+          ]
+        },
+        "loro_5_unseen_relations": {
+          "n": 91,
+          "n_unique_subjects": 91,
+          "matched_acc": 0.3407,
+          "matched_ci95": [
+            0.2418,
+            0.4396
+          ],
+          "shuffled_acc": 0.0,
+          "matched_minus_shuffled_pp": 34.07,
+          "diff_ci95_pp": [
+            24.18,
+            43.96
+          ]
+        },
+        "geometry_test": {
+          "centered_cosine": 0.34451,
+          "r2_euclidean": -0.30644,
+          "r2_fisher": -0.68242,
+          "mean_l2_err": 7.51712
+        },
+        "unlabeled_val_continuation_kl": 0.06674
+      }
+    }
+  },
+  "rank_k_compression": {
+    "k32_pca": {
+      "name": "k32_pca",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.0261,
+        "matched_ci95": [
+          0.0,
+          0.0598
+        ],
+        "shuffled_acc": 0.0065,
+        "matched_minus_shuffled_pp": 1.96,
+        "diff_ci95_pp": [
+          0.0,
+          4.27
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.0149,
+        "matched_ci95": [
+          0.0,
+          0.0492
+        ],
+        "shuffled_acc": 0.0149,
+        "matched_minus_shuffled_pp": 0.0,
+        "diff_ci95_pp": [
+          0.0,
+          0.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.033,
+        "matched_ci95": [
+          0.0,
+          0.0769
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 3.3,
+        "diff_ci95_pp": [
+          0.0,
+          7.69
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.18807,
+        "r2_euclidean": -0.05645,
+        "r2_fisher": 0.06206,
+        "mean_l2_err": 6.74132
+      },
+      "unlabeled_val_continuation_kl": 0.08516
+    },
+    "k32_pls": {
+      "name": "k32_pls",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.0458,
+        "matched_ci95": [
+          0.0129,
+          0.085
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 4.58,
+        "diff_ci95_pp": [
+          1.29,
+          8.5
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.0448,
+        "matched_ci95": [
+          0.0,
+          0.1045
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 4.48,
+        "diff_ci95_pp": [
+          0.0,
+          10.45
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.044,
+        "matched_ci95": [
+          0.011,
+          0.0879
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 4.4,
+        "diff_ci95_pp": [
+          1.1,
+          8.79
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.22717,
+        "r2_euclidean": -0.00731,
+        "r2_fisher": 0.1353,
+        "mean_l2_err": 6.57955
+      },
+      "unlabeled_val_continuation_kl": 0.08172
+    },
+    "k32_fisher_pls": {
+      "name": "k32_fisher_pls",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.085,
+        "matched_ci95": [
+          0.0379,
+          0.1409
+        ],
+        "shuffled_acc": 0.0065,
+        "matched_minus_shuffled_pp": 7.84,
+        "diff_ci95_pp": [
+          2.67,
+          13.77
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.0597,
+        "matched_ci95": [
+          0.0137,
+          0.12
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 5.97,
+        "diff_ci95_pp": [
+          1.37,
+          12.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.033,
+        "matched_ci95": [
+          0.0,
+          0.0769
+        ],
+        "shuffled_acc": 0.011,
+        "matched_minus_shuffled_pp": 2.2,
+        "diff_ci95_pp": [
+          0.0,
+          5.49
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.22781,
+        "r2_euclidean": -0.08161,
+        "r2_fisher": 0.07726,
+        "mean_l2_err": 6.83727
+      },
+      "unlabeled_val_continuation_kl": 0.08027
+    },
+    "k64_pca": {
+      "name": "k64_pca",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.0784,
+        "matched_ci95": [
+          0.034,
+          0.1267
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 7.84,
+        "diff_ci95_pp": [
+          3.4,
+          12.67
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.0597,
+        "matched_ci95": [
+          0.0137,
+          0.1213
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 5.97,
+        "diff_ci95_pp": [
+          1.37,
+          12.13
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.044,
+        "matched_ci95": [
+          0.011,
+          0.0879
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 4.4,
+        "diff_ci95_pp": [
+          1.1,
+          8.79
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.24363,
+        "r2_euclidean": -0.06127,
+        "r2_fisher": 0.09605,
+        "mean_l2_err": 6.77171
+      },
+      "unlabeled_val_continuation_kl": 0.06969
+    },
+    "k64_pls": {
+      "name": "k64_pls",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.1307,
+        "matched_ci95": [
+          0.071,
+          0.1962
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 13.07,
+        "diff_ci95_pp": [
+          7.1,
+          19.62
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.1194,
+        "matched_ci95": [
+          0.0469,
+          0.2121
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 11.94,
+        "diff_ci95_pp": [
+          4.69,
+          21.21
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.0989,
+        "matched_ci95": [
+          0.044,
+          0.1648
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 9.89,
+        "diff_ci95_pp": [
+          4.4,
+          16.48
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.2993,
+        "r2_euclidean": 0.02358,
+        "r2_fisher": 0.19483,
+        "mean_l2_err": 6.48523
+      },
+      "unlabeled_val_continuation_kl": 0.05957
+    },
+    "k64_fisher_pls": {
+      "name": "k64_fisher_pls",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.1569,
+        "matched_ci95": [
+          0.0909,
+          0.2291
+        ],
+        "shuffled_acc": 0.0131,
+        "matched_minus_shuffled_pp": 14.38,
+        "diff_ci95_pp": [
+          8.0,
+          21.23
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.1493,
+        "matched_ci95": [
+          0.0725,
+          0.2419
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 14.93,
+        "diff_ci95_pp": [
+          7.25,
+          24.19
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.1209,
+        "matched_ci95": [
+          0.0657,
+          0.1978
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 12.09,
+        "diff_ci95_pp": [
+          6.57,
+          19.78
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.29795,
+        "r2_euclidean": -0.14449,
+        "r2_fisher": 0.09325,
+        "mean_l2_err": 7.05322
+      },
+      "unlabeled_val_continuation_kl": 0.06496
+    }
+  },
+  "low_dof_so_comparison": {
+    "so32_mse_unlab_from_unlabR0": {
+      "name": "so32_mse_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4379,
+        "matched_ci95": [
+          0.3586,
+          0.5232
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 43.79,
+        "diff_ci95_pp": [
+          35.86,
+          52.32
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3284,
+        "matched_ci95": [
+          0.2206,
+          0.45
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.84,
+        "diff_ci95_pp": [
+          22.06,
+          45.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3956,
+        "matched_ci95": [
+          0.3074,
+          0.5055
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 39.56,
+        "diff_ci95_pp": [
+          30.74,
+          50.55
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38719,
+        "r2_euclidean": -0.28922,
+        "r2_fisher": 0.05873,
+        "mean_l2_err": 7.49963
+      },
+      "unlabeled_val_continuation_kl": 0.03852,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 0.031888,
+        "final_loss": 0.031115,
+        "orth_err": 1.503542017414426e-06,
+        "Q_displacement_fro": 0.8535
+      }
+    },
+    "so32_kl_unlab_from_unlabR0": {
+      "name": "so32_kl_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4379,
+        "matched_ci95": [
+          0.3586,
+          0.5232
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 43.79,
+        "diff_ci95_pp": [
+          35.86,
+          52.32
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3284,
+        "matched_ci95": [
+          0.2206,
+          0.45
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.84,
+        "diff_ci95_pp": [
+          22.06,
+          45.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3956,
+        "matched_ci95": [
+          0.3074,
+          0.5055
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 39.56,
+        "diff_ci95_pp": [
+          30.74,
+          50.55
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38736,
+        "r2_euclidean": -0.28904,
+        "r2_fisher": 0.06343,
+        "mean_l2_err": 7.4992
+      },
+      "unlabeled_val_continuation_kl": 0.03808,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.03331,
+        "final_train_kl": 0.02744,
+        "best_val_kl": 0.03575,
+        "orth_err": 0.0,
+        "Q_displacement_fro": 0.0
+      }
+    },
+    "so32_mse_selfswap_tr10_from_unlabR0": {
+      "name": "so32_mse_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4052,
+        "matched_ci95": [
+          0.3273,
+          0.4865
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 40.52,
+        "diff_ci95_pp": [
+          32.73,
+          48.65
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3582,
+        "matched_ci95": [
+          0.25,
+          0.4833
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 35.82,
+        "diff_ci95_pp": [
+          25.0,
+          48.33
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3956,
+        "matched_ci95": [
+          0.2967,
+          0.5055
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 39.56,
+        "diff_ci95_pp": [
+          29.67,
+          50.55
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38566,
+        "r2_euclidean": -0.29501,
+        "r2_fisher": 0.03936,
+        "mean_l2_err": 7.5123
+      },
+      "unlabeled_val_continuation_kl": 0.0426,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 0.04039,
+        "final_loss": 0.028346,
+        "orth_err": 2.4620632417876213e-06,
+        "Q_displacement_fro": 4.6197
+      }
+    },
+    "so32_kl_selfswap_tr10_from_unlabR0": {
+      "name": "so32_kl_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4575,
+        "matched_ci95": [
+          0.3775,
+          0.5369
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 45.75,
+        "diff_ci95_pp": [
+          37.75,
+          53.69
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3284,
+        "matched_ci95": [
+          0.2222,
+          0.4427
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.84,
+        "diff_ci95_pp": [
+          22.22,
+          44.27
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.4835,
+        "matched_ci95": [
+          0.3846,
+          0.5934
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 48.35,
+        "diff_ci95_pp": [
+          38.46,
+          59.34
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.36015,
+        "r2_euclidean": -0.38767,
+        "r2_fisher": -0.77173,
+        "mean_l2_err": 7.79873
+      },
+      "unlabeled_val_continuation_kl": 0.05939,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.28908,
+        "final_train_kl": 0.17138,
+        "best_val_kl": 0.40379,
+        "orth_err": 1.7740379070577001e-06,
+        "Q_displacement_fro": 4.7967
+      }
+    },
+    "so32_mse_selfswap_tr10_from_qa10R0": {
+      "name": "so32_mse_selfswap_tr10_from_qa10R0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3399,
+        "matched_ci95": [
+          0.2681,
+          0.4162
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 33.99,
+        "diff_ci95_pp": [
+          26.81,
+          41.62
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2687,
+        "matched_ci95": [
+          0.1692,
+          0.3768
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 26.87,
+        "diff_ci95_pp": [
+          16.92,
+          37.68
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.1429,
+        "matched_ci95": [
+          0.0769,
+          0.2198
+        ],
+        "shuffled_acc": 0.033,
+        "matched_minus_shuffled_pp": 10.99,
+        "diff_ci95_pp": [
+          4.4,
+          17.58
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.41306,
+        "r2_euclidean": -0.24736,
+        "r2_fisher": 0.07849,
+        "mean_l2_err": 7.1673
+      },
+      "unlabeled_val_continuation_kl": 0.2706,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_loss": 0.007742,
+        "final_loss": 0.007649,
+        "orth_err": 1.7916038622747188e-06,
+        "Q_displacement_fro": 0.3738
+      }
+    },
+    "so32_kl_selfswap_tr10_from_qa10R0": {
+      "name": "so32_kl_selfswap_tr10_from_qa10R0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3464,
+        "matched_ci95": [
+          0.2657,
+          0.4294
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 34.64,
+        "diff_ci95_pp": [
+          26.57,
+          42.94
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2687,
+        "matched_ci95": [
+          0.1692,
+          0.3768
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 26.87,
+        "diff_ci95_pp": [
+          16.92,
+          37.68
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.1429,
+        "matched_ci95": [
+          0.0769,
+          0.2198
+        ],
+        "shuffled_acc": 0.033,
+        "matched_minus_shuffled_pp": 10.99,
+        "diff_ci95_pp": [
+          4.4,
+          17.58
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.40504,
+        "r2_euclidean": -0.26335,
+        "r2_fisher": -0.06863,
+        "mean_l2_err": 7.21679
+      },
+      "unlabeled_val_continuation_kl": 0.35074,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 32,
+        "dof": 496,
+        "n_steps": 100,
+        "init_train_kl": 0.15373,
+        "final_train_kl": 0.09759,
+        "best_val_kl": 0.45104,
+        "orth_err": 1.828749003575889e-06,
+        "Q_displacement_fro": 4.471
+      }
+    },
+    "so64_mse_unlab_from_unlabR0": {
+      "name": "so64_mse_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4444,
+        "matched_ci95": [
+          0.3648,
+          0.5287
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 44.44,
+        "diff_ci95_pp": [
+          36.48,
+          52.87
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3284,
+        "matched_ci95": [
+          0.2206,
+          0.45
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.84,
+        "diff_ci95_pp": [
+          22.06,
+          45.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.4066,
+        "matched_ci95": [
+          0.3187,
+          0.5165
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 40.66,
+        "diff_ci95_pp": [
+          31.87,
+          51.65
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38534,
+        "r2_euclidean": -0.29305,
+        "r2_fisher": 0.03822,
+        "mean_l2_err": 7.51054
+      },
+      "unlabeled_val_continuation_kl": 0.03962,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_loss": 0.028169,
+        "final_loss": 0.027525,
+        "orth_err": 3.0886243257003666e-06,
+        "Q_displacement_fro": 3.3883
+      }
+    },
+    "so64_kl_unlab_from_unlabR0": {
+      "name": "so64_kl_unlab_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4379,
+        "matched_ci95": [
+          0.3586,
+          0.5232
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 43.79,
+        "diff_ci95_pp": [
+          35.86,
+          52.32
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3284,
+        "matched_ci95": [
+          0.2206,
+          0.45
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.84,
+        "diff_ci95_pp": [
+          22.06,
+          45.0
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3956,
+        "matched_ci95": [
+          0.3074,
+          0.5055
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 39.56,
+        "diff_ci95_pp": [
+          30.74,
+          50.55
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38736,
+        "r2_euclidean": -0.28904,
+        "r2_fisher": 0.06343,
+        "mean_l2_err": 7.4992
+      },
+      "unlabeled_val_continuation_kl": 0.03808,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_train_kl": 0.03331,
+        "final_train_kl": 0.02693,
+        "best_val_kl": 0.03575,
+        "orth_err": 0.0,
+        "Q_displacement_fro": 0.0
+      }
+    },
+    "so64_mse_selfswap_tr10_from_unlabR0": {
+      "name": "so64_mse_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.3791,
+        "matched_ci95": [
+          0.3022,
+          0.4611
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 37.91,
+        "diff_ci95_pp": [
+          30.22,
+          46.11
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.2985,
+        "matched_ci95": [
+          0.1969,
+          0.4127
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 29.85,
+        "diff_ci95_pp": [
+          19.69,
+          41.27
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.3297,
+        "matched_ci95": [
+          0.2418,
+          0.4286
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 32.97,
+        "diff_ci95_pp": [
+          24.18,
+          42.86
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.38344,
+        "r2_euclidean": -0.30148,
+        "r2_fisher": 0.0288,
+        "mean_l2_err": 7.52688
+      },
+      "unlabeled_val_continuation_kl": 0.05376,
+      "train_diag": {
+        "loss_type": "mse",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_loss": 0.036872,
+        "final_loss": 0.023535,
+        "orth_err": 5.154347711490555e-06,
+        "Q_displacement_fro": 7.648
+      }
+    },
+    "so64_kl_selfswap_tr10_from_unlabR0": {
+      "name": "so64_kl_selfswap_tr10_from_unlabR0",
+      "cf_flip_test": {
+        "n": 153,
+        "n_unique_subjects": 115,
+        "matched_acc": 0.4183,
+        "matched_ci95": [
+          0.3401,
+          0.5
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 41.83,
+        "diff_ci95_pp": [
+          34.01,
+          50.0
+        ]
+      },
+      "cf_flip_test_answer_disjoint": {
+        "n": 67,
+        "n_unique_subjects": 55,
+        "matched_acc": 0.3433,
+        "matched_ci95": [
+          0.2381,
+          0.4545
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 34.33,
+        "diff_ci95_pp": [
+          23.81,
+          45.45
+        ]
+      },
+      "loro_5_unseen_relations": {
+        "n": 91,
+        "n_unique_subjects": 91,
+        "matched_acc": 0.4396,
+        "matched_ci95": [
+          0.3407,
+          0.5495
+        ],
+        "shuffled_acc": 0.0,
+        "matched_minus_shuffled_pp": 43.96,
+        "diff_ci95_pp": [
+          34.07,
+          54.95
+        ]
+      },
+      "geometry_test": {
+        "centered_cosine": 0.33891,
+        "r2_euclidean": -0.47709,
+        "r2_fisher": -1.11719,
+        "mean_l2_err": 8.05366
+      },
+      "unlabeled_val_continuation_kl": 0.06112,
+      "train_diag": {
+        "loss_type": "kl",
+        "r": 64,
+        "dof": 2016,
+        "n_steps": 100,
+        "init_train_kl": 0.28908,
+        "final_train_kl": 0.12249,
+        "best_val_kl": 0.41212,
+        "orth_err": 2.5606673343806407e-06,
+        "Q_displacement_fro": 6.2883
+      }
+    }
+  }
+}

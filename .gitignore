@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+hf_cache/
+cache/
+*.pt
+*.pth
+*.bin
+*.safetensors
+.DS_Store
+*.log

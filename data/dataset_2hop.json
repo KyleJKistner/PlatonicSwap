@@ -1,0 +1,3411 @@
+{
+  "meta": {
+    "name": "platos_key_2hop_bridge_v1",
+    "seed": 20261127,
+    "n_items": 139,
+    "hop_type_counts": {
+      "city_country_capital": 52,
+      "landmark_country_capital": 28,
+      "landmark_country_currency": 17,
+      "company_country_capital": 17,
+      "city_country_language": 25
+    },
+    "split_counts": {
+      "train": 90,
+      "test": 32,
+      "val": 17
+    },
+    "bridge_disjoint_splits": true
+  },
+  "items": [
+    {
+      "id": "2hop_0000",
+      "hop_type": "city_country_capital",
+      "subject": "Munich",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Munich is in a country whose capital is",
+      "hop1_prompt": "The city of Munich is in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0001",
+      "hop_type": "city_country_capital",
+      "subject": "Hamburg",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Hamburg is in a country whose capital is",
+      "hop1_prompt": "The city of Hamburg is in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0002",
+      "hop_type": "city_country_capital",
+      "subject": "Frankfurt",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Frankfurt is in a country whose capital is",
+      "hop1_prompt": "The city of Frankfurt is in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0003",
+      "hop_type": "city_country_capital",
+      "subject": "Lyon",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Lyon is in a country whose capital is",
+      "hop1_prompt": "The city of Lyon is in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0004",
+      "hop_type": "city_country_capital",
+      "subject": "Marseille",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Marseille is in a country whose capital is",
+      "hop1_prompt": "The city of Marseille is in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0005",
+      "hop_type": "city_country_capital",
+      "subject": "Nice",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Nice is in a country whose capital is",
+      "hop1_prompt": "The city of Nice is in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0006",
+      "hop_type": "city_country_capital",
+      "subject": "Milan",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Milan is in a country whose capital is",
+      "hop1_prompt": "The city of Milan is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0007",
+      "hop_type": "city_country_capital",
+      "subject": "Venice",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Venice is in a country whose capital is",
+      "hop1_prompt": "The city of Venice is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0008",
+      "hop_type": "city_country_capital",
+      "subject": "Florence",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Florence is in a country whose capital is",
+      "hop1_prompt": "The city of Florence is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0009",
+      "hop_type": "city_country_capital",
+      "subject": "Naples",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Naples is in a country whose capital is",
+      "hop1_prompt": "The city of Naples is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0010",
+      "hop_type": "city_country_capital",
+      "subject": "Barcelona",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Madrid",
+      "aliases": [
+        "Madrid"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Barcelona is in a country whose capital is",
+      "hop1_prompt": "The city of Barcelona is in the country of",
+      "hop2_prompt": "The capital of Spain is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0011",
+      "hop_type": "city_country_capital",
+      "subject": "Seville",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Madrid",
+      "aliases": [
+        "Madrid"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Seville is in a country whose capital is",
+      "hop1_prompt": "The city of Seville is in the country of",
+      "hop2_prompt": "The capital of Spain is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0012",
+      "hop_type": "city_country_capital",
+      "subject": "Valencia",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Madrid",
+      "aliases": [
+        "Madrid"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Valencia is in a country whose capital is",
+      "hop1_prompt": "The city of Valencia is in the country of",
+      "hop2_prompt": "The capital of Spain is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0013",
+      "hop_type": "city_country_capital",
+      "subject": "Porto",
+      "bridge_entity": "Portugal",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Lisbon",
+      "aliases": [
+        "Lisbon"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Porto is in a country whose capital is",
+      "hop1_prompt": "The city of Porto is in the country of",
+      "hop2_prompt": "The capital of Portugal is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0014",
+      "hop_type": "city_country_capital",
+      "subject": "Manchester",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Manchester is in a country whose capital is",
+      "hop1_prompt": "The city of Manchester is in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0015",
+      "hop_type": "city_country_capital",
+      "subject": "Edinburgh",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Edinburgh is in a country whose capital is",
+      "hop1_prompt": "The city of Edinburgh is in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0016",
+      "hop_type": "city_country_capital",
+      "subject": "Liverpool",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Liverpool is in a country whose capital is",
+      "hop1_prompt": "The city of Liverpool is in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0017",
+      "hop_type": "city_country_capital",
+      "subject": "Rotterdam",
+      "bridge_entity": "Netherlands",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Amsterdam",
+      "aliases": [
+        "Amsterdam"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Rotterdam is in a country whose capital is",
+      "hop1_prompt": "The city of Rotterdam is in the country of",
+      "hop2_prompt": "The capital of Netherlands is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0018",
+      "hop_type": "city_country_capital",
+      "subject": "Antwerp",
+      "bridge_entity": "Belgium",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Brussels",
+      "aliases": [
+        "Brussels"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Antwerp is in a country whose capital is",
+      "hop1_prompt": "The city of Antwerp is in the country of",
+      "hop2_prompt": "The capital of Belgium is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0019",
+      "hop_type": "city_country_capital",
+      "subject": "Salzburg",
+      "bridge_entity": "Austria",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Vienna",
+      "aliases": [
+        "Vienna"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Salzburg is in a country whose capital is",
+      "hop1_prompt": "The city of Salzburg is in the country of",
+      "hop2_prompt": "The capital of Austria is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0020",
+      "hop_type": "city_country_capital",
+      "subject": "Krakow",
+      "bridge_entity": "Poland",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Warsaw",
+      "aliases": [
+        "Warsaw"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Krakow is in a country whose capital is",
+      "hop1_prompt": "The city of Krakow is in the country of",
+      "hop2_prompt": "The capital of Poland is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0021",
+      "hop_type": "city_country_capital",
+      "subject": "Thessaloniki",
+      "bridge_entity": "Greece",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Athens",
+      "aliases": [
+        "Athens"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Thessaloniki is in a country whose capital is",
+      "hop1_prompt": "The city of Thessaloniki is in the country of",
+      "hop2_prompt": "The capital of Greece is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        24
+      ]
+    },
+    {
+      "id": "2hop_0022",
+      "hop_type": "city_country_capital",
+      "subject": "Gothenburg",
+      "bridge_entity": "Sweden",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Stockholm",
+      "aliases": [
+        "Stockholm"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Gothenburg is in a country whose capital is",
+      "hop1_prompt": "The city of Gothenburg is in the country of",
+      "hop2_prompt": "The capital of Sweden is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0023",
+      "hop_type": "city_country_capital",
+      "subject": "Bergen",
+      "bridge_entity": "Norway",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Oslo",
+      "aliases": [
+        "Oslo"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Bergen is in a country whose capital is",
+      "hop1_prompt": "The city of Bergen is in the country of",
+      "hop2_prompt": "The capital of Norway is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0024",
+      "hop_type": "city_country_capital",
+      "subject": "Istanbul",
+      "bridge_entity": "Turkey",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ankara",
+      "aliases": [
+        "Ankara"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Istanbul is in a country whose capital is",
+      "hop1_prompt": "The city of Istanbul is in the country of",
+      "hop2_prompt": "The capital of Turkey is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0025",
+      "hop_type": "city_country_capital",
+      "subject": "Saint Petersburg",
+      "bridge_entity": "Russia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Moscow",
+      "aliases": [
+        "Moscow"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Saint Petersburg is in a country whose capital is",
+      "hop1_prompt": "The city of Saint Petersburg is in the country of",
+      "hop2_prompt": "The capital of Russia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0026",
+      "hop_type": "city_country_capital",
+      "subject": "Osaka",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Osaka is in a country whose capital is",
+      "hop1_prompt": "The city of Osaka is in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0027",
+      "hop_type": "city_country_capital",
+      "subject": "Kyoto",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Kyoto is in a country whose capital is",
+      "hop1_prompt": "The city of Kyoto is in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0028",
+      "hop_type": "city_country_capital",
+      "subject": "Nagoya",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Nagoya is in a country whose capital is",
+      "hop1_prompt": "The city of Nagoya is in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0029",
+      "hop_type": "city_country_capital",
+      "subject": "Busan",
+      "bridge_entity": "South Korea",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Seoul",
+      "aliases": [
+        "Seoul"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Busan is in a country whose capital is",
+      "hop1_prompt": "The city of Busan is in the country of",
+      "hop2_prompt": "The capital of South Korea is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0030",
+      "hop_type": "city_country_capital",
+      "subject": "Shanghai",
+      "bridge_entity": "China",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Beijing",
+      "aliases": [
+        "Beijing"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Shanghai is in a country whose capital is",
+      "hop1_prompt": "The city of Shanghai is in the country of",
+      "hop2_prompt": "The capital of China is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0031",
+      "hop_type": "city_country_capital",
+      "subject": "Guangzhou",
+      "bridge_entity": "China",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Beijing",
+      "aliases": [
+        "Beijing"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Guangzhou is in a country whose capital is",
+      "hop1_prompt": "The city of Guangzhou is in the country of",
+      "hop2_prompt": "The capital of China is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0032",
+      "hop_type": "city_country_capital",
+      "subject": "Mumbai",
+      "bridge_entity": "India",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "New Delhi",
+      "aliases": [
+        "New Delhi"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Mumbai is in a country whose capital is",
+      "hop1_prompt": "The city of Mumbai is in the country of",
+      "hop2_prompt": "The capital of India is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0033",
+      "hop_type": "city_country_capital",
+      "subject": "Bengaluru",
+      "bridge_entity": "India",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "New Delhi",
+      "aliases": [
+        "New Delhi"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Bengaluru is in a country whose capital is",
+      "hop1_prompt": "The city of Bengaluru is in the country of",
+      "hop2_prompt": "The capital of India is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0034",
+      "hop_type": "city_country_capital",
+      "subject": "Karachi",
+      "bridge_entity": "Pakistan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Islamabad",
+      "aliases": [
+        "Islamabad"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Karachi is in a country whose capital is",
+      "hop1_prompt": "The city of Karachi is in the country of",
+      "hop2_prompt": "The capital of Pakistan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0035",
+      "hop_type": "city_country_capital",
+      "subject": "Chiang Mai",
+      "bridge_entity": "Thailand",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Bangkok",
+      "aliases": [
+        "Bangkok"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Chiang Mai is in a country whose capital is",
+      "hop1_prompt": "The city of Chiang Mai is in the country of",
+      "hop2_prompt": "The capital of Thailand is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0036",
+      "hop_type": "city_country_capital",
+      "subject": "Ho Chi Minh City",
+      "bridge_entity": "Vietnam",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Hanoi",
+      "aliases": [
+        "Hanoi"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Ho Chi Minh City is in a country whose capital is",
+      "hop1_prompt": "The city of Ho Chi Minh City is in the country of",
+      "hop2_prompt": "The capital of Vietnam is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0037",
+      "hop_type": "city_country_capital",
+      "subject": "Surabaya",
+      "bridge_entity": "Indonesia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Jakarta",
+      "aliases": [
+        "Jakarta"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Surabaya is in a country whose capital is",
+      "hop1_prompt": "The city of Surabaya is in the country of",
+      "hop2_prompt": "The capital of Indonesia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0038",
+      "hop_type": "city_country_capital",
+      "subject": "Alexandria",
+      "bridge_entity": "Egypt",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Cairo",
+      "aliases": [
+        "Cairo"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Alexandria is in a country whose capital is",
+      "hop1_prompt": "The city of Alexandria is in the country of",
+      "hop2_prompt": "The capital of Egypt is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0039",
+      "hop_type": "city_country_capital",
+      "subject": "Casablanca",
+      "bridge_entity": "Morocco",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rabat",
+      "aliases": [
+        "Rabat"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Casablanca is in a country whose capital is",
+      "hop1_prompt": "The city of Casablanca is in the country of",
+      "hop2_prompt": "The capital of Morocco is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0040",
+      "hop_type": "city_country_capital",
+      "subject": "Lagos",
+      "bridge_entity": "Nigeria",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Abuja",
+      "aliases": [
+        "Abuja"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Lagos is in a country whose capital is",
+      "hop1_prompt": "The city of Lagos is in the country of",
+      "hop2_prompt": "The capital of Nigeria is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0041",
+      "hop_type": "city_country_capital",
+      "subject": "Mombasa",
+      "bridge_entity": "Kenya",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Nairobi",
+      "aliases": [
+        "Nairobi"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Mombasa is in a country whose capital is",
+      "hop1_prompt": "The city of Mombasa is in the country of",
+      "hop2_prompt": "The capital of Kenya is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0042",
+      "hop_type": "city_country_capital",
+      "subject": "Toronto",
+      "bridge_entity": "Canada",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ottawa",
+      "aliases": [
+        "Ottawa"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Toronto is in a country whose capital is",
+      "hop1_prompt": "The city of Toronto is in the country of",
+      "hop2_prompt": "The capital of Canada is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0043",
+      "hop_type": "city_country_capital",
+      "subject": "Vancouver",
+      "bridge_entity": "Canada",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ottawa",
+      "aliases": [
+        "Ottawa"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Vancouver is in a country whose capital is",
+      "hop1_prompt": "The city of Vancouver is in the country of",
+      "hop2_prompt": "The capital of Canada is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0044",
+      "hop_type": "city_country_capital",
+      "subject": "Montreal",
+      "bridge_entity": "Canada",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ottawa",
+      "aliases": [
+        "Ottawa"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Montreal is in a country whose capital is",
+      "hop1_prompt": "The city of Montreal is in the country of",
+      "hop2_prompt": "The capital of Canada is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0045",
+      "hop_type": "city_country_capital",
+      "subject": "Guadalajara",
+      "bridge_entity": "Mexico",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Mexico City",
+      "aliases": [
+        "Mexico City"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Guadalajara is in a country whose capital is",
+      "hop1_prompt": "The city of Guadalajara is in the country of",
+      "hop2_prompt": "The capital of Mexico is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0046",
+      "hop_type": "city_country_capital",
+      "subject": "Rio de Janeiro",
+      "bridge_entity": "Brazil",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Brasilia",
+      "aliases": [
+        "Brasilia"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Rio de Janeiro is in a country whose capital is",
+      "hop1_prompt": "The city of Rio de Janeiro is in the country of",
+      "hop2_prompt": "The capital of Brazil is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        26
+      ]
+    },
+    {
+      "id": "2hop_0047",
+      "hop_type": "city_country_capital",
+      "subject": "Sao Paulo",
+      "bridge_entity": "Brazil",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Brasilia",
+      "aliases": [
+        "Brasilia"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Sao Paulo is in a country whose capital is",
+      "hop1_prompt": "The city of Sao Paulo is in the country of",
+      "hop2_prompt": "The capital of Brazil is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0048",
+      "hop_type": "city_country_capital",
+      "subject": "Medellin",
+      "bridge_entity": "Colombia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Bogota",
+      "aliases": [
+        "Bogota"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Medellin is in a country whose capital is",
+      "hop1_prompt": "The city of Medellin is in the country of",
+      "hop2_prompt": "The capital of Colombia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0049",
+      "hop_type": "city_country_capital",
+      "subject": "Sydney",
+      "bridge_entity": "Australia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Canberra",
+      "aliases": [
+        "Canberra"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Sydney is in a country whose capital is",
+      "hop1_prompt": "The city of Sydney is in the country of",
+      "hop2_prompt": "The capital of Australia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0050",
+      "hop_type": "city_country_capital",
+      "subject": "Melbourne",
+      "bridge_entity": "Australia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Canberra",
+      "aliases": [
+        "Canberra"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Melbourne is in a country whose capital is",
+      "hop1_prompt": "The city of Melbourne is in the country of",
+      "hop2_prompt": "The capital of Australia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0051",
+      "hop_type": "city_country_capital",
+      "subject": "Auckland",
+      "bridge_entity": "New Zealand",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_capital",
+      "answer": "Wellington",
+      "aliases": [
+        "Wellington"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The city of Auckland is in a country whose capital is",
+      "hop1_prompt": "The city of Auckland is in the country of",
+      "hop2_prompt": "The capital of New Zealand is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0052",
+      "hop_type": "landmark_country_capital",
+      "subject": "Eiffel Tower",
+      "bridge_entity": "France",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Eiffel Tower is in a country whose capital is",
+      "hop1_prompt": "The landmark Eiffel Tower is in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0053",
+      "hop_type": "landmark_country_capital",
+      "subject": "Louvre Museum",
+      "bridge_entity": "France",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Louvre Museum is in a country whose capital is",
+      "hop1_prompt": "The landmark Louvre Museum is in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        26
+      ]
+    },
+    {
+      "id": "2hop_0054",
+      "hop_type": "landmark_country_capital",
+      "subject": "Colosseum",
+      "bridge_entity": "Italy",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Colosseum is in a country whose capital is",
+      "hop1_prompt": "The landmark Colosseum is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0055",
+      "hop_type": "landmark_country_capital",
+      "subject": "Leaning Tower of Pisa",
+      "bridge_entity": "Italy",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Rome",
+      "aliases": [
+        "Rome"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Leaning Tower of Pisa is in a country whose capital is",
+      "hop1_prompt": "The landmark Leaning Tower of Pisa is in the country of",
+      "hop2_prompt": "The capital of Italy is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        34
+      ]
+    },
+    {
+      "id": "2hop_0056",
+      "hop_type": "landmark_country_capital",
+      "subject": "Sagrada Familia",
+      "bridge_entity": "Spain",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Madrid",
+      "aliases": [
+        "Madrid"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Sagrada Familia is in a country whose capital is",
+      "hop1_prompt": "The landmark Sagrada Familia is in the country of",
+      "hop2_prompt": "The capital of Spain is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0057",
+      "hop_type": "landmark_country_capital",
+      "subject": "Alhambra",
+      "bridge_entity": "Spain",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Madrid",
+      "aliases": [
+        "Madrid"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Alhambra is in a country whose capital is",
+      "hop1_prompt": "The landmark Alhambra is in the country of",
+      "hop2_prompt": "The capital of Spain is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0058",
+      "hop_type": "landmark_country_capital",
+      "subject": "Brandenburg Gate",
+      "bridge_entity": "Germany",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Brandenburg Gate is in a country whose capital is",
+      "hop1_prompt": "The landmark Brandenburg Gate is in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        29
+      ]
+    },
+    {
+      "id": "2hop_0059",
+      "hop_type": "landmark_country_capital",
+      "subject": "Neuschwanstein Castle",
+      "bridge_entity": "Germany",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Neuschwanstein Castle is in a country whose capital is",
+      "hop1_prompt": "The landmark Neuschwanstein Castle is in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        34
+      ]
+    },
+    {
+      "id": "2hop_0060",
+      "hop_type": "landmark_country_capital",
+      "subject": "Big Ben",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Big Ben is in a country whose capital is",
+      "hop1_prompt": "The landmark Big Ben is in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0061",
+      "hop_type": "landmark_country_capital",
+      "subject": "Stonehenge",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Stonehenge is in a country whose capital is",
+      "hop1_prompt": "The landmark Stonehenge is in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0062",
+      "hop_type": "landmark_country_capital",
+      "subject": "Acropolis of Athens",
+      "bridge_entity": "Greece",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Athens",
+      "aliases": [
+        "Athens"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Acropolis of Athens is in a country whose capital is",
+      "hop1_prompt": "The landmark Acropolis of Athens is in the country of",
+      "hop2_prompt": "The capital of Greece is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        13,
+        32
+      ]
+    },
+    {
+      "id": "2hop_0063",
+      "hop_type": "landmark_country_capital",
+      "subject": "Hagia Sophia",
+      "bridge_entity": "Turkey",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ankara",
+      "aliases": [
+        "Ankara"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Hagia Sophia is in a country whose capital is",
+      "hop1_prompt": "The landmark Hagia Sophia is in the country of",
+      "hop2_prompt": "The capital of Turkey is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0064",
+      "hop_type": "landmark_country_capital",
+      "subject": "Great Wall",
+      "bridge_entity": "China",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Beijing",
+      "aliases": [
+        "Beijing"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Great Wall is in a country whose capital is",
+      "hop1_prompt": "The landmark Great Wall is in the country of",
+      "hop2_prompt": "The capital of China is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0065",
+      "hop_type": "landmark_country_capital",
+      "subject": "Forbidden City",
+      "bridge_entity": "China",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Beijing",
+      "aliases": [
+        "Beijing"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Forbidden City is in a country whose capital is",
+      "hop1_prompt": "The landmark Forbidden City is in the country of",
+      "hop2_prompt": "The capital of China is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        27
+      ]
+    },
+    {
+      "id": "2hop_0066",
+      "hop_type": "landmark_country_capital",
+      "subject": "Taj Mahal",
+      "bridge_entity": "India",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "New Delhi",
+      "aliases": [
+        "New Delhi"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Taj Mahal is in a country whose capital is",
+      "hop1_prompt": "The landmark Taj Mahal is in the country of",
+      "hop2_prompt": "The capital of India is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0067",
+      "hop_type": "landmark_country_capital",
+      "subject": "Mount Fuji",
+      "bridge_entity": "Japan",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Mount Fuji is in a country whose capital is",
+      "hop1_prompt": "The landmark Mount Fuji is in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0068",
+      "hop_type": "landmark_country_capital",
+      "subject": "Angkor Wat",
+      "bridge_entity": "Cambodia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Phnom Penh",
+      "aliases": [
+        "Phnom Penh"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Angkor Wat is in a country whose capital is",
+      "hop1_prompt": "The landmark Angkor Wat is in the country of",
+      "hop2_prompt": "The capital of Cambodia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0069",
+      "hop_type": "landmark_country_capital",
+      "subject": "Borobudur",
+      "bridge_entity": "Indonesia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Jakarta",
+      "aliases": [
+        "Jakarta"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Borobudur is in a country whose capital is",
+      "hop1_prompt": "The landmark Borobudur is in the country of",
+      "hop2_prompt": "The capital of Indonesia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0070",
+      "hop_type": "landmark_country_capital",
+      "subject": "Petronas Towers",
+      "bridge_entity": "Malaysia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Kuala Lumpur",
+      "aliases": [
+        "Kuala Lumpur"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Petronas Towers is in a country whose capital is",
+      "hop1_prompt": "The landmark Petronas Towers is in the country of",
+      "hop2_prompt": "The capital of Malaysia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0071",
+      "hop_type": "landmark_country_capital",
+      "subject": "Petra",
+      "bridge_entity": "Jordan",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Amman",
+      "aliases": [
+        "Amman"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Petra is in a country whose capital is",
+      "hop1_prompt": "The landmark Petra is in the country of",
+      "hop2_prompt": "The capital of Jordan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0072",
+      "hop_type": "landmark_country_capital",
+      "subject": "Great Pyramid of Giza",
+      "bridge_entity": "Egypt",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Cairo",
+      "aliases": [
+        "Cairo"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Great Pyramid of Giza is in a country whose capital is",
+      "hop1_prompt": "The landmark Great Pyramid of Giza is in the country of",
+      "hop2_prompt": "The capital of Egypt is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        34
+      ]
+    },
+    {
+      "id": "2hop_0073",
+      "hop_type": "landmark_country_capital",
+      "subject": "CN Tower",
+      "bridge_entity": "Canada",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ottawa",
+      "aliases": [
+        "Ottawa"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark CN Tower is in a country whose capital is",
+      "hop1_prompt": "The landmark CN Tower is in the country of",
+      "hop2_prompt": "The capital of Canada is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        13,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0074",
+      "hop_type": "landmark_country_capital",
+      "subject": "Chichen Itza",
+      "bridge_entity": "Mexico",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Mexico City",
+      "aliases": [
+        "Mexico City"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Chichen Itza is in a country whose capital is",
+      "hop1_prompt": "The landmark Chichen Itza is in the country of",
+      "hop2_prompt": "The capital of Mexico is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0075",
+      "hop_type": "landmark_country_capital",
+      "subject": "Christ the Redeemer",
+      "bridge_entity": "Brazil",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Brasilia",
+      "aliases": [
+        "Brasilia"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Christ the Redeemer is in a country whose capital is",
+      "hop1_prompt": "The landmark Christ the Redeemer is in the country of",
+      "hop2_prompt": "The capital of Brazil is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        32
+      ]
+    },
+    {
+      "id": "2hop_0076",
+      "hop_type": "landmark_country_capital",
+      "subject": "Machu Picchu",
+      "bridge_entity": "Peru",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Lima",
+      "aliases": [
+        "Lima"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Machu Picchu is in a country whose capital is",
+      "hop1_prompt": "The landmark Machu Picchu is in the country of",
+      "hop2_prompt": "The capital of Peru is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0077",
+      "hop_type": "landmark_country_capital",
+      "subject": "Sydney Opera House",
+      "bridge_entity": "Australia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Canberra",
+      "aliases": [
+        "Canberra"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Sydney Opera House is in a country whose capital is",
+      "hop1_prompt": "The landmark Sydney Opera House is in the country of",
+      "hop2_prompt": "The capital of Australia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        31
+      ]
+    },
+    {
+      "id": "2hop_0078",
+      "hop_type": "landmark_country_capital",
+      "subject": "Uluru",
+      "bridge_entity": "Australia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Canberra",
+      "aliases": [
+        "Canberra"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Uluru is in a country whose capital is",
+      "hop1_prompt": "The landmark Uluru is in the country of",
+      "hop2_prompt": "The capital of Australia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0079",
+      "hop_type": "landmark_country_capital",
+      "subject": "Charles Bridge",
+      "bridge_entity": "Czech Republic",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_capital",
+      "answer": "Prague",
+      "aliases": [
+        "Prague"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose capital is",
+      "direct_prompt": "The landmark Charles Bridge is in a country whose capital is",
+      "hop1_prompt": "The landmark Charles Bridge is in the country of",
+      "hop2_prompt": "The capital of Czech Republic is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        13,
+        27
+      ]
+    },
+    {
+      "id": "2hop_0080",
+      "hop_type": "landmark_country_currency",
+      "subject": "Big Ben",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "pound",
+      "aliases": [
+        "pound",
+        "British pound",
+        "pound sterling",
+        "sterling",
+        "Egyptian pound"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Big Ben is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Big Ben is in the country of",
+      "hop2_prompt": "The official currency of United Kingdom is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0081",
+      "hop_type": "landmark_country_currency",
+      "subject": "Stonehenge",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "pound",
+      "aliases": [
+        "pound",
+        "British pound",
+        "pound sterling",
+        "sterling",
+        "Egyptian pound"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Stonehenge is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Stonehenge is in the country of",
+      "hop2_prompt": "The official currency of United Kingdom is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0082",
+      "hop_type": "landmark_country_currency",
+      "subject": "Hagia Sophia",
+      "bridge_entity": "Turkey",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "lira",
+      "aliases": [
+        "lira",
+        "Turkish lira"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Hagia Sophia is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Hagia Sophia is in the country of",
+      "hop2_prompt": "The official currency of Turkey is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0083",
+      "hop_type": "landmark_country_currency",
+      "subject": "Great Wall",
+      "bridge_entity": "China",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "yuan",
+      "aliases": [
+        "yuan",
+        "renminbi",
+        "Chinese yuan"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Great Wall is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Great Wall is in the country of",
+      "hop2_prompt": "The official currency of China is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0084",
+      "hop_type": "landmark_country_currency",
+      "subject": "Forbidden City",
+      "bridge_entity": "China",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "yuan",
+      "aliases": [
+        "yuan",
+        "renminbi",
+        "Chinese yuan"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Forbidden City is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Forbidden City is in the country of",
+      "hop2_prompt": "The official currency of China is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        27
+      ]
+    },
+    {
+      "id": "2hop_0085",
+      "hop_type": "landmark_country_currency",
+      "subject": "Taj Mahal",
+      "bridge_entity": "India",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "rupee",
+      "aliases": [
+        "rupee",
+        "Indian rupee",
+        "Pakistani rupee"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Taj Mahal is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Taj Mahal is in the country of",
+      "hop2_prompt": "The official currency of India is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0086",
+      "hop_type": "landmark_country_currency",
+      "subject": "Mount Fuji",
+      "bridge_entity": "Japan",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "yen",
+      "aliases": [
+        "yen",
+        "Japanese yen"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Mount Fuji is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Mount Fuji is in the country of",
+      "hop2_prompt": "The official currency of Japan is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        23
+      ]
+    },
+    {
+      "id": "2hop_0087",
+      "hop_type": "landmark_country_currency",
+      "subject": "Borobudur",
+      "bridge_entity": "Indonesia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "rupiah",
+      "aliases": [
+        "rupiah",
+        "Indonesian rupiah"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Borobudur is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Borobudur is in the country of",
+      "hop2_prompt": "The official currency of Indonesia is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0088",
+      "hop_type": "landmark_country_currency",
+      "subject": "Petronas Towers",
+      "bridge_entity": "Malaysia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "ringgit",
+      "aliases": [
+        "ringgit",
+        "Malaysian ringgit"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Petronas Towers is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Petronas Towers is in the country of",
+      "hop2_prompt": "The official currency of Malaysia is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0089",
+      "hop_type": "landmark_country_currency",
+      "subject": "Petra",
+      "bridge_entity": "Jordan",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "dinar",
+      "aliases": [
+        "dinar",
+        "Kuwaiti dinar",
+        "Jordanian dinar",
+        "Iraqi dinar"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Petra is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Petra is in the country of",
+      "hop2_prompt": "The official currency of Jordan is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "test",
+      "direct_subj_char_span": [
+        13,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0090",
+      "hop_type": "landmark_country_currency",
+      "subject": "CN Tower",
+      "bridge_entity": "Canada",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "dollar",
+      "aliases": [
+        "dollar",
+        "US dollar",
+        "U.S. dollar",
+        "United States dollar",
+        "Australian dollar",
+        "Canadian dollar",
+        "New Zealand dollar",
+        "Singapore dollar"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark CN Tower is in a country whose official currency is the",
+      "hop1_prompt": "The landmark CN Tower is in the country of",
+      "hop2_prompt": "The official currency of Canada is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "val",
+      "direct_subj_char_span": [
+        13,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0091",
+      "hop_type": "landmark_country_currency",
+      "subject": "Chichen Itza",
+      "bridge_entity": "Mexico",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "peso",
+      "aliases": [
+        "peso",
+        "Mexican peso",
+        "Argentine peso",
+        "Chilean peso",
+        "Colombian peso",
+        "Philippine peso"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Chichen Itza is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Chichen Itza is in the country of",
+      "hop2_prompt": "The official currency of Mexico is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0092",
+      "hop_type": "landmark_country_currency",
+      "subject": "Christ the Redeemer",
+      "bridge_entity": "Brazil",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "real",
+      "aliases": [
+        "real",
+        "Brazilian real"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Christ the Redeemer is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Christ the Redeemer is in the country of",
+      "hop2_prompt": "The official currency of Brazil is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        32
+      ]
+    },
+    {
+      "id": "2hop_0093",
+      "hop_type": "landmark_country_currency",
+      "subject": "Machu Picchu",
+      "bridge_entity": "Peru",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "sol",
+      "aliases": [
+        "sol",
+        "Peruvian sol"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Machu Picchu is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Machu Picchu is in the country of",
+      "hop2_prompt": "The official currency of Peru is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        25
+      ]
+    },
+    {
+      "id": "2hop_0094",
+      "hop_type": "landmark_country_currency",
+      "subject": "Sydney Opera House",
+      "bridge_entity": "Australia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "dollar",
+      "aliases": [
+        "dollar",
+        "US dollar",
+        "U.S. dollar",
+        "United States dollar",
+        "Australian dollar",
+        "Canadian dollar",
+        "New Zealand dollar",
+        "Singapore dollar"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Sydney Opera House is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Sydney Opera House is in the country of",
+      "hop2_prompt": "The official currency of Australia is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        31
+      ]
+    },
+    {
+      "id": "2hop_0095",
+      "hop_type": "landmark_country_currency",
+      "subject": "Uluru",
+      "bridge_entity": "Australia",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "dollar",
+      "aliases": [
+        "dollar",
+        "US dollar",
+        "U.S. dollar",
+        "United States dollar",
+        "Australian dollar",
+        "Canadian dollar",
+        "New Zealand dollar",
+        "Singapore dollar"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Uluru is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Uluru is in the country of",
+      "hop2_prompt": "The official currency of Australia is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "train",
+      "direct_subj_char_span": [
+        13,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0096",
+      "hop_type": "landmark_country_currency",
+      "subject": "Charles Bridge",
+      "bridge_entity": "Czech Republic",
+      "bridge_relation": "landmark_country",
+      "hop2_relation": "country_currency",
+      "answer": "koruna",
+      "aliases": [
+        "koruna",
+        "Czech koruna"
+      ],
+      "prefix": "The landmark ",
+      "suffix": " is in a country whose official currency is the",
+      "direct_prompt": "The landmark Charles Bridge is in a country whose official currency is the",
+      "hop1_prompt": "The landmark Charles Bridge is in the country of",
+      "hop2_prompt": "The official currency of Czech Republic is the",
+      "hop2_prefix": "The official currency of ",
+      "hop2_suffix": " is the",
+      "split": "val",
+      "direct_subj_char_span": [
+        13,
+        27
+      ]
+    },
+    {
+      "id": "2hop_0097",
+      "hop_type": "company_country_capital",
+      "subject": "Toyota",
+      "bridge_entity": "Japan",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Toyota is based in a country whose capital is",
+      "hop1_prompt": "The company Toyota is headquartered in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0098",
+      "hop_type": "company_country_capital",
+      "subject": "Sony",
+      "bridge_entity": "Japan",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Sony is based in a country whose capital is",
+      "hop1_prompt": "The company Sony is headquartered in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0099",
+      "hop_type": "company_country_capital",
+      "subject": "Nintendo",
+      "bridge_entity": "Japan",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Tokyo",
+      "aliases": [
+        "Tokyo"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Nintendo is based in a country whose capital is",
+      "hop1_prompt": "The company Nintendo is headquartered in the country of",
+      "hop2_prompt": "The capital of Japan is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0100",
+      "hop_type": "company_country_capital",
+      "subject": "Samsung",
+      "bridge_entity": "South Korea",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Seoul",
+      "aliases": [
+        "Seoul"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Samsung is based in a country whose capital is",
+      "hop1_prompt": "The company Samsung is headquartered in the country of",
+      "hop2_prompt": "The capital of South Korea is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0101",
+      "hop_type": "company_country_capital",
+      "subject": "Siemens",
+      "bridge_entity": "Germany",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Siemens is based in a country whose capital is",
+      "hop1_prompt": "The company Siemens is headquartered in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0102",
+      "hop_type": "company_country_capital",
+      "subject": "Adidas",
+      "bridge_entity": "Germany",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Berlin",
+      "aliases": [
+        "Berlin"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Adidas is based in a country whose capital is",
+      "hop1_prompt": "The company Adidas is headquartered in the country of",
+      "hop2_prompt": "The capital of Germany is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0103",
+      "hop_type": "company_country_capital",
+      "subject": "IKEA",
+      "bridge_entity": "Sweden",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Stockholm",
+      "aliases": [
+        "Stockholm"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company IKEA is based in a country whose capital is",
+      "hop1_prompt": "The company IKEA is headquartered in the country of",
+      "hop2_prompt": "The capital of Sweden is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0104",
+      "hop_type": "company_country_capital",
+      "subject": "Spotify",
+      "bridge_entity": "Sweden",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Stockholm",
+      "aliases": [
+        "Stockholm"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Spotify is based in a country whose capital is",
+      "hop1_prompt": "The company Spotify is headquartered in the country of",
+      "hop2_prompt": "The capital of Sweden is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0105",
+      "hop_type": "company_country_capital",
+      "subject": "Nokia",
+      "bridge_entity": "Finland",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Helsinki",
+      "aliases": [
+        "Helsinki"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Nokia is based in a country whose capital is",
+      "hop1_prompt": "The company Nokia is headquartered in the country of",
+      "hop2_prompt": "The capital of Finland is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0106",
+      "hop_type": "company_country_capital",
+      "subject": "Lego",
+      "bridge_entity": "Denmark",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Copenhagen",
+      "aliases": [
+        "Copenhagen"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Lego is based in a country whose capital is",
+      "hop1_prompt": "The company Lego is headquartered in the country of",
+      "hop2_prompt": "The capital of Denmark is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0107",
+      "hop_type": "company_country_capital",
+      "subject": "Philips",
+      "bridge_entity": "Netherlands",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Amsterdam",
+      "aliases": [
+        "Amsterdam"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Philips is based in a country whose capital is",
+      "hop1_prompt": "The company Philips is headquartered in the country of",
+      "hop2_prompt": "The capital of Netherlands is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0108",
+      "hop_type": "company_country_capital",
+      "subject": "LVMH",
+      "bridge_entity": "France",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Paris",
+      "aliases": [
+        "Paris"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company LVMH is based in a country whose capital is",
+      "hop1_prompt": "The company LVMH is headquartered in the country of",
+      "hop2_prompt": "The capital of France is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0109",
+      "hop_type": "company_country_capital",
+      "subject": "Unilever",
+      "bridge_entity": "United Kingdom",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "London",
+      "aliases": [
+        "London"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Unilever is based in a country whose capital is",
+      "hop1_prompt": "The company Unilever is headquartered in the country of",
+      "hop2_prompt": "The capital of United Kingdom is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0110",
+      "hop_type": "company_country_capital",
+      "subject": "Alibaba",
+      "bridge_entity": "China",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Beijing",
+      "aliases": [
+        "Beijing"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Alibaba is based in a country whose capital is",
+      "hop1_prompt": "The company Alibaba is headquartered in the country of",
+      "hop2_prompt": "The capital of China is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0111",
+      "hop_type": "company_country_capital",
+      "subject": "Infosys",
+      "bridge_entity": "India",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "New Delhi",
+      "aliases": [
+        "New Delhi"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Infosys is based in a country whose capital is",
+      "hop1_prompt": "The company Infosys is headquartered in the country of",
+      "hop2_prompt": "The capital of India is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0112",
+      "hop_type": "company_country_capital",
+      "subject": "Shopify",
+      "bridge_entity": "Canada",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Ottawa",
+      "aliases": [
+        "Ottawa"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Shopify is based in a country whose capital is",
+      "hop1_prompt": "The company Shopify is headquartered in the country of",
+      "hop2_prompt": "The capital of Canada is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0113",
+      "hop_type": "company_country_capital",
+      "subject": "Atlassian",
+      "bridge_entity": "Australia",
+      "bridge_relation": "company_country",
+      "hop2_relation": "country_capital",
+      "answer": "Canberra",
+      "aliases": [
+        "Canberra"
+      ],
+      "prefix": "The company ",
+      "suffix": " is based in a country whose capital is",
+      "direct_prompt": "The company Atlassian is based in a country whose capital is",
+      "hop1_prompt": "The company Atlassian is headquartered in the country of",
+      "hop2_prompt": "The capital of Australia is",
+      "hop2_prefix": "The capital of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0114",
+      "hop_type": "city_country_language",
+      "subject": "Munich",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "German",
+      "aliases": [
+        "German"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Munich is in a country whose main language is",
+      "hop1_prompt": "The city of Munich is in the country of",
+      "hop2_prompt": "The primary official language of Germany is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0115",
+      "hop_type": "city_country_language",
+      "subject": "Hamburg",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "German",
+      "aliases": [
+        "German"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Hamburg is in a country whose main language is",
+      "hop1_prompt": "The city of Hamburg is in the country of",
+      "hop2_prompt": "The primary official language of Germany is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0116",
+      "hop_type": "city_country_language",
+      "subject": "Frankfurt",
+      "bridge_entity": "Germany",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "German",
+      "aliases": [
+        "German"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Frankfurt is in a country whose main language is",
+      "hop1_prompt": "The city of Frankfurt is in the country of",
+      "hop2_prompt": "The primary official language of Germany is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0117",
+      "hop_type": "city_country_language",
+      "subject": "Lyon",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "French",
+      "aliases": [
+        "French"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Lyon is in a country whose main language is",
+      "hop1_prompt": "The city of Lyon is in the country of",
+      "hop2_prompt": "The primary official language of France is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0118",
+      "hop_type": "city_country_language",
+      "subject": "Marseille",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "French",
+      "aliases": [
+        "French"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Marseille is in a country whose main language is",
+      "hop1_prompt": "The city of Marseille is in the country of",
+      "hop2_prompt": "The primary official language of France is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0119",
+      "hop_type": "city_country_language",
+      "subject": "Nice",
+      "bridge_entity": "France",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "French",
+      "aliases": [
+        "French"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Nice is in a country whose main language is",
+      "hop1_prompt": "The city of Nice is in the country of",
+      "hop2_prompt": "The primary official language of France is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "2hop_0120",
+      "hop_type": "city_country_language",
+      "subject": "Milan",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Italian",
+      "aliases": [
+        "Italian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Milan is in a country whose main language is",
+      "hop1_prompt": "The city of Milan is in the country of",
+      "hop2_prompt": "The primary official language of Italy is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0121",
+      "hop_type": "city_country_language",
+      "subject": "Venice",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Italian",
+      "aliases": [
+        "Italian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Venice is in a country whose main language is",
+      "hop1_prompt": "The city of Venice is in the country of",
+      "hop2_prompt": "The primary official language of Italy is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0122",
+      "hop_type": "city_country_language",
+      "subject": "Florence",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Italian",
+      "aliases": [
+        "Italian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Florence is in a country whose main language is",
+      "hop1_prompt": "The city of Florence is in the country of",
+      "hop2_prompt": "The primary official language of Italy is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0123",
+      "hop_type": "city_country_language",
+      "subject": "Naples",
+      "bridge_entity": "Italy",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Italian",
+      "aliases": [
+        "Italian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Naples is in a country whose main language is",
+      "hop1_prompt": "The city of Naples is in the country of",
+      "hop2_prompt": "The primary official language of Italy is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0124",
+      "hop_type": "city_country_language",
+      "subject": "Barcelona",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Spanish",
+      "aliases": [
+        "Spanish",
+        "Castilian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Barcelona is in a country whose main language is",
+      "hop1_prompt": "The city of Barcelona is in the country of",
+      "hop2_prompt": "The primary official language of Spain is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0125",
+      "hop_type": "city_country_language",
+      "subject": "Seville",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Spanish",
+      "aliases": [
+        "Spanish",
+        "Castilian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Seville is in a country whose main language is",
+      "hop1_prompt": "The city of Seville is in the country of",
+      "hop2_prompt": "The primary official language of Spain is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        19
+      ]
+    },
+    {
+      "id": "2hop_0126",
+      "hop_type": "city_country_language",
+      "subject": "Valencia",
+      "bridge_entity": "Spain",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Spanish",
+      "aliases": [
+        "Spanish",
+        "Castilian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Valencia is in a country whose main language is",
+      "hop1_prompt": "The city of Valencia is in the country of",
+      "hop2_prompt": "The primary official language of Spain is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0127",
+      "hop_type": "city_country_language",
+      "subject": "Porto",
+      "bridge_entity": "Portugal",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Portuguese",
+      "aliases": [
+        "Portuguese"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Porto is in a country whose main language is",
+      "hop1_prompt": "The city of Porto is in the country of",
+      "hop2_prompt": "The primary official language of Portugal is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0128",
+      "hop_type": "city_country_language",
+      "subject": "Rotterdam",
+      "bridge_entity": "Netherlands",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Dutch",
+      "aliases": [
+        "Dutch"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Rotterdam is in a country whose main language is",
+      "hop1_prompt": "The city of Rotterdam is in the country of",
+      "hop2_prompt": "The primary official language of Netherlands is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": "2hop_0129",
+      "hop_type": "city_country_language",
+      "subject": "Krakow",
+      "bridge_entity": "Poland",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Polish",
+      "aliases": [
+        "Polish"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Krakow is in a country whose main language is",
+      "hop1_prompt": "The city of Krakow is in the country of",
+      "hop2_prompt": "The primary official language of Poland is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0130",
+      "hop_type": "city_country_language",
+      "subject": "Thessaloniki",
+      "bridge_entity": "Greece",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Greek",
+      "aliases": [
+        "Greek"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Thessaloniki is in a country whose main language is",
+      "hop1_prompt": "The city of Thessaloniki is in the country of",
+      "hop2_prompt": "The primary official language of Greece is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "val",
+      "direct_subj_char_span": [
+        12,
+        24
+      ]
+    },
+    {
+      "id": "2hop_0131",
+      "hop_type": "city_country_language",
+      "subject": "Gothenburg",
+      "bridge_entity": "Sweden",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Swedish",
+      "aliases": [
+        "Swedish"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Gothenburg is in a country whose main language is",
+      "hop1_prompt": "The city of Gothenburg is in the country of",
+      "hop2_prompt": "The primary official language of Sweden is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        22
+      ]
+    },
+    {
+      "id": "2hop_0132",
+      "hop_type": "city_country_language",
+      "subject": "Bergen",
+      "bridge_entity": "Norway",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Norwegian",
+      "aliases": [
+        "Norwegian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Bergen is in a country whose main language is",
+      "hop1_prompt": "The city of Bergen is in the country of",
+      "hop2_prompt": "The primary official language of Norway is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0133",
+      "hop_type": "city_country_language",
+      "subject": "Istanbul",
+      "bridge_entity": "Turkey",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Turkish",
+      "aliases": [
+        "Turkish"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Istanbul is in a country whose main language is",
+      "hop1_prompt": "The city of Istanbul is in the country of",
+      "hop2_prompt": "The primary official language of Turkey is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        20
+      ]
+    },
+    {
+      "id": "2hop_0134",
+      "hop_type": "city_country_language",
+      "subject": "Saint Petersburg",
+      "bridge_entity": "Russia",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Russian",
+      "aliases": [
+        "Russian"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Saint Petersburg is in a country whose main language is",
+      "hop1_prompt": "The city of Saint Petersburg is in the country of",
+      "hop2_prompt": "The primary official language of Russia is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        28
+      ]
+    },
+    {
+      "id": "2hop_0135",
+      "hop_type": "city_country_language",
+      "subject": "Osaka",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Japanese",
+      "aliases": [
+        "Japanese"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Osaka is in a country whose main language is",
+      "hop1_prompt": "The city of Osaka is in the country of",
+      "hop2_prompt": "The primary official language of Japan is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0136",
+      "hop_type": "city_country_language",
+      "subject": "Kyoto",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Japanese",
+      "aliases": [
+        "Japanese"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Kyoto is in a country whose main language is",
+      "hop1_prompt": "The city of Kyoto is in the country of",
+      "hop2_prompt": "The primary official language of Japan is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    },
+    {
+      "id": "2hop_0137",
+      "hop_type": "city_country_language",
+      "subject": "Nagoya",
+      "bridge_entity": "Japan",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Japanese",
+      "aliases": [
+        "Japanese"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Nagoya is in a country whose main language is",
+      "hop1_prompt": "The city of Nagoya is in the country of",
+      "hop2_prompt": "The primary official language of Japan is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "test",
+      "direct_subj_char_span": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "2hop_0138",
+      "hop_type": "city_country_language",
+      "subject": "Busan",
+      "bridge_entity": "South Korea",
+      "bridge_relation": "city_country",
+      "hop2_relation": "country_language",
+      "answer": "Korean",
+      "aliases": [
+        "Korean"
+      ],
+      "prefix": "The city of ",
+      "suffix": " is in a country whose main language is",
+      "direct_prompt": "The city of Busan is in a country whose main language is",
+      "hop1_prompt": "The city of Busan is in the country of",
+      "hop2_prompt": "The primary official language of South Korea is",
+      "hop2_prefix": "The primary official language of ",
+      "hop2_suffix": " is",
+      "split": "train",
+      "direct_subj_char_span": [
+        12,
+        17
+      ]
+    }
+  ]
+}

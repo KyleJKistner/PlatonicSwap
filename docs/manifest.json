@@ -1,0 +1,694 @@
+{
+  "papers": [
+    {
+      "arxiv_id": "2610.28366",
+      "slug": "bakker_2026_relative_representations_monitoring",
+      "cluster": "cross_model_probing",
+      "tags": [
+        "relative-representations",
+        "anchors",
+        "monitoring",
+        "probes",
+        "all-layer",
+        "scale-transfer",
+        "staleness"
+      ],
+      "v1_relevance": "Must-cite read-only counterpart; validates target-anchor normalization, low-FPR drop, and CKA non-predictiveness.",
+      "v2_relevance": "Local cosine anchors give linear native SwiGLU gates w_B = A_B^T w_rel; global all-layer anchoring removes layer matching; 1B->70B upward transfer.",
+      "title": "Relative Representations Enable Portable White-Box Monitoring Across Language Models",
+      "authors": [
+        "Tim Bakker",
+        "Christos Louizos"
+      ],
+      "published": "2026-10-20",
+      "abstract": "Independently trained autoregressive language models often acquire similar capabilities, but it remains unclear whether their internal representations organize behaviorally relevant information in compatible ways. We show that models do in fact organize information similarly by using specific behavioral probes that operate on compatible representations. This unlocks portable white-box monitoring: a probe developed and validated on one model can be reused when the model changes, without requiring labeled target data. To overcome incompatible native activation coordinates, we express each example through its angular distances to a shared set of anchors. We introduce a global anchored construction that summarizes information from all transformer layers and removes model-specific layer selection, so the same frozen probe can be straightforwardly applied to another model. We evaluate cross-model probe transfer across monitoring tasks on trivia datasets, safety monitoring, and mathematical reasoning. On average, transferred global anchored probes preserve at least 85% of same-model probe AUROC over chance. Anchored probes also support transfer to related datasets, remain robust across model scale and prompt changes, and retain performance better than standard probes after model updates. Transfer is nevertheless task- and target-dependent and can fail even when the monitored property remains strongly decodable in the target model. Overall, global anchoring reveals substantial task-relevant compatibility across independently trained models and provides a practical basis for portable white-box monitoring.",
+      "url": "https://arxiv.org/abs/2610.28366",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (208,964 chars)",
+      "file": "papers/bakker_2026_relative_representations_monitoring.md",
+      "kb": 206.9
+    },
+    {
+      "arxiv_id": "2503.04429",
+      "slug": "oozeer_2025_activation_intervention_transfer",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "activation-interventions",
+        "steering",
+        "safety",
+        "backdoor",
+        "autoencoder-bridge",
+        "llama",
+        "qwen",
+        "gemma"
+      ],
+      "v1_relevance": "Key prior work on cross-model activation intervention transfer (runtime hooks/bridges vs our hook-free native SwiGLU organs).",
+      "v2_relevance": "Autoencoder / learned cross-model bridges and corrupted-capability backdoor separation.",
+      "title": "Activation Space Interventions Can Be Transferred Between Large Language Models",
+      "authors": [
+        "Narmeen Oozeer",
+        "Dhruv Nathawani",
+        "Nirmalendu Prakash",
+        "Michael Lan",
+        "Abir Harrasse",
+        "Amirali Abdullah"
+      ],
+      "published": "2025-03-06",
+      "abstract": "The study of representation universality in AI models reveals growing convergence across domains, modalities, and architectures. However, the practical applications of representation universality remain largely unexplored. We bridge this gap by demonstrating that safety interventions can be transferred between models through learned mappings of their shared activation spaces. We demonstrate this approach on two well-established AI safety tasks: backdoor removal and refusal of harmful prompts, showing successful transfer of steering vectors that alter the models' outputs in a predictable way. Additionally, we propose a new task, \\textit{corrupted capabilities}, where models are fine-tuned to embed knowledge tied to a backdoor. This tests their ability to separate useful skills from backdoors, reflecting real-world challenges. Extensive experiments across Llama, Qwen and Gemma model families show that our method enables using smaller models to efficiently align larger ones. Furthermore, we demonstrate that autoencoder mappings between base and fine-tuned models can serve as reliable ``lightweight safety switches\", allowing dynamic toggling between model behaviors.",
+      "url": "https://arxiv.org/abs/2503.04429",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (130,000 chars)",
+      "file": "papers/oozeer_2025_activation_intervention_transfer.md",
+      "kb": 129.4
+    },
+    {
+      "arxiv_id": "2501.02009",
+      "slug": "huang_2025_platonic_concept_transferability",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "platonic-representations",
+        "steering-vectors",
+        "linear-bridge",
+        "weak-to-strong",
+        "acl-2025"
+      ],
+      "v1_relevance": "Must-cite ACL 2025 paper transferring steering vectors via linear bridges across LLMs (runtime steering vs mid-layer compositional ripple).",
+      "v2_relevance": "Weak-to-strong cross-model concept transfer.",
+      "title": "Cross-model Transferability among Large Language Models on the Platonic Representations of Concepts",
+      "authors": [
+        "Youcheng Huang",
+        "Chen Huang",
+        "Duanyu Feng",
+        "Wenqiang Lei",
+        "Jiancheng Lv"
+      ],
+      "published": "2025-01-02",
+      "abstract": "Understanding the inner workings of Large Language Models (LLMs) is a critical research frontier. Prior research has shown that a single LLM's concept representations can be captured as steering vectors (SVs), enabling the control of LLM behavior (e.g., towards generating harmful content). Our work takes a novel approach by exploring the intricate relationships between concept representations across different LLMs, drawing an intriguing parallel to Plato's Allegory of the Cave. In particular, we introduce a linear transformation method to bridge these representations and present three key findings: 1) Concept representations across different LLMs can be effectively aligned using simple linear transformations, enabling efficient cross-model transfer and behavioral control via SVs. 2) This linear transformation generalizes across concepts, facilitating alignment and control of SVs representing different concepts across LLMs. 3) A weak-to-strong transferability exists between LLM concept representations, whereby SVs extracted from smaller LLMs can effectively control the behavior of larger LLMs.",
+      "url": "https://arxiv.org/abs/2501.02009",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (77,188 chars)",
+      "file": "papers/huang_2025_platonic_concept_transferability.md",
+      "kb": 77.7
+    },
+    {
+      "arxiv_id": "2608.05164",
+      "slug": "agarwal_2026_cross_architecture_steering_transfer",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "steering",
+        "sae",
+        "cross-architecture",
+        "scale-threshold",
+        "1.7b"
+      ],
+      "v1_relevance": "Systematic cross-architecture SAE steering study; identifies >=1.7B parameter scale threshold (directly matches our 1.5B-3B regime).",
+      "v2_relevance": "SAE feature alignment across architectures.",
+      "title": "Cross-Architecture Steering Transfer in Language Models: A Systematic Empirical Study",
+      "authors": [
+        "Ayushi Agarwal"
+      ],
+      "published": "2026-05-26",
+      "abstract": "Independently trained large language models may develop shared internal representations of semantic concepts despite architectural differences -- but whether this geometric similarity has functional consequences for cross-model behavioural control remains untested. We present the first systematic evaluation of cross-model steering transfer and show that shared LLM geometry is functionally exploitable, conditionally: concept directions from one model can steer a different independently trained model when sufficient representational capacity exists. We study five open-weight models spanning three parameter scales (0.8B--8B) and two architectural lineages, training one Sparse Autoencoder per model across 15 semantic domains and testing alignment across all 20 directed model pairs. We observe a suggestive discontinuity near 1.7B parameters: at >= 1.7B scale, 47--49% of cross-model feature pairs validate (Pearson r >= 0.60, Procrustes cosines 0.895--0.956), while alignment degrades sharply below 0.8B. Cross-model steering vectors (B3-TI) achieve a 71.0% win rate across 15 supervised concepts versus 68.0% for same-model native vectors; a single universal vector achieves 67.3% in 4 of 5 models without any per-model supervision. Transfer degrades for models below 1.7B and for one model with generation instability, confirming that functional exploitability requires sufficient representational capacity. Our findings underscore the importance of scale thresholds in mechanistic interpretability: tools validated at 7B scale may not transfer to smaller models without revalidation. We provide the first functional complement to the Platonic Representation Hypothesis -- geometric convergence across independently trained LLMs supports cross-model behavioural control without fine-tuning, under the identified scale conditions.",
+      "url": "https://arxiv.org/abs/2608.05164",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (100,124 chars)",
+      "file": "papers/agarwal_2026_cross_architecture_steering_transfer.md",
+      "kb": 100.6
+    },
+    {
+      "arxiv_id": "2608.16347",
+      "slug": "piepereit_2026_architecture_dependent_causal_transfer",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "causal-transfer",
+        "activation-injection",
+        "architecture-dependent",
+        "failure-modes",
+        "abstention"
+      ],
+      "v1_relevance": "Shows causal injection can fail (e.g. into Mistral-7B) despite high representational alignment \u2014 directly motivates our calibrated abstention criterion.",
+      "v2_relevance": "Mutual kNN vs CKA/Procrustes alignment metrics.",
+      "title": "Architecture-Dependent Causal Transfer of Activation States Across Large Language Models",
+      "authors": [
+        "Fernando Cardenas Piepereit"
+      ],
+      "published": "2026-08-17",
+      "abstract": "Direct communication between AI systems relies on natural language as an intermediate layer, incurring encoding/decoding overhead, token cost, and latency. We ask whether internal activation states can instead be transferred causally between different large language model (LLM) architectures via a learned projection, evaluated at three levels: representational similarity, cross-model retrieval from projected states, and end-to-end causal transfer via activation injection during generation. Using four architecturally diverse open-weight models (Qwen2-0.5B, Phi-3-mini, Mistral-7B, FLAN-T5-base), we find that representational alignment in trained models exceeds a random-initialization null baseline and is best captured by a rank-based metric (mutual k-nearest-neighbour alignment), more robust to activation-magnitude outliers than centered kernel alignment (CKA) or Procrustes analysis. A learned projection network retrieves the correct target-model representation from a held-out set well above chance for the three causal decoder-only model pairs (45-50% top-1 accuracy vs. 5% chance) but at chance level for the encoder-based FLAN-T5. Injecting projected activations into a target model during generation produces a statistically significant, pre-registered causal effect on retrieval-based output similarity for only one of the three decoder-only pairs (Qwen2-0.5B to Phi-3-mini: 23.3% vs. 0.0% under negative control, p=0.047, FDR-corrected); the two pairs targeting Mistral-7B show no such effect despite comparable representational alignment at the hidden-state level. We interpret these results as evidence for causal transfer of the representational vehicle, not of meaning, and conclude that end-to-end activation-state transfer between LLMs, as currently implemented, is architecture-dependent rather than universal.",
+      "url": "https://arxiv.org/abs/2608.16347",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (49,964 chars)",
+      "file": "papers/piepereit_2026_architecture_dependent_causal_transfer.md",
+      "kb": 51.8
+    },
+    {
+      "arxiv_id": "2508.05232",
+      "slug": "xia_2025_cross_lora_heterogeneous_transfer",
+      "cluster": "weight_adapter_transfer",
+      "tags": [
+        "cross-lora",
+        "lora-transfer",
+        "data-free",
+        "training-free",
+        "svd",
+        "heterogeneous-llms"
+      ],
+      "v1_relevance": "Closest weight-space transfer baseline (data-free SVD subspace alignment for LoRA adapters vs our surgical mid-layer SwiGLU organs with unseen ripple).",
+      "v2_relevance": "LoRA-Align / LoRA-Shift subspace math for translating multi-layer attention+MLP LoRA skills.",
+      "title": "Cross-LoRA: A Data-Free LoRA Transfer Framework across Heterogeneous LLMs",
+      "authors": [
+        "Feifan Xia",
+        "Mingyang Liao",
+        "Yuyang Fang",
+        "Defang Li",
+        "Yantong Xie",
+        "Weikang Li",
+        "Yang Li",
+        "Deguo Xia",
+        "Jizhou Huang"
+      ],
+      "published": "2025-08-07",
+      "abstract": "Traditional parameter-efficient fine-tuning (PEFT) methods such as LoRA are tightly coupled with the base model architecture, which constrains their applicability across heterogeneous pretrained large language models (LLMs). To address this limitation, we introduce Cross-LoRA, a data-free framework for transferring LoRA modules between diverse base models without requiring additional training data. Cross-LoRA consists of two key components: (a) LoRA-Align, which performs subspace alignment between source and target base models through rank-truncated singular value decomposition (SVD) and Frobenius-optimal linear transformation, ensuring compatibility under dimension mismatch; and (b) LoRA-Shift, which applies the aligned subspaces to project source LoRA weight updates into the target model parameter space. Both components are data-free, training-free, and enable lightweight adaptation on a commodity GPU in 20 minutes. Experiments on ARCs, OBOA and HellaSwag show that Cross-LoRA achieves relative gains of up to 5.26% over base models. Across other commonsense reasoning benchmarks, Cross-LoRA maintains performance comparable to that of directly trained LoRA adapters.",
+      "url": "https://arxiv.org/abs/2508.05232",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (50,643 chars)",
+      "file": "papers/xia_2025_cross_lora_heterogeneous_transfer.md",
+      "kb": 51.9
+    },
+    {
+      "arxiv_id": "2501.16559",
+      "slug": "lorax_2025_training_free_cross_model_adaptation",
+      "cluster": "weight_adapter_transfer",
+      "tags": [
+        "lora-x",
+        "adapter-transfer",
+        "training-free",
+        "subspace-projection"
+      ],
+      "v1_relevance": "Training-free cross-model LoRA adapter transfer baseline.",
+      "v2_relevance": "Subspace-constrained adapter design for portable skills.",
+      "title": "LoRA-X: Bridging Foundation Models with Training-Free Cross-Model Adaptation",
+      "authors": [
+        "Farzad Farhadzadeh",
+        "Debasmit Das",
+        "Shubhankar Borse",
+        "Fatih Porikli"
+      ],
+      "published": "2025-01-27",
+      "abstract": "The rising popularity of large foundation models has led to a heightened demand for parameter-efficient fine-tuning methods, such as Low-Rank Adaptation (LoRA), which offer performance comparable to full model fine-tuning while requiring only a few additional parameters tailored to the specific base model. When such base models are deprecated and replaced, all associated LoRA modules must be retrained, requiring access to either the original training data or a substantial amount of synthetic data that mirrors the original distribution. However, the original data is often inaccessible due to privacy or licensing issues, and generating synthetic data may be impractical and insufficiently representative. These factors complicate the fine-tuning process considerably. To address this challenge, we introduce a new adapter, Cross-Model Low-Rank Adaptation (LoRA-X), which enables the training-free transfer of LoRA parameters across source and target models, eliminating the need for original or synthetic training data. Our approach imposes the adapter to operate within the subspace of the source base model. This constraint is necessary because our prior knowledge of the target model is limited to its weights, and the criteria for ensuring the adapter's transferability are restricted to the target base model's weights and subspace. To facilitate the transfer of LoRA parameters of the source model to a target model, we employ the adapter only in the layers of the target model that exhibit an acceptable level of subspace similarity. Our extensive experiments demonstrate the effectiveness of LoRA-X for text-to-image generation, including Stable Diffusion v1.5 and Stable Diffusion XL.",
+      "url": "https://arxiv.org/abs/2501.16559",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (69,669 chars)",
+      "file": "papers/lorax_2025_training_free_cross_model_adaptation.md",
+      "kb": 70.8
+    },
+    {
+      "arxiv_id": "2602.05495",
+      "slug": "cui_2026_transport_and_merge_cross_arch",
+      "cluster": "weight_adapter_transfer",
+      "tags": [
+        "optimal-transport",
+        "cross-architecture-merging",
+        "neuron-matching",
+        "weight-fusion",
+        "icml-2026"
+      ],
+      "v1_relevance": "OT neuron alignment for cross-architecture weight merging (destructive global merge vs our non-destructive additive organs + exact unlearning).",
+      "v2_relevance": "Optimal Transport cross-neuron correspondence for multi-layer/attention mechanism translation.",
+      "title": "Transport and Merge: Cross-Architecture Merging for Large Language Models",
+      "authors": [
+        "Chenhang Cui",
+        "Binyun Yang",
+        "Fei Shen",
+        "Yuxin Chen",
+        "Jingnan Zheng",
+        "Xiang Wang",
+        "An Zhang",
+        "Tat-Seng Chua"
+      ],
+      "published": "2026-02-05",
+      "abstract": "Large language models (LLMs) achieve strong capabilities by scaling model capacity and training data, yet many real-world deployments rely on smaller models trained or adapted from low-resource data. This gap motivates the need for mechanisms to transfer knowledge from large, high-resource models to smaller, low-resource targets. While model merging provides an effective transfer mechanism, most existing approaches assume architecture-compatible models and therefore cannot directly transfer knowledge from large high-resource LLMs to heterogeneous low-resource targets. In this work, we propose a cross-architecture merging framework based on optimal transport (OT) that aligns activations to infer cross-neuron correspondences between heterogeneous models. The resulting transport plans are then used to guide direct weight-space fusion, enabling effective high-resource to low-resource transfer using only a small set of inputs. Extensive experiments across low-resource languages and specialized domains demonstrate consistent improvements over target models.",
+      "url": "https://arxiv.org/abs/2602.05495",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (82,606 chars)",
+      "file": "papers/cui_2026_transport_and_merge_cross_arch.md",
+      "kb": 83.0
+    },
+    {
+      "arxiv_id": "2505.18502",
+      "slug": "graftllm_2025_modular_skillpacks",
+      "cluster": "weight_adapter_transfer",
+      "tags": [
+        "graftllm",
+        "skillpacks",
+        "knowledge-fusion",
+        "continual-learning",
+        "iclr-2026"
+      ],
+      "v1_relevance": "Modular SkillPacks for heterogeneous fusion & forget-free continual learning (uses target SFT/DPO vs our 0-recipient-SGD algebraic compilation).",
+      "v2_relevance": "SkillPack compression and modular storage formats.",
+      "title": "Knowledge Fusion of Large Language Models Via Modular SkillPacks",
+      "authors": [
+        "Guodong Du",
+        "Zhuo Li",
+        "Xuanning Zhou",
+        "Junlin Li",
+        "Zesheng Shi",
+        "Wanyu Lin",
+        "Ho-Kin Tang",
+        "Xiucheng Li",
+        "Fangming Liu",
+        "Wenya Wang",
+        "Min Zhang",
+        "Jing Li"
+      ],
+      "published": "2025-05-24",
+      "abstract": "Cross-capability transfer is a key challenge in large language model (LLM) research, with applications in multi-task integration, model compression, and continual learning. Recent works like FuseLLM and FuseChat have demonstrated the potential of transferring multiple model capabilities to lightweight models, enhancing adaptability and efficiency, which motivates our investigation into more efficient cross-capability transfer methods. However, existing approaches primarily focus on small, homogeneous models, limiting their applicability. For large, heterogeneous models, knowledge distillation with full-parameter fine-tuning often overlooks the student model's intrinsic capacity and risks catastrophic forgetting, while PEFT methods struggle to effectively absorb knowledge from source LLMs. To address these issues, we introduce GraftLLM, a novel method that stores source model capabilities in a target model with SkillPack format. This approach preserves general capabilities, reduces parameter conflicts, and supports forget-free continual learning and model fusion. We employ a module-aware adaptive compression strategy to compress parameter updates, ensuring efficient storage while maintaining task-specific knowledge. The resulting SkillPack serves as a compact and transferable knowledge carrier, ideal for heterogeneous model fusion and continual learning. Experiments across various scenarios demonstrate that GraftLLM outperforms existing techniques in knowledge transfer, knowledge fusion, and forget-free learning, providing a scalable and efficient solution for cross-capability transfer. The code is publicly available at: https://github.com/duguodong7/GraftLLM.",
+      "url": "https://arxiv.org/abs/2505.18502",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (101,605 chars)",
+      "file": "papers/graftllm_2025_modular_skillpacks.md",
+      "kb": 102.2
+    },
+    {
+      "arxiv_id": "2608.03893",
+      "slug": "heo_2026_cross_model_kv_cache_transfer",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "kv-cache",
+        "closed-form-linear",
+        "ridge",
+        "prefill-reuse",
+        "attention"
+      ],
+      "v1_relevance": "Closed-form linear mappings for cross-model KV cache transfer.",
+      "v2_relevance": "Directly relevant to v2 cross-model attention (K/V) translation!",
+      "title": "Cross-Model KV Cache Transfer in LLM Families: A Closed-Form Linear Mapping for Prefill Reuse",
+      "authors": [
+        "Taekyung Heo",
+        "Rasoul Shafipour",
+        "Ritchie Zhao",
+        "Maximilian Golub",
+        "Mohammad Mahdi Kamani",
+        "Ritika Borkar",
+        "Makesh Tarun Chandran",
+        "Pantea Zardoshti",
+        "Bita Darvish Rouhani"
+      ],
+      "published": "2026-08-04",
+      "abstract": "Production deployments often swap between different-sized models in a family for cost-quality cascading, mid-conversation switching, and routing, and each swap forces the receiver to repay the prefill from scratch. We propose cross-model KV cache transfer, where the receiver reuses the source's KV cache, skipping prefill. We find that cross-model KV has substantial linear structure across matched-KV pairs, where source and target share KV head count and per-head dimension. On Qwen3 14B->32B, one source layer explains 56% of variance in the target's keys and 32% in values, rising to 79% and 65% with multiple source layers. Building on this, we design a closed-form ridge mapper that operates per head and proceeds in three steps. First, for each target layer we select the top-k most predictive source layers and concatenate their KV as input. Second, we strip RoPE from the keys before mapping, so the fit is position-free and reusable across context lengths. Third, we fit ridge regression on a small calibration set of 500 FineWeb-Edu sequences of 1,024 tokens each. Surprisingly, across six pairs in three families, this linear mapper retains 73-98% of the receiver's standalone-prefill accuracy on four pairs, while two degrade sharply. A nonlinear MLP recovers up to +37 pp HellaSwag retention on the failures. The mapper runs 2.7-25x faster than re-prefill and remains stable across multi-turn handoff, making cross-model KV cache transfer practical.",
+      "url": "https://arxiv.org/abs/2608.03893",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (72,735 chars)",
+      "file": "papers/heo_2026_cross_model_kv_cache_transfer.md",
+      "kb": 73.8
+    },
+    {
+      "arxiv_id": "2602.11729",
+      "slug": "crosscoders_2026_cross_architecture_model_diffing",
+      "cluster": "cross_model_probing",
+      "tags": [
+        "crosscoders",
+        "model-diffing",
+        "cross-architecture",
+        "mechanistic-interpretability"
+      ],
+      "v1_relevance": "Unsupervised cross-architecture feature discovery and diffing.",
+      "v2_relevance": "Finding shared vs architecture-private multi-layer circuits via crosscoders.",
+      "title": "Cross-Architecture Model Diffing with Crosscoders: Unsupervised Discovery of Differences Between LLMs",
+      "authors": [
+        "Thomas Jiralerspong",
+        "Trenton Bricken"
+      ],
+      "published": "2026-02-12",
+      "abstract": "Model diffing, the process of comparing models' internal representations to identify their differences, is a promising approach for uncovering safety-critical behaviors in new models. However, its application has so far been primarily focused on comparing a base model with its finetune. Since new LLM releases are often novel architectures, cross-architecture methods are essential to make model diffing widely applicable. Crosscoders are one solution capable of cross-architecture model diffing but have only ever been applied to base vs finetune comparisons. We provide the first application of crosscoders to cross-architecture model diffing and introduce Dedicated Feature Crosscoders (DFCs), an architectural modification designed to better isolate features unique to one model. Using this technique, we find in an unsupervised fashion features including Chinese Communist Party alignment in Qwen3-8B and Deepseek-R1-0528-Qwen3-8B, American exceptionalism in Llama3.1-8B-Instruct, and a copyright refusal mechanism in GPT-OSS-20B. Together, our results work towards establishing cross-architecture crosscoder model diffing as an effective method for identifying meaningful behavioral differences between AI models.",
+      "url": "https://arxiv.org/abs/2602.11729",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (150,952 chars)",
+      "file": "papers/crosscoders_2026_cross_architecture_model_diffing.md",
+      "kb": 149.7
+    },
+    {
+      "arxiv_id": "2604.04496",
+      "slug": "lu_2025_indra_representation_hypothesis",
+      "cluster": "foundations_platonic",
+      "tags": [
+        "indra",
+        "relational-representations",
+        "angular-distance",
+        "yoneda",
+        "neurips-2025"
+      ],
+      "v1_relevance": "Foundational relational representation theory (angular distance used by Bakker & Louizos).",
+      "v2_relevance": "Category-theoretic relational alignment across architectures/modalities.",
+      "title": "The Indra Representation Hypothesis for Multimodal Alignment",
+      "authors": [
+        "Jianglin Lu",
+        "Hailing Wang",
+        "Kuo Yang",
+        "Yitian Zhang",
+        "Simon Jenni",
+        "Yun Fu"
+      ],
+      "published": "2026-04-06",
+      "abstract": "Recent studies have uncovered an interesting phenomenon: unimodal foundation models tend to learn convergent representations, regardless of differences in architecture, training objectives, or data modalities. However, these representations are essentially internal abstractions of samples that characterize samples independently, leading to limited expressiveness. In this paper, we propose The Indra Representation Hypothesis, inspired by the philosophical metaphor of Indra's Net. We argue that representations from unimodal foundation models are converging to implicitly reflect a shared relational structure underlying reality, akin to the relational ontology of Indra's Net. We formalize this hypothesis using the V-enriched Yoneda embedding from category theory, defining the Indra representation as a relational profile of each sample with respect to others. This formulation is shown to be unique, complete, and structure-preserving under a given cost function. We instantiate the Indra representation using angular distance and evaluate it in cross-model and cross-modal scenarios involving vision, language, and audio. Extensive experiments demonstrate that Indra representations consistently enhance robustness and alignment across architectures and modalities, providing a theoretically grounded and practical framework for training-free alignment of unimodal foundation models. Our code is available at https://github.com/Jianglin954/Indra.",
+      "url": "https://arxiv.org/abs/2604.04496",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (65,946 chars)",
+      "file": "papers/lu_2025_indra_representation_hypothesis.md",
+      "kb": 66.9
+    },
+    {
+      "arxiv_id": "2405.07987",
+      "slug": "huh_2024_platonic_representation_hypothesis",
+      "cluster": "foundations_platonic",
+      "tags": [
+        "platonic-representation-hypothesis",
+        "convergence",
+        "icml-2024"
+      ],
+      "v1_relevance": "Core foundational hypothesis motivating Plato's Key and PlatonicSwap.",
+      "v2_relevance": "Scaling laws of representational convergence.",
+      "title": "The Platonic Representation Hypothesis",
+      "authors": [
+        "Minyoung Huh",
+        "Brian Cheung",
+        "Tongzhou Wang",
+        "Phillip Isola"
+      ],
+      "published": "2024-05-13",
+      "abstract": "We argue that representations in AI models, particularly deep networks, are converging. First, we survey many examples of convergence in the literature: over time and across multiple domains, the ways by which different neural networks represent data are becoming more aligned. Next, we demonstrate convergence across data modalities: as vision models and language models get larger, they measure distance between datapoints in a more and more alike way. We hypothesize that this convergence is driving toward a shared statistical model of reality, akin to Plato's concept of an ideal reality. We term such a representation the platonic representation and discuss several possible selective pressures toward it. Finally, we discuss the implications of these trends, their limitations, and counterexamples to our analysis.",
+      "url": "https://arxiv.org/abs/2405.07987",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (124,459 chars)",
+      "file": "papers/huh_2024_platonic_representation_hypothesis.md",
+      "kb": 123.3
+    },
+    {
+      "arxiv_id": "2209.15430",
+      "slug": "moschella_2023_relative_representations",
+      "cluster": "foundations_platonic",
+      "tags": [
+        "relative-representations",
+        "zero-shot-stitching",
+        "anchors",
+        "iclr-2023"
+      ],
+      "v1_relevance": "Original relative representations paper enabling zero-shot latent space communication.",
+      "v2_relevance": "Anchor-based stitching across disparate encoders/decoders.",
+      "title": "Relative representations enable zero-shot latent space communication",
+      "authors": [
+        "Luca Moschella",
+        "Valentino Maiorca",
+        "Marco Fumero",
+        "Antonio Norelli",
+        "Francesco Locatello",
+        "Emanuele Rodol\u00e0"
+      ],
+      "published": "2022-09-30",
+      "abstract": "Neural networks embed the geometric structure of a data manifold lying in a high-dimensional space into latent representations. Ideally, the distribution of the data points in the latent space should depend only on the task, the data, the loss, and other architecture-specific constraints. However, factors such as the random weights initialization, training hyperparameters, or other sources of randomness in the training phase may induce incoherent latent spaces that hinder any form of reuse. Nevertheless, we empirically observe that, under the same data and modeling choices, the angles between the encodings within distinct latent spaces do not change. In this work, we propose the latent similarity between each sample and a fixed set of anchors as an alternative data representation, demonstrating that it can enforce the desired invariances without any additional training. We show how neural architectures can leverage these relative representations to guarantee, in practice, invariance to latent isometries and rescalings, effectively enabling latent space communication: from zero-shot model stitching to latent space comparison between diverse settings. We extensively validate the generalization capability of our approach on different datasets, spanning various modalities (images, text, graphs), tasks (e.g., classification, reconstruction) and architectures (e.g., CNNs, GCNs, transformers).",
+      "url": "https://arxiv.org/abs/2209.15430",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (94,496 chars)",
+      "file": "papers/moschella_2023_relative_representations.md",
+      "kb": 94.8
+    },
+    {
+      "arxiv_id": "2606.09873",
+      "slug": "sharma_2026_rotate2think_orthogonal_priming",
+      "cluster": "activation_steering_transfer",
+      "tags": [
+        "procrustes",
+        "orthogonal-rotation",
+        "reasoning",
+        "training-free",
+        "priming"
+      ],
+      "v1_relevance": "Training-free orthogonal Procrustes geometric priming for reasoning.",
+      "v2_relevance": "Orthogonal rotation operators for reasoning traces.",
+      "title": "Rotate2Think: Geometric Priming via Orthogonal Rotation to Improve Language Model Reasoning",
+      "authors": [
+        "Aditya Sharma",
+        "Christopher J. Pal",
+        "Amal Zouaq"
+      ],
+      "published": "2026-06-02",
+      "abstract": "Reasoning models achieve strong performance on challenging tasks by generating explicit intermediate reasoning traces before producing a final answer. Yet the internal structure of representation space when reasoning remains poorly understood: how do a model's hidden representations differ during thinking versus the embeddings of the input prompt, and can this structure be exploited to elicit stronger reasoning at inference time? We show that both input embeddings and thinking embeddings (mean-pooled last-layer hidden states over the prompt and reasoning trace, respectively) exhibit extremely high conicity, with all vectors clustering tightly around a single mean direction. Crucially, these mean input and thinking directions are non-collinear, with thinking embeddings occupying a geometrically distinct region of embedding space across many different models and benchmark tasks. This observation motivates casting the input-to-thinking transition as a rotation problem admitting a closed-form solution via orthogonal Procrustes analysis. We propose Rotate2Think, a training-free method that estimates this rotation from a small set of correctly solved examples and injects the resulting synthetic thinking vector between thinking delimiters at inference time, providing a geometric primer at the onset of the reasoning trace. Evaluated across multiple benchmarks and model families, Rotate2Think improves accuracy in 30 of 32 model-benchmark configurations across mathematics, science, and code tasks, and generalizes zero-shot to multimodal reasoning on MATH-Vision.",
+      "url": "https://arxiv.org/abs/2606.09873",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (48,029 chars)",
+      "file": "papers/sharma_2026_rotate2think_orthogonal_priming.md",
+      "kb": 49.5
+    },
+    {
+      "arxiv_id": "2607.17146",
+      "slug": "liang_2026_geometry_of_semantic_space",
+      "cluster": "foundations_platonic",
+      "tags": [
+        "semantic-geometry",
+        "continuous-flow",
+        "five-architectures",
+        "transformer-geometry"
+      ],
+      "v1_relevance": "Cross-architecture geometric study across 5 transformer families.",
+      "v2_relevance": "Continuous geometric / flow view of transformer layer trajectories!",
+      "title": "The Geometry of Semantic Space: A Continuous Geometric Framework for the Transformer Architecture",
+      "authors": [
+        "Zhihua Liang"
+      ],
+      "published": "2026-07-19",
+      "abstract": "We present a continuous geometric framework that models the discrete algebraic operations of the Transformer architecture as an integro-differential equation (IDE) on a semantic fiber bundle $\\calE = \\calM \\times \\R^d$. Beginning from a single geometric axiom -- that the token sequence forms a discrete $1$-manifold equipped with a canonical measure lattice -- we translate every core component of the modern Transformer (RMSNorm, RoPE, Softmax Attention, FFN, Residual Stream, SGD, Weight Decay) into a cohesive vocabulary of differential geometry, measure theory, and stochastic calculus. The resulting framework yields quantitative predictions spanning entropic optimal transport (Attention as a Schr\u00f6dinger bridge) and non-equilibrium thermodynamics (SGD as It\u00f4 diffusion violating detailed balance). We conduct a six-part experimental campaign across five architectures (Qwen3, LLaMA\\nobreakdash-3.1, Gemma\\nobreakdash-3, GPT-2, Mistral) spanning $124$M to $8$B parameters. The empirical observables are quantitatively consistent with the geometric predictions: the $\u03b5^{-1/2}$ Lipschitz scaling calibration at machine precision ($R^2 = 1.000$), the Lie--Trotter operator-splitting torsion, the symmetric ablation instability confirming the Dual-Law of Topological Stability, the $\\calO(1/\\sqrt{k})$ thermodynamic suppression of Poincar\u00e9 recurrence on the RoPE torus, the thermodynamic context-limit phase transition, and the Non-Equilibrium Steady State parameter vortex -- verified across two optimizers (AdamW and Pure SGD) to exclude momentum artifacts. The results demonstrate that analyzing Transformers through the lens of continuous stochastic differential geometry provides a predictive descriptive vocabulary for the stability limits, context bounds, and optimization dynamics of Large Language Models.",
+      "url": "https://arxiv.org/abs/2607.17146",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (268,530 chars)",
+      "file": "papers/liang_2026_geometry_of_semantic_space.md",
+      "kb": 217.8
+    },
+    {
+      "arxiv_id": "2604.05688",
+      "slug": "attention_editing_2026",
+      "cluster": "weight_adapter_transfer",
+      "tags": [
+        "attention-editing",
+        "architecture-conversion",
+        "intermediate-supervision"
+      ],
+      "v1_relevance": "Background on editing/converting attention mechanisms in pretrained LLMs.",
+      "v2_relevance": "Progressive intermediate activation supervision for cross-attention translation.",
+      "title": "Attention Editing: A Versatile Framework for Cross-Architecture Attention Conversion",
+      "authors": [
+        "Zhen Cheng",
+        "Hao-Bo Yang",
+        "Wan-Yi Huang",
+        "Jin-Long Li"
+      ],
+      "published": "2026-04-07",
+      "abstract": "Key-Value (KV) cache memory and bandwidth increasingly dominate large language model inference cost in long-context and long-generation regimes. Architectures such as multi-head latent attention (MLA) and hybrid sliding-window attention (SWA) can alleviate this bound, but integrating them into existing models remains difficult. Prior methods impose fine-grained structural requirements on both source and target attention modules, which cannot meet the feasible requirement in practical deployment. We present Attention Editing, a practical framework for converting already-trained large language models (LLMs) with new attention architectures without re-pretraining from scratch. Attention editing replaces the original attention with a learnable target module and trains it using progressive distillation, consisting of (1) layer-wise teacher-forced optimization with intermediate activation supervision to prevent cold-start error accumulation, and (2) model-level distillation on next-token distributions, optionally regularized by weak feature matching. We instantiate the framework on two different target--MLA and GateSWA, a gated hybrid SWA design, and apply it to Qwen3-8B and Qwen3-30B-A3B. The resulting models maintain competitive performance while delivering substantial efficiency improvements, demonstrating that large-scale attention conversion is both feasible and robust. Notably, experiments are conducted on an Ascend 910B clusters, offering a practical training case study on domestic hardware.",
+      "url": "https://arxiv.org/abs/2604.05688",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (60,564 chars)",
+      "file": "papers/attention_editing_2026.md",
+      "kb": 61.7
+    },
+    {
+      "arxiv_id": "2202.05262",
+      "slug": "meng_2022_rome",
+      "cluster": "model_editing_baselines",
+      "tags": [
+        "rome",
+        "model-editing",
+        "mlp-memory",
+        "causal-tracing"
+      ],
+      "v1_relevance": "Foundational single-model rank-1 MLP editing baseline.",
+      "v2_relevance": "Channel-aware generalization of ROME to cross-architecture SwiGLU organs.",
+      "title": "Locating and Editing Factual Associations in GPT",
+      "authors": [
+        "Kevin Meng",
+        "David Bau",
+        "Alex Andonian",
+        "Yonatan Belinkov"
+      ],
+      "published": "2022-02-10",
+      "abstract": "We analyze the storage and recall of factual associations in autoregressive transformer language models, finding evidence that these associations correspond to localized, directly-editable computations. We first develop a causal intervention for identifying neuron activations that are decisive in a model's factual predictions. This reveals a distinct set of steps in middle-layer feed-forward modules that mediate factual predictions while processing subject tokens. To test our hypothesis that these computations correspond to factual association recall, we modify feed-forward weights to update specific factual associations using Rank-One Model Editing (ROME). We find that ROME is effective on a standard zero-shot relation extraction (zsRE) model-editing task, comparable to existing methods. To perform a more sensitive evaluation, we also evaluate ROME on a new dataset of counterfactual assertions, on which it simultaneously maintains both specificity and generalization, whereas other methods sacrifice one or another. Our results confirm an important role for mid-layer feed-forward modules in storing factual associations and suggest that direct manipulation of computational mechanisms may be a feasible approach for model editing. The code, dataset, visualizations, and an interactive demo notebook are available at https://rome.baulab.info/",
+      "url": "https://arxiv.org/abs/2202.05262",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (97,921 chars)",
+      "file": "papers/meng_2022_rome.md",
+      "kb": 97.9
+    },
+    {
+      "arxiv_id": "2210.07229",
+      "slug": "meng_2023_memit",
+      "cluster": "model_editing_baselines",
+      "tags": [
+        "memit",
+        "mass-editing",
+        "mlp-memory",
+        "locality"
+      ],
+      "v1_relevance": "Direct baseline we compare against (+24.49 pp locality drop vs our non-destructive organs).",
+      "v2_relevance": "Multi-layer distributed edit spreading.",
+      "title": "Mass-Editing Memory in a Transformer",
+      "authors": [
+        "Kevin Meng",
+        "Arnab Sen Sharma",
+        "Alex Andonian",
+        "Yonatan Belinkov",
+        "David Bau"
+      ],
+      "published": "2022-10-13",
+      "abstract": "Recent work has shown exciting promise in updating large language models with new memories, so as to replace obsolete information or add specialized knowledge. However, this line of work is predominantly limited to updating single associations. We develop MEMIT, a method for directly updating a language model with many memories, demonstrating experimentally that it can scale up to thousands of associations for GPT-J (6B) and GPT-NeoX (20B), exceeding prior work by orders of magnitude. Our code and data are at https://memit.baulab.info.",
+      "url": "https://arxiv.org/abs/2210.07229",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (71,095 chars)",
+      "file": "papers/meng_2023_memit.md",
+      "kb": 70.9
+    },
+    {
+      "arxiv_id": "2606.15980",
+      "slug": "duan_2026_monitor_staleness",
+      "cluster": "cross_model_probing",
+      "tags": [
+        "staleness",
+        "activation-monitors",
+        "lora",
+        "quantization",
+        "model-updates"
+      ],
+      "v1_relevance": "Cited by Bakker & Louizos (2026); benchmarks monitor degradation under fine-tuning/quantization.",
+      "v2_relevance": "Designing update-resilient PlatonicSwap organs and triggers that survive downstream LoRA/quantization.",
+      "title": "Do Activation Monitors Survive Model Updates? Benchmarking, Predicting, and Repairing Activation-Monitor Staleness",
+      "authors": [
+        "Evan Duan"
+      ],
+      "published": "2026-06-14",
+      "abstract": "Activation monitors -- lightweight probes trained on a language model's internal representations -- are an increasingly common layer in deployment safety stacks. Deployed models however are rarely static: they are quantized, fine-tuned, adapted with LoRA, or served with merged adapters while the monitor remains frozen. We present the first systematic test of whether this implicit contract holds: whether activation monitors trained on a base model remain reliable after these routine model updates. Across multiple safety-relevant monitors, model depths, update families, and open-weight models, we find a sharp split: quantization-style updates largely preserve frozen probe performance, while fine-tuning-style updates frequently make probes stale. Fragility is highly monitor-dependent, with privacy/PII probes most affected and refusal-compliance probes comparatively stable, showing that retraining a behavior need not stale its corresponding monitor. QLoRA is especially damaging despite NF4 quantization alone being relatively benign, suggesting that quantization becomes riskier when combined with adaptation. We further show that degradation is predictable from pre-deployment features, enabling revalidation budgets to be triaged toward the monitors most likely to fail. Finally, we test repair strategies and find that cheap label-free activation realignment repairs every repair-relevant stale cell, with none requiring score calibration, few-label heads, or labeled retraining. These results suggest that fine-tuning should trigger activation-monitor revalidation by default, with prediction triaging which monitors to check first and label-free realignment as the default repair.",
+      "url": "https://arxiv.org/abs/2606.15980",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (46,979 chars)",
+      "file": "papers/duan_2026_monitor_staleness.md",
+      "kb": 48.7
+    },
+    {
+      "arxiv_id": "2601.11516",
+      "slug": "kramar_2026_production_probes_gemini",
+      "cluster": "cross_model_probing",
+      "tags": [
+        "probes",
+        "low-fpr",
+        "calibration",
+        "production",
+        "safety"
+      ],
+      "v1_relevance": "Cited by Bakker & Louizos (2026); production low-FPR calibration and distribution-shift failure modes.",
+      "v2_relevance": "Engineering low-FPR conformal triggers for safe native organ activation.",
+      "title": "Building Production-Ready Probes For Gemini",
+      "authors": [
+        "J\u00e1nos Kram\u00e1r",
+        "Joshua Engels",
+        "Zheng Wang",
+        "Bilal Chughtai",
+        "Rohin Shah",
+        "Neel Nanda",
+        "Arthur Conmy"
+      ],
+      "published": "2026-01-16",
+      "abstract": "Frontier language model capabilities are improving rapidly. We thus need stronger mitigations against bad actors misusing increasingly powerful systems. Prior work has shown that activation probes may be a promising misuse mitigation technique, but we identify a key remaining challenge: probes fail to generalize under important production distribution shifts. In particular, we find that the shift from short-context to long-context inputs is difficult for existing probe architectures. We propose several new probe architectures that handle this long-context distribution shift. We evaluate these probes in the cyber-offensive domain, testing their robustness against various production-relevant distribution shifts, including multi-turn conversations, long context prompts, and adaptive red teaming. Our results demonstrate that while our novel architectures address context length, a combination of architecture choice and training on diverse distributions is required for broad generalization. Additionally, we show that pairing probes with prompted classifiers achieves optimal accuracy at a low cost due to the computational efficiency of probes. These findings have informed the successful deployment of misuse mitigation probes in user-facing instances of Gemini, Google's frontier language model. Finally, we find early positive results using AlphaEvolve to automate improvements in both probe architecture search and adaptive red teaming, showing that automating some AI safety research is already possible.",
+      "url": "https://arxiv.org/abs/2601.11516",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (126,866 chars)",
+      "file": "papers/kramar_2026_production_probes_gemini.md",
+      "kb": 126.5
+    },
+    {
+      "arxiv_id": "2510.00296",
+      "slug": "barshalom_2025_act_vit_activation_tensors",
+      "cluster": "cross_model_probing",
+      "tags": [
+        "activation-tensors",
+        "multi-layer",
+        "hallucination",
+        "cross-model",
+        "adapters"
+      ],
+      "v1_relevance": "Cited by Bakker & Louizos (2026); multi-layer activation tensor monitoring with per-model linear adapters.",
+      "v2_relevance": "Multi-layer activation pooling & alignment patterns for v2 distributed skill translation.",
+      "title": "Beyond Token Probes: Hallucination Detection via Activation Tensors with ACT-ViT",
+      "authors": [
+        "Guy Bar-Shalom",
+        "Fabrizio Frasca",
+        "Yaniv Galron",
+        "Yftah Ziser",
+        "Haggai Maron"
+      ],
+      "published": "2025-09-30",
+      "abstract": "Detecting hallucinations in Large Language Model-generated text is crucial for their safe deployment. While probing classifiers show promise, they operate on isolated layer-token pairs and are LLM-specific, limiting their effectiveness and hindering cross-LLM applications. In this paper, we introduce a novel approach to address these shortcomings. We build on the natural sequential structure of activation data in both axes (layers $\\times$ tokens) and advocate treating full activation tensors akin to images. We design ACT-ViT, a Vision Transformer-inspired model that can be effectively and efficiently applied to activation tensors and supports training on data from multiple LLMs simultaneously. Through comprehensive experiments encompassing diverse LLMs and datasets, we demonstrate that ACT-ViT consistently outperforms traditional probing techniques while remaining extremely efficient for deployment. In particular, we show that our architecture benefits substantially from multi-LLM training, achieves strong zero-shot performance on unseen datasets, and can be transferred effectively to new LLMs through fine-tuning. Full code is available at https://github.com/BarSGuy/ACT-ViT.",
+      "url": "https://arxiv.org/abs/2510.00296",
+      "status": "FULL_TEXT",
+      "source": "arxiv_html (99,802 chars)",
+      "file": "papers/barshalom_2025_act_vit_activation_tensors.md",
+      "kb": 99.8
+    },
+    {
+      "slug": "cheng_2026_platos_key_hazy_research",
+      "title": "Plato's Key: Cross-Model Representation Transfer via Closed-Form Rotation and Scaling",
+      "authors": [
+        "Vivien Cheng, Jerry Liu, Morris Yau, Christopher R\u00e9 (Stanford Hazy Research)"
+      ],
+      "published": "2026-11-25",
+      "arxiv_id": "web",
+      "url": "https://hazyresearch.stanford.edu/blog/2026-11-25-platos-key",
+      "cluster": "foundations_platonic",
+      "tags": [
+        "platos-key",
+        "hazy-research",
+        "procrustes",
+        "rotation",
+        "factual-recall",
+        "dark-memories",
+        "chaining"
+      ],
+      "v1_relevance": "Direct parent paper that PlatonicSwap builds on, diagnoses (84-95% Fisher tail), improves (41% -> 83-92% zero-QA), and extends to native SwiGLU organs.",
+      "v2_relevance": "Chained rotation maps (A->B->C) and dark-memory unlocking.",
+      "status": "FULL_TEXT",
+      "source": "web_html (12,018 chars)",
+      "file": "papers/cheng_2026_platos_key_hazy_research.md",
+      "kb": 13.0
+    },
+    {
+      "slug": "tokenbender_2026_chantless",
+      "title": "Chantless: How Do Models Lose Weight Without Crying? (Training-Free Capability Extraction)",
+      "authors": [
+        "Abhishek Harshvardhan Mishra (tokenbender / Deus Experiments)"
+      ],
+      "published": "2026-11-26",
+      "arxiv_id": "web",
+      "url": "https://deusexperiments.com/research/how-do-models-lose-weight-without-crying/",
+      "cluster": "capability_extraction_complementary",
+      "tags": [
+        "chantless",
+        "capability-extraction",
+        "pruning",
+        "masks",
+        "training-free",
+        "gguf"
+      ],
+      "v1_relevance": "Complementary subtractive single-model capability extraction (carving a specialist out of 1 model vs our additive cross-architecture splicing).",
+      "v2_relevance": "Potential upstream 'harvester' for finding organic Donor-A capability subnetworks before PlatonicSwap splices their residual deltas into Recipient B.",
+      "status": "FULL_TEXT",
+      "source": "web_html (39,460 chars) + github_readme",
+      "file": "papers/tokenbender_2026_chantless.md",
+      "kb": 49.4
+    }
+  ],
+  "want_to_read": [
+    {
+      "title": "Transplanting Knowledge: A Study on Layer-Specific Grafting in LLMs",
+      "authors": "Bastien Zimmermann, Matthieu Boussard (craft ai)",
+      "venue_year": "AAAI 2025 Workshop (CoLoRAI) / OpenReview",
+      "url": "https://openreview.net/search?term=Transplanting+Knowledge+Layer-Specific+Grafting",
+      "reason": "OpenReview-only (no arXiv ID indexed); requires direct OpenReview PDF lookup.",
+      "why_matters": "Studies grafting fine-tuned layers across models with lightweight residual-stream translators \u2014 direct precedent for multi-layer grafting in v2."
+    }
+  ]
+}

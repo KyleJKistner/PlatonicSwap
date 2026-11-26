@@ -1,0 +1,1061 @@
+{
+  "meta": {
+    "donor": "qwen2.5-3b",
+    "recipient": "smollm2-1.7b",
+    "layers": [
+      17,
+      9
+    ],
+    "n_screened": 292,
+    "n_A_right": 276,
+    "n_B_right": 268,
+    "n_gap_total": 17,
+    "n_gap_obscure": 12,
+    "n_gap_dataset": 5,
+    "elapsed_sec": 37.52
+  },
+  "unpatched_A_all_gap": {
+    "country": {
+      "acc": 1.0,
+      "n": 17
+    },
+    "capital": {
+      "acc": 0.8235,
+      "n": 17
+    },
+    "currency": {
+      "acc": 0.9412,
+      "n": 17
+    },
+    "language": {
+      "acc": 0.7647,
+      "n": 17
+    },
+    "continent": {
+      "acc": 0.8824,
+      "n": 17
+    },
+    "unseen_4attr_mean": 0.8529
+  },
+  "unpatched_B_all_gap": {
+    "country": {
+      "acc": 0.0,
+      "n": 17
+    },
+    "capital": {
+      "acc": 0.8235,
+      "n": 17
+    },
+    "currency": {
+      "acc": 0.8235,
+      "n": 17
+    },
+    "language": {
+      "acc": 0.8824,
+      "n": 17
+    },
+    "continent": {
+      "acc": 0.7647,
+      "n": 17
+    },
+    "unseen_4attr_mean": 0.8235
+  },
+  "unpatched_B_obscure_only": {
+    "country": {
+      "acc": 0.0,
+      "n": 12
+    },
+    "capital": {
+      "acc": 0.8333,
+      "n": 12
+    },
+    "currency": {
+      "acc": 0.8333,
+      "n": 12
+    },
+    "language": {
+      "acc": 0.8333,
+      "n": 12
+    },
+    "continent": {
+      "acc": 0.75,
+      "n": 12
+    },
+    "unseen_4attr_mean": 0.8125
+  },
+  "conditions": {
+    "p1_10k_procrustes_matched": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 17
+        },
+        "currency": {
+          "acc": 0.9412,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.9412,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.9265
+      },
+      "obscure_only": {
+        "country": {
+          "acc": 1.0,
+          "n": 12
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 12
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 12
+        },
+        "language": {
+          "acc": 0.9167,
+          "n": 12
+        },
+        "continent": {
+          "acc": 0.75,
+          "n": 12
+        },
+        "unseen_4attr_mean": 0.9167
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 1
+        },
+        "continent": {
+          "acc": 0.5,
+          "n": 2
+        },
+        "unseen_4attr_mean": 0.625
+      },
+      "all_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 3
+        },
+        "currency": {
+          "acc": 0.6667,
+          "n": 3
+        },
+        "language": {
+          "acc": 0.5,
+          "n": 2
+        },
+        "continent": {
+          "acc": 0.5,
+          "n": 4
+        },
+        "unseen_4attr_mean": 0.6667
+      },
+      "examples": [
+        {
+          "entity": "Clermont-Ferrand",
+          "source": "obscure_longtail",
+          "country": "France",
+          "B_unpatched_country_gen": " Auvergne, in",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " France. The city is located",
+            "capital": " Paris. The country of France",
+            "currency": " euro.\n\nThe city",
+            "language": " French. The city is located",
+            "continent": " Europe. Clermont-"
+          }
+        },
+        {
+          "entity": "Augsburg",
+          "source": "obscure_longtail",
+          "country": "Germany",
+          "B_unpatched_country_gen": " Bavaria, in the state of",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Germany. The city is located",
+            "capital": " Berlin. The population of Aug",
+            "currency": " euro. The city of Aug",
+            "language": " German. The city is home",
+            "continent": " Europe. The local time is"
+          }
+        },
+        {
+          "entity": "Regensburg",
+          "source": "obscure_longtail",
+          "country": "Germany",
+          "B_unpatched_country_gen": " Bavaria, in the state of",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Germany. It is the capital",
+            "capital": " Berlin. The city of Reg",
+            "currency": " euro. The city of Reg",
+            "language": " German. The city is located",
+            "continent": " Europe, and the approximate population"
+          }
+        },
+        {
+          "entity": "Ballarat",
+          "source": "obscure_longtail",
+          "country": "Australia",
+          "B_unpatched_country_gen": " Victoria, Australia. It is",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Australia. It is the capital",
+            "capital": " Canberra.\n\nThe city",
+            "currency": " Australian dollar. The Australian dollar",
+            "language": " English.\n\nThe city",
+            "continent": " Australia. The country of Australia"
+          }
+        },
+        {
+          "entity": "Matsuyama",
+          "source": "obscure_longtail",
+          "country": "Japan",
+          "B_unpatched_country_gen": " Shikoku, Japan.",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 0
+          },
+          "transplanted_gens": {
+            "country": " Japan. The city is located",
+            "capital": " Tokyo. The city of Mats",
+            "currency": " Japanese Yen. The Japanese",
+            "language": " Japanese. The city is home",
+            "continent": " Kyushu, in the"
+          }
+        },
+        {
+          "entity": "Kuching",
+          "source": "obscure_longtail",
+          "country": "Malaysia",
+          "B_unpatched_country_gen": " Sarawak, which is located",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Malaysia. It is the capital",
+            "capital": " Kuala Lumpur",
+            "currency": " Malaysian Ringgit. The currency",
+            "language": " Malay. The country is also",
+            "continent": " Asia, and the approximate population"
+          }
+        },
+        {
+          "entity": "Moncton",
+          "source": "obscure_longtail",
+          "country": "Canada",
+          "B_unpatched_country_gen": " New Brunswick, Canada. The",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Canada. The population of the",
+            "capital": " Ottawa. The population of Mon",
+            "currency": " Canadian Dollar. The currency of",
+            "language": " French. The city of Mon",
+            "continent": " North America.\n\nMon"
+          }
+        },
+        {
+          "entity": "Kelowna",
+          "source": "obscure_longtail",
+          "country": "Canada",
+          "B_unpatched_country_gen": " British Columbia, Canada. It",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Canada. It is the capital",
+            "capital": " Ottawa. The country of Canada",
+            "currency": " Canadian Dollar. The Canadian Dollar",
+            "language": " English.\n\nThe city",
+            "continent": " North America. It is the"
+          }
+        },
+        {
+          "entity": "Ganja",
+          "source": "obscure_longtail",
+          "country": "Azerbaijan",
+          "B_unpatched_country_gen": " Armenia. The city is located",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 0
+          },
+          "transplanted_gens": {
+            "country": " Azerbaijan. The city is located",
+            "capital": " Baku. The city of",
+            "currency": " manat. The manat",
+            "language": " Azeri. The city is",
+            "continent": " Eurasia, in the region of"
+          }
+        },
+        {
+          "entity": "Vanadzor",
+          "source": "obscure_longtail",
+          "country": "Armenia",
+          "B_unpatched_country_gen": " Georgia. The city is located",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 0
+          },
+          "transplanted_gens": {
+            "country": " Armenia. The population of Van",
+            "capital": " Yerevan. The population",
+            "currency": " Armenian dram. The currency of",
+            "language": " Armenian. The country's official",
+            "continent": " Arkhosia, in"
+          }
+        },
+        {
+          "entity": "Mindanao",
+          "source": "obscure_longtail",
+          "country": "Philippines",
+          "B_unpatched_country_gen": " the same name, which is",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " the Philippines. It is the",
+            "capital": " Manila. The country is divided",
+            "currency": " Philippine Peso. The Philippine",
+            "language": " Tagalog. The Philippines is",
+            "continent": " Asia. The continent of Asia"
+          }
+        },
+        {
+          "entity": "Mount Hallasan",
+          "source": "obscure_longtail",
+          "country": "South Korea",
+          "B_unpatched_country_gen": " Sri Lanka. It is a",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 0,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " South Korea. It is the",
+            "capital": " Seoul.\n\nThe country",
+            "currency": " South Korean Won.\n\n",
+            "language": " Japanese.\n\nThe Japanese",
+            "continent": " Asia. The continent of Asia"
+          }
+        },
+        {
+          "entity": "Philippine Airlines",
+          "source": "dataset_gap",
+          "country": "Philippines",
+          "B_unpatched_country_gen": " the same name.\n\n",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " the same name.\n\n",
+            "capital": " Manila.\n\nThe airline",
+            "currency": " Philippine peso. The airline",
+            "language": " Tagalog. The airline is",
+            "continent": " Asia. The country that shares"
+          }
+        },
+        {
+          "entity": "Chicago",
+          "source": "dataset_gap",
+          "country": "United States",
+          "B_unpatched_country_gen": " Illinois. It is the largest",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Illinois. It is the largest",
+            "capital": " Washington, D.C.",
+            "currency": " US dollar. The city of",
+            "language": " English. The city is home",
+            "continent": " North America, in the country"
+          }
+        },
+        {
+          "entity": "Seattle",
+          "source": "dataset_gap",
+          "country": "United States",
+          "B_unpatched_country_gen": " Washington. The city is located",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " Washington. The city is located",
+            "capital": " Washington, D.C.",
+            "currency": " US dollar.\n\nThe",
+            "language": " English.\n\nThe city",
+            "continent": " North America, in the country"
+          }
+        },
+        {
+          "entity": "TotalEnergies",
+          "source": "dataset_gap",
+          "country": "France",
+          "B_unpatched_country_gen": " Luxembourg. The company is a",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " France. The company is a",
+            "capital": " Paris.\n\nThe company",
+            "currency": " euro. The company has a",
+            "language": " French. The company has a",
+            "continent": " Europe. The company is a"
+          }
+        },
+        {
+          "entity": "Vodafone",
+          "source": "dataset_gap",
+          "country": "United Kingdom",
+          "B_unpatched_country_gen": " the same name.\n\n",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 0,
+            "language": 1,
+            "continent": 1
+          },
+          "transplanted_gens": {
+            "country": " the United Kingdom. The company",
+            "capital": " London. The company is a",
+            "currency": " Euro. The company has a",
+            "language": " English. The company has a",
+            "continent": " Europe.\n\nVod"
+          }
+        }
+      ]
+    },
+    "p1_10k_fisher_orth_matched": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.7059,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.9412,
+          "n": 17
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.9412,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.9265
+      },
+      "obscure_only": {
+        "country": {
+          "acc": 0.75,
+          "n": 12
+        },
+        "capital": {
+          "acc": 0.9167,
+          "n": 12
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 12
+        },
+        "language": {
+          "acc": 0.9167,
+          "n": 12
+        },
+        "continent": {
+          "acc": 0.8333,
+          "n": 12
+        },
+        "unseen_4attr_mean": 0.9167
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.7059,
+          "n": 17
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "language": {
+          "acc": 1.0,
+          "n": 1
+        },
+        "continent": {
+          "acc": 0.5,
+          "n": 2
+        },
+        "unseen_4attr_mean": 0.875
+      },
+      "all_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.7059,
+          "n": 17
+        },
+        "capital": {
+          "acc": 1.0,
+          "n": 3
+        },
+        "currency": {
+          "acc": 1.0,
+          "n": 3
+        },
+        "language": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "continent": {
+          "acc": 0.25,
+          "n": 4
+        },
+        "unseen_4attr_mean": 0.8125
+      }
+    },
+    "ctrl_diff_gap_entity_from_A": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.1176,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0588,
+          "n": 17
+        },
+        "currency": {
+          "acc": 0.1765,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.3529,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.2353,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.2059
+      },
+      "obscure_only": {
+        "country": {
+          "acc": 0.1667,
+          "n": 12
+        },
+        "capital": {
+          "acc": 0.0833,
+          "n": 12
+        },
+        "currency": {
+          "acc": 0.1667,
+          "n": 12
+        },
+        "language": {
+          "acc": 0.4167,
+          "n": 12
+        },
+        "continent": {
+          "acc": 0.3333,
+          "n": 12
+        },
+        "unseen_4attr_mean": 0.25
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.1176,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 1
+        },
+        "continent": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "unseen_4attr_mean": 0.0
+      },
+      "all_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.1176,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "continent": {
+          "acc": 0.0,
+          "n": 4
+        },
+        "unseen_4attr_mean": 0.0
+      },
+      "tracks_swapped_alt_entity": {
+        "country": {
+          "acc": 0.7647,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "currency": {
+          "acc": 0.7647,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.5882,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.6471,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.7059
+      }
+    },
+    "ctrl_B_self_roundtrip": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.0,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "currency": {
+          "acc": 0.8235,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.8824,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.7647,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.8235
+      },
+      "obscure_only": {
+        "country": {
+          "acc": 0.0,
+          "n": 12
+        },
+        "capital": {
+          "acc": 0.8333,
+          "n": 12
+        },
+        "currency": {
+          "acc": 0.8333,
+          "n": 12
+        },
+        "language": {
+          "acc": 0.8333,
+          "n": 12
+        },
+        "continent": {
+          "acc": 0.75,
+          "n": 12
+        },
+        "unseen_4attr_mean": 0.8125
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.0,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 1
+        },
+        "continent": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "unseen_4attr_mean": 0.0
+      },
+      "all_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.0,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "continent": {
+          "acc": 0.0,
+          "n": 4
+        },
+        "unseen_4attr_mean": 0.0
+      }
+    },
+    "ctrl_norm_matched_random_rot": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.4118,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.5294,
+          "n": 17
+        },
+        "currency": {
+          "acc": 0.4706,
+          "n": 17
+        },
+        "language": {
+          "acc": 0.7647,
+          "n": 17
+        },
+        "continent": {
+          "acc": 0.7647,
+          "n": 17
+        },
+        "unseen_4attr_mean": 0.6323
+      },
+      "obscure_only": {
+        "country": {
+          "acc": 0.5,
+          "n": 12
+        },
+        "capital": {
+          "acc": 0.5,
+          "n": 12
+        },
+        "currency": {
+          "acc": 0.5,
+          "n": 12
+        },
+        "language": {
+          "acc": 0.6667,
+          "n": 12
+        },
+        "continent": {
+          "acc": 0.6667,
+          "n": 12
+        },
+        "unseen_4attr_mean": 0.5834
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.4118,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 1
+        },
+        "continent": {
+          "acc": 1.0,
+          "n": 2
+        },
+        "unseen_4attr_mean": 0.25
+      },
+      "all_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.4118,
+          "n": 17
+        },
+        "capital": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "currency": {
+          "acc": 0.0,
+          "n": 3
+        },
+        "language": {
+          "acc": 0.0,
+          "n": 2
+        },
+        "continent": {
+          "acc": 0.75,
+          "n": 4
+        },
+        "unseen_4attr_mean": 0.1875
+      }
+    }
+  },
+  "gap_items": [
+    {
+      "entity": "Clermont-Ferrand",
+      "kind": "city",
+      "country": "France",
+      "source": "obscure_longtail",
+      "A_gen": " France. The country of France",
+      "B_gen": " Auvergne, in"
+    },
+    {
+      "entity": "Augsburg",
+      "kind": "city",
+      "country": "Germany",
+      "source": "obscure_longtail",
+      "A_gen": " Germany. The country of Germany",
+      "B_gen": " Bavaria, in the state of"
+    },
+    {
+      "entity": "Regensburg",
+      "kind": "city",
+      "country": "Germany",
+      "source": "obscure_longtail",
+      "A_gen": " Germany. The country of Germany",
+      "B_gen": " Bavaria, in the state of"
+    },
+    {
+      "entity": "Ballarat",
+      "kind": "city",
+      "country": "Australia",
+      "source": "obscure_longtail",
+      "A_gen": " Australia. The city is located",
+      "B_gen": " Victoria, Australia. It is"
+    },
+    {
+      "entity": "Matsuyama",
+      "kind": "city",
+      "country": "Japan",
+      "source": "obscure_longtail",
+      "A_gen": " Japan. The country of Japan",
+      "B_gen": " Shikoku, Japan."
+    },
+    {
+      "entity": "Kuching",
+      "kind": "city",
+      "country": "Malaysia",
+      "source": "obscure_longtail",
+      "A_gen": " Malaysia. The country of Malaysia",
+      "B_gen": " Sarawak, which is located"
+    },
+    {
+      "entity": "Moncton",
+      "kind": "city",
+      "country": "Canada",
+      "source": "obscure_longtail",
+      "A_gen": " Canada. The country of Canada",
+      "B_gen": " New Brunswick, Canada. The"
+    },
+    {
+      "entity": "Kelowna",
+      "kind": "city",
+      "country": "Canada",
+      "source": "obscure_longtail",
+      "A_gen": " Canada. The country of Canada",
+      "B_gen": " British Columbia, Canada. It"
+    },
+    {
+      "entity": "Ganja",
+      "kind": "city",
+      "country": "Azerbaijan",
+      "source": "obscure_longtail",
+      "A_gen": " Azerbaijan. It is the capital",
+      "B_gen": " Armenia. The city is located"
+    },
+    {
+      "entity": "Vanadzor",
+      "kind": "city",
+      "country": "Armenia",
+      "source": "obscure_longtail",
+      "A_gen": " Armenia. The city is known",
+      "B_gen": " Georgia. The city is located"
+    },
+    {
+      "entity": "Mindanao",
+      "kind": "island",
+      "country": "Philippines",
+      "source": "obscure_longtail",
+      "A_gen": " the Philippines. It is the",
+      "B_gen": " the same name, which is"
+    },
+    {
+      "entity": "Mount Hallasan",
+      "kind": "mountain",
+      "country": "South Korea",
+      "source": "obscure_longtail",
+      "A_gen": " South Korea. It is a",
+      "B_gen": " Sri Lanka. It is a"
+    },
+    {
+      "entity": "Philippine Airlines",
+      "kind": "airline",
+      "country": "Philippines",
+      "source": "dataset_gap",
+      "A_gen": " the Philippines. It is the",
+      "B_gen": " the same name.\n\n"
+    },
+    {
+      "entity": "Chicago",
+      "kind": "city",
+      "country": "United States",
+      "source": "dataset_gap",
+      "A_gen": " the United States. The country",
+      "B_gen": " Illinois. It is the largest"
+    },
+    {
+      "entity": "Seattle",
+      "kind": "city",
+      "country": "United States",
+      "source": "dataset_gap",
+      "A_gen": " the United States. The country",
+      "B_gen": " Washington. The city is located"
+    },
+    {
+      "entity": "TotalEnergies",
+      "kind": "company",
+      "country": "France",
+      "source": "dataset_gap",
+      "A_gen": " France. The company is a",
+      "B_gen": " Luxembourg. The company is a"
+    },
+    {
+      "entity": "Vodafone",
+      "kind": "company",
+      "country": "United Kingdom",
+      "source": "dataset_gap",
+      "A_gen": " the United Kingdom. The company",
+      "B_gen": " the same name.\n\n"
+    }
+  ]
+}

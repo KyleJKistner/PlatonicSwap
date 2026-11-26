@@ -1,0 +1,3321 @@
+{
+  "meta": {
+    "pair": "qwen2.5-3b->granite-3.1-2b",
+    "donor": "qwen2.5-3b",
+    "recipient": "granite-3.1-2b",
+    "layers": [
+      18,
+      8
+    ],
+    "map_path": "/private/tmp/platos_key_lab/cache/pilot1_maps_qwen2.5-3b_to_granite-3.1-2b_l18_8.pt",
+    "n_screened": 265,
+    "n_A_right": 256,
+    "n_B_right": 253,
+    "n_gap_total": 8,
+    "n_strict_blindspot_entities": 5,
+    "n_countries_in_gap": 6,
+    "gap_by_country": {
+      "Italy": 1,
+      "Brazil": 1,
+      "Greece": 1,
+      "Mexico": 1,
+      "Australia": 3,
+      "Portugal": 1
+    },
+    "gap_by_kind": {
+      "town": 5,
+      "historic_site": 2,
+      "temple": 1
+    },
+    "elapsed_sec": 39.2
+  },
+  "unpatched_A": {
+    "country": {
+      "acc": 1.0,
+      "k": 8,
+      "n": 8,
+      "wilson_95ci": [
+        0.6756,
+        1.0
+      ],
+      "boot_95ci": [
+        1.0,
+        1.0
+      ]
+    },
+    "capital": {
+      "acc": 0.75,
+      "k": 6,
+      "n": 8,
+      "wilson_95ci": [
+        0.4093,
+        0.9285
+      ],
+      "boot_95ci": [
+        0.375,
+        1.0
+      ]
+    },
+    "currency": {
+      "acc": 0.875,
+      "k": 7,
+      "n": 8,
+      "wilson_95ci": [
+        0.5291,
+        0.9776
+      ],
+      "boot_95ci": [
+        0.625,
+        1.0
+      ]
+    },
+    "language": {
+      "acc": 0.875,
+      "k": 7,
+      "n": 8,
+      "wilson_95ci": [
+        0.5291,
+        0.9776
+      ],
+      "boot_95ci": [
+        0.625,
+        1.0
+      ]
+    },
+    "continent": {
+      "acc": 0.625,
+      "k": 5,
+      "n": 8,
+      "wilson_95ci": [
+        0.3057,
+        0.8632
+      ],
+      "boot_95ci": [
+        0.25,
+        0.875
+      ]
+    },
+    "protected": {
+      "acc": 0.25,
+      "k": 2,
+      "n": 8,
+      "wilson_95ci": [
+        0.0715,
+        0.5907
+      ],
+      "boot_95ci": [
+        0.0,
+        0.5
+      ]
+    },
+    "geo_4attr_ccl": {
+      "mean": 0.875,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.75,
+        0.9688
+      ]
+    },
+    "unseen_3attr_ripple": {
+      "mean": 0.8333,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.6667,
+        0.9583
+      ]
+    },
+    "unseen_4attr_with_cont": {
+      "mean": 0.7812,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.5938,
+        0.9062
+      ]
+    },
+    "protected_retention_on_B_known": {
+      "acc": 0.5,
+      "k": 1,
+      "n": 2,
+      "wilson_95ci": [
+        0.0945,
+        0.9055
+      ]
+    }
+  },
+  "unpatched_B": {
+    "country": {
+      "acc": 0.0,
+      "k": 0,
+      "n": 8,
+      "wilson_95ci": [
+        0.0,
+        0.3244
+      ],
+      "boot_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "capital": {
+      "acc": 0.5,
+      "k": 4,
+      "n": 8,
+      "wilson_95ci": [
+        0.2152,
+        0.7848
+      ],
+      "boot_95ci": [
+        0.125,
+        0.875
+      ]
+    },
+    "currency": {
+      "acc": 0.375,
+      "k": 3,
+      "n": 8,
+      "wilson_95ci": [
+        0.1368,
+        0.6943
+      ],
+      "boot_95ci": [
+        0.125,
+        0.75
+      ]
+    },
+    "language": {
+      "acc": 0.625,
+      "k": 5,
+      "n": 8,
+      "wilson_95ci": [
+        0.3057,
+        0.8632
+      ],
+      "boot_95ci": [
+        0.25,
+        0.875
+      ]
+    },
+    "continent": {
+      "acc": 0.75,
+      "k": 6,
+      "n": 8,
+      "wilson_95ci": [
+        0.4093,
+        0.9285
+      ],
+      "boot_95ci": [
+        0.375,
+        1.0
+      ]
+    },
+    "protected": {
+      "acc": 0.25,
+      "k": 2,
+      "n": 8,
+      "wilson_95ci": [
+        0.0715,
+        0.5907
+      ],
+      "boot_95ci": [
+        0.0,
+        0.625
+      ]
+    },
+    "geo_4attr_ccl": {
+      "mean": 0.375,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.1875,
+        0.5625
+      ]
+    },
+    "unseen_3attr_ripple": {
+      "mean": 0.5,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.25,
+        0.75
+      ]
+    },
+    "unseen_4attr_with_cont": {
+      "mean": 0.5625,
+      "n_entities": 8,
+      "entity_boot_95ci": [
+        0.3438,
+        0.7812
+      ]
+    },
+    "protected_retention_on_B_known": {
+      "acc": 1.0,
+      "k": 2,
+      "n": 2,
+      "wilson_95ci": [
+        0.3424,
+        1.0
+      ]
+    }
+  },
+  "unpatched_B_strict_blindspot": {
+    "country": {
+      "acc": 0.0,
+      "k": 0,
+      "n": 5,
+      "wilson_95ci": [
+        0.0,
+        0.4345
+      ],
+      "boot_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "capital": {
+      "acc": 0.4,
+      "k": 2,
+      "n": 5,
+      "wilson_95ci": [
+        0.1176,
+        0.7693
+      ],
+      "boot_95ci": [
+        0.0,
+        0.8
+      ]
+    },
+    "currency": {
+      "acc": 0.0,
+      "k": 0,
+      "n": 5,
+      "wilson_95ci": [
+        0.0,
+        0.4345
+      ],
+      "boot_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "language": {
+      "acc": 0.4,
+      "k": 2,
+      "n": 5,
+      "wilson_95ci": [
+        0.1176,
+        0.7693
+      ],
+      "boot_95ci": [
+        0.0,
+        0.8
+      ]
+    },
+    "continent": {
+      "acc": 0.6,
+      "k": 3,
+      "n": 5,
+      "wilson_95ci": [
+        0.2307,
+        0.8824
+      ],
+      "boot_95ci": [
+        0.2,
+        1.0
+      ]
+    },
+    "protected": {
+      "acc": 0.2,
+      "k": 1,
+      "n": 5,
+      "wilson_95ci": [
+        0.0362,
+        0.6245
+      ],
+      "boot_95ci": [
+        0.0,
+        0.6
+      ]
+    },
+    "geo_4attr_ccl": {
+      "mean": 0.2,
+      "n_entities": 5,
+      "entity_boot_95ci": [
+        0.05,
+        0.35
+      ]
+    },
+    "unseen_3attr_ripple": {
+      "mean": 0.2667,
+      "n_entities": 5,
+      "entity_boot_95ci": [
+        0.0667,
+        0.4667
+      ]
+    },
+    "unseen_4attr_with_cont": {
+      "mean": 0.35,
+      "n_entities": 5,
+      "entity_boot_95ci": [
+        0.15,
+        0.5
+      ]
+    },
+    "protected_retention_on_B_known": {
+      "acc": 1.0,
+      "k": 1,
+      "n": 1,
+      "wilson_95ci": [
+        0.2065,
+        1.0
+      ]
+    }
+  },
+  "conditions": {
+    "p1_10k_procrustes_matched": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.0,
+            0.75
+          ]
+        },
+        "capital": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "currency": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "language": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "continent": {
+          "acc": 0.625,
+          "k": 5,
+          "n": 8,
+          "wilson_95ci": [
+            0.3057,
+            0.8632
+          ],
+          "boot_95ci": [
+            0.25,
+            1.0
+          ]
+        },
+        "protected": {
+          "acc": 0.625,
+          "k": 5,
+          "n": 8,
+          "wilson_95ci": [
+            0.3057,
+            0.8632
+          ],
+          "boot_95ci": [
+            0.25,
+            0.875
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.4688,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.2812,
+            0.6562
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.5,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.2917,
+            0.7083
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.5312,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.3438,
+            0.6875
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      },
+      "strict_blindspot_gap": {
+        "country": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "capital": {
+          "acc": 0.6,
+          "k": 3,
+          "n": 5,
+          "wilson_95ci": [
+            0.2307,
+            0.8824
+          ],
+          "boot_95ci": [
+            0.2,
+            1.0
+          ]
+        },
+        "currency": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "language": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "continent": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "protected": {
+          "acc": 0.6,
+          "k": 3,
+          "n": 5,
+          "wilson_95ci": [
+            0.2307,
+            0.8824
+          ],
+          "boot_95ci": [
+            0.2,
+            1.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.45,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.15,
+            0.75
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.4667,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.2,
+            0.8
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.45,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.2,
+            0.7
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ]
+        }
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.0,
+            0.75
+          ]
+        },
+        "capital": {
+          "acc": 0.3333,
+          "k": 1,
+          "n": 3,
+          "wilson_95ci": [
+            0.0615,
+            0.7923
+          ],
+          "boot_95ci": [
+            0.0,
+            1.0
+          ]
+        },
+        "currency": {
+          "acc": 0.5,
+          "k": 2,
+          "n": 4,
+          "wilson_95ci": [
+            0.15,
+            0.85
+          ],
+          "boot_95ci": [
+            0.0,
+            1.0
+          ]
+        },
+        "language": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 2,
+          "wilson_95ci": [
+            0.0,
+            0.6576
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ],
+          "boot_95ci": [
+            1.0,
+            1.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.3958,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.125,
+            0.6875
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.5,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.1,
+            0.9
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.4,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.1,
+            0.7
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": null,
+          "k": 0,
+          "n": 0,
+          "wilson_95ci": [
+            null,
+            null
+          ]
+        }
+      },
+      "examples": [
+        {
+          "entity": "Volterra",
+          "kind": "town",
+          "country": "Italy",
+          "is_blindspot": false,
+          "B_unpatched_country": " Tuscany, in the",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 0,
+            "language": 0,
+            "continent": 1,
+            "protected": 1
+          },
+          "transplanted_gens": {
+            "country": " Italy. It is located",
+            "capital": " Rome.\n\n**",
+            "currency": " .\n\nThe currency of",
+            "language": " English.\n\n**So",
+            "continent": " Europe, bordering the Ad",
+            "protected": " city in the northern It"
+          }
+        },
+        {
+          "entity": "Alcantara",
+          "kind": "town",
+          "country": "Brazil",
+          "is_blindspot": true,
+          "B_unpatched_country": " Spain.\n\n**",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 0,
+            "language": 0,
+            "continent": 1,
+            "protected": 1
+          },
+          "transplanted_gens": {
+            "country": " Brazil, in the state",
+            "capital": " Brasilia.\n\n",
+            "currency": " Euro.\n\nThe",
+            "language": " Spanish.\n\nAl",
+            "continent": " South America, bordering the",
+            "protected": " city in the state of Al"
+          }
+        },
+        {
+          "entity": "Lindos",
+          "kind": "town",
+          "country": "Greece",
+          "is_blindspot": true,
+          "B_unpatched_country": " Rhodes, in the",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 1,
+            "currency": 1,
+            "language": 0,
+            "continent": 1,
+            "protected": 1
+          },
+          "transplanted_gens": {
+            "country": " Libya, in the west",
+            "capital": " Athens.\n\n",
+            "currency": " Euro.\n\n**",
+            "language": " English.\n\n**So",
+            "continent": " Europe.\n\nLind",
+            "protected": " town on the island of"
+          }
+        },
+        {
+          "entity": "Monte Alban",
+          "kind": "historic_site",
+          "country": "Mexico",
+          "is_blindspot": true,
+          "B_unpatched_country": " Oaxaca, Mex",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 0,
+            "currency": 0,
+            "language": 1,
+            "continent": 0,
+            "protected": 1
+          },
+          "transplanted_gens": {
+            "country": " Bolivia.\n",
+            "capital": " Bogot\u00e1.\n",
+            "currency": " .\n\nThe coordinates of",
+            "language": " Spanish.\n\n**",
+            "continent": " South America, in the country",
+            "protected": " site of ancient ruins"
+          }
+        },
+        {
+          "entity": "Port Arthur",
+          "kind": "historic_site",
+          "country": "Australia",
+          "is_blindspot": true,
+          "B_unpatched_country": " Canada.\n\n**So",
+          "transplanted_ok": {
+            "country": 1,
+            "capital": 1,
+            "currency": 1,
+            "language": 1,
+            "continent": 0,
+            "protected": 0
+          },
+          "transplanted_gens": {
+            "country": " Australia.\n\n**",
+            "capital": " Canberra.\n\n",
+            "currency": " Australian dollar.\n",
+            "language": " English.\n\n**So",
+            "continent": " North America, and within the",
+            "protected": " port city on the Texas"
+          }
+        },
+        {
+          "entity": "Kalgoorlie",
+          "kind": "town",
+          "country": "Australia",
+          "is_blindspot": false,
+          "B_unpatched_country": " Western Australia. It",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 0,
+            "currency": 1,
+            "language": 1,
+            "continent": 1,
+            "protected": 0
+          },
+          "transplanted_gens": {
+            "country": " Western Australia. It",
+            "capital": " Perth.\n\nK",
+            "currency": " Australian dollar.\n",
+            "language": " English. The local population is",
+            "continent": " Australia, and is the",
+            "protected": " gold mining town. It is"
+          }
+        },
+        {
+          "entity": "Echuca",
+          "kind": "town",
+          "country": "Australia",
+          "is_blindspot": false,
+          "B_unpatched_country": " Victoria, Australia",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 0,
+            "currency": 1,
+            "language": 1,
+            "continent": 1,
+            "protected": 1
+          },
+          "transplanted_gens": {
+            "country": " Victoria, Australia",
+            "capital": " Melbourne.\n\n",
+            "currency": " Australian dollar.\n",
+            "language": " English. The local dialect is",
+            "continent": " Australia, on the M",
+            "protected": " town on the Murray"
+          }
+        },
+        {
+          "entity": "Tomar Convent",
+          "kind": "temple",
+          "country": "Portugal",
+          "is_blindspot": true,
+          "B_unpatched_country": " India.\n\n**",
+          "transplanted_ok": {
+            "country": 0,
+            "capital": 0,
+            "currency": 0,
+            "language": 0,
+            "continent": 0,
+            "protected": 0
+          },
+          "transplanted_gens": {
+            "country": " India.\n\n**",
+            "capital": " Nairobi.\n\n",
+            "currency": " .\n\nWhat is the",
+            "language": " English.\n\n**So",
+            "continent": " Asia.\n\nTomar",
+            "protected": " former capital of the Kingdom"
+          }
+        }
+      ]
+    },
+    "p1_10k_fisher_orth_matched": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "capital": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "currency": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "language": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "continent": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "protected": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.4688,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.2812,
+            0.625
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.4583,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.25,
+            0.625
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.4688,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.25,
+            0.6875
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      },
+      "strict_blindspot_gap": {
+        "country": {
+          "acc": 0.6,
+          "k": 3,
+          "n": 5,
+          "wilson_95ci": [
+            0.2307,
+            0.8824
+          ],
+          "boot_95ci": [
+            0.2,
+            1.0
+          ]
+        },
+        "capital": {
+          "acc": 0.6,
+          "k": 3,
+          "n": 5,
+          "wilson_95ci": [
+            0.2307,
+            0.8824
+          ],
+          "boot_95ci": [
+            0.2,
+            1.0
+          ]
+        },
+        "currency": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "language": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "continent": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "protected": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.4,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.15,
+            0.65
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.3333,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0667,
+            0.6
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.3,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.05,
+            0.55
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ]
+        }
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "capital": {
+          "acc": 0.3333,
+          "k": 1,
+          "n": 3,
+          "wilson_95ci": [
+            0.0615,
+            0.7923
+          ],
+          "boot_95ci": [
+            0.0,
+            1.0
+          ]
+        },
+        "currency": {
+          "acc": 0.25,
+          "k": 1,
+          "n": 4,
+          "wilson_95ci": [
+            0.0456,
+            0.6994
+          ],
+          "boot_95ci": [
+            0.0,
+            0.75
+          ]
+        },
+        "language": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 2,
+          "wilson_95ci": [
+            0.0,
+            0.6576
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ],
+          "boot_95ci": [
+            1.0,
+            1.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.3958,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.1458,
+            0.6667
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.3,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.7
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.3,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.7
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": null,
+          "k": 0,
+          "n": 0,
+          "wilson_95ci": [
+            null,
+            null
+          ]
+        }
+      }
+    },
+    "ctrl_B_self_roundtrip": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 8,
+          "wilson_95ci": [
+            0.0,
+            0.3244
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "currency": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "language": {
+          "acc": 0.625,
+          "k": 5,
+          "n": 8,
+          "wilson_95ci": [
+            0.3057,
+            0.8632
+          ],
+          "boot_95ci": [
+            0.25,
+            0.875
+          ]
+        },
+        "continent": {
+          "acc": 0.75,
+          "k": 6,
+          "n": 8,
+          "wilson_95ci": [
+            0.4093,
+            0.9285
+          ],
+          "boot_95ci": [
+            0.375,
+            1.0
+          ]
+        },
+        "protected": {
+          "acc": 0.25,
+          "k": 2,
+          "n": 8,
+          "wilson_95ci": [
+            0.0715,
+            0.5907
+          ],
+          "boot_95ci": [
+            0.0,
+            0.625
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.375,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.1875,
+            0.5625
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.5,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.25,
+            0.75
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.5625,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.3438,
+            0.7812
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      },
+      "strict_blindspot_gap": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "currency": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "language": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "continent": {
+          "acc": 0.6,
+          "k": 3,
+          "n": 5,
+          "wilson_95ci": [
+            0.2307,
+            0.8824
+          ],
+          "boot_95ci": [
+            0.2,
+            1.0
+          ]
+        },
+        "protected": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.2,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.05,
+            0.35
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.2667,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0667,
+            0.4667
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.35,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.15,
+            0.5
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ]
+        }
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 8,
+          "wilson_95ci": [
+            0.0,
+            0.3244
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 3,
+          "wilson_95ci": [
+            0.0,
+            0.5615
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "currency": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 4,
+          "wilson_95ci": [
+            0.0,
+            0.4899
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "language": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 2,
+          "wilson_95ci": [
+            0.0,
+            0.6576
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.0,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.0,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.0,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": null,
+          "k": 0,
+          "n": 0,
+          "wilson_95ci": [
+            null,
+            null
+          ]
+        }
+      }
+    },
+    "ctrl_shuffled_R": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.125,
+          "k": 1,
+          "n": 8,
+          "wilson_95ci": [
+            0.0224,
+            0.4709
+          ],
+          "boot_95ci": [
+            0.0,
+            0.375
+          ]
+        },
+        "capital": {
+          "acc": 0.25,
+          "k": 2,
+          "n": 8,
+          "wilson_95ci": [
+            0.0715,
+            0.5907
+          ],
+          "boot_95ci": [
+            0.0,
+            0.625
+          ]
+        },
+        "currency": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "language": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "continent": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "protected": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.3125,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.125,
+            0.5625
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.375,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.1667,
+            0.625
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.375,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.1562,
+            0.625
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      },
+      "strict_blindspot_gap": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "currency": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "language": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.15,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.35
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.2,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.4667
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.15,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.35
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ]
+        }
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.125,
+          "k": 1,
+          "n": 8,
+          "wilson_95ci": [
+            0.0224,
+            0.4709
+          ],
+          "boot_95ci": [
+            0.0,
+            0.375
+          ]
+        },
+        "capital": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 3,
+          "wilson_95ci": [
+            0.0,
+            0.5615
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "currency": {
+          "acc": 0.25,
+          "k": 1,
+          "n": 4,
+          "wilson_95ci": [
+            0.0456,
+            0.6994
+          ],
+          "boot_95ci": [
+            0.0,
+            0.75
+          ]
+        },
+        "language": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 2,
+          "wilson_95ci": [
+            0.0,
+            0.6576
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.1875,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0,
+            0.4375
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.2,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.2,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": null,
+          "k": 0,
+          "n": 0,
+          "wilson_95ci": [
+            null,
+            null
+          ]
+        }
+      }
+    },
+    "ctrl_wrong_entity_e_prime": {
+      "all_gap_entities": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 8,
+          "wilson_95ci": [
+            0.0,
+            0.3244
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.125,
+          "k": 1,
+          "n": 8,
+          "wilson_95ci": [
+            0.0224,
+            0.4709
+          ],
+          "boot_95ci": [
+            0.0,
+            0.375
+          ]
+        },
+        "currency": {
+          "acc": 0.25,
+          "k": 2,
+          "n": 8,
+          "wilson_95ci": [
+            0.0715,
+            0.5907
+          ],
+          "boot_95ci": [
+            0.0,
+            0.625
+          ]
+        },
+        "language": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "continent": {
+          "acc": 0.25,
+          "k": 2,
+          "n": 8,
+          "wilson_95ci": [
+            0.0715,
+            0.5907
+          ],
+          "boot_95ci": [
+            0.0,
+            0.625
+          ]
+        },
+        "protected": {
+          "acc": 0.375,
+          "k": 3,
+          "n": 8,
+          "wilson_95ci": [
+            0.1368,
+            0.6943
+          ],
+          "boot_95ci": [
+            0.125,
+            0.75
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.1875,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0625,
+            0.375
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.25,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0833,
+            0.5
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.25,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0625,
+            0.5
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      },
+      "strict_blindspot_gap": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "currency": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "language": {
+          "acc": 0.2,
+          "k": 1,
+          "n": 5,
+          "wilson_95ci": [
+            0.0362,
+            0.6245
+          ],
+          "boot_95ci": [
+            0.0,
+            0.6
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 5,
+          "wilson_95ci": [
+            0.0,
+            0.4345
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 0.4,
+          "k": 2,
+          "n": 5,
+          "wilson_95ci": [
+            0.1176,
+            0.7693
+          ],
+          "boot_95ci": [
+            0.0,
+            0.8
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.1,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.3
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.1333,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.4
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.1,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.3
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ]
+        }
+      },
+      "strict_A_right_B_wrong_per_attr": {
+        "country": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 8,
+          "wilson_95ci": [
+            0.0,
+            0.3244
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "capital": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 3,
+          "wilson_95ci": [
+            0.0,
+            0.5615
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "currency": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 4,
+          "wilson_95ci": [
+            0.0,
+            0.4899
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "language": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 2,
+          "wilson_95ci": [
+            0.0,
+            0.6576
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "continent": {
+          "acc": 0.0,
+          "k": 0,
+          "n": 1,
+          "wilson_95ci": [
+            0.0,
+            0.7935
+          ],
+          "boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected": {
+          "acc": 1.0,
+          "k": 1,
+          "n": 1,
+          "wilson_95ci": [
+            0.2065,
+            1.0
+          ],
+          "boot_95ci": [
+            1.0,
+            1.0
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.0,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.0,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.0,
+          "n_entities": 5,
+          "entity_boot_95ci": [
+            0.0,
+            0.0
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": null,
+          "k": 0,
+          "n": 0,
+          "wilson_95ci": [
+            null,
+            null
+          ]
+        }
+      },
+      "tracks_swapped_alt_entity": {
+        "country": {
+          "acc": 0.75,
+          "k": 6,
+          "n": 8,
+          "wilson_95ci": [
+            0.4093,
+            0.9285
+          ],
+          "boot_95ci": [
+            0.375,
+            1.0
+          ]
+        },
+        "capital": {
+          "acc": 0.625,
+          "k": 5,
+          "n": 8,
+          "wilson_95ci": [
+            0.3057,
+            0.8632
+          ],
+          "boot_95ci": [
+            0.25,
+            0.875
+          ]
+        },
+        "currency": {
+          "acc": 0.125,
+          "k": 1,
+          "n": 8,
+          "wilson_95ci": [
+            0.0224,
+            0.4709
+          ],
+          "boot_95ci": [
+            0.0,
+            0.375
+          ]
+        },
+        "language": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "continent": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "protected": {
+          "acc": 0.5,
+          "k": 4,
+          "n": 8,
+          "wilson_95ci": [
+            0.2152,
+            0.7848
+          ],
+          "boot_95ci": [
+            0.125,
+            0.875
+          ]
+        },
+        "geo_4attr_ccl": {
+          "mean": 0.5,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.25,
+            0.75
+          ]
+        },
+        "unseen_3attr_ripple": {
+          "mean": 0.4167,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.1667,
+            0.6667
+          ]
+        },
+        "unseen_4attr_with_cont": {
+          "mean": 0.4375,
+          "n_entities": 8,
+          "entity_boot_95ci": [
+            0.2188,
+            0.6562
+          ]
+        },
+        "protected_retention_on_B_known": {
+          "acc": 1.0,
+          "k": 2,
+          "n": 2,
+          "wilson_95ci": [
+            0.3424,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "mcnemar_tests": {
+    "p1_10k_procrustes_matched_vs_ctrl_B_self_roundtrip": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.0,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.0,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.5,
+        "diff_pp": 0.0,
+        "n10_a_only": 1,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.4,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.375,
+        "diff_pp": 12.5,
+        "n10_a_only": 2,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.625,
+        "diff_pp": -12.5,
+        "n10_a_only": 0,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.4,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.625,
+        "acc_b": 0.75,
+        "diff_pp": -12.5,
+        "n10_a_only": 0,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.6,
+        "diff_pp": -20.0,
+        "n10_a_only": 0,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      }
+    },
+    "p1_10k_procrustes_matched_vs_ctrl_shuffled_R": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.125,
+        "diff_pp": 25.0,
+        "n10_a_only": 3,
+        "n01_b_only": 1,
+        "p_value": 0.625
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.125,
+        "diff_pp": 25.0,
+        "n10_a_only": 3,
+        "n01_b_only": 1,
+        "p_value": 0.625
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 3,
+        "n01_b_only": 1,
+        "p_value": 0.625
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.2,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.5,
+        "diff_pp": 0.0,
+        "n10_a_only": 1,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.2,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.375,
+        "diff_pp": 12.5,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.2,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.625,
+        "acc_b": 0.375,
+        "diff_pp": 25.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.3333,
+        "acc_b": 0.1111,
+        "diff_pp": 22.22,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      }
+    },
+    "p1_10k_procrustes_matched_vs_ctrl_wrong_entity_e_prime": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.0,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.0,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.125,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.2,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.375,
+        "diff_pp": 12.5,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.2,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.625,
+        "acc_b": 0.25,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.4,
+        "acc_b": 0.0,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      }
+    },
+    "p1_10k_fisher_orth_matched_vs_ctrl_B_self_roundtrip": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 4,
+        "n01_b_only": 0,
+        "p_value": 0.125
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 4,
+        "n01_b_only": 0,
+        "p_value": 0.125
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.0,
+        "diff_pp": 60.0,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.5,
+        "diff_pp": 0.0,
+        "n10_a_only": 1,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.4,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.375,
+        "diff_pp": 12.5,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.25,
+        "acc_b": 0.0,
+        "diff_pp": 25.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.0,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.625,
+        "diff_pp": -25.0,
+        "n10_a_only": 0,
+        "n01_b_only": 2,
+        "p_value": 0.5
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.4,
+        "diff_pp": -20.0,
+        "n10_a_only": 0,
+        "n01_b_only": 1,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.75,
+        "diff_pp": -25.0,
+        "n10_a_only": 0,
+        "n01_b_only": 2,
+        "p_value": 0.5
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.6,
+        "diff_pp": -40.0,
+        "n10_a_only": 0,
+        "n01_b_only": 2,
+        "p_value": 0.5
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.2222,
+        "acc_b": 0.0,
+        "diff_pp": 22.22,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      }
+    },
+    "p1_10k_fisher_orth_matched_vs_ctrl_shuffled_R": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.125,
+        "diff_pp": 37.5,
+        "n10_a_only": 4,
+        "n01_b_only": 1,
+        "p_value": 0.375
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.125,
+        "diff_pp": 37.5,
+        "n10_a_only": 4,
+        "n01_b_only": 1,
+        "p_value": 0.375
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.0,
+        "diff_pp": 60.0,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 3,
+        "n01_b_only": 1,
+        "p_value": 0.625
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.2,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.5,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.25,
+        "acc_b": 0.25,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.2,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.375,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.2,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.375,
+        "diff_pp": 12.5,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.0,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.2222,
+        "acc_b": 0.1111,
+        "diff_pp": 11.11,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      }
+    },
+    "p1_10k_fisher_orth_matched_vs_ctrl_wrong_entity_e_prime": {
+      "country_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 4,
+        "n01_b_only": 0,
+        "p_value": 0.125
+      },
+      "country_strict_attr_gap": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.0,
+        "diff_pp": 50.0,
+        "n10_a_only": 4,
+        "n01_b_only": 0,
+        "p_value": 0.125
+      },
+      "country_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.0,
+        "diff_pp": 60.0,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "capital_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.125,
+        "diff_pp": 37.5,
+        "n10_a_only": 3,
+        "n01_b_only": 0,
+        "p_value": 0.25
+      },
+      "capital_strict_attr_gap": {
+        "n": 3,
+        "acc_a": 0.3333,
+        "acc_b": 0.0,
+        "diff_pp": 33.33,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "capital_blindspot": {
+        "n": 5,
+        "acc_a": 0.6,
+        "acc_b": 0.2,
+        "diff_pp": 40.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "currency_strict_attr_gap": {
+        "n": 4,
+        "acc_a": 0.25,
+        "acc_b": 0.0,
+        "diff_pp": 25.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "currency_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.0,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_all": {
+        "n": 8,
+        "acc_a": 0.375,
+        "acc_b": 0.375,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_strict_attr_gap": {
+        "n": 2,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "language_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.2,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_all": {
+        "n": 8,
+        "acc_a": 0.5,
+        "acc_b": 0.25,
+        "diff_pp": 25.0,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      },
+      "continent_strict_attr_gap": {
+        "n": 1,
+        "acc_a": 0.0,
+        "acc_b": 0.0,
+        "diff_pp": 0.0,
+        "n10_a_only": 0,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "continent_blindspot": {
+        "n": 5,
+        "acc_a": 0.2,
+        "acc_b": 0.0,
+        "diff_pp": 20.0,
+        "n10_a_only": 1,
+        "n01_b_only": 0,
+        "p_value": 1.0
+      },
+      "pooled_strict_3attr_ripple": {
+        "n": 9,
+        "acc_a": 0.2222,
+        "acc_b": 0.0,
+        "diff_pp": 22.22,
+        "n10_a_only": 2,
+        "n01_b_only": 0,
+        "p_value": 0.5
+      }
+    }
+  },
+  "gap_items": [
+    {
+      "entity": "Volterra",
+      "kind": "town",
+      "country": "Italy",
+      "A_gen": " Italy, in the region of",
+      "B_gen": " Tuscany, in the",
+      "B_mentions_country": false
+    },
+    {
+      "entity": "Alcantara",
+      "kind": "town",
+      "country": "Brazil",
+      "A_gen": " Brazil, in the state of",
+      "B_gen": " Spain.\n\n**",
+      "B_mentions_country": false
+    },
+    {
+      "entity": "Lindos",
+      "kind": "town",
+      "country": "Greece",
+      "A_gen": " Greece, on the island of",
+      "B_gen": " Rhodes, in the",
+      "B_mentions_country": false
+    },
+    {
+      "entity": "Monte Alban",
+      "kind": "historic_site",
+      "country": "Mexico",
+      "A_gen": " Mexico. The country of Mexico",
+      "B_gen": " Oaxaca, Mex",
+      "B_mentions_country": false
+    },
+    {
+      "entity": "Port Arthur",
+      "kind": "historic_site",
+      "country": "Australia",
+      "A_gen": " Australia. It is situated in",
+      "B_gen": " Canada.\n\n**So",
+      "B_mentions_country": false
+    },
+    {
+      "entity": "Kalgoorlie",
+      "kind": "town",
+      "country": "Australia",
+      "A_gen": " Australia. It is located in",
+      "B_gen": " Western Australia. It",
+      "B_mentions_country": true
+    },
+    {
+      "entity": "Echuca",
+      "kind": "town",
+      "country": "Australia",
+      "A_gen": " Australia. It is situated in",
+      "B_gen": " Victoria, Australia",
+      "B_mentions_country": true
+    },
+    {
+      "entity": "Tomar Convent",
+      "kind": "temple",
+      "country": "Portugal",
+      "A_gen": " Portugal. It is a UNESCO",
+      "B_gen": " India.\n\n**",
+      "B_mentions_country": false
+    }
+  ]
+}

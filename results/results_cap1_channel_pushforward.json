@@ -1,0 +1,4373 @@
+{
+  "meta": {
+    "engine_sha256": "22ef57c9d196e12f2cd3c9ecc79ec0813803df43d5a6009f5422904948802306",
+    "tolerances": {
+      "alpha": 0.002,
+      "alpha_neg": 0.03,
+      "delta": 0.02
+    },
+    "all_subtokens": false,
+    "ablate_domain_up": false,
+    "targets": [
+      "smollm2",
+      "granite",
+      "falcon3",
+      "qwen1.5b"
+    ],
+    "seed": 20261125,
+    "total_elapsed_sec": 703.6
+  },
+  "stage_A_multifamily": {
+    "smollm2": {
+      "model_key": "smollm2-1.7b",
+      "layer": 9,
+      "rm": 1.0,
+      "unlabeled_depth_diag": {
+        "num_layers": 24,
+        "rm": 1.0,
+        "whole_word_kl": 1.1938,
+        "recommended_layer": 5,
+        "recommended_band_width": 1,
+        "by_layer": {
+          "5": {
+            "layer": 5,
+            "depth_frac": 0.208,
+            "C_commit": 0.8251,
+            "H_healing_2L": 0.1398,
+            "eta_step_auth": 0.2396,
+            "rec_band_width": 1
+          },
+          "7": {
+            "layer": 7,
+            "depth_frac": 0.292,
+            "C_commit": 0.8054,
+            "H_healing_2L": 0.1052,
+            "eta_step_auth": 0.3028,
+            "rec_band_width": 1
+          },
+          "9": {
+            "layer": 9,
+            "depth_frac": 0.375,
+            "C_commit": 0.7464,
+            "H_healing_2L": 0.0717,
+            "eta_step_auth": 0.2589,
+            "rec_band_width": 1
+          },
+          "11": {
+            "layer": 11,
+            "depth_frac": 0.458,
+            "C_commit": 0.7057,
+            "H_healing_2L": 0.0922,
+            "eta_step_auth": 0.2488,
+            "rec_band_width": 1
+          },
+          "13": {
+            "layer": 13,
+            "depth_frac": 0.542,
+            "C_commit": 0.5791,
+            "H_healing_2L": 0.1062,
+            "eta_step_auth": 0.2465,
+            "rec_band_width": 1
+          }
+        }
+      },
+      "channel_summary": {
+        "D_A": 2048,
+        "D_B": 2048,
+        "n_fit": 12418,
+        "n_resid": 3856,
+        "shrink_AA": 0.01147,
+        "shrink_BB": 0.02175,
+        "shrink_N": 0.48057,
+        "heldout_gen_read_R2": 0.7038,
+        "heldout_write_rms_cos": 0.8069,
+        "s_out_iso": 2.3634,
+        "med_norm_A": 71.025,
+        "med_norm_B": 167.861,
+        "c_B_std": 0.00829,
+        "tag": "universal",
+        "n_eval_aligned": 2941,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1176.1,
+          "s_out_concept": 1.9543,
+          "med_norm_A": 87.437,
+          "med_norm_B": 220.701,
+          "heldout_concept_write_cos": 0.3813,
+          "heldout_concept_write_R2": -0.1314
+        }
+      },
+      "baseline": {
+        "general_text": {
+          "ppl": 26.1002,
+          "n_tokens": 4216
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.9235,
+          "n_correct_all": 181
+        },
+        "qa": {
+          "direct_country_em": 0.0,
+          "direct_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.1936,
+            "k": 0,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.0,
+          "ripple_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.0741,
+            "k": 0,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 0.9375,
+          "hardneg_false_flip_to_rule": 0.125,
+          "hardneg_orig_retained": 0.875,
+          "dataset_fr_it_8_rule_gen": 0.0,
+          "france_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.875,
+            "ds_rule_gen": 0.0,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        }
+      },
+      "arms": {
+        "PUSHFWD_DIGITAL_BIASFREE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.21539,
+                "t1": 0.21539,
+                "t2": 0.27791,
+                "Gamma": 0.06252,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.7339,
+                "a_emp": 0.8483,
+                "beta": 222.6849,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.412,
+                "vB_res_norm": 192.0161
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.23886,
+                "t1": 0.23886,
+                "t2": 0.29731,
+                "Gamma": 0.05846,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.706,
+                "a_emp": 0.8061,
+                "beta": 238.1794,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.382,
+                "vB_res_norm": 224.3332
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 9.9e-07,
+            "bos_eval60_mean_norm": 0.00916064,
+            "bos_eval60_max_norm": 0.05722265,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2941,
+              "ff_rate_gate_gt0": 0.00136,
+              "leak_energy_ratio": 0.068832,
+              "out_rms": 15.390864
+            },
+            "unaligned": {
+              "n_tokens": 1275,
+              "ff_rate_gate_gt0": 0.001176,
+              "leak_energy_ratio": 0.086345,
+              "out_rms": 16.818675
+            }
+          },
+          "general_text": {
+            "ppl": 26.3885,
+            "n_tokens": 4216,
+            "mean_kl": 0.009586,
+            "p99_kl": 0.100205,
+            "p999_kl": 1.244519,
+            "max_kl": 16.425947,
+            "delta_ppl": 0.2883
+          },
+          "qa": {
+            "direct_country_em": 0.1875,
+            "direct_wilson95": {
+              "p": 0.1875,
+              "lo": 0.0659,
+              "hi": 0.4301,
+              "k": 3,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.1875,
+            "ripple_wilson95": {
+              "p": 0.1875,
+              "lo": 0.1019,
+              "hi": 0.3194,
+              "k": 9,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.1875,
+              "lo": 0.0833,
+              "hi": 0.3125
+            },
+            "capital_em": 0.1875,
+            "currency_em": 0.1875,
+            "language_em": 0.1875,
+            "joint_4of4_em": 0.125,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.8125,
+            "dataset_fr_it_8_rule_gen": 0.25,
+            "france_subset": {
+              "direct_country_em": 0.25,
+              "unseen_ripple_3attr_em": 0.375,
+              "capital_em": 0.375,
+              "currency_em": 0.375,
+              "language_em": 0.375,
+              "joint_4of4_em": 0.25,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.6667,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8367,
+            "n_correct_all": 164,
+            "n_orig_correct_all": 181,
+            "newly_broken_all": 18,
+            "drop_pp_all": 8.67,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 175,
+            "newly_broken_unrelated": 15,
+            "unrelated_retention": 0.9143
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": true,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.21539,
+                "t1": 0.21539,
+                "t2": 0.27791,
+                "Gamma": 0.06252,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.7339,
+                "a_emp": 0.8483,
+                "beta": 222.6849,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.412,
+                "vB_res_norm": 192.0161
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.23886,
+                "t1": 0.23886,
+                "t2": 0.29731,
+                "Gamma": 0.05846,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.706,
+                "a_emp": 0.8061,
+                "beta": 238.1794,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.382,
+                "vB_res_norm": 224.3332
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 0.0,
+            "bos_eval60_mean_norm": 0.0,
+            "bos_eval60_max_norm": 0.0,
+            "bos_max_abs_up": 0.0,
+            "aligned": {
+              "n_tokens": 2941,
+              "ff_rate_gate_gt0": 0.00136,
+              "leak_energy_ratio": 0.025448,
+              "out_rms": 9.358274
+            },
+            "unaligned": {
+              "n_tokens": 1275,
+              "ff_rate_gate_gt0": 0.001176,
+              "leak_energy_ratio": 0.015512,
+              "out_rms": 7.128602
+            }
+          },
+          "general_text": {
+            "ppl": 26.225,
+            "n_tokens": 4216,
+            "mean_kl": 0.003942,
+            "p99_kl": 0.050952,
+            "p999_kl": 0.503711,
+            "max_kl": 6.893728,
+            "delta_ppl": 0.1248
+          },
+          "qa": {
+            "direct_country_em": 0.1875,
+            "direct_wilson95": {
+              "p": 0.1875,
+              "lo": 0.0659,
+              "hi": 0.4301,
+              "k": 3,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.1458,
+            "ripple_wilson95": {
+              "p": 0.1458,
+              "lo": 0.0725,
+              "hi": 0.2717,
+              "k": 7,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.1458,
+              "lo": 0.0625,
+              "hi": 0.25
+            },
+            "capital_em": 0.25,
+            "currency_em": 0.125,
+            "language_em": 0.0625,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.25,
+            "france_subset": {
+              "direct_country_em": 0.25,
+              "unseen_ripple_3attr_em": 0.2083,
+              "capital_em": 0.375,
+              "currency_em": 0.125,
+              "language_em": 0.125,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.6667,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0833,
+              "capital_em": 0.125,
+              "currency_em": 0.125,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8673,
+            "n_correct_all": 170,
+            "n_orig_correct_all": 181,
+            "newly_broken_all": 12,
+            "drop_pp_all": 5.61,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 175,
+            "newly_broken_unrelated": 9,
+            "unrelated_retention": 0.9486
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "SHUFFLED_READ_AUTO": {
+          "compiled": {
+            "status": "ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.23279,
+                "t1": 0.23279,
+                "t2": 0.27778,
+                "Gamma": 0.04498,
+                "r2_chan_heldout": -1.2845,
+                "r_dir_heldout": 0.2994,
+                "a_emp": 0.1804,
+                "pred_hit_rate": 0.3065,
+                "pred_dprime": 3.817
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.16481,
+                "t1": 0.16481,
+                "t2": 0.21217,
+                "Gamma": 0.04736,
+                "r2_chan_heldout": -1.2845,
+                "r_dir_heldout": 0.2013,
+                "a_emp": 0.1322,
+                "pred_hit_rate": 0.0655,
+                "pred_dprime": 2.857
+              }
+            ]
+          },
+          "abstained": true
+        },
+        "SHUFFLED_READ_FORCED": {
+          "compiled": {
+            "status": "FORCED_FROM_ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.23279,
+                "t1": 0.23279,
+                "t2": 0.27778,
+                "Gamma": 0.04498,
+                "r2_chan_heldout": -1.2845,
+                "r_dir_heldout": 0.2994,
+                "a_emp": 0.1804,
+                "beta": 309.5114,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.3065,
+                "pred_dprime": 3.817,
+                "vB_res_norm": 192.0161
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.16481,
+                "t1": 0.16481,
+                "t2": 0.21217,
+                "Gamma": 0.04736,
+                "r2_chan_heldout": -1.2845,
+                "r_dir_heldout": 0.2013,
+                "a_emp": 0.1322,
+                "beta": 293.9725,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.0655,
+                "pred_dprime": 2.857,
+                "vB_res_norm": 224.3332
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 9.9e-07,
+            "bos_eval60_mean_norm": 0.00916024,
+            "bos_eval60_max_norm": 0.05722045,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2941,
+              "ff_rate_gate_gt0": 0.000595,
+              "leak_energy_ratio": 0.014072,
+              "out_rms": 6.958948
+            },
+            "unaligned": {
+              "n_tokens": 1275,
+              "ff_rate_gate_gt0": 0.00098,
+              "leak_energy_ratio": 0.060492,
+              "out_rms": 14.077404
+            }
+          },
+          "general_text": {
+            "ppl": 26.2084,
+            "n_tokens": 4216,
+            "mean_kl": 0.005138,
+            "p99_kl": 0.018199,
+            "p999_kl": 1.024281,
+            "max_kl": 11.330566,
+            "delta_ppl": 0.1082
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.9375,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8929,
+            "n_correct_all": 175,
+            "n_orig_correct_all": 181,
+            "newly_broken_all": 7,
+            "drop_pp_all": 3.06,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 175,
+            "newly_broken_unrelated": 7,
+            "unrelated_retention": 0.96
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "SHUFFLED_WRITE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.21539,
+                "t1": 0.21539,
+                "t2": 0.27791,
+                "Gamma": 0.06252,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.7339,
+                "a_emp": 0.8483,
+                "beta": 222.6849,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.412,
+                "vB_res_norm": 192.0161
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.23886,
+                "t1": 0.23886,
+                "t2": 0.29731,
+                "Gamma": 0.05846,
+                "r2_chan_heldout": 0.7059,
+                "r_dir_heldout": 0.706,
+                "a_emp": 0.8061,
+                "beta": 238.1794,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.382,
+                "vB_res_norm": 224.3332
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 9.9e-07,
+            "bos_eval60_mean_norm": 0.00916064,
+            "bos_eval60_max_norm": 0.05722265,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2941,
+              "ff_rate_gate_gt0": 0.00136,
+              "leak_energy_ratio": 0.068832,
+              "out_rms": 15.390864
+            },
+            "unaligned": {
+              "n_tokens": 1275,
+              "ff_rate_gate_gt0": 0.001176,
+              "leak_energy_ratio": 0.086345,
+              "out_rms": 16.818675
+            }
+          },
+          "general_text": {
+            "ppl": 26.2207,
+            "n_tokens": 4216,
+            "mean_kl": 0.00581,
+            "p99_kl": 0.067735,
+            "p999_kl": 0.75803,
+            "max_kl": 8.767976,
+            "delta_ppl": 0.1205
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.9031,
+            "n_correct_all": 177,
+            "n_orig_correct_all": 181,
+            "newly_broken_all": 7,
+            "drop_pp_all": 2.04,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 175,
+            "newly_broken_unrelated": 6,
+            "unrelated_retention": 0.9657
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "NATIVE_B_ORACLE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.24252,
+                "t1": 0.24252,
+                "t2": 0.28238,
+                "Gamma": 0.03986,
+                "r2_chan_heldout": 1.0,
+                "r_dir_heldout": 1.0,
+                "a_emp": 1.0,
+                "beta": 349.3246,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 7.0,
+                "vB_res_norm": 190.3839
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.15298,
+                "t1": 0.15298,
+                "t2": 0.19231,
+                "Gamma": 0.03933,
+                "r2_chan_heldout": 1.0,
+                "r_dir_heldout": 1.0,
+                "a_emp": 1.0,
+                "beta": 353.9948,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 8.233,
+                "vB_res_norm": 217.9604
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 9.8e-07,
+            "bos_eval60_mean_norm": 0.00905626,
+            "bos_eval60_max_norm": 0.05657059,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2941,
+              "ff_rate_gate_gt0": 0.00068,
+              "leak_energy_ratio": 0.032155,
+              "out_rms": 10.519493
+            },
+            "unaligned": {
+              "n_tokens": 1275,
+              "ff_rate_gate_gt0": 0.00098,
+              "leak_energy_ratio": 0.060305,
+              "out_rms": 14.055564
+            }
+          },
+          "general_text": {
+            "ppl": 26.2631,
+            "n_tokens": 4216,
+            "mean_kl": 0.009154,
+            "p99_kl": 0.020032,
+            "p999_kl": 1.633335,
+            "max_kl": 10.76029,
+            "delta_ppl": 0.1629
+          },
+          "qa": {
+            "direct_country_em": 0.625,
+            "direct_wilson95": {
+              "p": 0.625,
+              "lo": 0.3864,
+              "hi": 0.8152,
+              "k": 10,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.4167,
+            "ripple_wilson95": {
+              "p": 0.4167,
+              "lo": 0.2885,
+              "hi": 0.5572,
+              "k": 20,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.4167,
+              "lo": 0.2917,
+              "hi": 0.5625
+            },
+            "capital_em": 0.0625,
+            "currency_em": 0.5625,
+            "language_em": 0.625,
+            "joint_4of4_em": 0.0625,
+            "protected_retention_em": 0.8125,
+            "hardneg_false_flip_to_rule": 1.0,
+            "hardneg_orig_retained": 0.125,
+            "dataset_fr_it_8_rule_gen": 0.875,
+            "france_subset": {
+              "direct_country_em": 0.75,
+              "unseen_ripple_3attr_em": 0.625,
+              "capital_em": 0.125,
+              "currency_em": 0.75,
+              "language_em": 1.0,
+              "joint_4of4_em": 0.125,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.6667,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.5,
+              "unseen_ripple_3attr_em": 0.2083,
+              "capital_em": 0.0,
+              "currency_em": 0.375,
+              "language_em": 0.25,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 1.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.2143,
+            "n_correct_all": 42,
+            "n_orig_correct_all": 181,
+            "newly_broken_all": 139,
+            "drop_pp_all": 70.92,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 175,
+            "newly_broken_unrelated": 133,
+            "unrelated_retention": 0.24
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        }
+      },
+      "mcnemar": {
+        "PUSHFWD_DIGITAL_BIASFREE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 3,
+            "b_only": 0,
+            "p_value": 0.25
+          },
+          "ripple_3attr": {
+            "a_only": 9,
+            "b_only": 0,
+            "p_value": 0.00390625
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 3,
+            "b_only": 0,
+            "p_value": 0.25
+          },
+          "ripple_3attr": {
+            "a_only": 7,
+            "b_only": 0,
+            "p_value": 0.015625
+          }
+        },
+        "SHUFFLED_WRITE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          }
+        },
+        "NATIVE_B_ORACLE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 10,
+            "b_only": 0,
+            "p_value": 0.001953125
+          },
+          "ripple_3attr": {
+            "a_only": 20,
+            "b_only": 0,
+            "p_value": 1.9073486328125e-06
+          }
+        },
+        "SMOL_2x2_UNIV_R_PROSE_W_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 4,
+            "b_only": 0,
+            "p_value": 0.125
+          }
+        },
+        "SMOL_2x2_PROSE_R_PROSE_W_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 1,
+            "b_only": 0,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 9,
+            "b_only": 0,
+            "p_value": 0.00390625
+          }
+        },
+        "SMOL_2x2_PROSE_R_CONCEPT_W_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 9,
+            "b_only": 0,
+            "p_value": 0.00390625
+          },
+          "ripple_3attr": {
+            "a_only": 24,
+            "b_only": 0,
+            "p_value": 1.1920928955078125e-07
+          }
+        }
+      },
+      "elapsed_sec": 155.5
+    },
+    "granite": {
+      "model_key": "granite-3.1-2b",
+      "layer": 12,
+      "rm": 0.22,
+      "unlabeled_depth_diag": {
+        "num_layers": 40,
+        "rm": 0.22,
+        "whole_word_kl": 1.1954,
+        "recommended_layer": 8,
+        "recommended_band_width": 1,
+        "by_layer": {
+          "8": {
+            "layer": 8,
+            "depth_frac": 0.2,
+            "C_commit": 0.6953,
+            "H_healing_2L": 0.0414,
+            "eta_step_auth": 0.3648,
+            "rec_band_width": 1
+          },
+          "12": {
+            "layer": 12,
+            "depth_frac": 0.3,
+            "C_commit": 0.5587,
+            "H_healing_2L": 0.0246,
+            "eta_step_auth": 0.263,
+            "rec_band_width": 1
+          },
+          "15": {
+            "layer": 15,
+            "depth_frac": 0.375,
+            "C_commit": 0.4862,
+            "H_healing_2L": 0.0908,
+            "eta_step_auth": 0.2633,
+            "rec_band_width": 1
+          },
+          "18": {
+            "layer": 18,
+            "depth_frac": 0.45,
+            "C_commit": 0.1904,
+            "H_healing_2L": 0.041,
+            "eta_step_auth": 0.2517,
+            "rec_band_width": 1
+          },
+          "22": {
+            "layer": 22,
+            "depth_frac": 0.55,
+            "C_commit": 0.0368,
+            "H_healing_2L": 0.0606,
+            "eta_step_auth": 0.1496,
+            "rec_band_width": 2
+          }
+        }
+      },
+      "channel_summary": {
+        "D_A": 2048,
+        "D_B": 2048,
+        "n_fit": 12415,
+        "n_resid": 3856,
+        "shrink_AA": 0.01147,
+        "shrink_BB": 0.01543,
+        "shrink_N": 0.43768,
+        "heldout_gen_read_R2": 0.7454,
+        "heldout_write_rms_cos": 0.8191,
+        "s_out_iso": 0.1337,
+        "med_norm_A": 71.017,
+        "med_norm_B": 9.493,
+        "c_B_std": 0.00863,
+        "tag": "universal",
+        "n_eval_aligned": 2940,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1179.1,
+          "s_out_concept": 0.1054,
+          "med_norm_A": 87.437,
+          "med_norm_B": 11.779,
+          "heldout_concept_write_cos": 0.4137,
+          "heldout_concept_write_R2": -0.0602
+        }
+      },
+      "baseline": {
+        "general_text": {
+          "ppl": 14.681,
+          "n_tokens": 4929
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.9796,
+          "n_correct_all": 192
+        },
+        "qa": {
+          "direct_country_em": 0.0,
+          "direct_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.1936,
+            "k": 0,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.0,
+          "ripple_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.0741,
+            "k": 0,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 0.5625,
+          "hardneg_false_flip_to_rule": 0.125,
+          "hardneg_orig_retained": 0.875,
+          "dataset_fr_it_8_rule_gen": 0.0,
+          "france_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.5,
+            "ds_rule_gen": 0.0,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.625,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        }
+      },
+      "arms": {
+        "PUSHFWD_DIGITAL_BIASFREE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.27232,
+                "t1": 2.27232,
+                "t2": 2.84744,
+                "Gamma": 0.57512,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7498,
+                "a_emp": 0.8375,
+                "beta": 24.2092,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.429,
+                "vB_res_norm": 10.356
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.58956,
+                "t1": 2.58956,
+                "t2": 3.15319,
+                "Gamma": 0.56362,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7568,
+                "a_emp": 0.8995,
+                "beta": 24.7031,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.395,
+                "vB_res_norm": 12.099
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 4e-08,
+            "bos_eval60_mean_norm": 0.00013749,
+            "bos_eval60_max_norm": 0.00071448,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2940,
+              "ff_rate_gate_gt0": 0.0,
+              "leak_energy_ratio": 0.0,
+              "out_rms": 0.000186
+            },
+            "unaligned": {
+              "n_tokens": 1989,
+              "ff_rate_gate_gt0": 0.000754,
+              "leak_energy_ratio": 0.016711,
+              "out_rms": 0.353301
+            }
+          },
+          "general_text": {
+            "ppl": 14.7077,
+            "n_tokens": 4929,
+            "mean_kl": 0.001589,
+            "p99_kl": 0.000658,
+            "p999_kl": 0.051208,
+            "max_kl": 4.531839,
+            "delta_ppl": 0.0267
+          },
+          "qa": {
+            "direct_country_em": 0.25,
+            "direct_wilson95": {
+              "p": 0.25,
+              "lo": 0.1018,
+              "hi": 0.495,
+              "k": 4,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.2292,
+            "ripple_wilson95": {
+              "p": 0.2292,
+              "lo": 0.1331,
+              "hi": 0.3654,
+              "k": 11,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.2292,
+              "lo": 0.1042,
+              "hi": 0.3542
+            },
+            "capital_em": 0.25,
+            "currency_em": 0.25,
+            "language_em": 0.1875,
+            "joint_4of4_em": 0.125,
+            "protected_retention_em": 0.875,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.75,
+            "dataset_fr_it_8_rule_gen": 0.25,
+            "france_subset": {
+              "direct_country_em": 0.375,
+              "unseen_ripple_3attr_em": 0.4583,
+              "capital_em": 0.5,
+              "currency_em": 0.5,
+              "language_em": 0.375,
+              "joint_4of4_em": 0.25,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.3333,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.2,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8418,
+            "n_correct_all": 165,
+            "n_orig_correct_all": 192,
+            "newly_broken_all": 27,
+            "drop_pp_all": 13.78,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 183,
+            "newly_broken_unrelated": 22,
+            "unrelated_retention": 0.8798
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": true,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.27232,
+                "t1": 2.27232,
+                "t2": 2.84744,
+                "Gamma": 0.57512,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7498,
+                "a_emp": 0.8375,
+                "beta": 24.2092,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.429,
+                "vB_res_norm": 10.356
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.58956,
+                "t1": 2.58956,
+                "t2": 3.15319,
+                "Gamma": 0.56362,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7568,
+                "a_emp": 0.8995,
+                "beta": 24.7031,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.395,
+                "vB_res_norm": 12.099
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 0.0,
+            "bos_eval60_mean_norm": 0.0,
+            "bos_eval60_max_norm": 0.0,
+            "bos_max_abs_up": 6e-08,
+            "aligned": {
+              "n_tokens": 2940,
+              "ff_rate_gate_gt0": 0.0,
+              "leak_energy_ratio": 0.0,
+              "out_rms": 0.000197
+            },
+            "unaligned": {
+              "n_tokens": 1989,
+              "ff_rate_gate_gt0": 0.000628,
+              "leak_energy_ratio": 0.013555,
+              "out_rms": 0.3182
+            }
+          },
+          "general_text": {
+            "ppl": 14.7014,
+            "n_tokens": 4929,
+            "mean_kl": 0.001166,
+            "p99_kl": 0.000561,
+            "p999_kl": 0.046326,
+            "max_kl": 2.633686,
+            "delta_ppl": 0.0204
+          },
+          "qa": {
+            "direct_country_em": 0.25,
+            "direct_wilson95": {
+              "p": 0.25,
+              "lo": 0.1018,
+              "hi": 0.495,
+              "k": 4,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.1458,
+            "ripple_wilson95": {
+              "p": 0.1458,
+              "lo": 0.0725,
+              "hi": 0.2717,
+              "k": 7,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.1458,
+              "lo": 0.0625,
+              "hi": 0.25
+            },
+            "capital_em": 0.125,
+            "currency_em": 0.1875,
+            "language_em": 0.125,
+            "joint_4of4_em": 0.0625,
+            "protected_retention_em": 0.8125,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.75,
+            "dataset_fr_it_8_rule_gen": 0.25,
+            "france_subset": {
+              "direct_country_em": 0.375,
+              "unseen_ripple_3attr_em": 0.2917,
+              "capital_em": 0.25,
+              "currency_em": 0.375,
+              "language_em": 0.25,
+              "joint_4of4_em": 0.125,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.3333,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 0.2,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8571,
+            "n_correct_all": 168,
+            "n_orig_correct_all": 192,
+            "newly_broken_all": 24,
+            "drop_pp_all": 12.24,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 183,
+            "newly_broken_unrelated": 19,
+            "unrelated_retention": 0.8962
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "SHUFFLED_READ_AUTO": {
+          "compiled": {
+            "status": "ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.43822,
+                "t1": 1.43822,
+                "t2": 1.89998,
+                "Gamma": 0.46177,
+                "r2_chan_heldout": -1.1329,
+                "r_dir_heldout": 0.2701,
+                "a_emp": 0.1732,
+                "pred_hit_rate": 0.4286,
+                "pred_dprime": 3.556
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.68749,
+                "t1": 1.68749,
+                "t2": 2.13136,
+                "Gamma": 0.44387,
+                "r2_chan_heldout": -1.1329,
+                "r_dir_heldout": 0.2332,
+                "a_emp": 0.1541,
+                "pred_hit_rate": 0.1667,
+                "pred_dprime": 3.293
+              }
+            ]
+          },
+          "abstained": true
+        },
+        "SHUFFLED_READ_FORCED": {
+          "compiled": {
+            "status": "FORCED_FROM_ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.43822,
+                "t1": 1.43822,
+                "t2": 1.89998,
+                "Gamma": 0.46177,
+                "r2_chan_heldout": -1.1329,
+                "r_dir_heldout": 0.2701,
+                "a_emp": 0.1732,
+                "beta": 30.1522,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.4286,
+                "pred_dprime": 3.556,
+                "vB_res_norm": 10.356
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.68749,
+                "t1": 1.68749,
+                "t2": 2.13136,
+                "Gamma": 0.44387,
+                "r2_chan_heldout": -1.1329,
+                "r_dir_heldout": 0.2332,
+                "a_emp": 0.1541,
+                "beta": 31.368,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.1667,
+                "pred_dprime": 3.293,
+                "vB_res_norm": 12.099
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 0.0,
+            "bos_eval60_mean_norm": 0.0,
+            "bos_eval60_max_norm": 0.0,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2940,
+              "ff_rate_gate_gt0": 0.00068,
+              "leak_energy_ratio": 0.009754,
+              "out_rms": 0.272974
+            },
+            "unaligned": {
+              "n_tokens": 1989,
+              "ff_rate_gate_gt0": 0.002388,
+              "leak_energy_ratio": 0.022726,
+              "out_rms": 0.412013
+            }
+          },
+          "general_text": {
+            "ppl": 14.6913,
+            "n_tokens": 4929,
+            "mean_kl": 0.000508,
+            "p99_kl": 0.005377,
+            "p999_kl": 0.103578,
+            "max_kl": 0.340862,
+            "delta_ppl": 0.0103
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.5625,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.8125,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.5,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.625,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.9082,
+            "n_correct_all": 178,
+            "n_orig_correct_all": 192,
+            "newly_broken_all": 14,
+            "drop_pp_all": 7.14,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 183,
+            "newly_broken_unrelated": 13,
+            "unrelated_retention": 0.929
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        },
+        "SHUFFLED_WRITE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.27232,
+                "t1": 2.27232,
+                "t2": 2.84744,
+                "Gamma": 0.57512,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7498,
+                "a_emp": 0.8375,
+                "beta": 24.2092,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.429,
+                "vB_res_norm": 10.356
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 2.58956,
+                "t1": 2.58956,
+                "t2": 3.15319,
+                "Gamma": 0.56362,
+                "r2_chan_heldout": 0.7469,
+                "r_dir_heldout": 0.7568,
+                "a_emp": 0.8995,
+                "beta": 24.7031,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.395,
+                "vB_res_norm": 12.099
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8196,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 4e-08,
+            "bos_eval60_mean_norm": 0.00013749,
+            "bos_eval60_max_norm": 0.00071448,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2940,
+              "ff_rate_gate_gt0": 0.0,
+              "leak_energy_ratio": 0.0,
+              "out_rms": 0.000186
+            },
+            "unaligned": {
+              "n_tokens": 1989,
+              "ff_rate_gate_gt0": 0.000754,
+              "leak_energy_ratio": 0.016711,
+              "out_rms": 0.353301
+            }
+          },
+          "general_text": {
+            "ppl": 14.6971,
+            "n_tokens": 4929,
+            "mean_kl": 0.001062,
+            "p99_kl": 0.000681,
+            "p999_kl": 0.042354,
+            "max_kl": 3.928454,
+            "delta_ppl": 0.0161
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.5625,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.5,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.625,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.9643,
+            "n_correct_all": 189,
+            "n_orig_correct_all": 192,
+            "newly_broken_all": 3,
+            "drop_pp_all": 1.53,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 183,
+            "newly_broken_unrelated": 2,
+            "unrelated_retention": 0.9891
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8192
+          }
+        }
+      },
+      "mcnemar": {
+        "PUSHFWD_DIGITAL_BIASFREE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 4,
+            "b_only": 0,
+            "p_value": 0.125
+          },
+          "ripple_3attr": {
+            "a_only": 11,
+            "b_only": 0,
+            "p_value": 0.0009765625
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 4,
+            "b_only": 0,
+            "p_value": 0.125
+          },
+          "ripple_3attr": {
+            "a_only": 7,
+            "b_only": 0,
+            "p_value": 0.015625
+          }
+        },
+        "SHUFFLED_WRITE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          }
+        }
+      },
+      "elapsed_sec": 142.4
+    },
+    "falcon3": {
+      "model_key": "falcon3-3b",
+      "layer": 9,
+      "rm": 1.0,
+      "unlabeled_depth_diag": {
+        "num_layers": 22,
+        "rm": 1.0,
+        "whole_word_kl": 1.0362,
+        "recommended_layer": 4,
+        "recommended_band_width": 1,
+        "by_layer": {
+          "4": {
+            "layer": 4,
+            "depth_frac": 0.182,
+            "C_commit": 0.9241,
+            "H_healing_2L": 0.0835,
+            "eta_step_auth": 0.3998,
+            "rec_band_width": 1
+          },
+          "7": {
+            "layer": 7,
+            "depth_frac": 0.318,
+            "C_commit": 0.7741,
+            "H_healing_2L": 0.1591,
+            "eta_step_auth": 0.2825,
+            "rec_band_width": 1
+          },
+          "8": {
+            "layer": 8,
+            "depth_frac": 0.364,
+            "C_commit": 0.7467,
+            "H_healing_2L": 0.0592,
+            "eta_step_auth": 0.2784,
+            "rec_band_width": 1
+          },
+          "10": {
+            "layer": 10,
+            "depth_frac": 0.455,
+            "C_commit": 0.5911,
+            "H_healing_2L": 0.0619,
+            "eta_step_auth": 0.2251,
+            "rec_band_width": 1
+          },
+          "12": {
+            "layer": 12,
+            "depth_frac": 0.545,
+            "C_commit": 0.4765,
+            "H_healing_2L": -0.1212,
+            "eta_step_auth": 0.2308,
+            "rec_band_width": 1
+          }
+        }
+      },
+      "channel_summary": {
+        "D_A": 2048,
+        "D_B": 3072,
+        "n_fit": 12289,
+        "n_resid": 3810,
+        "shrink_AA": 0.01185,
+        "shrink_BB": 0.01161,
+        "shrink_N": 0.44706,
+        "heldout_gen_read_R2": 0.7638,
+        "heldout_write_rms_cos": 0.8021,
+        "s_out_iso": 1.833,
+        "med_norm_A": 71.105,
+        "med_norm_B": 130.333,
+        "c_B_std": 0.00476,
+        "tag": "universal",
+        "n_eval_aligned": 2914,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1186.1,
+          "s_out_concept": 1.1168,
+          "med_norm_A": 87.437,
+          "med_norm_B": 165.408,
+          "heldout_concept_write_cos": 0.3981,
+          "heldout_concept_write_R2": -0.1138
+        }
+      },
+      "baseline": {
+        "general_text": {
+          "ppl": 24.9876,
+          "n_tokens": 4174
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.949,
+          "n_correct_all": 186
+        },
+        "qa": {
+          "direct_country_em": 0.0,
+          "direct_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.1936,
+            "k": 0,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.0,
+          "ripple_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.0741,
+            "k": 0,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 0.875,
+          "hardneg_false_flip_to_rule": 0.125,
+          "hardneg_orig_retained": 0.875,
+          "dataset_fr_it_8_rule_gen": 0.0,
+          "france_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.75,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        }
+      },
+      "arms": {
+        "PUSHFWD_DIGITAL_BIASFREE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.49244,
+                "t1": 0.49244,
+                "t2": 0.60544,
+                "Gamma": 0.113,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7266,
+                "a_emp": 0.8134,
+                "beta": 123.2171,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.335,
+                "vB_res_norm": 109.7323
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.89584,
+                "t1": 0.89584,
+                "t2": 1.0146,
+                "Gamma": 0.11876,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7371,
+                "a_emp": 0.8358,
+                "beta": 117.2369,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.645,
+                "vB_res_norm": 128.2007
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 9220,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 1.36e-06,
+            "bos_eval60_mean_norm": 0.02320418,
+            "bos_eval60_max_norm": 0.21972161,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2914,
+              "ff_rate_gate_gt0": 0.001287,
+              "leak_energy_ratio": 0.026892,
+              "out_rms": 5.639083
+            },
+            "unaligned": {
+              "n_tokens": 1260,
+              "ff_rate_gate_gt0": 0.010714,
+              "leak_energy_ratio": 5.8e-05,
+              "out_rms": 0.276928
+            }
+          },
+          "general_text": {
+            "ppl": 25.0408,
+            "n_tokens": 4174,
+            "mean_kl": 0.001223,
+            "p99_kl": 0.012249,
+            "p999_kl": 0.22233,
+            "max_kl": 1.197254,
+            "delta_ppl": 0.0532
+          },
+          "qa": {
+            "direct_country_em": 0.375,
+            "direct_wilson95": {
+              "p": 0.375,
+              "lo": 0.1848,
+              "hi": 0.6136,
+              "k": 6,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0625,
+            "ripple_wilson95": {
+              "p": 0.0625,
+              "lo": 0.0215,
+              "hi": 0.1684,
+              "k": 3,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0625,
+              "lo": 0.0,
+              "hi": 0.1458
+            },
+            "capital_em": 0.125,
+            "currency_em": 0.0625,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.8125,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.8125,
+            "dataset_fr_it_8_rule_gen": 0.5,
+            "france_subset": {
+              "direct_country_em": 0.25,
+              "unseen_ripple_3attr_em": 0.0833,
+              "capital_em": 0.25,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.5,
+              "unseen_ripple_3attr_em": 0.0417,
+              "capital_em": 0.0,
+              "currency_em": 0.125,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 0.8,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8316,
+            "n_correct_all": 163,
+            "n_orig_correct_all": 186,
+            "newly_broken_all": 23,
+            "drop_pp_all": 11.73,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 177,
+            "newly_broken_unrelated": 17,
+            "unrelated_retention": 0.904
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 9216
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": true,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.49244,
+                "t1": 0.49244,
+                "t2": 0.60544,
+                "Gamma": 0.113,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7266,
+                "a_emp": 0.8134,
+                "beta": 123.2171,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.335,
+                "vB_res_norm": 109.7323
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.89584,
+                "t1": 0.89584,
+                "t2": 1.0146,
+                "Gamma": 0.11876,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7371,
+                "a_emp": 0.8358,
+                "beta": 117.2369,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.645,
+                "vB_res_norm": 128.2007
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 9220,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 0.0,
+            "bos_eval60_mean_norm": 0.0,
+            "bos_eval60_max_norm": 0.0,
+            "bos_max_abs_up": 1.2e-07,
+            "aligned": {
+              "n_tokens": 2914,
+              "ff_rate_gate_gt0": 0.001201,
+              "leak_energy_ratio": 0.023725,
+              "out_rms": 5.296646
+            },
+            "unaligned": {
+              "n_tokens": 1260,
+              "ff_rate_gate_gt0": 0.0,
+              "leak_energy_ratio": 1e-06,
+              "out_rms": 0.030518
+            }
+          },
+          "general_text": {
+            "ppl": 25.0366,
+            "n_tokens": 4174,
+            "mean_kl": 0.001119,
+            "p99_kl": 0.011627,
+            "p999_kl": 0.157408,
+            "max_kl": 1.042802,
+            "delta_ppl": 0.049
+          },
+          "qa": {
+            "direct_country_em": 0.25,
+            "direct_wilson95": {
+              "p": 0.25,
+              "lo": 0.1018,
+              "hi": 0.495,
+              "k": 4,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0417,
+            "ripple_wilson95": {
+              "p": 0.0417,
+              "lo": 0.0115,
+              "hi": 0.1398,
+              "k": 2,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0417,
+              "lo": 0.0,
+              "hi": 0.1042
+            },
+            "capital_em": 0.0625,
+            "currency_em": 0.0625,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.8125,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.8125,
+            "dataset_fr_it_8_rule_gen": 0.375,
+            "france_subset": {
+              "direct_country_em": 0.25,
+              "unseen_ripple_3attr_em": 0.0417,
+              "capital_em": 0.125,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.875,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.25,
+              "unseen_ripple_3attr_em": 0.0417,
+              "capital_em": 0.0,
+              "currency_em": 0.125,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 0.6,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8622,
+            "n_correct_all": 169,
+            "n_orig_correct_all": 186,
+            "newly_broken_all": 17,
+            "drop_pp_all": 8.67,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 177,
+            "newly_broken_unrelated": 12,
+            "unrelated_retention": 0.9322
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 9216
+          }
+        },
+        "SHUFFLED_READ_AUTO": {
+          "compiled": {
+            "status": "ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.42267,
+                "t1": 0.42267,
+                "t2": 0.49768,
+                "Gamma": 0.07501,
+                "r2_chan_heldout": -1.1125,
+                "r_dir_heldout": 0.2285,
+                "a_emp": 0.1118,
+                "pred_hit_rate": 0.1786,
+                "pred_dprime": 3.236
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.48026,
+                "t1": 0.48026,
+                "t2": 0.55146,
+                "Gamma": 0.0712,
+                "r2_chan_heldout": -1.1125,
+                "r_dir_heldout": 0.2075,
+                "a_emp": 0.1041,
+                "pred_hit_rate": 0.1845,
+                "pred_dprime": 3.27
+              }
+            ]
+          },
+          "abstained": true
+        },
+        "SHUFFLED_READ_FORCED": {
+          "compiled": {
+            "status": "FORCED_FROM_ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.42267,
+                "t1": 0.42267,
+                "t2": 0.49768,
+                "Gamma": 0.07501,
+                "r2_chan_heldout": -1.1125,
+                "r_dir_heldout": 0.2285,
+                "a_emp": 0.1118,
+                "beta": 185.6094,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.1786,
+                "pred_dprime": 3.236,
+                "vB_res_norm": 109.7323
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.48026,
+                "t1": 0.48026,
+                "t2": 0.55146,
+                "Gamma": 0.0712,
+                "r2_chan_heldout": -1.1125,
+                "r_dir_heldout": 0.2075,
+                "a_emp": 0.1041,
+                "beta": 195.5378,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.1845,
+                "pred_dprime": 3.27,
+                "vB_res_norm": 128.2007
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 9220,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 1.17e-06,
+            "bos_eval60_mean_norm": 0.01986135,
+            "bos_eval60_max_norm": 0.18806723,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2914,
+              "ff_rate_gate_gt0": 0.000686,
+              "leak_energy_ratio": 0.006791,
+              "out_rms": 2.833716
+            },
+            "unaligned": {
+              "n_tokens": 1260,
+              "ff_rate_gate_gt0": 0.001389,
+              "leak_energy_ratio": 0.01231,
+              "out_rms": 4.030889
+            }
+          },
+          "general_text": {
+            "ppl": 24.9919,
+            "n_tokens": 4174,
+            "mean_kl": 0.00061,
+            "p99_kl": 0.004002,
+            "p999_kl": 0.112994,
+            "max_kl": 0.684271,
+            "delta_ppl": 0.0043
+          },
+          "qa": {
+            "direct_country_em": 0.0625,
+            "direct_wilson95": {
+              "p": 0.0625,
+              "lo": 0.0111,
+              "hi": 0.2833,
+              "k": 1,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.875,
+            "hardneg_false_flip_to_rule": 0.1875,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8622,
+            "n_correct_all": 169,
+            "n_orig_correct_all": 186,
+            "newly_broken_all": 17,
+            "drop_pp_all": 8.67,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 177,
+            "newly_broken_unrelated": 16,
+            "unrelated_retention": 0.9096
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 9216
+          }
+        },
+        "SHUFFLED_WRITE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.49244,
+                "t1": 0.49244,
+                "t2": 0.60544,
+                "Gamma": 0.113,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7266,
+                "a_emp": 0.8134,
+                "beta": 123.2171,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.335,
+                "vB_res_norm": 109.7323
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.89584,
+                "t1": 0.89584,
+                "t2": 1.0146,
+                "Gamma": 0.11876,
+                "r2_chan_heldout": 0.7618,
+                "r_dir_heldout": 0.7371,
+                "a_emp": 0.8358,
+                "beta": 117.2369,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.645,
+                "vB_res_norm": 128.2007
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 9220,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 1.36e-06,
+            "bos_eval60_mean_norm": 0.02320418,
+            "bos_eval60_max_norm": 0.21972161,
+            "bos_max_abs_up": 2e-08,
+            "aligned": {
+              "n_tokens": 2914,
+              "ff_rate_gate_gt0": 0.001287,
+              "leak_energy_ratio": 0.026892,
+              "out_rms": 5.639083
+            },
+            "unaligned": {
+              "n_tokens": 1260,
+              "ff_rate_gate_gt0": 0.010714,
+              "leak_energy_ratio": 5.8e-05,
+              "out_rms": 0.276928
+            }
+          },
+          "general_text": {
+            "ppl": 24.9908,
+            "n_tokens": 4174,
+            "mean_kl": 0.000478,
+            "p99_kl": 0.007237,
+            "p999_kl": 0.078164,
+            "max_kl": 0.270535,
+            "delta_ppl": 0.0032
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.875,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 0.75,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.9337,
+            "n_correct_all": 183,
+            "n_orig_correct_all": 186,
+            "newly_broken_all": 3,
+            "drop_pp_all": 1.53,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 177,
+            "newly_broken_unrelated": 2,
+            "unrelated_retention": 0.9887
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 9216
+          }
+        }
+      },
+      "mcnemar": {
+        "PUSHFWD_DIGITAL_BIASFREE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 6,
+            "b_only": 1,
+            "p_value": 0.125
+          },
+          "ripple_3attr": {
+            "a_only": 3,
+            "b_only": 0,
+            "p_value": 0.25
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 4,
+            "b_only": 1,
+            "p_value": 0.375
+          },
+          "ripple_3attr": {
+            "a_only": 2,
+            "b_only": 0,
+            "p_value": 0.5
+          }
+        },
+        "SHUFFLED_WRITE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 0,
+            "b_only": 1,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 0,
+            "b_only": 0,
+            "p_value": 1.0
+          }
+        }
+      },
+      "elapsed_sec": 180.2
+    },
+    "qwen1.5b": {
+      "model_key": "qwen2.5-1.5b",
+      "layer": 13,
+      "rm": 1.0,
+      "unlabeled_depth_diag": {
+        "num_layers": 28,
+        "rm": 1.0,
+        "whole_word_kl": 0.9758,
+        "recommended_layer": 6,
+        "recommended_band_width": 1,
+        "by_layer": {
+          "6": {
+            "layer": 6,
+            "depth_frac": 0.214,
+            "C_commit": 0.7669,
+            "H_healing_2L": 0.0885,
+            "eta_step_auth": 0.3794,
+            "rec_band_width": 1
+          },
+          "8": {
+            "layer": 8,
+            "depth_frac": 0.286,
+            "C_commit": 0.5954,
+            "H_healing_2L": 0.069,
+            "eta_step_auth": 0.3518,
+            "rec_band_width": 1
+          },
+          "11": {
+            "layer": 11,
+            "depth_frac": 0.393,
+            "C_commit": 0.4933,
+            "H_healing_2L": 0.0082,
+            "eta_step_auth": 0.3043,
+            "rec_band_width": 1
+          },
+          "13": {
+            "layer": 13,
+            "depth_frac": 0.464,
+            "C_commit": 0.3349,
+            "H_healing_2L": 0.1348,
+            "eta_step_auth": 0.2311,
+            "rec_band_width": 1
+          },
+          "15": {
+            "layer": 15,
+            "depth_frac": 0.536,
+            "C_commit": 0.2686,
+            "H_healing_2L": 0.0266,
+            "eta_step_auth": 0.2376,
+            "rec_band_width": 1
+          }
+        }
+      },
+      "channel_summary": {
+        "D_A": 2048,
+        "D_B": 1536,
+        "n_fit": 12471,
+        "n_resid": 3873,
+        "shrink_AA": 0.01141,
+        "shrink_BB": 0.00945,
+        "shrink_N": 0.41409,
+        "heldout_gen_read_R2": 0.7789,
+        "heldout_write_rms_cos": 0.8413,
+        "s_out_iso": 0.8277,
+        "med_norm_A": 71.023,
+        "med_norm_B": 58.784,
+        "c_B_std": 0.01051,
+        "tag": "universal",
+        "n_eval_aligned": 2945,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1187.2,
+          "s_out_concept": 0.6548,
+          "med_norm_A": 87.437,
+          "med_norm_B": 63.636,
+          "heldout_concept_write_cos": 0.5002,
+          "heldout_concept_write_R2": 0.1033
+        }
+      },
+      "baseline": {
+        "general_text": {
+          "ppl": 28.2509,
+          "n_tokens": 4140
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.8316,
+          "n_correct_all": 163
+        },
+        "qa": {
+          "direct_country_em": 0.0,
+          "direct_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.1936,
+            "k": 0,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.0,
+          "ripple_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.0741,
+            "k": 0,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 1.0,
+          "hardneg_false_flip_to_rule": 0.125,
+          "hardneg_orig_retained": 0.875,
+          "dataset_fr_it_8_rule_gen": 0.0,
+          "france_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        }
+      },
+      "arms": {
+        "PUSHFWD_DIGITAL_BIASFREE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.01628,
+                "t1": 1.01628,
+                "t2": 1.27369,
+                "Gamma": 0.25742,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7391,
+                "a_emp": 0.8182,
+                "beta": 54.0881,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.287,
+                "vB_res_norm": 63.2436
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.0546,
+                "t1": 1.0546,
+                "t2": 1.32266,
+                "Gamma": 0.26806,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7671,
+                "a_emp": 0.8716,
+                "beta": 51.9402,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.474,
+                "vB_res_norm": 73.5464
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8964,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 2.61e-06,
+            "bos_eval60_mean_norm": 0.0050729,
+            "bos_eval60_max_norm": 0.0381132,
+            "bos_max_abs_up": 1.3e-07,
+            "aligned": {
+              "n_tokens": 2945,
+              "ff_rate_gate_gt0": 0.000424,
+              "leak_energy_ratio": 0.010879,
+              "out_rms": 1.41826
+            },
+            "unaligned": {
+              "n_tokens": 1195,
+              "ff_rate_gate_gt0": 0.000837,
+              "leak_energy_ratio": 0.003158,
+              "out_rms": 0.804089
+            }
+          },
+          "general_text": {
+            "ppl": 28.286,
+            "n_tokens": 4140,
+            "mean_kl": 0.000594,
+            "p99_kl": 0.005023,
+            "p999_kl": 0.070365,
+            "max_kl": 1.028108,
+            "delta_ppl": 0.0351
+          },
+          "qa": {
+            "direct_country_em": 0.5,
+            "direct_wilson95": {
+              "p": 0.5,
+              "lo": 0.28,
+              "hi": 0.72,
+              "k": 8,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.1667,
+            "ripple_wilson95": {
+              "p": 0.1667,
+              "lo": 0.087,
+              "hi": 0.2958,
+              "k": 8,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.1667,
+              "lo": 0.0833,
+              "hi": 0.2708
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.5,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.375,
+            "hardneg_orig_retained": 0.5625,
+            "dataset_fr_it_8_rule_gen": 0.5,
+            "france_subset": {
+              "direct_country_em": 1.0,
+              "unseen_ripple_3attr_em": 0.3333,
+              "capital_em": 0.0,
+              "currency_em": 1.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.6667,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.4,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.6224,
+            "n_correct_all": 122,
+            "n_orig_correct_all": 163,
+            "newly_broken_all": 41,
+            "drop_pp_all": 20.92,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 155,
+            "newly_broken_unrelated": 34,
+            "unrelated_retention": 0.7806
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8960
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": true,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.01628,
+                "t1": 1.01628,
+                "t2": 1.27369,
+                "Gamma": 0.25742,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7391,
+                "a_emp": 0.8182,
+                "beta": 54.0881,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.287,
+                "vB_res_norm": 63.2436
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.0546,
+                "t1": 1.0546,
+                "t2": 1.32266,
+                "Gamma": 0.26806,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7671,
+                "a_emp": 0.8716,
+                "beta": 51.9402,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.474,
+                "vB_res_norm": 73.5464
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8964,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 0.0,
+            "bos_eval60_mean_norm": 0.0,
+            "bos_eval60_max_norm": 0.0,
+            "bos_max_abs_up": 0.0,
+            "aligned": {
+              "n_tokens": 2945,
+              "ff_rate_gate_gt0": 0.00034,
+              "leak_energy_ratio": 0.009234,
+              "out_rms": 1.306584
+            },
+            "unaligned": {
+              "n_tokens": 1195,
+              "ff_rate_gate_gt0": 0.000628,
+              "leak_energy_ratio": 0.002396,
+              "out_rms": 0.700411
+            }
+          },
+          "general_text": {
+            "ppl": 28.2775,
+            "n_tokens": 4140,
+            "mean_kl": 0.000499,
+            "p99_kl": 0.003436,
+            "p999_kl": 0.058094,
+            "max_kl": 0.799203,
+            "delta_ppl": 0.0266
+          },
+          "qa": {
+            "direct_country_em": 0.5,
+            "direct_wilson95": {
+              "p": 0.5,
+              "lo": 0.28,
+              "hi": 0.72,
+              "k": 8,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.1667,
+            "ripple_wilson95": {
+              "p": 0.1667,
+              "lo": 0.087,
+              "hi": 0.2958,
+              "k": 8,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.1667,
+              "lo": 0.0833,
+              "hi": 0.2708
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.5,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.375,
+            "hardneg_orig_retained": 0.625,
+            "dataset_fr_it_8_rule_gen": 0.375,
+            "france_subset": {
+              "direct_country_em": 1.0,
+              "unseen_ripple_3attr_em": 0.3333,
+              "capital_em": 0.0,
+              "currency_em": 1.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.6667,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.2,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.6429,
+            "n_correct_all": 126,
+            "n_orig_correct_all": 163,
+            "newly_broken_all": 37,
+            "drop_pp_all": 18.88,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 155,
+            "newly_broken_unrelated": 30,
+            "unrelated_retention": 0.8065
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8960
+          }
+        },
+        "SHUFFLED_READ_AUTO": {
+          "compiled": {
+            "status": "ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.75464,
+                "t1": 0.75464,
+                "t2": 0.98469,
+                "Gamma": 0.23005,
+                "r2_chan_heldout": -1.0207,
+                "r_dir_heldout": 0.2544,
+                "a_emp": 0.165,
+                "pred_hit_rate": 0.1607,
+                "pred_dprime": 2.914
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "ABSTAIN",
+                "abstain_reason": "r2_chan_ev<=0",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.25182,
+                "t1": 1.25182,
+                "t2": 1.48608,
+                "Gamma": 0.23426,
+                "r2_chan_heldout": -1.0207,
+                "r_dir_heldout": 0.2344,
+                "a_emp": 0.1639,
+                "pred_hit_rate": 0.1845,
+                "pred_dprime": 2.954
+              }
+            ]
+          },
+          "abstained": true
+        },
+        "SHUFFLED_READ_FORCED": {
+          "compiled": {
+            "status": "FORCED_FROM_ABSTAIN",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 0.75464,
+                "t1": 0.75464,
+                "t2": 0.98469,
+                "Gamma": 0.23005,
+                "r2_chan_heldout": -1.0207,
+                "r_dir_heldout": 0.2544,
+                "a_emp": 0.165,
+                "beta": 60.5231,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.1607,
+                "pred_dprime": 2.914,
+                "vB_res_norm": 63.2436
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "FORCED_FROM_ABSTAIN",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.25182,
+                "t1": 1.25182,
+                "t2": 1.48608,
+                "Gamma": 0.23426,
+                "r2_chan_heldout": -1.0207,
+                "r_dir_heldout": 0.2344,
+                "a_emp": 0.1639,
+                "beta": 59.4361,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 0.1845,
+                "pred_dprime": 2.954,
+                "vB_res_norm": 73.5464
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8964,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 3.03e-06,
+            "bos_eval60_mean_norm": 0.00589425,
+            "bos_eval60_max_norm": 0.04429076,
+            "bos_max_abs_up": 1.3e-07,
+            "aligned": {
+              "n_tokens": 2945,
+              "ff_rate_gate_gt0": 0.000509,
+              "leak_energy_ratio": 0.021697,
+              "out_rms": 2.002899
+            },
+            "unaligned": {
+              "n_tokens": 1195,
+              "ff_rate_gate_gt0": 0.001046,
+              "leak_energy_ratio": 0.032053,
+              "out_rms": 2.561675
+            }
+          },
+          "general_text": {
+            "ppl": 28.2538,
+            "n_tokens": 4140,
+            "mean_kl": 0.001468,
+            "p99_kl": 0.005545,
+            "p999_kl": 0.331613,
+            "max_kl": 1.979142,
+            "delta_ppl": 0.0029
+          },
+          "qa": {
+            "direct_country_em": 0.0625,
+            "direct_wilson95": {
+              "p": 0.0625,
+              "lo": 0.0111,
+              "hi": 0.2833,
+              "k": 1,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0208,
+            "ripple_wilson95": {
+              "p": 0.0208,
+              "lo": 0.0037,
+              "hi": 0.109,
+              "k": 1,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0208,
+              "lo": 0.0,
+              "hi": 0.0625
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0625,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.125,
+              "unseen_ripple_3attr_em": 0.0417,
+              "capital_em": 0.0,
+              "currency_em": 0.125,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.801,
+            "n_correct_all": 157,
+            "n_orig_correct_all": 163,
+            "newly_broken_all": 6,
+            "drop_pp_all": 3.06,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 155,
+            "newly_broken_unrelated": 5,
+            "unrelated_retention": 0.9677
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8960
+          }
+        },
+        "SHUFFLED_WRITE": {
+          "compiled": {
+            "status": "COMPILED",
+            "use_bias": false,
+            "tolerances": {
+              "alpha": 0.002,
+              "alpha_neg": 0.03,
+              "delta": 0.02
+            },
+            "rules": [
+              {
+                "name": "France->Japan",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.01628,
+                "t1": 1.01628,
+                "t2": 1.27369,
+                "Gamma": 0.25742,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7391,
+                "a_emp": 0.8182,
+                "beta": 54.0881,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.287,
+                "vB_res_norm": 55.4594
+              },
+              {
+                "name": "Italy->Brazil",
+                "status": "COMPILED",
+                "frame_only_auroc": 0.5,
+                "frame_cert_pass": true,
+                "q_real_B": 1.0546,
+                "t1": 1.0546,
+                "t2": 1.32266,
+                "Gamma": 0.26806,
+                "r2_chan_heldout": 0.7787,
+                "r_dir_heldout": 0.7671,
+                "a_emp": 0.8716,
+                "beta": 51.9402,
+                "beta_Gamma": 13.9232,
+                "pred_hit_rate": 1.0,
+                "pred_dprime": 6.474,
+                "vB_res_norm": 64.5278
+              }
+            ]
+          },
+          "abstained": false,
+          "widened_d_ff": 8964,
+          "firing_audit": {
+            "bos_pos0_residual_norm": 2.29e-06,
+            "bos_eval60_mean_norm": 0.00444851,
+            "bos_eval60_max_norm": 0.0334221,
+            "bos_max_abs_up": 1.3e-07,
+            "aligned": {
+              "n_tokens": 2945,
+              "ff_rate_gate_gt0": 0.000424,
+              "leak_energy_ratio": 0.008371,
+              "out_rms": 1.24408
+            },
+            "unaligned": {
+              "n_tokens": 1195,
+              "ff_rate_gate_gt0": 0.000837,
+              "leak_energy_ratio": 0.002429,
+              "out_rms": 0.705124
+            }
+          },
+          "general_text": {
+            "ppl": 28.2442,
+            "n_tokens": 4140,
+            "mean_kl": 0.000344,
+            "p99_kl": 0.003779,
+            "p999_kl": 0.076289,
+            "max_kl": 0.251575,
+            "delta_ppl": -0.0067
+          },
+          "qa": {
+            "direct_country_em": 0.0,
+            "direct_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.1936,
+              "k": 0,
+              "n": 16
+            },
+            "unseen_ripple_3attr_em": 0.0,
+            "ripple_wilson95": {
+              "p": 0.0,
+              "lo": 0.0,
+              "hi": 0.0741,
+              "k": 0,
+              "n": 48
+            },
+            "ripple_boot95": {
+              "mean": 0.0,
+              "lo": 0.0,
+              "hi": 0.0
+            },
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "hardneg_false_flip_to_rule": 0.125,
+            "hardneg_orig_retained": 0.875,
+            "dataset_fr_it_8_rule_gen": 0.0,
+            "france_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 3
+            },
+            "italy_subset": {
+              "direct_country_em": 0.0,
+              "unseen_ripple_3attr_em": 0.0,
+              "capital_em": 0.0,
+              "currency_em": 0.0,
+              "language_em": 0.0,
+              "joint_4of4_em": 0.0,
+              "protected_retention_em": 1.0,
+              "ds_rule_gen": 0.0,
+              "n_ds": 5
+            }
+          },
+          "locality_196": {
+            "n_facts": 196,
+            "acc_all": 0.8214,
+            "n_correct_all": 161,
+            "n_orig_correct_all": 163,
+            "newly_broken_all": 5,
+            "drop_pp_all": 1.02,
+            "n_unrelated": 187,
+            "n_unrelated_orig_correct": 155,
+            "newly_broken_unrelated": 3,
+            "unrelated_retention": 0.9806
+          },
+          "unlearning": {
+            "state_dict_bit_equal": true,
+            "logits_bit_equal": true,
+            "max_abs_dlogit": 0.0,
+            "restored_d_ff": 8960
+          }
+        }
+      },
+      "mcnemar": {
+        "PUSHFWD_DIGITAL_BIASFREE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 8,
+            "b_only": 1,
+            "p_value": 0.0390625
+          },
+          "ripple_3attr": {
+            "a_only": 8,
+            "b_only": 1,
+            "p_value": 0.0390625
+          }
+        },
+        "PUSHFWD_DIGITAL_AFFINE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 8,
+            "b_only": 1,
+            "p_value": 0.0390625
+          },
+          "ripple_3attr": {
+            "a_only": 8,
+            "b_only": 1,
+            "p_value": 0.0390625
+          }
+        },
+        "SHUFFLED_WRITE_vs_SHUFFLED_READ_FORCED": {
+          "direct": {
+            "a_only": 0,
+            "b_only": 1,
+            "p_value": 1.0
+          },
+          "ripple_3attr": {
+            "a_only": 0,
+            "b_only": 1,
+            "p_value": 1.0
+          }
+        }
+      },
+      "elapsed_sec": 94.0
+    }
+  },
+  "stage_A_2x2_smollm2_prose_vs_universal": {
+    "prose_only_channel": {
+      "D_A": 2048,
+      "D_B": 2048,
+      "n_fit": 10559,
+      "n_resid": 3579,
+      "shrink_AA": 0.01084,
+      "shrink_BB": 0.02109,
+      "shrink_N": 0.34004,
+      "heldout_gen_read_R2": 0.7907,
+      "heldout_write_rms_cos": 0.83,
+      "s_out_iso": 2.3505,
+      "med_norm_A": 70.359,
+      "med_norm_B": 165.377,
+      "c_B_std": 0.00691,
+      "tag": "proseonly",
+      "n_eval_aligned": 4104
+    },
+    "universal_channel": {
+      "D_A": 2048,
+      "D_B": 2048,
+      "n_fit": 12418,
+      "n_resid": 3856,
+      "shrink_AA": 0.01147,
+      "shrink_BB": 0.02175,
+      "shrink_N": 0.48057,
+      "heldout_gen_read_R2": 0.7038,
+      "heldout_write_rms_cos": 0.8069,
+      "s_out_iso": 2.3634,
+      "med_norm_A": 71.025,
+      "med_norm_B": 167.861,
+      "c_B_std": 0.00829,
+      "tag": "universal",
+      "n_eval_aligned": 2941,
+      "write_concept": {
+        "n_pairs": 1200,
+        "eff_n_cauchy": 1176.1,
+        "s_out_concept": 1.9543,
+        "med_norm_A": 87.437,
+        "med_norm_B": 220.701,
+        "heldout_concept_write_cos": 0.3813,
+        "heldout_concept_write_R2": -0.1314
+      }
+    },
+    "read_univ_write_prose": {
+      "compiled": {
+        "status": "COMPILED",
+        "use_bias": false,
+        "tolerances": {
+          "alpha": 0.002,
+          "alpha_neg": 0.03,
+          "delta": 0.02
+        },
+        "rules": [
+          {
+            "name": "France->Japan",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.21539,
+            "t1": 0.21539,
+            "t2": 0.27791,
+            "Gamma": 0.06252,
+            "r2_chan_heldout": 0.7059,
+            "r_dir_heldout": 0.7339,
+            "a_emp": 0.8483,
+            "beta": 222.6849,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.412,
+            "vB_res_norm": 232.2117
+          },
+          {
+            "name": "Italy->Brazil",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.23886,
+            "t1": 0.23886,
+            "t2": 0.29731,
+            "Gamma": 0.05846,
+            "r2_chan_heldout": 0.7059,
+            "r_dir_heldout": 0.706,
+            "a_emp": 0.8061,
+            "beta": 238.1794,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.382,
+            "vB_res_norm": 271.2938
+          }
+        ]
+      },
+      "abstained": false,
+      "widened_d_ff": 8196,
+      "firing_audit": {
+        "bos_pos0_residual_norm": 1.2e-06,
+        "bos_eval60_mean_norm": 0.01107828,
+        "bos_eval60_max_norm": 0.06920131,
+        "bos_max_abs_up": 2e-08,
+        "aligned": {
+          "n_tokens": 2941,
+          "ff_rate_gate_gt0": 0.00136,
+          "leak_energy_ratio": 0.100666,
+          "out_rms": 18.612699
+        },
+        "unaligned": {
+          "n_tokens": 1275,
+          "ff_rate_gate_gt0": 0.001176,
+          "leak_energy_ratio": 0.126279,
+          "out_rms": 20.3394
+        }
+      },
+      "general_text": {
+        "ppl": 26.2848,
+        "n_tokens": 4216,
+        "mean_kl": 0.008793,
+        "p99_kl": 0.08967,
+        "p999_kl": 1.485214,
+        "max_kl": 10.684631,
+        "delta_ppl": 0.1846
+      },
+      "qa": {
+        "direct_country_em": 0.0,
+        "direct_wilson95": {
+          "p": 0.0,
+          "lo": 0.0,
+          "hi": 0.1936,
+          "k": 0,
+          "n": 16
+        },
+        "unseen_ripple_3attr_em": 0.0833,
+        "ripple_wilson95": {
+          "p": 0.0833,
+          "lo": 0.0329,
+          "hi": 0.1955,
+          "k": 4,
+          "n": 48
+        },
+        "ripple_boot95": {
+          "mean": 0.0833,
+          "lo": 0.0208,
+          "hi": 0.1667
+        },
+        "capital_em": 0.0625,
+        "currency_em": 0.125,
+        "language_em": 0.0625,
+        "joint_4of4_em": 0.0,
+        "protected_retention_em": 1.0,
+        "hardneg_false_flip_to_rule": 0.125,
+        "hardneg_orig_retained": 0.8125,
+        "dataset_fr_it_8_rule_gen": 0.125,
+        "france_subset": {
+          "direct_country_em": 0.0,
+          "unseen_ripple_3attr_em": 0.1667,
+          "capital_em": 0.125,
+          "currency_em": 0.25,
+          "language_em": 0.125,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 1.0,
+          "ds_rule_gen": 0.3333,
+          "n_ds": 3
+        },
+        "italy_subset": {
+          "direct_country_em": 0.0,
+          "unseen_ripple_3attr_em": 0.0,
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 1.0,
+          "ds_rule_gen": 0.0,
+          "n_ds": 5
+        }
+      },
+      "locality_196": {
+        "n_facts": 196,
+        "acc_all": 0.8367,
+        "n_correct_all": 164,
+        "n_orig_correct_all": 181,
+        "newly_broken_all": 20,
+        "drop_pp_all": 8.67,
+        "n_unrelated": 187,
+        "n_unrelated_orig_correct": 175,
+        "newly_broken_unrelated": 17,
+        "unrelated_retention": 0.9029
+      },
+      "unlearning": {
+        "state_dict_bit_equal": true,
+        "logits_bit_equal": true,
+        "max_abs_dlogit": 0.0,
+        "restored_d_ff": 8192
+      }
+    },
+    "read_prose_write_prose": {
+      "compiled": {
+        "status": "COMPILED",
+        "use_bias": false,
+        "tolerances": {
+          "alpha": 0.002,
+          "alpha_neg": 0.03,
+          "delta": 0.02
+        },
+        "rules": [
+          {
+            "name": "France->Japan",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.1326,
+            "t1": 0.1326,
+            "t2": 0.18697,
+            "Gamma": 0.05438,
+            "r2_chan_heldout": 0.7704,
+            "r_dir_heldout": 0.7942,
+            "a_emp": 0.9292,
+            "beta": 256.0376,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.637,
+            "vB_res_norm": 230.9431
+          },
+          {
+            "name": "Italy->Brazil",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.20702,
+            "t1": 0.20702,
+            "t2": 0.26313,
+            "Gamma": 0.05611,
+            "r2_chan_heldout": 0.7704,
+            "r_dir_heldout": 0.8034,
+            "a_emp": 0.9217,
+            "beta": 248.1245,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.276,
+            "vB_res_norm": 269.8117
+          }
+        ]
+      },
+      "abstained": false,
+      "widened_d_ff": 8196,
+      "firing_audit": {
+        "bos_pos0_residual_norm": 2.11e-06,
+        "bos_eval60_mean_norm": 0.01106177,
+        "bos_eval60_max_norm": 0.07234686,
+        "bos_max_abs_up": 3e-08,
+        "aligned": {
+          "n_tokens": 4104,
+          "ff_rate_gate_gt0": 0.000975,
+          "leak_energy_ratio": 0.06145,
+          "out_rms": 14.582208
+        },
+        "unaligned": {
+          "n_tokens": 1943,
+          "ff_rate_gate_gt0": 0.000515,
+          "leak_energy_ratio": 0.02494,
+          "out_rms": 8.950052
+        }
+      },
+      "general_text": {
+        "ppl": 26.508,
+        "n_tokens": 4216,
+        "mean_kl": 0.015075,
+        "p99_kl": 0.064218,
+        "p999_kl": 4.553052,
+        "max_kl": 13.92147,
+        "delta_ppl": 0.4078
+      },
+      "qa": {
+        "direct_country_em": 0.0625,
+        "direct_wilson95": {
+          "p": 0.0625,
+          "lo": 0.0111,
+          "hi": 0.2833,
+          "k": 1,
+          "n": 16
+        },
+        "unseen_ripple_3attr_em": 0.1875,
+        "ripple_wilson95": {
+          "p": 0.1875,
+          "lo": 0.1019,
+          "hi": 0.3194,
+          "k": 9,
+          "n": 48
+        },
+        "ripple_boot95": {
+          "mean": 0.1875,
+          "lo": 0.0833,
+          "hi": 0.2917
+        },
+        "capital_em": 0.0625,
+        "currency_em": 0.25,
+        "language_em": 0.25,
+        "joint_4of4_em": 0.0,
+        "protected_retention_em": 0.9375,
+        "hardneg_false_flip_to_rule": 0.125,
+        "hardneg_orig_retained": 0.8125,
+        "dataset_fr_it_8_rule_gen": 0.125,
+        "france_subset": {
+          "direct_country_em": 0.125,
+          "unseen_ripple_3attr_em": 0.3333,
+          "capital_em": 0.0,
+          "currency_em": 0.5,
+          "language_em": 0.5,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 0.875,
+          "ds_rule_gen": 0.0,
+          "n_ds": 3
+        },
+        "italy_subset": {
+          "direct_country_em": 0.0,
+          "unseen_ripple_3attr_em": 0.0417,
+          "capital_em": 0.125,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 1.0,
+          "ds_rule_gen": 0.2,
+          "n_ds": 5
+        }
+      },
+      "locality_196": {
+        "n_facts": 196,
+        "acc_all": 0.7806,
+        "n_correct_all": 153,
+        "n_orig_correct_all": 181,
+        "newly_broken_all": 31,
+        "drop_pp_all": 14.29,
+        "n_unrelated": 187,
+        "n_unrelated_orig_correct": 175,
+        "newly_broken_unrelated": 28,
+        "unrelated_retention": 0.84
+      },
+      "unlearning": {
+        "state_dict_bit_equal": true,
+        "logits_bit_equal": true,
+        "max_abs_dlogit": 0.0,
+        "restored_d_ff": 8192
+      }
+    },
+    "read_prose_write_concept": {
+      "compiled": {
+        "status": "COMPILED",
+        "use_bias": false,
+        "tolerances": {
+          "alpha": 0.002,
+          "alpha_neg": 0.03,
+          "delta": 0.02
+        },
+        "rules": [
+          {
+            "name": "France->Japan",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.1326,
+            "t1": 0.1326,
+            "t2": 0.18697,
+            "Gamma": 0.05438,
+            "r2_chan_heldout": 0.7704,
+            "r_dir_heldout": 0.7942,
+            "a_emp": 0.9292,
+            "beta": 256.0376,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.637,
+            "vB_res_norm": 192.0161
+          },
+          {
+            "name": "Italy->Brazil",
+            "status": "COMPILED",
+            "frame_only_auroc": 0.5,
+            "frame_cert_pass": true,
+            "q_real_B": 0.20702,
+            "t1": 0.20702,
+            "t2": 0.26313,
+            "Gamma": 0.05611,
+            "r2_chan_heldout": 0.7704,
+            "r_dir_heldout": 0.8034,
+            "a_emp": 0.9217,
+            "beta": 248.1245,
+            "beta_Gamma": 13.9232,
+            "pred_hit_rate": 1.0,
+            "pred_dprime": 6.276,
+            "vB_res_norm": 224.3332
+          }
+        ]
+      },
+      "abstained": false,
+      "widened_d_ff": 8196,
+      "firing_audit": {
+        "bos_pos0_residual_norm": 1.75e-06,
+        "bos_eval60_mean_norm": 0.00919723,
+        "bos_eval60_max_norm": 0.06015232,
+        "bos_max_abs_up": 3e-08,
+        "aligned": {
+          "n_tokens": 4104,
+          "ff_rate_gate_gt0": 0.000975,
+          "leak_energy_ratio": 0.04248,
+          "out_rms": 12.12428
+        },
+        "unaligned": {
+          "n_tokens": 1943,
+          "ff_rate_gate_gt0": 0.000515,
+          "leak_energy_ratio": 0.017241,
+          "out_rms": 7.441461
+        }
+      },
+      "general_text": {
+        "ppl": 26.458,
+        "n_tokens": 4216,
+        "mean_kl": 0.01402,
+        "p99_kl": 0.073706,
+        "p999_kl": 3.948625,
+        "max_kl": 16.625029,
+        "delta_ppl": 0.3578
+      },
+      "qa": {
+        "direct_country_em": 0.5625,
+        "direct_wilson95": {
+          "p": 0.5625,
+          "lo": 0.3318,
+          "hi": 0.769,
+          "k": 9,
+          "n": 16
+        },
+        "unseen_ripple_3attr_em": 0.5,
+        "ripple_wilson95": {
+          "p": 0.5,
+          "lo": 0.3639,
+          "hi": 0.6361,
+          "k": 24,
+          "n": 48
+        },
+        "ripple_boot95": {
+          "mean": 0.5,
+          "lo": 0.3542,
+          "hi": 0.6458
+        },
+        "capital_em": 0.5,
+        "currency_em": 0.5,
+        "language_em": 0.5,
+        "joint_4of4_em": 0.5,
+        "protected_retention_em": 0.9375,
+        "hardneg_false_flip_to_rule": 0.125,
+        "hardneg_orig_retained": 0.8125,
+        "dataset_fr_it_8_rule_gen": 0.375,
+        "france_subset": {
+          "direct_country_em": 1.0,
+          "unseen_ripple_3attr_em": 1.0,
+          "capital_em": 1.0,
+          "currency_em": 1.0,
+          "language_em": 1.0,
+          "joint_4of4_em": 1.0,
+          "protected_retention_em": 0.875,
+          "ds_rule_gen": 0.6667,
+          "n_ds": 3
+        },
+        "italy_subset": {
+          "direct_country_em": 0.125,
+          "unseen_ripple_3attr_em": 0.0,
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 1.0,
+          "ds_rule_gen": 0.2,
+          "n_ds": 5
+        }
+      },
+      "locality_196": {
+        "n_facts": 196,
+        "acc_all": 0.7296,
+        "n_correct_all": 143,
+        "n_orig_correct_all": 181,
+        "newly_broken_all": 38,
+        "drop_pp_all": 19.39,
+        "n_unrelated": 187,
+        "n_unrelated_orig_correct": 175,
+        "newly_broken_unrelated": 35,
+        "unrelated_retention": 0.8
+      },
+      "unlearning": {
+        "state_dict_bit_equal": true,
+        "logits_bit_equal": true,
+        "max_abs_dlogit": 0.0,
+        "restored_d_ff": 8192
+      }
+    }
+  },
+  "stage_B_multidonor_composition": {
+    "qwen_compiled": {
+      "status": "COMPILED",
+      "use_bias": false,
+      "tolerances": {
+        "alpha": 0.002,
+        "alpha_neg": 0.03,
+        "delta": 0.02
+      },
+      "rules": [
+        {
+          "name": "France->Japan",
+          "status": "COMPILED",
+          "frame_only_auroc": 0.5,
+          "frame_cert_pass": true,
+          "q_real_B": 0.21539,
+          "t1": 0.21539,
+          "t2": 0.27791,
+          "Gamma": 0.06252,
+          "r2_chan_heldout": 0.7059,
+          "r_dir_heldout": 0.7339,
+          "a_emp": 0.8483,
+          "beta": 222.6849,
+          "beta_Gamma": 13.9232,
+          "pred_hit_rate": 1.0,
+          "pred_dprime": 6.412,
+          "vB_res_norm": 192.0161
+        }
+      ]
+    },
+    "falcon_compiled": {
+      "status": "COMPILED",
+      "use_bias": false,
+      "tolerances": {
+        "alpha": 0.002,
+        "alpha_neg": 0.03,
+        "delta": 0.02
+      },
+      "rules": [
+        {
+          "name": "Italy->Brazil",
+          "status": "COMPILED",
+          "frame_only_auroc": 0.5,
+          "frame_cert_pass": true,
+          "q_real_B": 0.2597,
+          "t1": 0.2597,
+          "t2": 0.31511,
+          "Gamma": 0.05541,
+          "r2_chan_heldout": 0.7422,
+          "r_dir_heldout": 0.7109,
+          "a_emp": 0.7764,
+          "beta": 251.2618,
+          "beta_Gamma": 13.9232,
+          "pred_hit_rate": 1.0,
+          "pred_dprime": 7.982,
+          "vB_res_norm": 182.3148
+        }
+      ]
+    },
+    "channels": {
+      "qwen_to_smol": {
+        "D_A": 2048,
+        "D_B": 2048,
+        "n_fit": 12418,
+        "n_resid": 3856,
+        "shrink_AA": 0.01147,
+        "shrink_BB": 0.02175,
+        "shrink_N": 0.48057,
+        "heldout_gen_read_R2": 0.7038,
+        "heldout_write_rms_cos": 0.8069,
+        "s_out_iso": 2.3634,
+        "med_norm_A": 71.025,
+        "med_norm_B": 167.861,
+        "c_B_std": 0.00829,
+        "tag": "universal",
+        "n_eval_aligned": 2941,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1176.1,
+          "s_out_concept": 1.9543,
+          "med_norm_A": 87.437,
+          "med_norm_B": 220.701,
+          "heldout_concept_write_cos": 0.3813,
+          "heldout_concept_write_R2": -0.1314
+        }
+      },
+      "falcon_to_smol": {
+        "D_A": 3072,
+        "D_B": 2048,
+        "n_fit": 12413,
+        "n_resid": 3883,
+        "shrink_AA": 0.00894,
+        "shrink_BB": 0.0223,
+        "shrink_N": 0.47898,
+        "heldout_gen_read_R2": 0.7357,
+        "heldout_write_rms_cos": 0.7978,
+        "s_out_iso": 0.8818,
+        "med_norm_A": 190.35,
+        "med_norm_B": 167.856,
+        "c_B_std": 0.00832,
+        "tag": "universal",
+        "n_eval_aligned": 2955,
+        "write_concept": {
+          "n_pairs": 1200,
+          "eff_n_cauchy": 1182.5,
+          "s_out_concept": 1.0599,
+          "med_norm_A": 210.859,
+          "med_norm_B": 220.701,
+          "heldout_concept_write_cos": 0.4234,
+          "heldout_concept_write_R2": -0.0359
+        }
+      }
+    },
+    "states": {
+      "JOINT_QWEN_PLUS_FALCON": {
+        "d_ff": 8196,
+        "general_text": {
+          "ppl": 26.1124,
+          "n_tokens": 4216,
+          "mean_kl": 0.001703,
+          "p99_kl": 0.030359,
+          "p999_kl": 0.207824,
+          "max_kl": 1.59702,
+          "delta_ppl": 0.0122
+        },
+        "qa": {
+          "direct_country_em": 0.1875,
+          "direct_wilson95": {
+            "p": 0.1875,
+            "lo": 0.0659,
+            "hi": 0.4301,
+            "k": 3,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.1875,
+          "ripple_wilson95": {
+            "p": 0.1875,
+            "lo": 0.1019,
+            "hi": 0.3194,
+            "k": 9,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.1875,
+            "lo": 0.0833,
+            "hi": 0.3125
+          },
+          "capital_em": 0.1875,
+          "currency_em": 0.1875,
+          "language_em": 0.1875,
+          "joint_4of4_em": 0.125,
+          "protected_retention_em": 1.0,
+          "hardneg_false_flip_to_rule": 0.1875,
+          "hardneg_orig_retained": 0.8125,
+          "dataset_fr_it_8_rule_gen": 0.25,
+          "france_subset": {
+            "direct_country_em": 0.375,
+            "unseen_ripple_3attr_em": 0.375,
+            "capital_em": 0.375,
+            "currency_em": 0.375,
+            "language_em": 0.375,
+            "joint_4of4_em": 0.25,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.6667,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.852,
+          "n_correct_all": 167,
+          "n_orig_correct_all": 181,
+          "newly_broken_all": 15,
+          "drop_pp_all": 7.14,
+          "n_unrelated": 187,
+          "n_unrelated_orig_correct": 175,
+          "newly_broken_unrelated": 13,
+          "unrelated_retention": 0.9257
+        }
+      },
+      "SELECTIVE_UNLEARN_QWEN": {
+        "d_ff": 8194,
+        "general_text": {
+          "ppl": 26.0912,
+          "n_tokens": 4216,
+          "mean_kl": 0.00061,
+          "p99_kl": 0.005254,
+          "p999_kl": 0.099041,
+          "max_kl": 0.625626,
+          "delta_ppl": -0.009
+        },
+        "qa": {
+          "direct_country_em": 0.0,
+          "direct_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.1936,
+            "k": 0,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.0,
+          "ripple_wilson95": {
+            "p": 0.0,
+            "lo": 0.0,
+            "hi": 0.0741,
+            "k": 0,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.0,
+            "lo": 0.0,
+            "hi": 0.0
+          },
+          "capital_em": 0.0,
+          "currency_em": 0.0,
+          "language_em": 0.0,
+          "joint_4of4_em": 0.0,
+          "protected_retention_em": 0.9375,
+          "hardneg_false_flip_to_rule": 0.125,
+          "hardneg_orig_retained": 0.875,
+          "dataset_fr_it_8_rule_gen": 0.0,
+          "france_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 0.875,
+            "ds_rule_gen": 0.0,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.9031,
+          "n_correct_all": 177,
+          "n_orig_correct_all": 181,
+          "newly_broken_all": 4,
+          "drop_pp_all": 2.04,
+          "n_unrelated": 187,
+          "n_unrelated_orig_correct": 175,
+          "newly_broken_unrelated": 3,
+          "unrelated_retention": 0.9829
+        }
+      },
+      "SELECTIVE_UNLEARN_FALCON": {
+        "d_ff": 8194,
+        "general_text": {
+          "ppl": 26.1224,
+          "n_tokens": 4216,
+          "mean_kl": 0.001119,
+          "p99_kl": 0.012029,
+          "p999_kl": 0.14283,
+          "max_kl": 1.430761,
+          "delta_ppl": 0.0222
+        },
+        "qa": {
+          "direct_country_em": 0.1875,
+          "direct_wilson95": {
+            "p": 0.1875,
+            "lo": 0.0659,
+            "hi": 0.4301,
+            "k": 3,
+            "n": 16
+          },
+          "unseen_ripple_3attr_em": 0.1875,
+          "ripple_wilson95": {
+            "p": 0.1875,
+            "lo": 0.1019,
+            "hi": 0.3194,
+            "k": 9,
+            "n": 48
+          },
+          "ripple_boot95": {
+            "mean": 0.1875,
+            "lo": 0.0833,
+            "hi": 0.3125
+          },
+          "capital_em": 0.1875,
+          "currency_em": 0.1875,
+          "language_em": 0.1875,
+          "joint_4of4_em": 0.125,
+          "protected_retention_em": 1.0,
+          "hardneg_false_flip_to_rule": 0.1875,
+          "hardneg_orig_retained": 0.8125,
+          "dataset_fr_it_8_rule_gen": 0.25,
+          "france_subset": {
+            "direct_country_em": 0.375,
+            "unseen_ripple_3attr_em": 0.375,
+            "capital_em": 0.375,
+            "currency_em": 0.375,
+            "language_em": 0.375,
+            "joint_4of4_em": 0.25,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.6667,
+            "n_ds": 3
+          },
+          "italy_subset": {
+            "direct_country_em": 0.0,
+            "unseen_ripple_3attr_em": 0.0,
+            "capital_em": 0.0,
+            "currency_em": 0.0,
+            "language_em": 0.0,
+            "joint_4of4_em": 0.0,
+            "protected_retention_em": 1.0,
+            "ds_rule_gen": 0.0,
+            "n_ds": 5
+          }
+        },
+        "locality_196": {
+          "n_facts": 196,
+          "acc_all": 0.8724,
+          "n_correct_all": 171,
+          "n_orig_correct_all": 181,
+          "newly_broken_all": 12,
+          "drop_pp_all": 5.1,
+          "n_unrelated": 187,
+          "n_unrelated_orig_correct": 175,
+          "newly_broken_unrelated": 11,
+          "unrelated_retention": 0.9371
+        }
+      },
+      "UNLEARN_ALL": {
+        "state_dict_bit_equal": true,
+        "logits_bit_equal": true,
+        "max_abs_dlogit": 0.0,
+        "restored_d_ff": 8192
+      }
+    },
+    "elapsed_sec": 106.5
+  }
+}
