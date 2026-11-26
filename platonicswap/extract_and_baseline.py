@@ -46,6 +46,8 @@ SEED = 20261125
 
 
 def get_device_and_dtype() -> Tuple[torch.device, torch.dtype]:
+    if torch.cuda.is_available():
+        return torch.device("cuda"), torch.bfloat16
     if torch.backends.mps.is_available():
         return torch.device("mps"), torch.bfloat16
     # On Apple Silicon CPU (sandboxed), float32 uses native AMX and is ~5x faster than bfloat16.

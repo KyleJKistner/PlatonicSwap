@@ -1211,6 +1211,8 @@ def unlearn_mlp_native(mlp: nn.Module, orig_state: Dict[str, Any]) -> None:
 # ======================================================================================
 
 def get_compute_device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -1239,6 +1241,8 @@ def load_model_fp32(model_key: str) -> Tuple[Any, Any, torch.device, float]:
 def unload_model(model: Any) -> None:
     del model
     gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     if torch.backends.mps.is_available():
         torch.mps.empty_cache()
 
