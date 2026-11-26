@@ -76,11 +76,11 @@ def extract_dev_rules_from_model(
     # Extract all 3 species pools once (reused across both rules -> 2x faster!)
     r1 = donor_prompts["rule1_Bird_to_Fish"]
     r2 = donor_prompts["rule2_Mammal_to_Reptile"]
-    st_b = poe.extract_entity_states(model, tok, device, r1["pos_prompts"], r1["pos_spans"], layer_idx, all_subtokens=False, batch_size=32)["x_mid"].astype(np.float64)
-    st_m = poe.extract_entity_states(model, tok, device, r2["pos_prompts"], r2["pos_spans"], layer_idx, all_subtokens=False, batch_size=32)["x_mid"].astype(np.float64)
+    st_b = poe.extract_entity_states(model, tok, device, r1["pos_prompts"], r1["pos_spans"], layer_idx, all_subtokens=False, batch_size=32)["x"].astype(np.float64)
+    st_m = poe.extract_entity_states(model, tok, device, r2["pos_prompts"], r2["pos_spans"], layer_idx, all_subtokens=False, batch_size=32)["x"].astype(np.float64)
     # Non-bird/non-mammal negatives = tail of r1 neg_prompts after st_m
     n_m = len(r2["pos_prompts"])
-    st_n = poe.extract_entity_states(model, tok, device, r1["neg_prompts"][n_m:], r1["neg_spans"][n_m:], layer_idx, all_subtokens=False, batch_size=32)["x_mid"].astype(np.float64)
+    st_n = poe.extract_entity_states(model, tok, device, r1["neg_prompts"][n_m:], r1["neg_spans"][n_m:], layer_idx, all_subtokens=False, batch_size=32)["x"].astype(np.float64)
 
     rules = [
         {
@@ -127,9 +127,23 @@ def eval_dev_suite_fast(
         pos_cands = [x["forbid_fc"] if is_hn else x["new_fc"] for x in items]
         neg_cands = [x["orig_fc"] if is_hn else x["old_fc"] for x in items]
 
-        # Full-continuation max logp per item
-        lp_pos = d1.full_continuation_logp_batch(model, tok, device, prompts, pos_cands, batch_size=batch_size)
-        lp_neg = d1.full_continuation_logp_batch(model, tok, device, prompts, neg_cands, batch_size=batch_size)
+        # Full-continuation max logp per item (flatten candidate lists cleanly)
+        def _max_cand_logps(cand_lists: List[List[str]]) -> List[float]:
+            flat_p, flat_c, owners = [], [], []
+            for idx_i, (pr, cl) in enumerate(zip(prompts, cand_lists)):
+                for c in cl:
+                    flat_p.append(pr)
+                    flat_c.append(c)
+                    owners.append(idx_i)
+            flat_scores = d1.full_continuation_logp_batch(model, tok, device, flat_p, flat_c, batch_size=batch_size)
+            best = [-1e9] * len(prompts)
+            for own, sc in zip(owners, flat_scores):
+                if sc > best[own]:
+                    best[own] = sc
+            return best
+
+        lp_pos = _max_cand_logps(pos_cands)
+        lp_neg = _max_cand_logps(neg_cands)
 
         fc_ok, em_ok, lo_list = [], [], []
         for i, it in enumerate(items):
