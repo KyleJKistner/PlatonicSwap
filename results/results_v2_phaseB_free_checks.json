@@ -1,0 +1,502 @@
+{
+  "meta": {
+    "note": "Fable 5.2 Max 3 pre-registered free diagnostic checks on existing v1.0 caches.",
+    "elapsed_sec": 214.0
+  },
+  "check1_split_half_write_reliability": {
+    "smollm2": {
+      "Bird->Fish": {
+        "r_split_half": 0.0984,
+        "N0_over_N": 4.582,
+        "cos_obs_N1200": 0.2675,
+        "cos_h1_N600": 0.1934,
+        "cos_h2_N600": 0.1967,
+        "c_inf_projected": 0.632,
+        "c_10x_projected": 0.5233,
+        "drop_10x_generic_corpus": false
+      },
+      "Mammal->Reptile": {
+        "r_split_half": 0.1429,
+        "N0_over_N": 2.9988,
+        "cos_obs_N1200": 0.2423,
+        "cos_h1_N600": 0.1367,
+        "cos_h2_N600": 0.1834,
+        "c_inf_projected": 0.4846,
+        "c_10x_projected": 0.425,
+        "drop_10x_generic_corpus": false
+      }
+    },
+    "falcon3": {
+      "Bird->Fish": {
+        "r_split_half": 0.1092,
+        "N0_over_N": 4.0803,
+        "cos_obs_N1200": 0.3156,
+        "cos_h1_N600": 0.1629,
+        "cos_h2_N600": 0.2509,
+        "c_inf_projected": 0.7114,
+        "c_10x_projected": 0.5996,
+        "drop_10x_generic_corpus": false
+      },
+      "Mammal->Reptile": {
+        "r_split_half": 0.0936,
+        "N0_over_N": 4.8417,
+        "cos_obs_N1200": 0.283,
+        "cos_h1_N600": 0.1577,
+        "cos_h2_N600": 0.1775,
+        "c_inf_projected": 0.6839,
+        "c_10x_projected": 0.5614,
+        "drop_10x_generic_corpus": false
+      }
+    }
+  },
+  "check2_smollm2_per_position_phi_and_scale_sweep": {
+    "per_position_phi": {
+      "PUSH_R_x_PUSH_W": {
+        "direct": {
+          "n": 48,
+          "species_sum_phi_mean": 1.8796,
+          "species_max_phi_mean": 1.3429,
+          "other_prompt_sum_phi_mean": 0.001,
+          "other_prompt_max_phi_mean": 0.001,
+          "other_prompt_n_tokens_ge_05_mean": 0.0,
+          "other_prompt_frac_any_ge_05": 0.0,
+          "gen_sum_phi_mean": 0.7291,
+          "gen_max_phi_mean": 0.6005,
+          "gen_n_tokens_ge_05_mean": 0.5833,
+          "gen_frac_any_ge_05": 0.4583,
+          "total_sum_phi_mean": 2.6097,
+          "by_rule_mean_sum_phi": {
+            "Bird->Fish": {
+              "sp": 2.1291,
+              "other": 0.0,
+              "gen": 0.3907
+            },
+            "Mammal->Reptile": {
+              "sp": 1.6301,
+              "other": 0.002,
+              "gen": 1.0675
+            }
+          }
+        },
+        "hardneg": {
+          "n": 24,
+          "species_sum_phi_mean": 1.276,
+          "species_max_phi_mean": 1.0763,
+          "other_prompt_sum_phi_mean": 0.0,
+          "other_prompt_max_phi_mean": -0.0,
+          "other_prompt_n_tokens_ge_05_mean": 0.0,
+          "other_prompt_frac_any_ge_05": 0.0,
+          "gen_sum_phi_mean": 0.5685,
+          "gen_max_phi_mean": 0.4856,
+          "gen_n_tokens_ge_05_mean": 0.4167,
+          "gen_frac_any_ge_05": 0.375,
+          "total_sum_phi_mean": 1.8445,
+          "by_rule_mean_sum_phi": {}
+        }
+      },
+      "NAT_R_x_NAT_W": {
+        "direct": {
+          "n": 48,
+          "species_sum_phi_mean": 2.6014,
+          "species_max_phi_mean": 1.3681,
+          "other_prompt_sum_phi_mean": 1.4794,
+          "other_prompt_max_phi_mean": 0.783,
+          "other_prompt_n_tokens_ge_05_mean": 1.9167,
+          "other_prompt_frac_any_ge_05": 0.9792,
+          "gen_sum_phi_mean": 4.0651,
+          "gen_max_phi_mean": 1.4146,
+          "gen_n_tokens_ge_05_mean": 3.6458,
+          "gen_frac_any_ge_05": 1.0,
+          "total_sum_phi_mean": 8.1459,
+          "by_rule_mean_sum_phi": {
+            "Bird->Fish": {
+              "sp": 2.8425,
+              "other": 1.5678,
+              "gen": 3.4877
+            },
+            "Mammal->Reptile": {
+              "sp": 2.3603,
+              "other": 1.3911,
+              "gen": 4.6425
+            }
+          }
+        },
+        "hardneg": {
+          "n": 24,
+          "species_sum_phi_mean": 1.7758,
+          "species_max_phi_mean": 1.2982,
+          "other_prompt_sum_phi_mean": 1.4194,
+          "other_prompt_max_phi_mean": 0.7581,
+          "other_prompt_n_tokens_ge_05_mean": 1.7917,
+          "other_prompt_frac_any_ge_05": 0.9583,
+          "gen_sum_phi_mean": 4.0307,
+          "gen_max_phi_mean": 1.4035,
+          "gen_n_tokens_ge_05_mean": 3.7083,
+          "gen_frac_any_ge_05": 1.0,
+          "total_sum_phi_mean": 7.2259,
+          "by_rule_mean_sum_phi": {}
+        }
+      }
+    },
+    "gold_push_scale_sweep": {
+      "1.0": {
+        "direct_fc_full": 0.2292,
+        "direct_em": 0.0417,
+        "em_over_fc": 0.1818,
+        "mean_log_odds": -2.7356,
+        "by_rule": {
+          "Bird->Fish": {
+            "fc_full": 0.4583,
+            "em": 0.0833
+          },
+          "Mammal->Reptile": {
+            "fc_full": 0.0,
+            "em": 0.0
+          }
+        },
+        "sample_gens": [
+          " bird of prey that feeds on carrion",
+          " type of fish.\n\nPeac",
+          " type of game bird. It is a",
+          " type of bird.\n\nThe qu",
+          " type of bird.\n\nThe part",
+          " small, usually brightly colored, marine or"
+        ]
+      },
+      "2.0": {
+        "direct_fc_full": 0.5208,
+        "direct_em": 0.2083,
+        "em_over_fc": 0.4,
+        "mean_log_odds": 1.3648,
+        "by_rule": {
+          "Bird->Fish": {
+            "fc_full": 0.9167,
+            "em": 0.2917
+          },
+          "Mammal->Reptile": {
+            "fc_full": 0.125,
+            "em": 0.125
+          }
+        },
+        "sample_gens": [
+          " marine scavenger. It is a marine",
+          " fish.\n\nThe word \"fish",
+          " fish.\n\nThe word \"fish",
+          " marine fish. It is a member of",
+          " type of fish.\n\nThe part",
+          " marine fish that lives in the sea."
+        ]
+      },
+      "3.0": {
+        "direct_fc_full": 0.7917,
+        "direct_em": 0.2708,
+        "em_over_fc": 0.3421,
+        "mean_log_odds": 2.6323,
+        "by_rule": {
+          "Bird->Fish": {
+            "fc_full": 0.9167,
+            "em": 0.3333
+          },
+          "Mammal->Reptile": {
+            "fc_full": 0.6667,
+            "em": 0.2083
+          }
+        },
+        "sample_gens": [
+          " marine animal that lives in the sea.",
+          " fish.\n\nThe word \"fish",
+          " fish, a reptile, a bird,",
+          " marine animal that lives in the sea.",
+          " fish.\n\nThe part of the",
+          " marine reptile that lives in the sea."
+        ]
+      },
+      "4.0": {
+        "direct_fc_full": 0.7708,
+        "direct_em": 0.3542,
+        "em_over_fc": 0.4595,
+        "mean_log_odds": 2.6463,
+        "by_rule": {
+          "Bird->Fish": {
+            "fc_full": 0.7917,
+            "em": 0.375
+          },
+          "Mammal->Reptile": {
+            "fc_full": 0.75,
+            "em": 0.3333
+          }
+        },
+        "sample_gens": [
+          " marine animal that lives in the sea.",
+          " fish.\n\nThe word \"fish",
+          " fish, a reptile, a mammal,",
+          " fish, a reptile, a bird,",
+          " fish, and a fish is a part",
+          " fish, a reptile, a bird,"
+        ]
+      },
+      "6.0": {
+        "direct_fc_full": 0.6458,
+        "direct_em": 0.25,
+        "em_over_fc": 0.3871,
+        "mean_log_odds": 1.9256,
+        "by_rule": {
+          "Bird->Fish": {
+            "fc_full": 0.7917,
+            "em": 0.4167
+          },
+          "Mammal->Reptile": {
+            "fc_full": 0.5,
+            "em": 0.0833
+          }
+        },
+        "sample_gens": [
+          " marine animal that lives in the sea.",
+          " fish.\n\nThe word \"fish",
+          " fish, a reptile, a mammal,",
+          " fish, a reptile, a bird,",
+          " fish, and a part of a fish",
+          " fish, a reptile, a bird,"
+        ]
+      }
+    }
+  },
+  "check3_top3_hardnegs": {
+    "smollm2": {
+      "PUSH": {
+        "Bird->Fish": {
+          "pos_z_min": 0.3268,
+          "pos_z_med": 0.4394,
+          "pos_z_max": 0.6161,
+          "top3_hardnegs": [
+            {
+              "species": "perch",
+              "sub_group": "non_target_fish",
+              "z_subj": 0.48432,
+              "phi_subj": 1.23972,
+              "outranks_pos_frac": 0.7083
+            },
+            {
+              "species": "mantis",
+              "sub_group": "non_target_insect",
+              "z_subj": 0.38836,
+              "phi_subj": 1.27977,
+              "outranks_pos_frac": 0.1667
+            },
+            {
+              "species": "wasp",
+              "sub_group": "flying_insect",
+              "z_subj": 0.36108,
+              "phi_subj": 1.07056,
+              "outranks_pos_frac": 0.0833
+            }
+          ]
+        },
+        "Mammal->Reptile": {
+          "pos_z_min": 0.2288,
+          "pos_z_med": 0.3715,
+          "pos_z_max": 0.502,
+          "top3_hardnegs": [
+            {
+              "species": "otter",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.39766,
+              "phi_subj": 1.23838,
+              "outranks_pos_frac": 0.5417
+            },
+            {
+              "species": "locust",
+              "sub_group": "flying_insect",
+              "z_subj": 0.37937,
+              "phi_subj": 1.387,
+              "outranks_pos_frac": 0.5417
+            },
+            {
+              "species": "whale",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.34354,
+              "phi_subj": 1.16798,
+              "outranks_pos_frac": 0.4167
+            }
+          ]
+        }
+      },
+      "NATIVE": {
+        "Bird->Fish": {
+          "pos_z_min": 0.8823,
+          "pos_z_med": 1.3513,
+          "pos_z_max": 1.7926,
+          "top3_hardnegs": [
+            {
+              "species": "perch",
+              "sub_group": "non_target_fish",
+              "z_subj": 0.85572,
+              "phi_subj": 1.23962,
+              "outranks_pos_frac": 0.0
+            },
+            {
+              "species": "mantis",
+              "sub_group": "non_target_insect",
+              "z_subj": 0.7692,
+              "phi_subj": 1.27966,
+              "outranks_pos_frac": 0.0
+            },
+            {
+              "species": "otter",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.73155,
+              "phi_subj": 1.23834,
+              "outranks_pos_frac": 0.0
+            }
+          ]
+        },
+        "Mammal->Reptile": {
+          "pos_z_min": 0.602,
+          "pos_z_med": 1.0221,
+          "pos_z_max": 1.2685,
+          "top3_hardnegs": [
+            {
+              "species": "walrus",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.96243,
+              "phi_subj": 1.20344,
+              "outranks_pos_frac": 0.3333
+            },
+            {
+              "species": "otter",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.84164,
+              "phi_subj": 1.23851,
+              "outranks_pos_frac": 0.125
+            },
+            {
+              "species": "dolphin",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.71017,
+              "phi_subj": 1.17629,
+              "outranks_pos_frac": 0.0417
+            }
+          ]
+        }
+      }
+    },
+    "falcon3": {
+      "PUSH": {
+        "Bird->Fish": {
+          "pos_z_min": 0.5011,
+          "pos_z_med": 0.9096,
+          "pos_z_max": 1.2769,
+          "top3_hardnegs": [
+            {
+              "species": "perch",
+              "sub_group": "non_target_fish",
+              "z_subj": 0.86478,
+              "phi_subj": 0.95425,
+              "outranks_pos_frac": 0.4167
+            },
+            {
+              "species": "walrus",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.80518,
+              "phi_subj": 0.94096,
+              "outranks_pos_frac": 0.2917
+            },
+            {
+              "species": "seal",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.70567,
+              "phi_subj": 0.95043,
+              "outranks_pos_frac": 0.125
+            }
+          ]
+        },
+        "Mammal->Reptile": {
+          "pos_z_min": 0.4885,
+          "pos_z_med": 0.8815,
+          "pos_z_max": 1.2161,
+          "top3_hardnegs": [
+            {
+              "species": "manatee",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 1.0768,
+              "phi_subj": 0.95119,
+              "outranks_pos_frac": 0.9167
+            },
+            {
+              "species": "whale",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.93359,
+              "phi_subj": 0.9618,
+              "outranks_pos_frac": 0.75
+            },
+            {
+              "species": "walrus",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 0.9161,
+              "phi_subj": 0.9409,
+              "outranks_pos_frac": 0.75
+            }
+          ]
+        }
+      },
+      "NATIVE": {
+        "Bird->Fish": {
+          "pos_z_min": 1.6619,
+          "pos_z_med": 2.4818,
+          "pos_z_max": 3.3117,
+          "top3_hardnegs": [
+            {
+              "species": "bat",
+              "sub_group": "flying_mammal",
+              "z_subj": 1.57416,
+              "phi_subj": 0.95855,
+              "outranks_pos_frac": 0.0
+            },
+            {
+              "species": "hornet",
+              "sub_group": "flying_insect",
+              "z_subj": 1.48935,
+              "phi_subj": 0.98082,
+              "outranks_pos_frac": 0.0
+            },
+            {
+              "species": "seal",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 1.29198,
+              "phi_subj": 0.95038,
+              "outranks_pos_frac": 0.0
+            }
+          ]
+        },
+        "Mammal->Reptile": {
+          "pos_z_min": 1.327,
+          "pos_z_med": 2.1554,
+          "pos_z_max": 2.7815,
+          "top3_hardnegs": [
+            {
+              "species": "walrus",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 2.01025,
+              "phi_subj": 0.94094,
+              "outranks_pos_frac": 0.4583
+            },
+            {
+              "species": "manatee",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 1.77215,
+              "phi_subj": 0.95122,
+              "outranks_pos_frac": 0.1667
+            },
+            {
+              "species": "otter",
+              "sub_group": "aquatic_mammal",
+              "z_subj": 1.71989,
+              "phi_subj": 0.93964,
+              "outranks_pos_frac": 0.1667
+            }
+          ]
+        }
+      }
+    }
+  }
+}
