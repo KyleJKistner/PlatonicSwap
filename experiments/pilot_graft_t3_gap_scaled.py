@@ -555,13 +555,13 @@ def run_unit_test() -> None:
     mc = exact_mcnemar([1] * 15 + [0] * 5, [0] * 20)
     assert mc["n10_a_only"] == 15 and mc["n01_b_only"] == 0 and mc["p_value"] < 1e-4
 
-    # 5. Cached Zero-QA Pilot 1 maps exist for both pairs
-    for pkey, cfg in PAIR_CONFIGS.items():
-        assert cfg["map_path"].exists(), f"Missing cached map for {pkey}: {cfg['map_path']}"
+    # 5. Report cached Zero-QA Pilot 1 map availability (gitignored on fresh clones)
+    n_cached = sum(1 for cfg in PAIR_CONFIGS.values() if cfg["map_path"].exists())
 
     print(
         f"[unit-test] ALL PASSED! n_entities={len(SCALED_OBSCURE_ENTITIES)} across {len(countries)} countries, "
-        f"0 duplicates, 0 overlaps with dataset.json/ORGAN1_*, exact Wilson/bootstrap/McNemar & map caches OK!"
+        f"0 duplicates, 0 overlaps with dataset.json/ORGAN1_*, exact Wilson/bootstrap/McNemar OK "
+        f"({n_cached}/{len(PAIR_CONFIGS)} optional map caches present)!"
     )
 
 

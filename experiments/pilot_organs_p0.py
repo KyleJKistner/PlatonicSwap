@@ -909,15 +909,19 @@ def apply_exact_bos_null_affine(
     r_bos_subspace: int = 8,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
-    Exact minimum-Frobenius rank-1 update along v = x_BOS - mu_B (plus optional rank-r
-    pos-0 sink-variance projection when pos-0 varies across first tokens without a fixed BOS!) so that:
-      1. W_u_new @ x_BOS + b_u_new == 0.0              (EXACT zero up-branch at mean pos-0!)
-      2. W_u_new @ mu_B  + b_u_new == W_u @ mu_B + b_u (EXACT mean preservation!)
-      3. W_g_new @ x_BOS + b_g_new == target_bos_gate  (-20.0 -> SiLU(-20) = -4.1e-8!)
-      4. W_g_new @ mu_B  + b_g_new == W_g @ mu_B + b_g (EXACT mean preservation!)
-      5. When x_bos_bank (N_pos0 x D) has non-zero variance across pos-0 tokens, projects W_u and W_g
-         off the top r_bos_subspace centered pos-0 directions (orthogonal to v), mean-compensated at mu_B,
-         so EVERY unseen pos-0 token stays deeply suppressed!
+    Exact minimum-Frobenius rank-1 up-branch update along v = x_BOS - mu_B (plus optional rank-r
+    pos-0 sink-variance projection when pos-0 varies across first tokens without a fixed BOS) so that:
+      1. W_u_new @ x_BOS + b_u_new == 0.0              (exact zero up-branch at mean pos-0)
+      2. W_u_new @ mu_B  + b_u_new == W_u @ mu_B + b_u (exact mean preservation)
+      3. When x_bos_bank (N_pos0 x D) has non-zero variance across pos-0 tokens, projects W_u
+         off the top r_bos_subspace centered pos-0 directions (orthogonal to v), mean-compensated at mu_B.
+
+    NOTE (v1.0 erratum): `target_bos_gate` is accepted for API compatibility but intentionally
+    unapplied here; W_g and b_g are returned unchanged so that gate selectivity is unaffected and
+    published affine tables remain reproducible. Sealed Cap-2 arms use `apply_exact_bos_null_biasfree`
+    and do not call this function. Note also that the linear up-null is exact at the fitted x_BOS
+    vector (~4.9e-7) rather than identically zero across unseen pos-0 tokens (e.g., Cap-2 SmolLM2
+    `bos_eval60_max_norm = 0.028`).
     """
     Wg = np.asarray(W_g, dtype=np.float64).copy()
     bg = np.asarray(b_g, dtype=np.float64).copy()

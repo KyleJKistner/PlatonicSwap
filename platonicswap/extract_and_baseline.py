@@ -29,12 +29,18 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-LAB_DIR = Path(__file__).resolve().parent
-HF_CACHE_DIR = LAB_DIR / "hf_cache"
-CACHE_DIR = LAB_DIR / "cache"
-DATASET_PATH = LAB_DIR / "dataset.json"
-DATASET_2HOP_PATH = LAB_DIR / "dataset_2hop.json"
-RESULTS_PATH = LAB_DIR / "results_baseline.json"
+_THIS_DIR = Path(__file__).resolve().parent
+_REPO_ROOT = _THIS_DIR.parent
+_DEFAULT_LAB_DIR = _REPO_ROOT / "experiments" if (_REPO_ROOT / "experiments").is_dir() else _THIS_DIR
+_DEFAULT_DATA_DIR = _REPO_ROOT / "data" if (_REPO_ROOT / "data").is_dir() else _DEFAULT_LAB_DIR
+_DEFAULT_RESULTS_DIR = _REPO_ROOT / "results" if (_REPO_ROOT / "results").is_dir() else _DEFAULT_LAB_DIR
+
+LAB_DIR = Path(os.environ.get("PLATONICSWAP_LAB_DIR", str(_DEFAULT_LAB_DIR)))
+HF_CACHE_DIR = Path(os.environ.get("PLATONICSWAP_HF_CACHE", str(LAB_DIR / "hf_cache")))
+CACHE_DIR = Path(os.environ.get("PLATONICSWAP_CACHE_DIR", str(LAB_DIR / "cache")))
+DATASET_PATH = Path(os.environ.get("PLATONICSWAP_DATASET", str(_DEFAULT_DATA_DIR / "dataset.json")))
+DATASET_2HOP_PATH = Path(os.environ.get("PLATONICSWAP_DATASET_2HOP", str(_DEFAULT_DATA_DIR / "dataset_2hop.json")))
+RESULTS_PATH = Path(os.environ.get("PLATONICSWAP_BASELINE_RESULTS", str(_DEFAULT_RESULTS_DIR / "results_baseline.json")))
 
 SEED = 20261125
 

@@ -22,6 +22,7 @@ Adjacent foundational or venue-only works not needed for v1 positioning, queued 
 | 3 | **Model Stitching: Looking for Conserved Representations** | Bansal, Nakkiran, Barak (NeurIPS 2021) | Foundational linear stitching test for functional interchangeability across architectures. |
 | 4 | **FuseLLM / FuseChat: Knowledge Fusion of Large Language Models** | Wan et al. (ICLR 2024 / 2025) | Probabilistic distribution-level cross-architecture knowledge fusion baseline (requires target training). |
 | 5 | **Text-to-LoRA: Instant Transformer Adaption** | Sakana AI (2025) | Hypernetwork generation of task LoRAs — relevant if v2 compiles skills from text or donor probes into native weights. |
+| 6 | **Neuron-Addition & Side-Memory Editors (SERAC, T-Patcher, WISE)** | Mitchell et al. (ICML 2022) / Huang et al. (ICLR 2023) / Wang et al. (NeurIPS 2024) | Flagged by council red-team: check single-model neuron-addition & side-memory literature before claiming "append-only" novelty in formal papers. |
 
 ## How to Resolve Items in This Queue
 

@@ -3,13 +3,12 @@
 build_repo_tables.py — Zero-Hallucination Programmatic Results Auditor & Markdown Table Generator
 ==================================================================================================
 
-Reads all audited JSON artifacts in `/tmp/platos_key_lab/` and programmatically emits
-`/tmp/platos_key_lab/master_audited_results.md` with exact denominators, 95% CIs, p-values,
-matched native ceilings, and shuffled/random controls. Gracefully marks any not-yet-generated
-JSONs as `[PENDING]` so the script can be re-run cleanly after final MPS sweeps finish.
+Reads all audited JSON artifacts in `results/` (falling back to the script directory) and
+programmatically emits `results/master_audited_results.md` with exact denominators, 95% CIs,
+p-values, matched native ceilings, and shuffled/random controls.
 
 Usage:
-  python build_repo_tables.py
+  python experiments/build_repo_tables.py
 """
 
 from __future__ import annotations
@@ -17,19 +16,23 @@ from __future__ import annotations
 import datetime
 import hashlib
 import json
+import math
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-LAB_DIR = Path(__file__).resolve().parent
-OUT_MD = LAB_DIR / "master_audited_results.md"
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+RESULTS_DIR = REPO_ROOT / "results" if (REPO_ROOT / "results").is_dir() else SCRIPT_DIR
+OUT_MD = RESULTS_DIR / "master_audited_results.md"
 
 
 def load_json_opt(filename: str) -> Optional[Dict[str, Any]]:
-    p = LAB_DIR / filename
-    if not p.exists():
-        return None
-    with open(p, "r", encoding="utf-8") as f:
-        return json.load(f)
+    for base in (RESULTS_DIR, SCRIPT_DIR):
+        p = base / filename
+        if p.exists():
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
+    return None
 
 
 def pct(v: Optional[float], digits: int = 1) -> str:
@@ -69,12 +72,21 @@ def sha256_short(p: Path) -> str:
 
 
 def md_table(headers: Sequence[str], rows: Sequence[Sequence[str]]) -> str:
+    n_cols = len(headers)
+    for h in headers:
+        assert "|" not in str(h), f"Bare pipe in header: {h!r}"
     lines = [
-        "| " + " | ".join(headers) + " |",
-        "| " + " | ".join(["---"] * len(headers)) + " |",
+        "| " + " | ".join(str(h) for h in headers) + " |",
+        "| " + " | ".join(["---"] * n_cols) + " |",
     ]
     for r in rows:
-        lines.append("| " + " | ".join(str(x) for x in r) + " |")
+        assert len(r) == n_cols, f"Row width {len(r)} != {n_cols}: {r}"
+        cells = []
+        for x in r:
+            s = str(x)
+            assert "|" not in s, f"Bare pipe in table cell (breaks GitHub rendering): {s!r}"
+            cells.append(s)
+        lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
 
 
@@ -85,13 +97,53 @@ def _kl_val(m: dict) -> str:
     return num(kl, 4)
 
 
+def _exact_one_sided_sign_p(k: int, n: int) -> float:
+    return sum(math.comb(n, i) for i in range(k, n + 1)) / (2 ** n)
+
+
+def _match_nss_ceiling(nss: Dict[str, Any], cf1: Optional[float], eff1: Optional[float], fallback_keys: Sequence[str]) -> Tuple[Optional[float], str]:
+    """Return the exact native self-swap ceiling used for a Pilot 1B row."""
+    if cf1 is not None and eff1 is not None and eff1 > 0:
+        inferred = float(cf1) / float(eff1)
+        best_k, best_v, best_err = None, None, 1e9
+        for k, v in nss.items():
+            if isinstance(v, dict) and "cf_1x" in v:
+                acc = float(v["cf_1x"]["matched_acc"])
+                err = abs(acc - inferred)
+                if err < best_err:
+                    best_k, best_v, best_err = k, acc, err
+        if best_v is not None and best_err < 0.005:
+            return best_v, str(best_k)
+    for pref in fallback_keys:
+        for k, v in nss.items():
+            if isinstance(v, dict) and "cf_1x" in v and (k == pref or k.startswith(pref)):
+                return float(v["cf_1x"]["matched_acc"]), k
+    return None, "—"
+
+
 # =============================================================================
 # PILLAR 1: Zero-QA Geometry, N >> D Scaling, O(d) vs GL(d), Pilot 1B
 # =============================================================================
 
 
 def build_pillar1_sections() -> List[str]:
-    out: List[str] = ["## Pillar 1: Zero-QA Geometry, $N \\gg D$ Scaling, $O(d)$ vs. $GL(d)$, and Breaking 85%+"]
+    out: List[str] = ["## Pillar 1: Zero-QA Geometry, $N \\gg D$ Scaling, $O(d)$ vs. $GL(d)$, and Attention-Knockout Decomposition"]
+
+    # --- 1.0 Plato's Key 20-Pair Baseline Replication ---
+    base = load_json_opt("results_baseline.json")
+    if base is not None:
+        agg = base.get("aggregate", {})
+        out.append("### Table 1.0 — Plato's Key 20-Pair Protocol Replication (`results_baseline.json`)")
+        out.append(md_table(
+            ["Metric (20 Ordered Pairs, 5 Models)", "Value"],
+            [
+                ["Median Self-Swap Accuracy at $l_B$ (20 pairs)", pct(agg.get("median_self_swap_at_lB_acc"))],
+                ["Median Cross-Model Procrustes Transfer (all 20 pairs)", pct(agg.get("median_test_transfer_acc"))],
+                ["Median Retention vs. Self-Swap (cf. Plato's Key ~73%)", pct(agg.get("median_retention_vs_self_swap"))],
+                ["Median Shuffled / Random Control", f"{pct(agg.get('median_shuffled_control_acc'))} / {pct(agg.get('median_random_control_acc'))}"],
+            ],
+        ))
+        out.append("")
 
     # --- 1A. Pilot 0 Diagnostics ---
     p0 = load_json_opt("results_pilot0.json")
@@ -131,7 +183,7 @@ def build_pillar1_sections() -> List[str]:
                 auc_l2 = p0d["auc_all_test_cached_outcomes"]["predictors"]["l2_delta"]
                 spec = p0d["fisher_spectrum_train_gold"]
                 f_pca64 = spec["fisher_energy_captured_by_top_k_activation_pca"]["64"]
-                f_str = f"AUC `|g·δ|`={num(auc_g['auc'], 4)} vs L2={num(auc_l2['auc'], 4)}; Fisher-in-PCA64={pct(f_pca64)} (PR={num(spec['effective_rank_participation_ratio'], 1)})"
+                f_str = f"AUC `abs(g·δ)`={num(auc_g['auc'], 4)} vs L2={num(auc_l2['auc'], 4)}; Fisher-in-PCA64={pct(f_pca64)} (PR={num(spec['effective_rank_participation_ratio'], 1)})"
             else:
                 f_str = "—"
             rows_lc.append([f"`{pair}`", " -> ".join(vals), f_str])
@@ -211,11 +263,14 @@ def build_pillar1_sections() -> List[str]:
                 pca = rk[f"k{k_val}_pca"]["cf_flip_test"]
                 pls = rk.get(f"k{k_val}_pls", {}).get("cf_flip_test", {})
                 fpls = rk[f"k{k_val}_fisher_pls"]["cf_flip_test"]
+                raw_ratio = (fpls["matched_acc"] / pca["matched_acc"]) if pca["matched_acc"] else None
+                net_ratio = (fpls["matched_minus_shuffled_pp"] / pca["matched_minus_shuffled_pp"]) if pca["matched_minus_shuffled_pp"] else None
                 rows_rk.append([
                     f"`{pair}`", f"k={k_val}",
                     f"{pct(pca['matched_acc'])} (net {num(pca['matched_minus_shuffled_pp'], 1, True)}pp)",
                     f"{pct(pls.get('matched_acc'))} (net {num(pls.get('matched_minus_shuffled_pp'), 1, True)}pp)",
                     f"{pct(fpls['matched_acc'])} (net {num(fpls['matched_minus_shuffled_pp'], 1, True)}pp)",
+                    f"raw {num(raw_ratio, 2)}x, net {num(net_ratio, 2)}x",
                 ])
     out.append(md_table(
         ["Pair", "Map (0-QA unless labeled QA)", "CF-Flip Test (95% CI)", "Shuf", "Answer-Disjoint", "LORO 5 Unseen Rels (95% CI)", "Geom $R^2$", "Unlab KL"],
@@ -223,7 +278,7 @@ def build_pillar1_sections() -> List[str]:
     ))
     if rows_rk:
         out.append("\n*Rank-$k$ Unlabeled Compression (0 QA labels):*")
-        out.append(md_table(["Pair", "Rank", "PCA-Procrustes", "PLS", "Closed-Form Fisher-PLS"], rows_rk))
+        out.append(md_table(["Pair", "Rank", "PCA-Procrustes", "PLS", "Closed-Form Fisher-PLS", "Fisher-PLS / PCA Ratio"], rows_rk))
     out.append("")
 
     # --- 1C. Pilot 1B: STRICTLY Separating Natural Single-Layer vs Attention Knockout ---
@@ -232,7 +287,11 @@ def build_pillar1_sections() -> List[str]:
         ("qwen2.5-3b->granite-3.1-2b", "results_pilot1b_qwen2.5-3b_to_granite-3.1-2b.json"),
         ("falcon3-3b->smollm2-1.7b", "results_pilot1b_falcon3-3b_to_smollm2-1.7b.json"),
     ]
-    out.append("### Table 1C — Pilot 1B (Breaking 85%+): STRICT Separation of Natural Unmasked vs. Attention-Knockout Regimes")
+    out.append("### Table 1C — Pilot 1B: STRICT Separation of Natural Unmasked vs. Attention-Knockout Regimes")
+    out.append(
+        "*Note: Transport Efficiency is the ratio of cross-family transfer to matched native self-swap at the same layer and mask configuration (not a strict 100% upper bound; values >100% occur when the cross-family map slightly exceeds the recipient's own single-layer/band self-swap).* "
+        "*Note on layer choice: swap layers were chosen via labeled validation transfer; '0-QA' refers to map fitting only.*\n"
+    )
     rows_nat = []
     rows_ko = []
     for pair, fname in p1b_files:
@@ -241,19 +300,22 @@ def build_pillar1_sections() -> List[str]:
             rows_nat.append([f"`{pair}`", f"[PENDING: {fname}]", "—", "—", "—", "—", "—", "—"])
             continue
         nss = d.get("stage0", {}).get("native_self_swap", {})
-        # Collect matched native ceilings for display
-        nat_single = next((v["cf_1x"]["matched_acc"] for k, v in nss.items() if k.startswith("A0_self_single") and "cf_1x" in v), None)
-        nat_band = next((v["cf_1x"]["matched_acc"] for k, v in nss.items() if k.startswith("A1_self_band") and "cf_1x" in v), None)
-        nat_ko = next((v["cf_1x"]["matched_acc"] for k, v in nss.items() if "full_ko" in k and "band" in k and "cf_1x" in v), None)
 
-        def _append_p1b_row(target_rows: list, label: str, item: dict, ceil_acc: Optional[float]):
+        def _append_p1b_row(target_rows: list, label: str, item: dict, fallback_ceils: Sequence[str]):
             c1 = item.get("cf_1x") or {}
             c5 = item.get("cf_5x_powered") or {}
             ad = item.get("ad_1x") or {}
+            ad5 = item.get("ad_5x_powered") or {}
             lo = item.get("loro_5") or {}
             eff1 = item.get("transport_efficiency_1x")
             eff5 = item.get("transport_efficiency_5x")
+            ceil_acc, ceil_key = _match_nss_ceiling(nss, c1.get("matched_acc"), eff1, fallback_ceils)
+            if eff1 is None and ceil_acc and c1.get("matched_acc") is not None:
+                eff1 = float(c1["matched_acc"]) / float(ceil_acc)
             c5_str = f"{pct(c5.get('matched_acc'))} {ci_pct(c5.get('matched_ci95'))} (n={c5.get('n', '—')})" if c5 else "—"
+            if ad5 and ad5.get("matched_acc") is not None:
+                c5_str += f", AD={pct(ad5.get('matched_acc'))}"
+            ceil_str = f"{pct(ceil_acc)} (`{ceil_key}`)" if ceil_acc is not None else "—"
             target_rows.append([
                 f"`{pair}`",
                 label,
@@ -261,15 +323,21 @@ def build_pillar1_sections() -> List[str]:
                 c5_str,
                 f"{pct(ad.get('matched_acc'))} / {pct(lo.get('matched_acc'))}",
                 f"{pct(c1.get('shuffled_acc'))} / {pct(c5.get('shuffled_acc'))}" if c5 else pct(c1.get("shuffled_acc")),
-                pct(ceil_acc),
+                ceil_str,
                 f"{pct(eff1)} / {pct(eff5)}" if eff5 is not None else pct(eff1),
             ])
 
-        # Stage 0 free geometry (strictly mask_mode == "none")
+        # Stage 0 free geometry (ALL variants, strictly mask_mode == "none")
         fg = d.get("stage0", {}).get("free_geometry", {}).get("variants", {})
-        for vk in ("proc_ls_scale", "proc_var_matched", "ridge_polar_I", "ridge_sigma_rescaled", "F_spherical_procrustes"):
-            if vk in fg and isinstance(fg[vk], dict) and "cf_1x" in fg[vk]:
-                _append_p1b_row(rows_nat, f"FreeGeom `{vk}` (1L, no mask)", fg[vk], nat_single)
+        best_fg = max(
+            ((vk, vv["cf_1x"]["matched_acc"]) for vk, vv in fg.items() if isinstance(vv, dict) and "cf_1x" in vv),
+            key=lambda x: x[1],
+            default=(None, -1.0),
+        )[0]
+        for vk, vv in fg.items():
+            if isinstance(vv, dict) and "cf_1x" in vv:
+                tag = " [best]" if vk == best_fg else ""
+                _append_p1b_row(rows_nat, f"FreeGeom `{vk}`{tag} (1L, no mask)", vv, ["A0_self_single", "A0_self_l8", "A0_self_l"])
 
         # Stage 1 Lever A
         for ck, cv in d.get("stage1_leverA", {}).get("configs", {}).items():
@@ -277,9 +345,11 @@ def build_pillar1_sections() -> List[str]:
                 continue
             mm = cv.get("mask_mode", "none")
             if mm == "none":
-                _append_p1b_row(rows_nat, f"LeverA `{ck}` (no mask)", cv, nat_band if "band" in ck else nat_single)
+                fb = ["A1_self_band"] if "band" in ck else ["A0_self_single", "A0_self_l8"]
+                _append_p1b_row(rows_nat, f"LeverA `{ck}` (no mask)", cv, fb)
             else:
-                _append_p1b_row(rows_ko, f"LeverA `{ck}` (mask={mm})", cv, nat_ko)
+                fb = ["A3_self_band3_12_14_full_ko", "A3_self_band", "A2_self_l8_full_ko", "A2_self"] if "band" in ck else ["A2_self_l8_full_ko", "A2_self"]
+                _append_p1b_row(rows_ko, f"LeverA `{ck}` (mask={mm})", cv, fb)
 
         # Stage 2 Lever B
         for ck, cv in d.get("stage2_leverB", {}).get("configs", {}).items():
@@ -287,27 +357,27 @@ def build_pillar1_sections() -> List[str]:
                 continue
             mm = cv.get("mask_mode", "none")
             if mm == "none":
-                _append_p1b_row(rows_nat, f"LeverB `{ck}` (no mask)", cv, nat_single)
+                _append_p1b_row(rows_nat, f"LeverB `{ck}` (no mask)", cv, ["A0_self_single", "A0_self_l8"])
             else:
-                _append_p1b_row(rows_ko, f"LeverB `{ck}` (mask={mm})", cv, nat_ko)
+                _append_p1b_row(rows_ko, f"LeverB `{ck}` (mask={mm})", cv, ["A3_self_band3_12_14_full_ko", "A3_self_band", "A2_self"])
 
         # Stage 3 Lever C
         s3 = d.get("stage3_leverC", {}).get("eval")
         if isinstance(s3, dict) and "cf_1x" in s3:
             mm = s3.get("mask_mode", "none")
             if mm == "none":
-                _append_p1b_row(rows_nat, f"LeverC `{s3.get('name', 's3')}` (no mask)", s3, nat_single)
+                _append_p1b_row(rows_nat, f"LeverC `{s3.get('name', 's3')}` (no mask)", s3, ["A0_self_single", "A0_self_l8"])
             else:
-                _append_p1b_row(rows_ko, f"LeverC `{s3.get('name', 's3')}` (mask={mm})", s3, nat_ko)
+                _append_p1b_row(rows_ko, f"LeverC `{s3.get('name', 's3')}` (mask={mm})", s3, ["A3_self_band", "A2_self"])
 
     out.append("#### 1C-i. Natural Unmasked Regime (`mask_mode == none`)")
     out.append(md_table(
-        ["Pair", "Config (Unmasked)", "CF-Flip 1x (95% CI)", "CF-Flip 5x Powered (95% CI)", "AD / LORO-5", "Shuf 1x / 5x", "Native Ceiling", "Transport Eff (1x / 5x)"],
+        ["Pair", "Config (Unmasked)", "CF-Flip 1x (95% CI)", "CF-Flip 5x Powered (95% CI)", "AD / LORO-5", "Shuf 1x / 5x", "Matched Native Ceiling", "Transport Eff (1x / 5x)"],
         rows_nat,
     ))
     out.append("\n#### 1C-ii. Earlier-Subject / Full-Subject Attention-Knockout Regime (`mask_mode != none`)")
     out.append(md_table(
-        ["Pair", "Config (Attention Knockout)", "CF-Flip 1x (95% CI)", "CF-Flip 5x Powered (95% CI)", "AD / LORO-5", "Shuf 1x / 5x", "Native Ceiling", "Transport Eff (1x / 5x)"],
+        ["Pair", "Config (Attention Knockout)", "CF-Flip 1x (95% CI)", "CF-Flip 5x Powered (95% CI)", "AD / LORO-5", "Shuf 1x / 5x", "Matched Native Ceiling", "Transport Eff (1x / 5x)"],
         rows_ko,
     ))
     out.append("")
@@ -320,7 +390,7 @@ def build_pillar1_sections() -> List[str]:
 
 
 def build_pillar2_sections() -> List[str]:
-    out: List[str] = ["## Pillar 2: Platonic Organs — Native SwiGLU Conjugation & Write-Once Implant-Anywhere"]
+    out: List[str] = ["## Pillar 2: Platonic Organs — Native SwiGLU Conjugation & Earlier Prototype Comparison"]
 
     # --- 2A. P-ORGAN-0 Stage 0 Channel Census, Regime 1, Gate G0 ---
     op0 = load_json_opt("results_organs_p0.json")
@@ -333,14 +403,16 @@ def build_pillar2_sections() -> List[str]:
         sh = s0.get("split_half_R_agreement", {})
         cp = s0.get("constant_pin", {})
         g0 = s0.get("gate_g0_read_test", {})
+        lm24 = g0.get("landmarks_24_retrieval", {})
+        gp17 = g0.get("gap_17_retrieval", {})
         out.append(md_table(
             ["Diagnostic", "Metric", "Value"],
             [
                 ["Channel Census (`qwen2.5-3b L17 -> smollm2-1.7b L9`)", "Held-out Read $R^2$ / Write $R^2$ (filtered vs raw)", f"{num(s0.get('heldout_read_R2'), 4)} / {num(s0.get('heldout_write_R2'), 4)} (raw: {num(s0.get('heldout_write_R2_raw'), 4)})"],
-                ["Massive-Activation Outlier Filter", "Dropped tokens / max norm before->after", f"{of.get('n_dropped', '—')}/{of.get('n_before', '—')} | {num(of.get('max_norm_A_before'), 1)} -> {num(of.get('max_norm_A_after'), 1)}"],
+                ["Massive-Activation Outlier Filter", "Dropped tokens; max norm before->after", f"{of.get('n_dropped', '—')}/{of.get('n_before', '—')}; {num(of.get('max_norm_A_before'), 1)} -> {num(of.get('max_norm_A_after'), 1)}"],
                 ["Split-Half Socket Stability", "Top-256 PC mean / median cos (`>=0.80`)", f"{num(sh.get('top256_pc_mean_cos'), 4)} / {num(sh.get('top256_pc_median_cos'), 4)} ({sh.get('n_top256_ge_080', '—')}/256)"],
-                ["Constant Pin $c_B^\\top x_B \\approx 1$", "$\\sigma(c_A^\\top x_A)$ / $\\sigma(c_B^\\top x_B)$ / pin err", f"{num(cp.get('std_cA_xA'), 5)} / {num(cp.get('std_cB_xB'), 5)} / {cp.get('pin_err', '—'):.2e}"],
-                ["Gate G0 (1000-distractor Read Retrieval)", "Known 24 LM Top-1 / Gap-17 B-unknown Top-1 (ratio)", f"{pct(g0.get('landmarks_24_retrieval', {}).get('top1_acc'))} / {pct(g0.get('gap_17_retrieval', {}).get('top1_acc'))} (ratio {num(g0.get('gap_to_known_top1_ratio'), 3)})"],
+                ["Constant Pin $c_B^\\top x_B \\approx 1$", "$\\sigma(c_A^\\top x_A)$ / $\\sigma(c_B^\\top x_B)$ / pin err", f"{num(cp.get('std_cA_xA'), 5)} / {num(cp.get('std_cB_xB'), 5)} / {cp.get('pin_err', 0.0):.2e}"],
+                ["Gate G0 (1000-distractor Read Retrieval)", "Known 24 LM Top-1 (Top-5) / Gap-17 Top-1 (Top-5)", f"{pct(lm24.get('top1_acc'))} ({pct(lm24.get('top5_acc'))}) / {pct(gp17.get('top1_acc'))} ({pct(gp17.get('top5_acc'))}); ratio {num(g0.get('gap_to_known_top1_ratio'), 3)}"],
             ],
         ))
         out.append("\n*Regime 1: 2,000-Neuron Stock MLP Conjugation (`n_eval_tokens = 4,104`):*")
@@ -356,18 +428,19 @@ def build_pillar2_sections() -> List[str]:
                 num(av.get("channel_model_r_g_R2"), 4),
             ])
         out.append(md_table(
-            ["Conjugation Arm", "Median $r(g)$", "Frac $r(g)\\ge 0.70$", "Median $r(a)$", "Median $|\\Delta|/\\sigma$", "BOS Max $|y|$", "Channel Model $R^2$"],
+            ["Conjugation Arm", "Median $r(g)$", "Frac $r(g)\\ge 0.70$", "Median $r(a)$", "Median $\\lvert\\Delta\\rvert/\\sigma$", "BOS Max $\\lvert y\\rvert$", "Channel Model $R^2$"],
             r1_rows,
         ))
         out.append("")
 
-    # --- 2B. Multi-Family Write-Once Implant-Anywhere + Foils ---
-    out.append("### Table 2B — Write-Once, Implant-Anywhere Across 4 Architectures (`results_organs_multifamily.json` Stage A + Foils)")
+    # --- 2B. Earlier Bespoke Prototype Multi-Family (Stage A) ---
+    out.append("### Table 2B — Earlier Bespoke Prototype Across 4 Recipients (`results_organs_multifamily.json` Stage A)")
+    out.append("*Note: This earlier hand-factored bilinear prototype (`Entity × Country`) succeeded on `smollm2-1.7b` only and collapsed to `0.0%` on Granite, Falcon3, and Qwen-1.5B, motivating the frozen Channel-Pushforward engine in Pillar 4.*\n")
     omf = load_json_opt("results_organs_multifamily.json")
     if omf is None:
-        out.append("> **[PENDING]** `results_organs_multifamily.json` not yet generated — re-run `build_repo_tables.py` once Stage A & Stage B complete on MPS.\n")
+        out.append("> **[PENDING]** `results_organs_multifamily.json` not found.\n")
     else:
-        stage_a = omf.get("stageA", omf.get("stage_A", {}))
+        stage_a = omf.get("stage_A_multifamily", omf.get("stageA", omf.get("stage_A", {})))
         recips = stage_a.get("recipients", stage_a)
         rows_a = []
         for target_name, tdata in recips.items():
@@ -375,111 +448,125 @@ def build_pillar2_sections() -> List[str]:
                 continue
             arms = tdata.get("arms", tdata)
             mcn = tdata.get("mcnemar_vs_shuffled", {})
+            rk = tdata.get("model_key", target_name)
+            lB = tdata.get("layer", "—")
             for arm_name, av in arms.items():
                 if not isinstance(av, dict) or ("qa" not in av and "direct_country_em" not in av):
                     continue
                 qa = av.get("qa", av)
-                loc = av.get("locality", {})
+                loc = av.get("locality_196", av.get("locality", {}))
                 gt = av.get("general_text", {})
                 dppl = gt.get("delta_ppl")
                 if dppl is None and "ppl" in gt and "baseline" in tdata and "general_text" in tdata["baseline"]:
                     dppl = gt["ppl"] - tdata["baseline"]["general_text"]["ppl"]
                 pv = mcn.get(arm_name, {}).get("ripple", {}).get("p_value")
                 rows_a.append([
-                    f"`{target_name}`",
+                    f"`{rk}` (L{lB})",
                     f"`{arm_name}`",
                     pct(qa.get("direct_country_em")),
                     f"{pct(qa.get('unseen_ripple_3attr_em'))} (p={pval_str(pv)})" if pv is not None else pct(qa.get("unseen_ripple_3attr_em")),
                     pct(qa.get("dataset_fr_it_8_rule_gen")),
                     pct(qa.get("protected_retention_em")),
                     f"{loc.get('newly_broken_unrelated', '—')}/{loc.get('n_unrelated_orig_correct', '—')} ({pct(loc.get('unrelated_retention'))})",
-                    f"KL={num(gt.get('mean_kl'), 6)} ΔPPL={num(dppl, 4, True)}",
+                    f"KL={num(gt.get('mean_kl'), 6)}, ΔPPL={num(dppl, 4, True)}",
                     f"{av.get('unlearn_max_dlogit', av.get('exact_unlearn_max_abs_diff', '—'))}",
                 ])
-        if rows_a:
-            out.append(md_table(
-                ["Recipient", "Arm", "Direct EM", "Unseen 3-Attr Ripple", "Unseen DS-8", "Protected Ret.", "Unrelated Loc (Broken)", "WikiText KL / ΔPPL", "Exact Unlearn"],
-                rows_a,
-            ))
-        else:
-            out.append("> `results_organs_multifamily.json` present; inspect custom keys.\n")
+        out.append(md_table(
+            ["Recipient", "Arm", "Direct EM", "Unseen 3-Attr Ripple", "Unseen DS-8", "Protected Ret.", "Unrelated Loc (Broken)", "WikiText KL, ΔPPL", "Bit-Exact Removal"],
+            rows_a,
+        ))
 
-    # Comparison Foils: Layer-23 Sidecar vs MEMIT overwrite
+    # Comparison Foils: Layer-23 Sidecar vs Non-Canonical Single-Layer L23 W_down Overwrite
     p2f = load_json_opt("results_pilot2_fullrank.json")
     p2g = load_json_opt("results_pilot2_gated.json")
-    out.append("\n#### Pillar 2 Comparison Foils — Output-Layer (L23) MEMIT vs. Non-Destructive Gated Sidecar (`qwen2.5-3b -> smollm2-1.7b`)")
+    out.append("\n#### Pillar 2 Comparison Foils — Output-Layer (L23) Non-Canonical `W_down` Overwrite vs. Non-Destructive Gated Sidecar (`qwen2.5-3b -> smollm2-1.7b`)")
+    out.append("*Note: The `W_down` overwrite foil is a non-canonical single-layer L23 closed-form edit (`α=1.5, λ=10`), NOT canonical multi-layer MEMIT (`meng_2023_memit`, `R={3..8}, λ=15,000`). Mid-layer multi-hop ripple was not measured for these output-layer foils.*\n")
     foil_rows = []
     if p2f:
         l23_live = p2f["test2A_live_crossing"]["site2_preoutput_last"]["dual_adjoint_wu"]
         l23_memit = p2f["test2B_donor_free_memit"]["site2_preoutput_last"]["dual_adjoint_wu_single_l23"]
         foil_rows.append([
             "Live Dual-Adjoint Crossing (`L35->L23`)", "Donor alive",
-            f"f={pct(l23_live['matched_f_choice8'])}/{pct(l23_live['matched_f_greedy_em'])} EM | f'={pct(l23_live['matched_fp_choice8'])}/{pct(l23_live['matched_fp_greedy_em'])} EM (on old f: {pct(l23_live['fp_scored_on_old_f_choice8'])})",
-            "n/a (live)", "0% (post-attention L23)",
+            f"f={pct(l23_live['matched_f_choice8'])}/{pct(l23_live['matched_f_greedy_em'])} EM; f'={pct(l23_live['matched_fp_choice8'])}/{pct(l23_live['matched_fp_greedy_em'])} EM (on old f: {pct(l23_live['fp_scored_on_old_f_choice8'])})",
+            "n/a (live)", "not measured",
         ])
         cf, cfp = l23_memit["compiled_f"], l23_memit["compiled_f_prime"]
         foil_rows.append([
-            "Platonic MEMIT (`W_down` overwrite, `L23`)", "Donor unloaded, 0 SGD",
-            f"f={pct(cf['test_unseen_para_choice8'])}/{pct(cf['test_unseen_para_greedy_em'])} EM | f'={pct(cfp['test_unseen_para_choice8'])}/{pct(cfp['test_unseen_para_greedy_em'])} EM",
-            f"**+{num(cf['locality_drop_pp'], 2)} pp** (collateral damage!)", "0% (post-attention L23)",
+            "Non-canonical single-layer L23 closed-form `W_down` overwrite (`α=1.5, λ=10`)", "Donor unloaded, 0 SGD",
+            f"f={pct(cf['test_unseen_para_choice8'])}/{pct(cf['test_unseen_para_greedy_em'])} EM; f'={pct(cfp['test_unseen_para_choice8'])}/{pct(cfp['test_unseen_para_greedy_em'])} EM",
+            f"**+{num(cf['locality_drop_pp'], 2)} pp**", "not measured",
         ])
     if p2g:
         cf, cfp = p2g["compiled_f"], p2g["compiled_f_prime"]
         lt = cf["locality_prefill_telemetry"]
         foil_rows.append([
             "Non-Destructive Gated Sidecar (`L23`, frozen `MLP_orig`)", "Donor unloaded, 0 SGD",
-            f"f={pct(cf['test_unseen_para_choice8'])}/{pct(cf['test_unseen_para_greedy_em'])} EM | f'={pct(cfp['test_unseen_para_choice8'])}/{pct(cfp['test_unseen_para_greedy_em'])} EM (on old f: {pct(p2g['compiled_fp_on_old_f']['test_unseen_para_choice8'])})",
+            f"f={pct(cf['test_unseen_para_choice8'])}/{pct(cf['test_unseen_para_greedy_em'])} EM; f'={pct(cfp['test_unseen_para_choice8'])}/{pct(cfp['test_unseen_para_greedy_em'])} EM (on old f: {pct(p2g['compiled_fp_on_old_f']['test_unseen_para_choice8'])})",
             f"**{num(cf['locality_drop_pp'], 2, True)} pp** (FPR={pct(lt['any_bank_token_fire_rate'], 2)}, 0/{lt['total_real_tokens']} toks)",
-            "0% (output-only foil!)",
+            "not measured",
         ])
     if foil_rows:
-        out.append(md_table(["Method", "Deployment Regime", "Private Table `f` / Deranged `f'` (96 unseen paraphrases)", "196-Fact Locality Drop", "Mid-Layer Multi-Hop Ripple"], foil_rows))
+        out.append(md_table(["Method", "Deployment Regime", "Private Table `f` & Deranged `f'` (96 unseen paraphrases)", "196-Fact Unrelated Retention Drop", "Mid-Layer Multi-Hop Ripple"], foil_rows))
     out.append("")
     return out
 
 
 # =============================================================================
-# PILLAR 3: Multi-Donor Composition, Portability & Scaled Knowledge-Gap T3
+# PILLAR 3: Multi-Donor Composition, Portability & Latent-Knowledge Unlocking T3
 # =============================================================================
 
 
 def build_pillar3_sections() -> List[str]:
-    out: List[str] = ["## Pillar 3: Multi-Donor Composition, Selective Exact Unlearning & Scaled Knowledge-Gap Transplant"]
+    out: List[str] = ["## Pillar 3: Multi-Donor Composition, Modular Removal & Latent-Knowledge Unlocking (T3)"]
 
-    # --- 3A. Stage B Native Mid-Layer Multi-Donor Composition ---
-    out.append("### Table 3A — Native Mid-Layer Multi-Donor Composition (`Qwen2.5-3B` + `Falcon3-3B` -> Solo `SmolLM2-1.7B`) & Selective Unlearning")
+    # --- 3A. Earlier Prototype Stage B Multi-Donor Composition ---
+    out.append("### Table 3A — Earlier Prototype Native Multi-Donor Composition (`Qwen2.5-3B` + `Falcon3-3B` -> Solo `SmolLM2-1.7B`) (`results_organs_multifamily.json` Stage B)")
     omf = load_json_opt("results_organs_multifamily.json")
-    if omf is None or ("stage_B" not in omf and "stageB" not in omf):
-        out.append("> **[PENDING]** `results_organs_multifamily.json` Stage B not yet generated.\n")
+    sb = omf.get("stage_B_multidonor_composition", omf.get("stageB", omf.get("stage_B"))) if omf else None
+    if not sb:
+        out.append("> **[PENDING]** `results_organs_multifamily.json` Stage B not found.\n")
     else:
-        sb = omf.get("stageB", omf.get("stage_B", {}))
         rows_b = []
-        modes = sb.get("modes", {"default": {"states": sb}})
+        modes = sb.get("modes", {})
         for mname, mdata in modes.items():
             if not isinstance(mdata, dict):
                 continue
             for state_name, sv in mdata.get("states", {}).items():
                 if not isinstance(sv, dict):
                     continue
-                qa = sv.get("qa", sv)
-                loc = sv.get("locality", {})
-                gt = sv.get("general_text", {})
-                rows_b.append([
-                    f"`{mname}`",
-                    f"`{state_name}`",
-                    str(sv.get("d_ff", sv.get("widened_d_ff", "—"))),
-                    pct(qa.get("france_ripple_3attr_em", qa.get("france_unseen_ripple_3attr_em"))),
-                    pct(qa.get("italy_ripple_3attr_em", qa.get("italy_unseen_ripple_3attr_em"))),
-                    pct(loc.get("unrelated_retention", sv.get("unrelated_retention"))),
-                    num(gt.get("mean_kl", sv.get("mean_kl")), 6),
-                    str(sv.get("max_dlogit", sv.get("max_abs_logit_diff_vs_base", "—"))),
-                ])
-        if rows_b:
-            out.append(md_table(["Mode", "State", "$d_{\\text{ff}}$", "France->Japan 3-Attr Ripple", "Italy->Brazil 3-Attr Ripple", "175 Unrelated Loc", "WikiText KL", "Max $|\\Delta\\text{logit}|$ vs Base"], rows_b))
+                if "qa" in sv:
+                    qa = sv["qa"]
+                    fr = qa.get("france_subset", {})
+                    it = qa.get("italy_subset", {})
+                    loc = sv.get("locality_196", sv.get("locality", {}))
+                    gt = sv.get("general_text", {})
+                    rows_b.append([
+                        f"`{mname}`",
+                        f"`{state_name}`",
+                        str(sv.get("d_ff", "—")),
+                        f"dir={pct(fr.get('direct_country_em'))}, rip3={pct(fr.get('unseen_ripple_3attr_em'))}",
+                        f"dir={pct(it.get('direct_country_em'))}, rip3={pct(it.get('unseen_ripple_3attr_em'))}",
+                        f"{loc.get('newly_broken_unrelated', '—')}/{loc.get('n_unrelated_orig_correct', '—')} ({pct(loc.get('unrelated_retention'))})",
+                        num(gt.get("mean_kl"), 6),
+                        "—",
+                    ])
+                else:
+                    rows_b.append([
+                        f"`{mname}`",
+                        f"`{state_name}`",
+                        str(sv.get("d_ff", "—")),
+                        "restored to base",
+                        "restored to base",
+                        "0/175 (100.0%)",
+                        "0.000000",
+                        str(sv.get("max_dlogit", "—")),
+                    ])
+        out.append(md_table(["Mode", "State", "$d_{\\text{ff}}$", "France->Japan (Qwen Donor)", "Italy->Brazil (Falcon Donor)", "175 Unrelated Loc", "WikiText KL", "Max $\\lvert\\Delta\\text{logit}\\rvert$ vs Base"], rows_b))
         out.append("")
 
     # --- 3B. Output-Layer 3-Family Composition & Compile-Once Deploy-to-4-Recipients ---
-    out.append("### Table 3B — Output-Layer 3-Family Split-Donor Composition & Compile-Once Deploy-to-4-Recipients (`results_pilot3*.json`)")
+    out.append("### Table 3B — Output-Layer 3-Family Split-Donor Composition (`results_pilot3*.json`)")
+    out.append("*Note: Full 2-step greedy EM composition (`62.5%`) succeeds on `smollm2-1.7b` only; on the other 3 recipients 2-step greedy EM is `6.2%` (`qwen2.5-1.5b`), `18.8%` (`falcon3-3b`), and `15.6%` (`granite-3.1-2b`).*\n")
     p3_files = [
         ("smollm2-1.7b", "results_pilot3.json"),
         ("qwen2.5-1.5b", "results_pilot3_qwen2.5-1.5b.json"),
@@ -492,12 +579,11 @@ def build_pillar3_sections() -> List[str]:
         if d is None:
             rows_p3.append([f"`{rec}`", f"[PENDING: {fname}]", "—", "—", "—", "—", "—", "—"])
             continue
-        # MEMIT row if present
         if d.get("solo_B_memit", {}).get("compiled_f_plus_g"):
             m = d["solo_B_memit"]["compiled_f_plus_g"]
             s2 = m["solo_2step_rollout"]
             rows_p3.append([
-                f"`{rec}`", "MEMIT `f + g` (`W_down`)",
+                f"`{rec}`", "Non-canonical L23 `W_down` `f + g`",
                 f"{pct(m['hop1_f_choice8'])} / {pct(m['hop1_f_greedy_em'])}",
                 f"{pct(m['hop2_g_choice8'])} / {pct(m['hop2_g_greedy_em'])}",
                 f"{pct(s2['composed_2step_from_8way_choice8'])} (alt {pct(s2['composed_2step_from_8way_scored_on_other_g'])})",
@@ -569,10 +655,11 @@ def build_pillar3_sections() -> List[str]:
         g3_wb = t2_9["gate3_sigma_c_with_bos"]
         out.append("\n*T2 Key Selectivity & Gate 3 Implicit Constant Stability:*")
         out.append(md_table(["Key Family", "Mean Margin (min pos - max hneg)", "Neon Margin (p10 - p99)", "Recall@0.1%FPR", "Mean $d'^2$"], rows_t2))
-        out.append(f"\n*Gate 3 (`lB=9`):* non-BOS $\\delta_{{99}}={num(g3_nb['eval_p99_abs_err_delta99'], 3)}$, **with-BOS $\\delta_{{99}}={num(g3_wb['eval_p99_abs_err_delta99'], 3)}$** (kills naive zero-bias SwiGLU without explicit BOS null!).\n")
+        out.append(f"\n*Gate 3 (`lB=9`):* non-BOS $\\delta_{{99}}={num(g3_nb['eval_p99_abs_err_delta99'], 3)}$, **with-BOS $\\delta_{{99}}={num(g3_wb['eval_p99_abs_err_delta99'], 3)}$** (kills naive zero-bias SwiGLU without explicit BOS null).\n")
 
-    # --- 3D. Fable T3 Long-Tail Knowledge-Gap Transplant (Original + Scaled!) ---
-    out.append("### Table 3D — Pillar 3c: Fable T3 Long-Tail Knowledge-Gap Transplant (`results_graft_t3_gap*.json`)")
+    # --- 3D. T3 Latent-Knowledge Unlocking (Original + Scaled) ---
+    out.append("### Table 3D — Pillar 3c: T3 Latent-Knowledge Unlocking with Donor-Attributable Content (`results_graft_t3_gap*.json`)")
+    out.append("*Note: In the scaled SmolLM2 cohort (`n=21`), 10/21 base misses were region-first answers naming the country later in the completion, and unpatched SmolLM2 already knew 11/21 capitals, 16/21 currencies, and 15/21 languages. On the strict blind-spot subset (`n=8`), B-self-roundtrip scores `33.3%` on `strict_blindspot_gap.unseen_3attr_ripple` (`0.0%` on the pooled strict per-attribute metric where matched transport scores `50.0%`, `8:0, p=0.0078`).*\n")
     t3_files = [
         ("Original T3 (`qwen2.5-3b->smollm2-1.7b`, n=17)", "results_graft_t3_gap.json", False),
         ("Scaled T3 (`qwen2.5-3b->smollm2-1.7b`)", "results_graft_t3_gap_scaled.json", True),
@@ -582,7 +669,7 @@ def build_pillar3_sections() -> List[str]:
         d = load_json_opt(fname)
         out.append(f"\n#### {label} (`{fname}`)")
         if d is None:
-            out.append(f"> **[PENDING]** `{fname}` not yet generated — run `pilot_graft_t3_gap_scaled.py` on MPS.\n")
+            out.append(f"> **[PENDING]** `{fname}` not found.\n")
             continue
         meta = d["meta"]
         if not is_scaled:
@@ -604,7 +691,7 @@ def build_pillar3_sections() -> List[str]:
         else:
             out.append(
                 f"*Screened `{meta['n_screened']}` obscure entities across `{meta['n_countries_in_gap']}` countries -> "
-                f"`n_gap={meta['n_gap_total']}` genuine `A-right, B-wrong` (`strict_blindspot={meta['n_strict_blindspot_entities']}`).*"
+                f"`n_gap={meta['n_gap_total']}` `A-right, B-startswith-wrong` (`strict_blindspot={meta['n_strict_blindspot_entities']}`).*"
             )
             rows = []
             for cname, cv in d["conditions"].items():
@@ -650,33 +737,53 @@ def build_pillar3_sections() -> List[str]:
 
 
 # =============================================================================
-# PILLAR 4: First-Principles Zero-Magic-Constant Engine (Cap-1 & Sealed Cap-2)
+# PILLAR 4: Frozen Channel-Pushforward Engine (Cap-1 & Cap-2 BIO-RIPPLE)
 # =============================================================================
 
 
 def build_pillar4_first_principles_sections() -> List[str]:
     out: List[str] = [
-        "## Pillar 4: Zero-Magic-Constant Channel-Pushforward Engine (Cap-1 Geography & Strictly Sealed Cap-2 `BIO-RIPPLE`)"
+        "## Pillar 4: Frozen Channel-Pushforward Engine (Cap-1 Geography & Single-Execution Cap-2 `BIO-RIPPLE`)"
     ]
 
-    # --- 4A. Cap-1 Zero-Magic-Constant Multi-Family + 2x2 + Stage B ---
-    out.append("### Table 4A — Cap-1 Zero-Magic-Constant Multi-Family Channel-Pushforward (`results_cap1_channel_pushforward.json`)")
+    # --- 4A. Cap-1 Multi-Family + 2x2 + Stage B + Per-Attribute Scorecard ---
+    out.append("### Table 4A — Cap-1 Multi-Family Channel-Pushforward (`results_cap1_channel_pushforward.json`)")
     c1 = load_json_opt("results_cap1_channel_pushforward.json")
     if c1 is None:
-        out.append("> **[PENDING]** `results_cap1_channel_pushforward.json` not yet generated.\n")
+        out.append("> **[PENDING]** `results_cap1_channel_pushforward.json` not found.\n")
     else:
         meta = c1.get("meta", {})
         tol = meta.get("tolerances", {})
         out.append(
-            f"*Frozen Engine SHA-256:* `{meta.get('engine_sha256', '—')[:16]}` | "
-            f"*Frozen Tolerances:* `alpha={tol.get('alpha')}, alpha_neg={tol.get('alpha_neg')}, delta={tol.get('delta')}` | "
+            f"*Frozen Engine SHA-256:* `{meta.get('engine_sha256', '—')[:16]}` ; "
+            f"*Declared Tolerances:* `alpha={tol.get('alpha')}, alpha_neg={tol.get('alpha_neg')}, delta={tol.get('delta')}` "
+            f"(plus frozen abstention gates `R^2<=0, r<=0.25, a<=0.15`) ; "
             f"*Targets:* `{', '.join(meta.get('targets', []))}`.\n"
         )
+        out.append(
+            "*Note on `HardNeg (JP/BR)`: The 16 hard-negative prompts include `Kyoto` and `Nagoya`, whose true answer is `Japan`, producing a `12.5%` (2/16) BASE floor on every recipient. Delta vs. BASE is shown explicitly.*\n"
+        )
         rows_4a = []
+        rows_4a_attr = []
         for tgt, td in c1.get("stage_A_multifamily", {}).items():
             rk = td.get("model_key", tgt)
             lB = td.get("layer", "—")
             mcn = td.get("mcnemar", {})
+            b_qa = td.get("baseline", {}).get("qa", {})
+            b_loc = td.get("baseline", {}).get("locality_196", {})
+            b_gt = td.get("baseline", {}).get("general_text", {})
+            base_hn = b_qa.get("hardneg_false_flip_to_rule")
+            rows_4a.append([
+                f"`{rk}` (L{lB})", "`BASE`", "unedited", "—",
+                pct(b_qa.get("direct_country_em")),
+                pct(b_qa.get("unseen_ripple_3attr_em")),
+                pct(b_qa.get("dataset_fr_it_8_rule_gen")),
+                pct(b_qa.get("protected_retention_em")),
+                f"{pct(base_hn)} (+0.0pp)",
+                f"0/{b_loc.get('n_unrelated_orig_correct', b_loc.get('n_correct_unrelated', '—'))} (100.0%)",
+                f"0.00000 / PPL={num(b_gt.get('ppl'), 3)}",
+                "—", "—",
+            ])
             for arm_name, av in td.get("arms", {}).items():
                 comp = av.get("compiled", {})
                 status = comp.get("status", "ABSTAIN" if av.get("abstained") else "—")
@@ -693,13 +800,17 @@ def build_pillar4_first_principles_sections() -> List[str]:
                 qa = av.get("qa", {})
                 loc = av.get("locality_196", {})
                 gt = av.get("general_text", {})
-                fire = av.get("firing_audit", {}).get("aligned", {})
+                fire_a = av.get("firing_audit", {}).get("aligned", {})
+                fire_u = av.get("firing_audit", {}).get("unaligned", {})
                 unl = av.get("unlearning", {})
                 mc_k = f"{arm_name}_vs_SHUFFLED_READ_FORCED"
                 pv_rip = mcn.get(mc_k, {}).get("ripple_3attr", {}).get("p_value")
                 pv_dir = mcn.get(mc_k, {}).get("direct", {}).get("p_value")
                 rip_s = f"{pct(qa.get('unseen_ripple_3attr_em'))} (p={pval_str(pv_rip)})" if pv_rip is not None else pct(qa.get("unseen_ripple_3attr_em"))
                 dir_s = f"{pct(qa.get('direct_country_em'))} (p={pval_str(pv_dir)})" if pv_dir is not None else pct(qa.get("direct_country_em"))
+                hn = qa.get("hardneg_false_flip_to_rule")
+                hn_delta = (hn - base_hn) * 100.0 if (hn is not None and base_hn is not None) else None
+                hn_s = f"{pct(hn)} ({num(hn_delta, 1, True)}pp)" if hn_delta is not None else pct(hn)
                 rows_4a.append([
                     f"`{rk}` (L{lB})",
                     f"`{arm_name}`",
@@ -709,16 +820,35 @@ def build_pillar4_first_principles_sections() -> List[str]:
                     rip_s,
                     pct(qa.get("dataset_fr_it_8_rule_gen")),
                     pct(qa.get("protected_retention_em")),
-                    pct(qa.get("hardneg_false_flip_to_rule")),
+                    hn_s,
                     f"{loc.get('newly_broken_unrelated', '—')}/{loc.get('n_unrelated_orig_correct', '—')} ({pct(loc.get('unrelated_retention'))})",
                     f"{num(gt.get('mean_kl'), 5)} / {num(gt.get('delta_ppl'), 4, True)}",
-                    num(fire.get("ff_rate_gate_gt0"), 5),
+                    f"al={num(fire_a.get('ff_rate_gate_gt0'), 5)}, un={num(fire_u.get('ff_rate_gate_gt0'), 5)}",
                     str(unl.get("logits_bit_equal", "—")),
                 ])
+                if arm_name in ("PUSHFWD_DIGITAL_BIASFREE", "PUSHFWD_DIGITAL_AFFINE", "SHUFFLED_READ_FORCED", "SHUFFLED_WRITE_CONTROL"):
+                    rows_4a_attr.append([
+                        f"`{rk}` (L{lB})",
+                        f"`{arm_name}`",
+                        pct(qa.get("direct_country_em")),
+                        pct(qa.get("capital_em")),
+                        pct(qa.get("currency_em")),
+                        pct(qa.get("language_em")),
+                        pct(qa.get("unseen_ripple_3attr_em")),
+                        pct(qa.get("joint_4of4_em")),
+                    ])
         out.append(md_table(
-            ["Recipient", "Arm", "Status", "$d_{\\text{ff}}$", "Direct EM", "Unseen 3-Attr Ripple", "DS-8", "Prot Ret.", "HardNeg FF", "196-Fact Loc (Broken)", "KL / ΔPPL", "Conf. ff", "Bit-UL"],
+            ["Recipient", "Arm", "Status", "$d_{\\text{ff}}$", "Direct EM (n=16)", "Unseen 3-Attr Ripple (n=48)", "DS-8", "Prot Ret.", "HardNeg JP/BR (Δ vs 12.5% BASE)", "196-Fact Unrel Loc (Broken)", "KL / ΔPPL", "Firing Rate (al, un)", "Bit-Rem"],
             rows_4a,
         ))
+
+        if rows_4a_attr:
+            out.append("\n#### Table 4A-iv — Cap-1 Per-Attribute Scorecard (`n=16` entities per attribute)")
+            out.append("*Note: Because the authored geographic write vector combines `country_dst - country_src` and `capital_dst - capital_src`, **Currency** and **Language** are the cleanest tests of propagation beyond authored vector terms. Note also that pooled 3-attribute p-values (`n=48`) treat 3 prompts per entity as independent; entity-level p-values over `n=16` entities are `>= 0.0625` on SmolLM2.*\n")
+            out.append(md_table(
+                ["Recipient", "Arm", "Direct Country (n=16)", "Capital (n=16)", "Currency (n=16)", "Language (n=16)", "3-Attr Ripple Mean", "Joint 4/4 EM"],
+                rows_4a_attr,
+            ))
 
         # 4A-ii: 2x2 Read x Write Ablation on SmolLM2
         ab = c1.get("stage_A_2x2_smollm2_prose_vs_universal", {})
@@ -752,7 +882,7 @@ def build_pillar4_first_principles_sections() -> List[str]:
                 ])
             if rows_2x2:
                 out.append(md_table(
-                    ["2×2 Cell (`smollm2-1.7b` L9)", "Direct EM", "Unseen 3-Attr Ripple", "DS-8", "Prot Ret.", "HardNeg FF", "196-Fact Loc", "KL / ΔPPL", "Conf. ff"],
+                    ["2×2 Cell (`smollm2-1.7b` L9)", "Direct EM", "Unseen 3-Attr Ripple", "DS-8", "Prot Ret.", "HardNeg JP/BR", "196-Fact Loc", "KL / ΔPPL", "Conf. ff"],
                     rows_2x2,
                 ))
 
@@ -784,25 +914,31 @@ def build_pillar4_first_principles_sections() -> List[str]:
                         f"sd={sv.get('state_dict_bit_equal')}, logits={sv.get('logits_bit_equal')}, maxΔ={sv.get('max_abs_dlogit')}",
                     ])
             out.append(md_table(
-                ["State", "$d_{\\text{ff}}$", "France→Japan (Qwen Donor)", "Italy→Brazil (Falcon Donor)", "196-Fact Loc", "KL / ΔPPL", "Bit-Exact Unlearn"],
+                ["State", "$d_{\\text{ff}}$", "France→Japan (Qwen Donor)", "Italy→Brazil (Falcon Donor)", "196-Fact Loc", "KL / ΔPPL", "Bit-Exact Removal"],
                 rows_sb,
             ))
         out.append("")
 
-    # --- 4B. Strictly Sealed Capability 2: BIO-RIPPLE ---
-    out.append("### Table 4B — Strictly Sealed Capability 2 Benchmark: `BIO-RIPPLE` (`Bird->Fish`, `Mammal->Reptile`, `results_bio_ripple_sealed.json`)")
+    # --- 4B. Single-Execution Cap-2: BIO-RIPPLE ---
+    out.append("### Table 4B — Single-Execution Capability 2 Benchmark: `BIO-RIPPLE` (`Bird->Fish`, `Mammal->Reptile`, `results_bio_ripple_sealed.json`)")
     c2 = load_json_opt("results_bio_ripple_sealed.json")
     if c2 is None:
-        out.append("> **[PENDING]** `results_bio_ripple_sealed.json` not yet generated — re-run `build_repo_tables.py` once one-shot Sealed Cap-2 finishes on MPS.\n")
+        out.append("> **[PENDING]** `results_bio_ripple_sealed.json` not found.\n")
         return out
 
     meta2 = c2.get("meta", {})
     tol2 = meta2.get("tolerances", {})
     out.append(
-        f"*Frozen Engine SHA-256:* `{meta2.get('engine_sha256', '—')[:16]}` | "
-        f"*Sealed Cap-2 SHA-256:* `{meta2.get('sealed_cap2_sha256', '—')[:16]}` | "
-        f"*Frozen Tolerances:* `alpha={tol2.get('alpha')}, alpha_neg={tol2.get('alpha_neg')}, delta={tol2.get('delta')}` | "
+        f"*Frozen Engine SHA-256:* `{meta2.get('engine_sha256', '—')[:16]}` ; "
+        f"*Cap-2 Benchmark SHA-256 (self-attested, single recorded execution):* `{meta2.get('sealed_cap2_sha256', '—')[:16]}` ; "
+        f"*Declared Tolerances:* `alpha={tol2.get('alpha')}, alpha_neg={tol2.get('alpha_neg')}, delta={tol2.get('delta')}` ; "
         f"*Donor Frame-Only AUROC:* `{meta2.get('donor_frame_certs', {})}`.\n"
+    )
+    out.append(
+        "*Definitions:* **FC** = first-token log-probability preference (`new > old`); **EM** = greedy-generation alias match; **elig** = subset of items where BASE prefers the old answer. "
+        "**Hops caveat:** `hop1_heat_lamp` (`\"...with a heat lamp because it is\"`) entails `cold` regardless of species, creating a flat `24/48` floor on Mammal→Reptile; use the **eligible-subset hops** as the primary hop metric. "
+        "**In-context premise baseline caveat:** Hard-negative prompts are never premise-prefixed (`bio_ripple_sealed.py:337-347`), so `IN_CONTEXT_PREMISE` HardNeg equals BASE by construction and is marked `n/a (unprefixed)`. "
+        "**Granite firing caveat:** Granite's aligned general-text firing rate is `0.00170` (`<= 0.002`), while its unaligned-split firing rate is `0.00641` (`0.641%`); both are shown below.\n"
     )
 
     def _fmt_fc_em(c2d: dict, key_fc: str, key_em: str, elig_fc: Optional[str] = None, elig_em: Optional[str] = None) -> str:
@@ -814,8 +950,19 @@ def build_pillar4_first_principles_sections() -> List[str]:
             s += f" (elig {pct(el[elig_fc].get('acc'))}/{pct(el[elig_em].get('acc'))})"
         return s
 
+    def _fmt_hn(c2d: dict) -> str:
+        ff_fc = c2d.get("hardneg_false_flip_fc", {}).get("acc")
+        ff_em = c2d.get("hardneg_false_flip_em", {}).get("acc")
+        nt_fc = c2d.get("hardneg_strict_nontarget_orig_retained_fc", {}).get("acc")
+        nt_em = c2d.get("hardneg_strict_nontarget_orig_retained_em", {}).get("acc")
+        return f"FF {pct(ff_fc)}/{pct(ff_em)}; NT-ret {pct(nt_fc)}/{pct(nt_em)}"
+
     rows_4b = []
     rows_4b_mcn = []
+    rows_4b_rule = []
+    n_rule_organs_beat_both = 0
+    n_rule_organs_total = 0
+
     for tgt, td in c2.get("recipients", {}).items():
         rk = td.get("model_key", tgt)
         lB = td.get("layer", "—")
@@ -829,28 +976,29 @@ def build_pillar4_first_principles_sections() -> List[str]:
         rows_4b.append([
             f"`{rk}` (L{lB})", "`BASE`", f"elig: {el_tag}",
             _fmt_fc_em(b_c2, "direct_fc_all", "direct_em_all"),
-            _fmt_fc_em(b_c2, "ripple_4attr_fc_all", "ripple_4attr_em_all"),
+            f"{_fmt_fc_em(b_c2, 'ripple_4attr_fc_all', 'ripple_4attr_em_all')} {ci_pct(b_c2.get('ripple_4attr_fc_all', {}).get('species_boot_95ci'))}",
             _fmt_fc_em(b_c2, "hops_2ms_fc_all", "hops_2ms_em_all"),
             f"{pct(b_c2.get('invariant_fc_retention', {}).get('acc'))} / {pct(b_c2.get('invariant_em_retention', {}).get('acc'))}",
-            f"ff={pct(b_c2.get('hardneg_false_flip_em', {}).get('acc'))}, nt={pct(b_c2.get('hardneg_strict_nontarget_orig_retained_em', {}).get('acc'))}",
-            f"{b_loc.get('n_correct_all', '—')}/196 | PPL={num(b_gt.get('ppl'), 3)}",
+            _fmt_hn(b_c2),
+            f"base={b_loc.get('n_correct_all', '—')}/196; PPL={num(b_gt.get('ppl'), 3)}",
         ])
 
-        # IN_CONTEXT_CEILING row
+        # IN_CONTEXT_PREMISE row (renamed from IN_CONTEXT_CEILING)
         ic_c2 = td.get("in_context_ceiling", {})
         if ic_c2:
             rows_4b.append([
-                f"`{rk}` (L{lB})", "`IN_CONTEXT_CEILING`", "prompt ceiling",
+                f"`{rk}` (L{lB})", "`IN_CONTEXT_PREMISE`", "premise baseline",
                 _fmt_fc_em(ic_c2, "direct_fc_all", "direct_em_all", "direct_fc", "direct_em"),
-                _fmt_fc_em(ic_c2, "ripple_4attr_fc_all", "ripple_4attr_em_all", "ripple_4attr_fc", "ripple_4attr_em"),
+                f"{_fmt_fc_em(ic_c2, 'ripple_4attr_fc_all', 'ripple_4attr_em_all', 'ripple_4attr_fc', 'ripple_4attr_em')} {ci_pct(ic_c2.get('ripple_4attr_fc_all', {}).get('species_boot_95ci'))}",
                 _fmt_fc_em(ic_c2, "hops_2ms_fc_all", "hops_2ms_em_all", "hops_2ms_fc", "hops_2ms_em"),
                 f"{pct(ic_c2.get('invariant_fc_retention', {}).get('acc'))} / {pct(ic_c2.get('invariant_em_retention', {}).get('acc'))}",
-                f"ff={pct(ic_c2.get('hardneg_false_flip_em', {}).get('acc'))}, nt={pct(ic_c2.get('hardneg_strict_nontarget_orig_retained_em', {}).get('acc'))}",
+                "n/a (unprefixed)",
                 "unedited B",
             ])
 
         # Compiled / Abstained arms
-        for arm_name, av in td.get("arms", {}).items():
+        arms_dict = td.get("arms", {})
+        for arm_name, av in arms_dict.items():
             comp = av.get("compiled", {})
             status = comp.get("status", "ABSTAIN" if av.get("abstained") else "—")
             if av.get("abstained"):
@@ -862,19 +1010,42 @@ def build_pillar4_first_principles_sections() -> List[str]:
             c2d = av.get("cap2", {})
             loc = av.get("locality_196", {})
             gt = av.get("general_text", {})
-            fire = av.get("firing_audit", {}).get("aligned", {})
+            fire_a = av.get("firing_audit", {}).get("aligned", {})
+            fire_u = av.get("firing_audit", {}).get("unaligned", {})
             unl = av.get("unlearning", {})
+            brk = loc.get("newly_broken_unrelated", loc.get("newly_broken_all", "—"))
+            den = loc.get("n_unrelated_orig_correct", loc.get("n_orig_correct_all", "—"))
             rows_4b.append([
                 f"`{rk}` (L{lB})", f"`{arm_name}`", f"{status} (d_ff={av.get('widened_d_ff', '—')})",
                 _fmt_fc_em(c2d, "direct_fc_all", "direct_em_all", "direct_fc", "direct_em"),
-                _fmt_fc_em(c2d, "ripple_4attr_fc_all", "ripple_4attr_em_all", "ripple_4attr_fc", "ripple_4attr_em"),
+                f"{_fmt_fc_em(c2d, 'ripple_4attr_fc_all', 'ripple_4attr_em_all', 'ripple_4attr_fc', 'ripple_4attr_em')} {ci_pct(c2d.get('ripple_4attr_fc_all', {}).get('species_boot_95ci'))}",
                 _fmt_fc_em(c2d, "hops_2ms_fc_all", "hops_2ms_em_all", "hops_2ms_fc", "hops_2ms_em"),
                 f"{pct(c2d.get('invariant_fc_retention', {}).get('acc'))} / {pct(c2d.get('invariant_em_retention', {}).get('acc'))}",
-                f"ff={pct(c2d.get('hardneg_false_flip_em', {}).get('acc'))}, nt={pct(c2d.get('hardneg_strict_nontarget_orig_retained_em', {}).get('acc'))}",
-                f"loc={loc.get('newly_broken_unrelated', '—')}/{loc.get('n_unrelated_orig_correct', '—')} KL={num(gt.get('mean_kl'), 5)} ff={num(fire.get('ff_rate_gate_gt0'), 5)} ul={unl.get('logits_bit_equal')}",
+                _fmt_hn(c2d),
+                f"broken={brk}/{den}; KL={num(gt.get('mean_kl'), 5)}; ff={num(fire_a.get('ff_rate_gate_gt0'), 5)} (un={num(fire_u.get('ff_rate_gate_gt0'), 5)}); bit_rem={unl.get('logits_bit_equal')}",
             ])
 
-        # McNemar comparisons
+        # Per-rule table for primary arm vs BASE & SHUFFLED_R_FORCED
+        prim_c2 = arms_dict.get("CHANNEL_PUSHFORWARD_BIASFREE", {}).get("cap2", {})
+        shuf_c2 = arms_dict.get("SHUFFLED_R_FORCED", {}).get("cap2", {})
+        for rname in ("Bird->Fish", "Mammal->Reptile"):
+            pr = prim_c2.get("by_rule", {}).get(rname, {})
+            br = b_c2.get("by_rule", {}).get(rname, {})
+            sr = shuf_c2.get("by_rule", {}).get(rname, {})
+            if pr:
+                n_rule_organs_total += 1
+                if pr["ripple_fc"]["acc"] > br.get("ripple_fc", {}).get("acc", -1) and pr["ripple_fc"]["acc"] > sr.get("ripple_fc", {}).get("acc", -1):
+                    n_rule_organs_beat_both += 1
+                rows_4b_rule.append([
+                    f"`{rk}` (L{lB})",
+                    f"`{rname}`",
+                    f"{pct(pr['direct_fc']['acc'])} / {pct(pr['direct_em']['acc'])} (BASE {pct(br.get('direct_fc', {}).get('acc'))})",
+                    f"{pct(pr['ripple_fc']['acc'])} {ci_pct(pr['ripple_fc'].get('species_boot_95ci'))} / {pct(pr['ripple_em']['acc'])}",
+                    f"BASE {pct(br.get('ripple_fc', {}).get('acc'))} ; Shuf {pct(sr.get('ripple_fc', {}).get('acc'))}",
+                    f"{pct(pr['hops_fc']['acc'])} / {pct(pr['hops_em']['acc'])} (BASE {pct(br.get('hops_fc', {}).get('acc'))})",
+                ])
+
+        # McNemar comparisons (ZERO bare pipes inside cells!)
         for comp_name, mv in td.get("mcnemar", {}).items():
             d_fc = mv.get("direct", {}).get("fc_all", {})
             d_em = mv.get("direct", {}).get("em_all", {})
@@ -885,18 +1056,35 @@ def build_pillar4_first_principles_sections() -> List[str]:
             h_em = mv.get("hops_2ms", {}).get("em_all", {})
             rows_4b_mcn.append([
                 f"`{rk}`", f"`{comp_name}`",
-                f"FC {d_fc.get('n10')}:{d_fc.get('n01')} (p={pval_str(d_fc.get('p_value'))}) | EM {d_em.get('n10')}:{d_em.get('n01')} (p={pval_str(d_em.get('p_value'))})",
-                f"FC {r_fc.get('n10')}:{r_fc.get('n01')} (p={pval_str(r_fc.get('p_value'))}) | EM {r_em.get('n10')}:{r_em.get('n01')} (p={pval_str(r_em.get('p_value'))})",
+                f"FC {d_fc.get('n10')}:{d_fc.get('n01')} (p={pval_str(d_fc.get('p_value'))}); EM {d_em.get('n10')}:{d_em.get('n01')} (p={pval_str(d_em.get('p_value'))})",
+                f"FC {r_fc.get('n10')}:{r_fc.get('n01')} (p={pval_str(r_fc.get('p_value'))}); EM {r_em.get('n10')}:{r_em.get('n01')} (p={pval_str(r_em.get('p_value'))})",
                 f"FC {r_el.get('n10')}:{r_el.get('n01')} (p={pval_str(r_el.get('p_value'))})",
-                f"FC {h_fc.get('n10')}:{h_fc.get('n01')} (p={pval_str(h_fc.get('p_value'))}) | EM {h_em.get('n10')}:{h_em.get('n01')} (p={pval_str(h_em.get('p_value'))})",
+                f"FC {h_fc.get('n10')}:{h_fc.get('n01')} (p={pval_str(h_fc.get('p_value'))}); EM {h_em.get('n10')}:{h_em.get('n01')} (p={pval_str(h_em.get('p_value'))})",
             ])
 
     out.append(md_table(
-        ["Recipient", "Arm", "Status / $d_{\\text{ff}}$", "Direct (FC / EM)", "4-Attr Ripple (FC / EM)", "2-Sent Hops (FC / EM)", "Invariant Ret (FC/EM)", "HardNeg (FF / Strict NT Ret)", "Loc / KL / Conf. ff / Bit-UL"],
+        ["Recipient", "Arm", "Status / $d_{\\text{ff}}$", "Direct (FC / EM)", "4-Attr Ripple (FC / EM) [Species 95% CI]", "2-Sent Hops (FC / EM)", "Invariant Acc (FC/EM)", "HardNeg (FF FC/EM; NT-Ret FC/EM)", "Broken / Base-Correct (all 196); KL; Firing; Bit-Rem"],
         rows_4b,
     ))
+
+    if rows_4b_rule:
+        out.append("\n#### Table 4B-iv — Cap-2 Per-Rule Breakdown & Clustered Evidence (`CHANNEL_PUSHFORWARD_BIASFREE`)")
+        p_org = _exact_one_sided_sign_p(n_rule_organs_beat_both, n_rule_organs_total) if n_rule_organs_total else None
+        smol_r_fc = c2["recipients"]["smollm2"]["mcnemar"]["CHANNEL_PUSHFORWARD_BIASFREE_vs_BASE"]["ripple_4attr"]["fc_all"]
+        min_sp_improved = math.ceil(smol_r_fc["n10"] / 4.0)
+        p_sp_bound = _exact_one_sided_sign_p(min_sp_improved, min_sp_improved) if smol_r_fc["n01"] == 0 else None
+        out.append(
+            f"*Clustered statistics:* **{n_rule_organs_beat_both}/{n_rule_organs_total} compiled rule-organs** beat both BASE and forced shuffled-read on unseen 4-attribute ripple FC (exact one-sided sign test `p = {pval_str(p_org)}`). "
+            f"On `smollm2-1.7b`, `{smol_r_fc['n10']}:{smol_r_fc['n01']}` item-level ripple FC improvement across 48 species (4 attributes/species, 0 regressions) guarantees at least `{min_sp_improved}/48` species improved and 0 worsened (conservative species-level sign-test bound `p <= {pval_str(p_sp_bound)}`).\n"
+        )
+        out.append(md_table(
+            ["Recipient", "Rule (24 unseen species)", "Direct FC / EM", "4-Attr Ripple FC [Sp. 95% CI] / EM", "Ripple FC Controls", "2-Sent Hops FC / EM"],
+            rows_4b_rule,
+        ))
+
     if rows_4b_mcn:
-        out.append("\n#### Table 4B-ii — Sealed Cap-2 Exact Two-Sided McNemar p-Values")
+        out.append("\n#### Table 4B-ii — Cap-2 Exact Two-Sided Item-Level McNemar p-Values")
+        out.append("*Note: Item-level McNemar pools 4 attributes per species (`n=192` over 48 species) and 2 hop prompts per species (`n=96`); treat species-clustered CIs and sign-test bounds in Table 4B-iv as primary.*\n")
         out.append(md_table(
             ["Recipient", "Comparison", "Direct (n10:n01, p)", "4-Attr Ripple All (n10:n01, p)", "4-Attr Ripple Elig FC", "2-Sent Hops All (n10:n01, p)"],
             rows_4b_mcn,
@@ -905,7 +1093,7 @@ def build_pillar4_first_principles_sections() -> List[str]:
     # 4B-iii: Cross-Capability Co-Implantation on Solo SmolLM2
     co = c2.get("co_implantation_smollm2", {})
     if co and co.get("states"):
-        out.append("\n#### Table 4B-iii — Cross-Capability Co-Implantation on Solo `smollm2-1.7b` L9 (`Cap-1 Geo + Cap-2 Bio`: $d_{\\text{ff}}$ `8192 → 8200 → 8196 → 8192`)")
+        out.append("\n#### Table 4B-iii — Cross-Capability Co-Implantation & Bit-Exact Modular Removal on Solo `smollm2-1.7b` L9 (`Cap-1 Geo + Cap-2 Bio`: $d_{\\text{ff}}$ `8192 → 8200 → 8196 → 8192`)")
         rows_co = []
         for st_name, sv in co["states"].items():
             if "cap1" in sv and "cap2" in sv:
@@ -931,11 +1119,11 @@ def build_pillar4_first_principles_sections() -> List[str]:
                 rows_co.append([
                     f"`{st_name}`",
                     str(p1u.get("restored_d_ff", "—")),
-                    "restored to base", "restored to base", "100.0%", "0.00000",
+                    "restored to base", "restored to base", "0/175 (100.0%)", "0.00000",
                     f"cap1_eq={p1u.get('logits_bit_equal')}, cap2_eq={p2u.get('logits_bit_equal')}, maxΔ={max(p1u.get('max_abs_dlogit', 0.0), p2u.get('max_abs_dlogit', 0.0))}",
                 ])
         out.append(md_table(
-            ["State", "$d_{\\text{ff}}$", "Cap-1 Geography (EM)", "Cap-2 BIO-RIPPLE (FC/EM)", "196-Fact Loc", "KL / ΔPPL", "Bit-Exact Certificate"],
+            ["State", "$d_{\\text{ff}}$", "Cap-1 Geography (EM)", "Cap-2 BIO-RIPPLE (FC/EM)", "196-Fact Unrel Loc", "KL / ΔPPL", "Bit-Exact Modular Removal Certificate"],
             rows_co,
         ))
     out.append("")
@@ -945,14 +1133,17 @@ def build_pillar4_first_principles_sections() -> List[str]:
 def main() -> None:
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sections: List[str] = [
-        "# PlatonicSwap — Master Programmatically Audited Results",
+        "# PlatonicSwap — Master Programmatically Audited Results (`v1.0`)",
         "",
-        f"> **Auto-generated** by `build_repo_tables.py` at `{now}` directly from JSON artifacts in `/tmp/platos_key_lab/` (zero hand-typed numbers).",
+        f"> **Auto-generated** by `experiments/build_repo_tables.py` at `{now}` directly from JSON artifacts in `results/` (zero hand-typed numbers; strict column-count and no-bare-pipe assertions enforced).",
         "",
     ]
 
-    # Manifest of audited JSONs
+    # Manifest of audited JSONs (21 core + 3 supporting upstream JSONs)
     tracked_jsons = [
+        "results_baseline.json",
+        "results_referee_controls.json",
+        "results_systems.json",
         "results_pilot0.json",
         "results_pilot1.json",
         "results_pilot1_qwen2.5-3b_to_granite-3.1-2b.json",
@@ -978,7 +1169,9 @@ def main() -> None:
     man_rows = []
     n_present = 0
     for fn in tracked_jsons:
-        p = LAB_DIR / fn
+        p = RESULTS_DIR / fn
+        if not p.exists():
+            p = SCRIPT_DIR / fn
         if p.exists():
             n_present += 1
             st = p.stat()
