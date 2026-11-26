@@ -1239,6 +1239,10 @@ def load_model_fp32(model_key: str) -> Tuple[Any, Any, torch.device, float]:
 
 
 def unload_model(model: Any) -> None:
+    try:
+        model.to("cpu")
+    except Exception:
+        pass
     del model
     gc.collect()
     if torch.cuda.is_available():

@@ -1093,7 +1093,12 @@ def run_falsifier_a(args: argparse.Namespace) -> Dict[str, Any]:
         donor_heads_data[(li, hq)] = hd
 
     # UNLOAD Donor A completely before loading any Recipient B!
+    del layers_A
     po.unload_model(model_A)
+    del model_A
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     print(f"  Donor {DONOR_KEY} completely unloaded!")
 
     # ------------------------------------------------------------------
