@@ -1070,7 +1070,7 @@ def run_falsifier_b(args: argparse.Namespace) -> Dict[str, Any]:
                 unl = poe.verify_exact_bit_unlearning(model_B, tok_B, dev_B, mlp_B, orig_state_B, base_logits_probe, probe_prompts)
             finally:
                 tok_B.padding_side = old_pad
-            loc_str = f"loc={loc_r['newly_broken_unrelated']}/{loc_r['n_unrelated_orig_correct']} KL={gt_r['mean_kl']:.5f}" if do_loc else "loc=skip"
+            loc_str = f"loc={loc_r.get('newly_broken_unrelated', loc_r['newly_broken_all'])}/{loc_r.get('n_unrelated_orig_correct', loc_r['n_orig_correct_all'])} KL={gt_r['mean_kl']:.5f}" if do_loc else "loc=skip"
             print(
                 f"  [{arm_name:34s}] d_ff={new_dff} | "
                 f"Carry tens={ev['carry']['tens_top1']['acc']:.3f}({delta['delta_carry_tens_top1']:+.3f}) "
