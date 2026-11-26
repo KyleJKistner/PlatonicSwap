@@ -9,7 +9,23 @@
 
 ---
 
-## Executed & Planned `v2` Falsification Ladder (Apple Silicon M5 Pro, 48 GB MPS)
+## Completed `v2` Phase-A Falsification Results (Audited JSONs in `results/`)
+
+| Experiment | Compute & Artifact | Outcome | Headline Audited Finding |
+| :--- | :--- | :---: | :--- |
+| **Step 0 — Read×Write Decomposition & Per-Item Gate Telemetry** | Local M5 Pro MPS (`1,615 s`) · [`results_v2_step0_rw_diagnostic.json`](results/results_v2_step0_rw_diagnostic.json) | **BREAKTHROUGH (Write-Limited)** | **`0 / 192` gate misses** across all 4 recipients (`pos φ ≥ 0.90` on `92–100%`). Keeping the untouched frozen `v1.0` Pushforward Reader and swapping **only** the write vector (`PUSH_READ × NATIVE_WRITE`) jumps Direct Full-FC to **`100.0%` on 4/4 recipients** (`SmolLM2`: **`100.0% FC / 83.3% EM`**, Ripple **`97.4% FC / 51.0% EM`** — beating Native-B Oracle `47.9% / 41.1%` EM!; `Granite`: **`100.0% Full-FC / 47.9% EM`** vs. Oracle `18.8%`; `Falcon3`: **`100.0% FC / 39.6% EM`**, Ripple **`87.5%`**; `Qwen1.5B`: **`100.0% FC / 54.2% EM`** vs. Oracle `27.1%`). Actual write alignment `cos(v_push, v_nat) = 0.24–0.40` accounts for **`129 / 129`** write-limited Direct failures. Empirical Pushforward gate `AUROC` (species vs. HardNegs) = `0.80–0.96` (`0.960` Bird→Fish on SmolLM2). |
+| **Falsifier A — RoPE Torus-Dissociation Test (Prediction P1)** | Colab NVIDIA L4 (`277 s`) · [`results_v2_falsifierA_rope_torus.json`](results/results_v2_falsifierA_rope_torus.json) | **CONFIRMED (O1 + O2 Double Dissociation)** | **Exact reversal of `v1.0` ranking on long-range duplicate-token attention (`L05.H09`):** nearly RoPE-nested **`Falcon3-3B`** (`OPTIMAL_ROPE_J`, `i → 2i`) holds **`0.88 / 0.86 / 0.85 / 0.81`** target-lag mass at `Δ = 8 / 16 / 32 / 64` (`r = 0.62` at `Δ=64`) vs. `NAIVE_INDEX_J` (`i → i`) collapsing to **`0.18` (`Δ=32`) → `0.01` (`Δ=64`)** (**`81×` gain** from zero-parameter $\mathcal{J}$). RoPE-incommensurate **`SmolLM2-1.7B`** decays past `Δ ≈ 8` (`0.61 → 0.42 → 0.28 → 0.21`, `r=0.13`), while `ROPE_STRIPPED_REF` recovers **`0.92 / 0.92 / 0.85`**. Short-lag (`Δ=1`) previous-token heads (`L01.H01`, `L19.H11`) hit **`r = 0.98–0.99`, `top1 = 100%`, `KL = 0.03–0.16`** on **both** recipients vs. `HAAR_RANDOM_J` (`r = -0.01..0.47`). 2-hop induction heads (`L20.H01/H03`) fail even under `ROPE_STRIPPED_REF` (`r = 0.09–0.35`), confirming **O2**. |
+| **Falsifier B — Organic Arithmetic-Carry Neuron Transplant** | Colab NVIDIA L4 (`746 s`) · [`results_v2_falsifierB_carry_transplant.json`](results/results_v2_falsifierB_carry_transplant.json) | **FALSIFIED (Null vs. Controls)** | Donor `qwen2.5-3b` carry is multi-layer distributed (`L24 k=64` lesion: `Δcarry_LO = -0.804` vs. `RAND-64 +0.002`, but only `-1.7 pp` EM and `Δnocarry_LO = -0.498`). Conjugating top-32/64 raw pretrained carry rows into `smollm2-1.7b` (`L17→L9` & `L24→L16`, `0/181` locality broken, `torch.equal = True`) fails to beat **`RANDOM_DONOR_NEURONS`** (`70.8%` vs. `71.7%` EM on `L17→L9`, `p=1.0`; `67.5%` vs. `65.8%` on `L24→L16`, `p=0.625`) or **`CONSTANT_MEAN_WRITE`** (`66.7%` / `69.2%`, `p ≥ 0.18`). Even `NATIVE_B_CARRY_AMPLIFY_k32` gains carry FC (`90.8% → 97.5%`) at the expense of No-Carry accuracy (`56.7% → 50.0%`; `43.3%` at `k=64`, `p=0.005`). |
+
+**Strategic Pivot Informed by Phase A:**
+1. **Drop** naive single-layer raw pretrained procedural neuron harvesting (Falsifier B falsified).
+2. **Double down on the two empirically validated `v2` winners:**
+   - **Write-Bridge + Two-Sided Gate `v2` Compiler** (Step 0 proved the frozen `v1.0` Pushforward Reader already reaches `100.0%` Direct Full-FC and `80–97%` Ripple Full-FC across all 4 families once `v_B` is aligned, and beats Native-B Oracle on Direct EM up to `83.3%`!). Next: scale the unlabeled write corpus `10×` + readout-weighted write bridge AND test `<= 25`-step frozen-recipient write-vector refinement (`v2-Lite`) + two-sided `t1/t2` on a fresh externally pre-registered **Sealed Cap-3**.
+   - **Congruent Attention-Head Organs with Optimal RoPE Intertwiner $\mathcal{J}$ + Depth-Cocycle Refit** (Falsifier A proved `top1 = 100%`, `r = 0.99` short-lag transfer and `81×` long-lag `Δ=64` transfer on RoPE-nested `Qwen → Falcon3`). Next: **Falsifier C** (2-site `prev_token → induction` / cyclic digit rotation with sequential depth-cocycle refit to overcome O2).
+
+---
+
+## Executed & Planned `v2` Falsification Ladder (Apple Silicon M5 Pro + Colab NVIDIA L4)
 
 ### Step 0 — Per-Item Gate Telemetry & `2 × 2` Native/Transferred Read×Write Decomposition (`~15 min MPS`)
 - **Script:** `experiments/v2_step0_rw_diagnostic.py` → `results/results_v2_step0_rw_diagnostic.json`
