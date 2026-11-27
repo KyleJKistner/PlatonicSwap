@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "experiment": "v3_gate2_skill_and_sql",
+    "seed": 20261127
+  },
+  "part_a_2hop_policy_swap": {
+    "donor_model": "qwen2.5-7b-instruct",
+    "recipient_model": "smollm2-1.7b-instruct",
+    "n_train": 192,
+    "n_test_sealed": 256,
+    "donor_7b_test": {
+      "left_em": 0.1602,
+      "right_em": 0.3477,
+      "joint_swap_em": 0.1172,
+      "left_fc": 0.9492,
+      "right_fc": 0.9531,
+      "joint_swap_fc": 0.9023
+    },
+    "base_recipient": {
+      "left_em": 0.0039,
+      "right_em": 0.0,
+      "left_fc": 0.7891,
+      "right_fc": 0.1992,
+      "locality_100": {
+        "n_facts": 100,
+        "n_correct": 0,
+        "acc": 0.0
+      }
+    },
+    "contrast_bridges": {
+      "l1": {
+        "train_mean_cos": 0.9908,
+        "train_r2": 0.9752,
+        "lam": 0.005231
+      },
+      "l2": {
+        "train_mean_cos": 0.9896,
+        "train_r2": 0.9671,
+        "lam": 0.094799
+      }
+    },
+    "tiers": {
+      "Tier1_CLOSED_FORM_SEQ_DELTA_W": {
+        "left_em": 0.0117,
+        "right_em": 0.0,
+        "joint_swap_em": 0.0,
+        "left_fc": 0.8008,
+        "right_fc": 0.2305,
+        "joint_swap_fc": 0.0859,
+        "n_bytes_bf16": 67108864,
+        "train_sec": 36.3,
+        "locality_100": {
+          "n_facts": 100,
+          "n_correct": 0,
+          "acc": 0.0,
+          "base_correct": 0,
+          "newly_broken": 0,
+          "retention": 0.0
+        },
+        "rollback": {
+          "logits_bit_equal": true,
+          "max_abs_diff": 0.0
+        }
+      },
+      "Tier2A_SIDECAR_2BLOCK_WITH_HINT": {
+        "left_em": 0.2305,
+        "right_em": 0.2617,
+        "joint_swap_em": 0.1133,
+        "left_fc": 0.9531,
+        "right_fc": 0.9766,
+        "joint_swap_fc": 0.9297,
+        "n_params": 1839104,
+        "n_bytes_bf16": 3678208,
+        "train_sec": 68.7,
+        "locality_100": {
+          "n_facts": 100,
+          "n_correct": 0,
+          "acc": 0.0,
+          "base_correct": 0,
+          "newly_broken": 0,
+          "retention": 0.0
+        },
+        "hot_swap_max_logit_diff": 13.0,
+        "hard_bypass_bit_equal": true,
+        "rollback": {
+          "logits_bit_equal": true,
+          "max_abs_diff": 0.0
+        }
+      },
+      "Tier2B_SIDECAR_OUTPUT_ONLY_CTRL": {
+        "left_em": 0.2227,
+        "right_em": 0.0117,
+        "joint_swap_em": 0.0039,
+        "left_fc": 0.9766,
+        "right_fc": 0.5469,
+        "joint_swap_fc": 0.5312,
+        "n_params": 1839104,
+        "n_bytes_bf16": 3678208,
+        "train_sec": 67.9,
+        "locality_100": {
+          "n_facts": 100,
+          "n_correct": 0,
+          "acc": 0.0,
+          "base_correct": 0,
+          "newly_broken": 0,
+          "retention": 0.0
+        },
+        "hot_swap_max_logit_diff": 12.6133,
+        "hard_bypass_bit_equal": true,
+        "rollback": {
+          "logits_bit_equal": true,
+          "max_abs_diff": 0.0
+        }
+      },
+      "Tier2C_SIDECAR_SHUFFLED_CTRL": {
+        "left_em": 0.0234,
+        "right_em": 0.0195,
+        "joint_swap_em": 0.0,
+        "left_fc": 0.4883,
+        "right_fc": 0.5039,
+        "joint_swap_fc": 0.2852,
+        "n_params": 1839104,
+        "n_bytes_bf16": 3678208,
+        "train_sec": 67.6,
+        "locality_100": {
+          "n_facts": 100,
+          "n_correct": 0,
+          "acc": 0.0,
+          "base_correct": 0,
+          "newly_broken": 0,
+          "retention": 0.0
+        },
+        "hot_swap_max_logit_diff": 4.7266,
+        "hard_bypass_bit_equal": true,
+        "rollback": {
+          "logits_bit_equal": true,
+          "max_abs_diff": 0.0
+        }
+      },
+      "Tier3_TEACHER_LORA_R16": {
+        "left_em": 0.1992,
+        "right_em": 0.3203,
+        "joint_swap_em": 0.1016,
+        "left_fc": 0.9844,
+        "right_fc": 0.9648,
+        "joint_swap_fc": 0.9492,
+        "n_bytes_bf16": 6488064,
+        "train_sec": 49.1,
+        "locality_100": {
+          "n_facts": 100,
+          "n_correct": 0,
+          "acc": 0.0,
+          "base_correct": 0,
+          "newly_broken": 0,
+          "retention": 0.0
+        },
+        "rollback": {
+          "logits_bit_equal": true,
+          "max_abs_diff": 0.0
+        }
+      }
+    },
+    "gate2a_pass": false,
+    "margin_over_shuffled_pp": 11.33,
+    "elapsed_sec": 430.0
+  },
+  "part_b_text_to_sqlite_headroom": {
+    "n_schemas": 8,
+    "n_queries": 80,
+    "models": {
+      "qwen2.5-7b-instruct": {
+        "n_queries": 80,
+        "exec_match_count": 71,
+        "exec_match_rate": 0.8875,
+        "syntax_valid_rate": 0.975,
+        "by_schema": {
+          "logistics_shipments": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 10,
+            "exec_rate": 1.0
+          },
+          "hospital_appointments": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 8,
+            "exec_rate": 0.8
+          },
+          "library_loans": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 9,
+            "exec_rate": 0.9
+          },
+          "solar_power_grid": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 8,
+            "exec_rate": 0.8
+          },
+          "retail_inventory": {
+            "n": 10,
+            "valid": 8,
+            "exec_match": 7,
+            "exec_rate": 0.7
+          },
+          "university_courses": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 10,
+            "exec_rate": 1.0
+          },
+          "flight_manifests": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 10,
+            "exec_rate": 1.0
+          },
+          "sensor_telemetry": {
+            "n": 10,
+            "valid": 10,
+            "exec_match": 9,
+            "exec_rate": 0.9
+          }
+        },
+        "elapsed_sec": 202.1,
+        "samples": [
+          {
+            "id": "logistics_shipments_q00",
+            "pred_sql": "SELECT hub_name FROM warehouses WHERE capacity_tons > 400 ORDER BY hub_name ASC",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q01",
+            "pred_sql": "SELECT COUNT(*) FROM shipments WHERE status = 'delivered'",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q02",
+            "pred_sql": "SELECT SUM(cost_usd) FROM shipments WHERE carrier_id = (SELECT carrier_id FROM carriers WHERE carrier_name = 'AeroCargo')",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q03",
+            "pred_sql": "SELECT wh.hub_name FROM warehouses wh JOIN shipments s ON wh.wh_id = s.wh_id GROUP BY wh.hub_name ORDER BY SUM(s.weight_tons) DESC LIMIT 1",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q04",
+            "pred_sql": "SELECT status, COUNT(*) FROM shipments GROUP BY status ORDER BY status",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q05",
+            "pred_sql": "SELECT carrier_name FROM carriers WHERE carrier_id IN (SELECT carrier_id FROM shipments WHERE status = 'delayed') ORDER BY carrier_name",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q06",
+            "pred_sql": "SELECT AVG(cost_usd) FROM shipments WHERE status = 'delivered' AND wh_id IN (SELECT wh_id FROM warehouses WHERE region = 'North')",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q07",
+            "pred_sql": "SELECT c.carrier_name, SUM(s.weight_tons) AS total_delivered_weight\nFROM carriers c\nJOIN shipments s ON c.carrier_id = s.carrier_id\nWHERE s.status = 'delivered'\nGROUP BY c.carrier_name\nORDER BY total_delivered_weight DESC",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q08",
+            "pred_sql": "SELECT ship_id FROM shipments WHERE weight_tons < 15 ORDER BY cost_usd DESC LIMIT 1",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q09",
+            "pred_sql": "SELECT region \nFROM warehouses \nJOIN shipments ON warehouses.wh_id = shipments.wh_id \nGROUP BY region \nHAVING SUM(cost_usd) > 3500 \nORDER BY region ASC",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q00",
+            "pred_sql": "SELECT doc_name FROM doctors WHERE dept_id = (SELECT dept_id FROM departments WHERE dept_name = 'Cardiology') ORDER BY doc_name",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q01",
+            "pred_sql": "SELECT COUNT(*) FROM appointments WHERE attended = 1",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q02",
+            "pred_sql": "SELECT SUM(d.fee_usd) FROM doctors d JOIN appointments a ON d.doc_id = a.doc_id WHERE a.attended = 1",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q03",
+            "pred_sql": "SELECT p.pat_name FROM patients p JOIN appointments a ON p.pat_id = a.pat_id WHERE a.attended = 1 GROUP BY p.pat_name ORDER BY COUNT(a.appt_id) DESC LIMIT 1",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q04",
+            "pred_sql": "SELECT d.dept_name, COUNT(a.appt_id) AS attended_appointments\nFROM departments d\nJOIN doctors doct ON d.dept_id = doct.dept_id\nJOIN appointments a ON doct.doc_id = a.doc_id\nWHERE a.attended = 1\nGROUP BY d.dept_name\nORDER BY d.dept_name",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q05",
+            "pred_sql": "SELECT AVG(patients.age) \nFROM patients \nJOIN appointments ON patients.pat_id = appointments.pat_id \nJOIN doctors ON appointments.doc_id = doctors.doc_id \nWHERE doctors.doc_name = 'Dr. Lin' AND appointments.attended = 1",
+            "valid": true,
+            "exec_match": false,
+            "err": null
+          }
+        ]
+      },
+      "smollm2-1.7b-instruct": {
+        "n_queries": 80,
+        "exec_match_count": 33,
+        "exec_match_rate": 0.4125,
+        "syntax_valid_rate": 0.6125,
+        "by_schema": {
+          "logistics_shipments": {
+            "n": 10,
+            "valid": 5,
+            "exec_match": 4,
+            "exec_rate": 0.4
+          },
+          "hospital_appointments": {
+            "n": 10,
+            "valid": 6,
+            "exec_match": 4,
+            "exec_rate": 0.4
+          },
+          "library_loans": {
+            "n": 10,
+            "valid": 5,
+            "exec_match": 3,
+            "exec_rate": 0.3
+          },
+          "solar_power_grid": {
+            "n": 10,
+            "valid": 8,
+            "exec_match": 7,
+            "exec_rate": 0.7
+          },
+          "retail_inventory": {
+            "n": 10,
+            "valid": 5,
+            "exec_match": 4,
+            "exec_rate": 0.4
+          },
+          "university_courses": {
+            "n": 10,
+            "valid": 4,
+            "exec_match": 2,
+            "exec_rate": 0.2
+          },
+          "flight_manifests": {
+            "n": 10,
+            "valid": 9,
+            "exec_match": 3,
+            "exec_rate": 0.3
+          },
+          "sensor_telemetry": {
+            "n": 10,
+            "valid": 7,
+            "exec_match": 6,
+            "exec_rate": 0.6
+          }
+        },
+        "elapsed_sec": 91.0,
+        "samples": [
+          {
+            "id": "logistics_shipments_q00",
+            "pred_sql": "SELECT hub_name\nFROM warehouses\nWHERE capacity_tons > 400\nORDER BY hub_name ASC;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q01",
+            "pred_sql": "SELECT COUNT(*) FROM shipments WHERE status = 'delivered';",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q02",
+            "pred_sql": "SELECT SUM(cost_usd) FROM shipments WHERE carrier_id = 1;",
+            "valid": true,
+            "exec_match": false,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q03",
+            "pred_sql": "SELECT hub_name\nFROM warehouses\nGROUP BY hub_name\nORDER BY SUM(weight_tons) DESC\nLIMIT 1;",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: weight_tons"
+          },
+          {
+            "id": "logistics_shipments_q04",
+            "pred_sql": "SELECT status, COUNT(*)\nFROM shipments\nGROUP BY status\nORDER BY status ASC;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q05",
+            "pred_sql": "SELECT carrier_name\nFROM shipments\nWHERE status = 'delayed'\nORDER BY carrier_name ASC;",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: carrier_name"
+          },
+          {
+            "id": "logistics_shipments_q06",
+            "pred_sql": "SELECT AVG(cost_usd) FROM shipments WHERE status = 'delivered' AND region = 'North';",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: region"
+          },
+          {
+            "id": "logistics_shipments_q07",
+            "pred_sql": "SELECT carrier_name, SUM(weight_tons) AS total_delivered_tons\nFROM shipments\nGROUP BY carrier_name\nORDER BY total_delivered_tons DESC;",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: carrier_name"
+          },
+          {
+            "id": "logistics_shipments_q08",
+            "pred_sql": "SELECT ship_id\nFROM shipments\nWHERE weight_tons < 15\nORDER BY cost_usd DESC\nLIMIT 1;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "logistics_shipments_q09",
+            "pred_sql": "SELECT region\nFROM shipments\nWHERE cost_usd > 3500\nORDER BY region ASC;",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: region"
+          },
+          {
+            "id": "hospital_appointments_q00",
+            "pred_sql": "SELECT doc_name FROM doctors WHERE dept_id = 1 ORDER BY doc_name ASC;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q01",
+            "pred_sql": "SELECT COUNT(*) FROM appointments WHERE attended = 1;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q02",
+            "pred_sql": "SELECT SUM(fee_usd) FROM appointments WHERE attended = 1;",
+            "valid": false,
+            "exec_match": false,
+            "err": "no such column: fee_usd"
+          },
+          {
+            "id": "hospital_appointments_q03",
+            "pred_sql": "SELECT pat_name\nFROM patients\nJOIN appointments ON patients.pat_id = appointments.pat_id\nGROUP BY pat_name\nORDER BY COUNT(appointments.pat_id) DESC\nLIMIT 1;",
+            "valid": true,
+            "exec_match": true,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q04",
+            "pred_sql": "SELECT dept_name, COUNT(attended) AS num_attended\nFROM appointments\nJOIN doctors ON appointments.doc_id = doctors.doc_id\nJOIN departments ON doctors.dept_id = departments.dept_id\nGROUP BY dept_name\nORDER BY dept_name;",
+            "valid": true,
+            "exec_match": false,
+            "err": null
+          },
+          {
+            "id": "hospital_appointments_q05",
+            "pred_sql": "SELECT AVG(age) FROM patients WHERE pat_id IN (SELECT pat_id FROM appointments WHERE doc_id = 1);",
+            "valid": true,
+            "exec_match": false,
+            "err": null
+          }
+        ]
+      }
+    },
+    "headroom_gap_pp": 47.5,
+    "headroom_bar_80_vs_40_pass": false,
+    "elapsed_sec": 293.2
+  }
+}
