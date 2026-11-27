@@ -585,34 +585,42 @@ def forward_qwen2_prefix_no_hooks(
     seq_len = int(inputs_embeds.shape[1])
     position_ids = torch.arange(seq_len, device=inputs_embeds.device).unsqueeze(0)
 
+    import inspect
     from transformers.masking_utils import create_causal_mask, create_sliding_window_causal_mask
-    mask_kwargs = {
+    cm_params = inspect.signature(create_causal_mask).parameters
+    mask_kwargs: Dict[str, Any] = {
         "config": base.config,
         "inputs_embeds": inputs_embeds,
         "attention_mask": attention_mask,
         "position_ids": position_ids,
     }
-    try:
-        causal_mask_mapping = {"full_attention": create_causal_mask(**mask_kwargs, cache=None)}
-        if getattr(base, "has_sliding_layers", False):
-            causal_mask_mapping["sliding_attention"] = create_sliding_window_causal_mask(**mask_kwargs, cache=None)
-    except TypeError:
-        cache_position = torch.arange(seq_len, device=inputs_embeds.device)
-        causal_mask_mapping = {"full_attention": create_causal_mask(**mask_kwargs, cache_position=cache_position, past_key_values=None)}
-        if getattr(base, "has_sliding_layers", False):
-            causal_mask_mapping["sliding_attention"] = create_sliding_window_causal_mask(**mask_kwargs, cache_position=cache_position, past_key_values=None)
+    cache_position = torch.arange(seq_len, device=inputs_embeds.device)
+    if "cache" in cm_params:
+        mask_kwargs["cache"] = None
+    elif "past_key_values" in cm_params:
+        mask_kwargs["past_key_values"] = None
+    if "cache_position" in cm_params:
+        mask_kwargs["cache_position"] = cache_position
+    causal_mask_mapping = {"full_attention": create_causal_mask(**mask_kwargs)}
+    if getattr(base, "has_sliding_layers", False):
+        sw_params = inspect.signature(create_sliding_window_causal_mask).parameters
+        sw_kwargs = {k: v for k, v in mask_kwargs.items() if k in sw_params}
+        causal_mask_mapping["sliding_attention"] = create_sliding_window_causal_mask(**sw_kwargs)
 
     hidden_states = inputs_embeds
     position_embeddings = base.rotary_emb(hidden_states, position_ids)
     layer_types = getattr(base.config, "layer_types", ["full_attention"] * len(base.layers))
+    lyr_params = inspect.signature(base.layers[0].forward).parameters
     for i in range(int(stop_layer)):
-        out = base.layers[i](
-            hidden_states,
-            attention_mask=causal_mask_mapping[layer_types[i]],
-            position_embeddings=position_embeddings,
-            position_ids=position_ids,
-            use_cache=False,
-        )
+        lkw: Dict[str, Any] = {
+            "attention_mask": causal_mask_mapping[layer_types[i]],
+            "position_embeddings": position_embeddings,
+            "position_ids": position_ids,
+            "use_cache": False,
+        }
+        if "cache_position" in lyr_params:
+            lkw["cache_position"] = cache_position
+        out = base.layers[i](hidden_states, **lkw)
         hidden_states = out[0] if isinstance(out, tuple) else out
     assert_zero_runtime_hooks(model)
     return hidden_states.detach()
