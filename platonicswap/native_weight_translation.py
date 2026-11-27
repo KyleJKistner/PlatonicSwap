@@ -69,15 +69,12 @@ def get_config_rope_theta(config: Any, default: float = 1_000_000.0) -> float:
 
 
 def unload_model_vram_safe(model: Any) -> None:
-    """Release GPU VRAM WITHOUT copying a 14 GiB checkpoint onto host CPU RAM."""
-    try:
-        for p in model.parameters():
-            p.data = torch.empty(0, device="cpu", dtype=p.dtype)
-            p.grad = None
-        for b in model.buffers():
-            b.data = torch.empty(0, device="cpu", dtype=b.dtype)
-    except Exception:
-        pass
+    """Release GPU VRAM WITHOUT copying a 14 GiB checkpoint onto host CPU RAM (strict — no silent swallow!)."""
+    for p in model.parameters():
+        p.data = torch.empty(0, device="cpu", dtype=p.dtype)
+        p.grad = None
+    for b in model.buffers():
+        b.data = torch.empty(0, device="cpu", dtype=b.dtype)
     del model
     gc.collect()
     if torch.cuda.is_available():
@@ -88,19 +85,21 @@ def unload_model_vram_safe(model: Any) -> None:
 
 
 def assert_zero_runtime_hooks(model: nn.Module) -> None:
-    """Machine-verify ZERO forward/pre/backward hooks AND ZERO training-only wrapper modules anywhere in `model`."""
+    """Machine-verify ZERO local/global forward/pre/backward hooks AND ZERO training-only wrappers anywhere in `model`."""
     bad: List[str] = []
+    # Check PyTorch global hooks (must be completely empty during native inference!)
+    mod_mod = torch.nn.modules.module
+    for gattr in ("_global_forward_hooks", "_global_forward_pre_hooks", "_global_backward_hooks", "_global_backward_pre_hooks"):
+        gdict = getattr(mod_mod, gattr, None)
+        if gdict:
+            bad.append(f"GLOBAL.{gattr}({len(gdict)})")
     for name, mod in model.named_modules():
-        if isinstance(mod, _TrainableAppendedSliceLinear):
-            bad.append(f"{name}._TrainableAppendedSliceLinear")
-        if getattr(mod, "_forward_hooks", None):
-            bad.append(f"{name}._forward_hooks({len(mod._forward_hooks)})")
-        if getattr(mod, "_forward_pre_hooks", None):
-            bad.append(f"{name}._forward_pre_hooks({len(mod._forward_pre_hooks)})")
-        if getattr(mod, "_backward_hooks", None):
-            bad.append(f"{name}._backward_hooks({len(mod._backward_hooks)})")
-        if getattr(mod, "_full_backward_hooks", None):
-            bad.append(f"{name}._full_backward_hooks({len(mod._full_backward_hooks)})")
+        if isinstance(mod, _TrainableAppendedSliceLinear) or type(mod).__name__ == "ReversibleLoRALinear":
+            bad.append(f"{name}.{type(mod).__name__}")
+        for attr in ("_forward_hooks", "_forward_pre_hooks", "_backward_hooks", "_full_backward_hooks", "_backward_pre_hooks"):
+            hdict = getattr(mod, attr, None)
+            if hdict:
+                bad.append(f"{name}.{attr}({len(hdict)})")
     if bad:
         raise AssertionError(f"Runtime hooks or training wrappers detected during native inference: {bad[:5]}")
 
@@ -259,7 +258,7 @@ class ReversibleNativeOrganPack:
 
             self._applied = True
             assert_zero_runtime_hooks(model)
-        except Exception:
+        except BaseException:
             self._revert_partial(model)
             raise
 
@@ -648,60 +647,60 @@ def extract_layer_token_states(
         int(li): {f: [] for f in fields} for li in layer_indices
     }
     handles: List[Any] = []
-
-    for li in layer_indices:
-        li = int(li)
-        lyr = layers[li]
-        if "u_in" in fields:
-            def _mk_uin(idx: int):
-                def _fn(_m, _i, out):
-                    buf[idx]["u_in"] = out.detach()
-                return _fn
-            handles.append(lyr.input_layernorm.register_forward_hook(_mk_uin(li)))
-        if "z_attn" in fields:
-            def _mk_za(idx: int, sl: Optional[int]):
-                def _pre(_m, args):
-                    t = args[0].detach()
-                    buf[idx]["z_attn"] = t[..., -sl:] if sl is not None else t
-                return _pre
-            handles.append(lyr.self_attn.o_proj.register_forward_pre_hook(_mk_za(li, z_attn_tail_slice)))
-        if "y_attn" in fields:
-            def _mk_ya(idx: int):
-                def _fn(_m, _i, out):
-                    buf[idx]["y_attn"] = out.detach()
-                return _fn
-            handles.append(lyr.self_attn.o_proj.register_forward_hook(_mk_ya(li)))
-        if "u_post" in fields:
-            def _mk_up(idx: int):
-                def _fn(_m, _i, out):
-                    buf[idx]["u_post"] = out.detach()
-                return _fn
-            handles.append(lyr.post_attention_layernorm.register_forward_hook(_mk_up(li)))
-        if "z_mlp" in fields:
-            def _mk_zm(idx: int, sl: Optional[int]):
-                def _pre(_m, args):
-                    t = args[0].detach()
-                    buf[idx]["z_mlp"] = t[..., -sl:] if sl is not None else t
-                return _pre
-            handles.append(lyr.mlp.down_proj.register_forward_pre_hook(_mk_zm(li, z_mlp_tail_slice)))
-        if "y_mlp" in fields:
-            def _mk_ym(idx: int):
-                def _fn(_m, _i, out):
-                    buf[idx]["y_mlp"] = out.detach()
-                return _fn
-            handles.append(lyr.mlp.down_proj.register_forward_hook(_mk_ym(li)))
-        if "h_out" in fields:
-            def _mk_ho(idx: int):
-                def _fn(_m, _i, out):
-                    t = out[0] if isinstance(out, tuple) else out
-                    buf[idx]["h_out"] = t.detach()
-                return _fn
-            handles.append(lyr.register_forward_hook(_mk_ho(li)))
-
     old_pad = tok.padding_side
     tok.padding_side = "left"
     collected = 0
     try:
+        for li in layer_indices:
+            li = int(li)
+            lyr = layers[li]
+            if "u_in" in fields:
+                def _mk_uin(idx: int):
+                    def _fn(_m, _i, out):
+                        buf[idx]["u_in"] = out.detach()
+                    return _fn
+                handles.append(lyr.input_layernorm.register_forward_hook(_mk_uin(li)))
+            if "z_attn" in fields:
+                def _mk_za(idx: int, sl: Optional[int]):
+                    def _pre(_m, args):
+                        t = args[0].detach()
+                        buf[idx]["z_attn"] = t[..., -sl:] if sl is not None else t
+                    return _pre
+                handles.append(lyr.self_attn.o_proj.register_forward_pre_hook(_mk_za(li, z_attn_tail_slice)))
+            if "y_attn" in fields:
+                def _mk_ya(idx: int):
+                    def _fn(_m, _i, out):
+                        buf[idx]["y_attn"] = out.detach()
+                    return _fn
+                handles.append(lyr.self_attn.o_proj.register_forward_hook(_mk_ya(li)))
+            if "u_post" in fields:
+                def _mk_up(idx: int):
+                    def _fn(_m, _i, out):
+                        buf[idx]["u_post"] = out.detach()
+                    return _fn
+                handles.append(lyr.post_attention_layernorm.register_forward_hook(_mk_up(li)))
+            if "z_mlp" in fields:
+                def _mk_zm(idx: int, sl: Optional[int]):
+                    def _pre(_m, args):
+                        t = args[0].detach()
+                        buf[idx]["z_mlp"] = t[..., -sl:] if sl is not None else t
+                    return _pre
+                handles.append(lyr.mlp.down_proj.register_forward_pre_hook(_mk_zm(li, z_mlp_tail_slice)))
+            if "y_mlp" in fields:
+                def _mk_ym(idx: int):
+                    def _fn(_m, _i, out):
+                        buf[idx]["y_mlp"] = out.detach()
+                    return _fn
+                handles.append(lyr.mlp.down_proj.register_forward_hook(_mk_ym(li)))
+            if "h_out" in fields:
+                def _mk_ho(idx: int):
+                    def _fn(_m, _i, out):
+                        t = out[0] if isinstance(out, tuple) else out
+                        buf[idx]["h_out"] = t.detach()
+                    return _fn
+                handles.append(lyr.register_forward_hook(_mk_ho(li)))
+
+        backbone = model.model if hasattr(model, "model") else model
         for i0 in range(0, len(prompts), batch_size):
             batch_p = list(prompts[i0 : i0 + batch_size])
             enc = tok(
@@ -714,7 +713,7 @@ def extract_layer_token_states(
             )
             ids = enc["input_ids"].to(device)
             mask = enc["attention_mask"].to(device)
-            _ = model(input_ids=ids, attention_mask=mask, use_cache=False)
+            _ = backbone(input_ids=ids, attention_mask=mask, use_cache=False)
 
             if positions == "last":
                 sel_count = ids.shape[0]
@@ -817,8 +816,8 @@ def compile_tier1a_sequential_native_delta_w(
             del dW_o
             deltas[pname_o] = t_o
             pk_o = ReversibleNativeOrganPack(deltas={pname_o: t_o})
-            pk_o.apply(model_B)
             step_packs.append(pk_o)
+            pk_o.apply(model_B)
 
             st_task_m = extract_layer_token_states(
                 model_B, tok_B, task_prompts, [li], device_B, batch_size=batch_size,
@@ -849,8 +848,8 @@ def compile_tier1a_sequential_native_delta_w(
             del dW_d
             deltas[pname_d] = t_d
             pk_d = ReversibleNativeOrganPack(deltas={pname_d: t_d})
-            pk_d.apply(model_B)
             step_packs.append(pk_d)
+            pk_d.apply(model_B)
 
             layer_diag[f"L{li}"] = {"attn_o": info_o, "mlp_down": info_d, "n_toks": n_m_toks}
     finally:
@@ -907,123 +906,128 @@ def compile_tier1b_native_widened_heads_and_swiglu(
             dw = donor_extracted_weights[li]
 
             # 1. Exact Native-BF16 Attention Head Pullback -> Capture Real Appended `z_attn` -> Solve `W_O_new`!
-            Wq_new = torch.from_numpy((dw["q_w"].astype(np.float64) @ P_attn).astype(np.float32))
-            Wk_new = torch.from_numpy((dw["k_w"].astype(np.float64) @ P_attn).astype(np.float32))
-            Wv_new = torch.from_numpy((dw["v_w"].astype(np.float64) @ P_attn).astype(np.float32))
-            bq_new = torch.from_numpy(dw["q_b"].astype(np.float32)) if dw.get("q_b") is not None else None
-            bk_new = torch.from_numpy(dw["k_b"].astype(np.float32)) if dw.get("k_b") is not None else None
-            bv_new = torch.from_numpy(dw["v_b"].astype(np.float32)) if dw.get("v_b") is not None else None
-            add_q_dim = int(Wq_new.shape[0])
+            info_o: Dict[str, Any] = {"skipped": True}
+            if dw.get("q_w") is not None and int(dw.get("add_q_heads", 0)) > 0:
+                Wq_new = torch.from_numpy((dw["q_w"].astype(np.float64) @ P_attn).astype(np.float32))
+                Wk_new = torch.from_numpy((dw["k_w"].astype(np.float64) @ P_attn).astype(np.float32))
+                Wv_new = torch.from_numpy((dw["v_w"].astype(np.float64) @ P_attn).astype(np.float32))
+                bq_new = torch.from_numpy(dw["q_b"].astype(np.float32)) if dw.get("q_b") is not None else None
+                bk_new = torch.from_numpy(dw["k_b"].astype(np.float32)) if dw.get("k_b") is not None else None
+                bv_new = torch.from_numpy(dw["v_b"].astype(np.float32)) if dw.get("v_b") is not None else None
+                add_q_dim = int(Wq_new.shape[0])
 
-            probe_a_spec = {
-                "q_w": Wq_new, "q_b": bq_new, "k_w": Wk_new, "k_b": bk_new, "v_w": Wv_new, "v_b": bv_new,
-                "o_w": torch.zeros((D_B, add_q_dim), dtype=torch.float32),
-                "add_q_heads": int(dw["add_q_heads"]), "add_kv_heads": int(dw["add_kv_heads"]),
-            }
-            pk_probe_a = ReversibleNativeOrganPack(attn_widen={li: probe_a_spec})
-            pk_probe_a.apply(model_B)
-            try:
-                st_task_a = extract_layer_token_states(
-                    model_B, tok_B, task_prompts, [li], device_B, batch_size=batch_size,
-                    max_length=max_length, positions=positions, capture_fields=("z_attn", "y_attn"),
-                    z_attn_tail_slice=add_q_dim,
-                )[li]
-                st_bg_a = extract_layer_token_states(
-                    model_B, tok_B, bg_prompts[:32], [li], device_B, batch_size=batch_size,
-                    max_length=max_length, positions="all_nonpad", capture_fields=("z_attn",),
-                    max_tokens_cap=2048, z_attn_tail_slice=add_q_dim,
-                )[li]
-            finally:
-                pk_probe_a.revert(model_B)
+                probe_a_spec = {
+                    "q_w": Wq_new, "q_b": bq_new, "k_w": Wk_new, "k_b": bk_new, "v_w": Wv_new, "v_b": bv_new,
+                    "o_w": torch.zeros((D_B, add_q_dim), dtype=torch.float32),
+                    "add_q_heads": int(dw["add_q_heads"]), "add_kv_heads": int(dw["add_kv_heads"]),
+                }
+                pk_probe_a = ReversibleNativeOrganPack(attn_widen={li: probe_a_spec})
+                try:
+                    pk_probe_a.apply(model_B)
+                    st_task_a = extract_layer_token_states(
+                        model_B, tok_B, task_prompts, [li], device_B, batch_size=batch_size,
+                        max_length=max_length, positions=positions, capture_fields=("z_attn", "y_attn"),
+                        z_attn_tail_slice=add_q_dim,
+                    )[li]
+                    st_bg_a = extract_layer_token_states(
+                        model_B, tok_B, bg_prompts[:32], [li], device_B, batch_size=batch_size,
+                        max_length=max_length, positions="all_nonpad", capture_fields=("z_attn",),
+                        max_tokens_cap=2048, z_attn_tail_slice=add_q_dim,
+                    )[li]
+                finally:
+                    pk_probe_a.revert(model_B)
 
-            Z_new_task = bf16_to_f64_np(st_task_a["z_attn"])
-            Y_b_a = bf16_to_f64_np(st_task_a["y_attn"])
-            Y_a_a = bf16_to_f64_np(donor_task_states[li]["y_attn"])
-            assert len(Z_new_task) == len(Y_a_a), f"Tier 1B L{li} attn token misalignment: B={len(Z_new_task)} vs A={len(Y_a_a)}"
-            dY_attn = (Y_a_a @ M_attn.T) - Y_b_a
-            Z_new_bg = bf16_to_f64_np(st_bg_a["z_attn"])
-            C_bg_new = (Z_new_bg.T @ Z_new_bg) / max(float(len(Z_new_bg)), 1.0)
-            del Z_new_bg, st_bg_a
+                Z_new_task = bf16_to_f64_np(st_task_a["z_attn"])
+                Y_b_a = bf16_to_f64_np(st_task_a["y_attn"])
+                Y_a_a = bf16_to_f64_np(donor_task_states[li]["y_attn"])
+                assert len(Z_new_task) == len(Y_a_a), f"Tier 1B L{li} attn token misalignment: B={len(Z_new_task)} vs A={len(Y_a_a)}"
+                dY_attn = (Y_a_a @ M_attn.T) - Y_b_a
+                Z_new_bg = bf16_to_f64_np(st_bg_a["z_attn"])
+                C_bg_new = (Z_new_bg.T @ Z_new_bg) / max(float(len(Z_new_bg)), 1.0)
+                del Z_new_bg, st_bg_a
 
-            W_O_new, info_o = solve_closed_form_ridge_with_bg(
-                Z_new_task, dY_attn, C_bg=C_bg_new, lam_bg=lam_bg, lam_eye=lam_eye, W_prior=None,
-            )
-            del Z_new_task, Y_b_a, Y_a_a, dY_attn, C_bg_new, st_task_a
-            a_spec = {
-                "q_w": Wq_new, "q_b": bq_new, "k_w": Wk_new, "k_b": bk_new, "v_w": Wv_new, "v_b": bv_new,
-                "o_w": torch.from_numpy(W_O_new.astype(np.float32)),
-                "add_q_heads": int(dw["add_q_heads"]), "add_kv_heads": int(dw["add_kv_heads"]),
-            }
-            attn_widen_all[li] = a_spec
-            pk_a = ReversibleNativeOrganPack(attn_widen={li: a_spec})
-            pk_a.apply(model_B)
-            step_packs.append(pk_a)
+                W_O_new, info_o = solve_closed_form_ridge_with_bg(
+                    Z_new_task, dY_attn, C_bg=C_bg_new, lam_bg=lam_bg, lam_eye=lam_eye, W_prior=None,
+                )
+                del Z_new_task, Y_b_a, Y_a_a, dY_attn, C_bg_new, st_task_a
+                a_spec = {
+                    "q_w": Wq_new, "q_b": bq_new, "k_w": Wk_new, "k_b": bk_new, "v_w": Wv_new, "v_b": bv_new,
+                    "o_w": torch.from_numpy(W_O_new.astype(np.float32)),
+                    "add_q_heads": int(dw["add_q_heads"]), "add_kv_heads": int(dw["add_kv_heads"]),
+                }
+                attn_widen_all[li] = a_spec
+                pk_a = ReversibleNativeOrganPack(attn_widen={li: a_spec})
+                step_packs.append(pk_a)
+                pk_a.apply(model_B)
 
             # 2. Exact Native-BF16 SwiGLU Pullback -> Bridge-Observable Filtering -> Capture Real Appended `z_mlp`!
-            Wg_raw = dw["gate_w"].astype(np.float64)
-            Wu_raw = dw["up_w"].astype(np.float64)
-            Wg_proj = Wg_raw @ P_mlp
-            Wu_proj = Wu_raw @ P_mlp
-            target_k = int(dw.get("target_mlp_rows", Wg_raw.shape[0]))
-            if Wg_raw.shape[0] > target_k:
-                # Bridge-observable selection: prefer donor neurons whose pulled-back projections preserve energy!
-                obs_ratio = (
-                    np.linalg.norm(Wg_proj, axis=1) / (np.linalg.norm(Wg_raw, axis=1) + 1e-12)
-                    + np.linalg.norm(Wu_proj, axis=1) / (np.linalg.norm(Wu_raw, axis=1) + 1e-12)
-                ) * 0.5
-                keep_obs = np.sort(np.argsort(obs_ratio)[-target_k:])
-                Wg_proj = Wg_proj[keep_obs]
-                Wu_proj = Wu_proj[keep_obs]
-                mean_obs = float(np.mean(obs_ratio[keep_obs]))
-            else:
-                mean_obs = float(np.mean(np.linalg.norm(Wg_proj, axis=1) / (np.linalg.norm(Wg_raw, axis=1) + 1e-12)))
+            info_d: Dict[str, Any] = {"skipped": True}
+            add_m_dim = 0
+            mean_obs = 0.0
+            if dw.get("gate_w") is not None and int(dw["gate_w"].shape[0]) > 0:
+                Wg_raw = dw["gate_w"].astype(np.float64)
+                Wu_raw = dw["up_w"].astype(np.float64)
+                Wg_proj = Wg_raw @ P_mlp
+                Wu_proj = Wu_raw @ P_mlp
+                target_k = int(dw.get("target_mlp_rows", Wg_raw.shape[0]))
+                if Wg_raw.shape[0] > target_k:
+                    obs_ratio = (
+                        np.linalg.norm(Wg_proj, axis=1) / (np.linalg.norm(Wg_raw, axis=1) + 1e-12)
+                        + np.linalg.norm(Wu_proj, axis=1) / (np.linalg.norm(Wu_raw, axis=1) + 1e-12)
+                    ) * 0.5
+                    keep_obs = np.sort(np.argsort(obs_ratio)[-target_k:])
+                    Wg_proj = Wg_proj[keep_obs]
+                    Wu_proj = Wu_proj[keep_obs]
+                    mean_obs = float(np.mean(obs_ratio[keep_obs]))
+                else:
+                    mean_obs = float(np.mean(np.linalg.norm(Wg_proj, axis=1) / (np.linalg.norm(Wg_raw, axis=1) + 1e-12)))
 
-            Wg_new = torch.from_numpy(Wg_proj.astype(np.float32))
-            Wu_new = torch.from_numpy(Wu_proj.astype(np.float32))
-            add_m_dim = int(Wg_new.shape[0])
+                Wg_new = torch.from_numpy(Wg_proj.astype(np.float32))
+                Wu_new = torch.from_numpy(Wu_proj.astype(np.float32))
+                add_m_dim = int(Wg_new.shape[0])
 
-            probe_m_spec = {
-                "gate_w": Wg_new, "up_w": Wu_new,
-                "down_w": torch.zeros((D_B, add_m_dim), dtype=torch.float32),
-            }
-            pk_probe_m = ReversibleNativeOrganPack(mlp_widen={li: probe_m_spec})
-            pk_probe_m.apply(model_B)
-            try:
-                st_task_m = extract_layer_token_states(
-                    model_B, tok_B, task_prompts, [li], device_B, batch_size=batch_size,
-                    max_length=max_length, positions=positions, capture_fields=("z_mlp", "h_out"),
-                    z_mlp_tail_slice=add_m_dim,
-                )[li]
-                st_bg_m = extract_layer_token_states(
-                    model_B, tok_B, bg_prompts[:32], [li], device_B, batch_size=batch_size,
-                    max_length=max_length, positions="all_nonpad", capture_fields=("z_mlp",),
-                    max_tokens_cap=2048, z_mlp_tail_slice=add_m_dim,
-                )[li]
-            finally:
-                pk_probe_m.revert(model_B)
+                probe_m_spec = {
+                    "gate_w": Wg_new, "up_w": Wu_new,
+                    "down_w": torch.zeros((D_B, add_m_dim), dtype=torch.float32),
+                }
+                pk_probe_m = ReversibleNativeOrganPack(mlp_widen={li: probe_m_spec})
+                try:
+                    pk_probe_m.apply(model_B)
+                    st_task_m = extract_layer_token_states(
+                        model_B, tok_B, task_prompts, [li], device_B, batch_size=batch_size,
+                        max_length=max_length, positions=positions, capture_fields=("z_mlp", "h_out"),
+                        z_mlp_tail_slice=add_m_dim,
+                    )[li]
+                    st_bg_m = extract_layer_token_states(
+                        model_B, tok_B, bg_prompts[:32], [li], device_B, batch_size=batch_size,
+                        max_length=max_length, positions="all_nonpad", capture_fields=("z_mlp",),
+                        max_tokens_cap=2048, z_mlp_tail_slice=add_m_dim,
+                    )[li]
+                finally:
+                    pk_probe_m.revert(model_B)
 
-            Z_m_task = bf16_to_f64_np(st_task_m["z_mlp"])
-            H_b = bf16_to_f64_np(st_task_m["h_out"])
-            H_a = bf16_to_f64_np(donor_task_states[li]["h_out"])
-            assert len(Z_m_task) == len(H_a), f"Tier 1B L{li} mlp token misalignment: B={len(Z_m_task)} vs A={len(H_a)}"
-            dY_mlp = (H_a @ M_out.T) - H_b
-            Z_m_bg = bf16_to_f64_np(st_bg_m["z_mlp"])
-            C_bg_m = (Z_m_bg.T @ Z_m_bg) / max(float(len(Z_m_bg)), 1.0)
-            del Z_m_bg, st_bg_m
+                Z_m_task = bf16_to_f64_np(st_task_m["z_mlp"])
+                H_b = bf16_to_f64_np(st_task_m["h_out"])
+                H_a = bf16_to_f64_np(donor_task_states[li]["h_out"])
+                assert len(Z_m_task) == len(H_a), f"Tier 1B L{li} mlp token misalignment: B={len(Z_m_task)} vs A={len(H_a)}"
+                dY_mlp = (H_a @ M_out.T) - H_b
+                Z_m_bg = bf16_to_f64_np(st_bg_m["z_mlp"])
+                C_bg_m = (Z_m_bg.T @ Z_m_bg) / max(float(len(Z_m_bg)), 1.0)
+                del Z_m_bg, st_bg_m
 
-            W_d_new, info_d = solve_closed_form_ridge_with_bg(
-                Z_m_task, dY_mlp, C_bg=C_bg_m, lam_bg=lam_bg, lam_eye=lam_eye, W_prior=None,
-            )
-            del Z_m_task, H_b, H_a, dY_mlp, C_bg_m, st_task_m
-            gc.collect()
-            m_spec = {
-                "gate_w": Wg_new, "up_w": Wu_new,
-                "down_w": torch.from_numpy(W_d_new.astype(np.float32)),
-            }
-            mlp_widen_all[li] = m_spec
-            pk_m = ReversibleNativeOrganPack(mlp_widen={li: m_spec})
-            pk_m.apply(model_B)
-            step_packs.append(pk_m)
+                W_d_new, info_d = solve_closed_form_ridge_with_bg(
+                    Z_m_task, dY_mlp, C_bg=C_bg_m, lam_bg=lam_bg, lam_eye=lam_eye, W_prior=None,
+                )
+                del Z_m_task, H_b, H_a, dY_mlp, C_bg_m, st_task_m
+                gc.collect()
+                m_spec = {
+                    "gate_w": Wg_new, "up_w": Wu_new,
+                    "down_w": torch.from_numpy(W_d_new.astype(np.float32)),
+                }
+                mlp_widen_all[li] = m_spec
+                pk_m = ReversibleNativeOrganPack(mlp_widen={li: m_spec})
+                step_packs.append(pk_m)
+                pk_m.apply(model_B)
 
             layer_diag[f"L{li}"] = {
                 "attn_widen_o": info_o, "mlp_widen_down": info_d,

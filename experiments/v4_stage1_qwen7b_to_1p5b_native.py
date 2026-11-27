@@ -410,35 +410,41 @@ def _extract_and_detach_training_slices(
     layers = get_decoder_layers(model_B)
     new_attn: Dict[int, Dict[str, Any]] = {}
     new_mlp: Dict[int, Dict[str, Any]] = {}
-    for li, orig in orig_attn.items():
-        attn = layers[li].self_attn
-        sp = init_pack.attn_widen[li]
-        if isinstance(attn.q_proj, _TrainableAppendedSliceLinear) and isinstance(attn.o_proj, _TrainableAppendedSliceLinear):
-            new_attn[li] = {
-                "q_w": attn.q_proj.append_weight.detach().float().cpu().clone(),
-                "q_b": attn.q_proj.append_bias.detach().float().cpu().clone() if attn.q_proj.append_bias is not None else None,
-                "k_w": attn.k_proj.append_weight.detach().float().cpu().clone(),
-                "k_b": attn.k_proj.append_bias.detach().float().cpu().clone() if attn.k_proj.append_bias is not None else None,
-                "v_w": attn.v_proj.append_weight.detach().float().cpu().clone(),
-                "v_b": attn.v_proj.append_bias.detach().float().cpu().clone() if attn.v_proj.append_bias is not None else None,
-                "o_w": attn.o_proj.append_weight.detach().float().cpu().clone(),
-                "add_q_heads": sp["add_q_heads"], "add_kv_heads": sp["add_kv_heads"],
-            }
-        attn.q_proj = orig["q_proj"]
-        attn.k_proj = orig["k_proj"]
-        attn.v_proj = orig["v_proj"]
-        attn.o_proj = orig["o_proj"]
-    for li, orig in orig_mlp.items():
-        mlp = layers[li].mlp
-        if isinstance(mlp.gate_proj, _TrainableAppendedSliceLinear) and isinstance(mlp.down_proj, _TrainableAppendedSliceLinear):
-            new_mlp[li] = {
-                "gate_w": mlp.gate_proj.append_weight.detach().float().cpu().clone(),
-                "up_w": mlp.up_proj.append_weight.detach().float().cpu().clone(),
-                "down_w": mlp.down_proj.append_weight.detach().float().cpu().clone(),
-            }
-        mlp.gate_proj = orig["gate_proj"]
-        mlp.up_proj = orig["up_proj"]
-        mlp.down_proj = orig["down_proj"]
+    try:
+        for li, orig in orig_attn.items():
+            attn = layers[li].self_attn
+            sp = init_pack.attn_widen[li]
+            if isinstance(attn.q_proj, _TrainableAppendedSliceLinear) and isinstance(attn.o_proj, _TrainableAppendedSliceLinear):
+                new_attn[li] = {
+                    "q_w": attn.q_proj.append_weight.detach().float().cpu().clone(),
+                    "q_b": attn.q_proj.append_bias.detach().float().cpu().clone() if attn.q_proj.append_bias is not None else None,
+                    "k_w": attn.k_proj.append_weight.detach().float().cpu().clone(),
+                    "k_b": attn.k_proj.append_bias.detach().float().cpu().clone() if attn.k_proj.append_bias is not None else None,
+                    "v_w": attn.v_proj.append_weight.detach().float().cpu().clone(),
+                    "v_b": attn.v_proj.append_bias.detach().float().cpu().clone() if attn.v_proj.append_bias is not None else None,
+                    "o_w": attn.o_proj.append_weight.detach().float().cpu().clone(),
+                    "add_q_heads": sp["add_q_heads"], "add_kv_heads": sp["add_kv_heads"],
+                }
+        for li, orig in orig_mlp.items():
+            mlp = layers[li].mlp
+            if isinstance(mlp.gate_proj, _TrainableAppendedSliceLinear) and isinstance(mlp.down_proj, _TrainableAppendedSliceLinear):
+                new_mlp[li] = {
+                    "gate_w": mlp.gate_proj.append_weight.detach().float().cpu().clone(),
+                    "up_w": mlp.up_proj.append_weight.detach().float().cpu().clone(),
+                    "down_w": mlp.down_proj.append_weight.detach().float().cpu().clone(),
+                }
+    finally:
+        for li, orig in orig_attn.items():
+            attn = layers[li].self_attn
+            attn.q_proj = orig["q_proj"]
+            attn.k_proj = orig["k_proj"]
+            attn.v_proj = orig["v_proj"]
+            attn.o_proj = orig["o_proj"]
+        for li, orig in orig_mlp.items():
+            mlp = layers[li].mlp
+            mlp.gate_proj = orig["gate_proj"]
+            mlp.up_proj = orig["up_proj"]
+            mlp.down_proj = orig["down_proj"]
     assert_zero_runtime_hooks(model_B)
     return ReversibleNativeOrganPack(attn_widen=new_attn, mlp_widen=new_mlp, metadata={"tier": tier_label})
 
@@ -642,15 +648,32 @@ def train_tier3_teacher_lora_merged_native(
         p.requires_grad_(False)
     torch.manual_seed(seed)
     targets = ("q_proj", "k_proj", "v_proj", "o_proj", "down_proj")
-    attached = attach_lora_adapters(model_B, layer_indices, target_modules=targets, rank=rank, alpha=alpha)
-    lora_params = [p for m in attached.values() for p in (m.lora_A, m.lora_B)]
-    opt = torch.optim.AdamW(lora_params, lr=lr, weight_decay=0.01)
-    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=max(steps, 1), eta_min=lr * 0.1)
-    rng = np.random.default_rng(seed)
     pad_id = tok_B.pad_token_id if tok_B.pad_token_id is not None else tok_B.eos_token_id
     old_pad = tok_B.padding_side
+    attached: Dict[str, Any] = {}
+    old_pack = None
+    raw_lora_bytes = 0
+    loss_start = 0.0
+    loss_end = 0.0
+
+    def _restore_any_lora() -> None:
+        layers = get_decoder_layers(model_B)
+        for li in layer_indices:
+            layer = layers[li]
+            for parent in (layer.self_attn, layer.mlp):
+                for tname in targets:
+                    if hasattr(parent, tname):
+                        cur = getattr(parent, tname)
+                        if type(cur).__name__ == "ReversibleLoRALinear" and hasattr(cur, "base"):
+                            setattr(parent, tname, cur.base)
 
     try:
+        attached = attach_lora_adapters(model_B, layer_indices, target_modules=targets, rank=rank, alpha=alpha)
+        lora_params = [p for m in attached.values() for p in (m.lora_A, m.lora_B)]
+        opt = torch.optim.AdamW(lora_params, lr=lr, weight_decay=0.01)
+        sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=max(steps, 1), eta_min=lr * 0.1)
+        rng = np.random.default_rng(seed)
+
         if mode == "sft":
             assert prompt_target_pairs is not None
             enc_pairs = []
@@ -700,7 +723,13 @@ def train_tier3_teacher_lora_merged_native(
                 loss_end = float(-(top_v[p_idx].to(device_B) * torch.gather(lps1, 1, top_i[p_idx].to(device_B))).sum(dim=-1).mean().item())
     finally:
         tok_B.padding_side = old_pad
-        old_pack, raw_lora_bytes = detach_lora_to_delta_pack(model_B, attached, layer_indices, target_modules=targets)
+        try:
+            if attached:
+                old_pack, raw_lora_bytes = detach_lora_to_delta_pack(model_B, attached, layer_indices, target_modules=targets)
+        finally:
+            _restore_any_lora()
+            for p in model_B.parameters():
+                p.requires_grad_(False)
 
     native_pack = ReversibleNativeOrganPack(deltas=old_pack.deltas, metadata={"tier": "Tier3_MergedTeacherLoRA"})
     assert_zero_runtime_hooks(model_B)
@@ -761,10 +790,14 @@ def _last_tok_logits(model: nn.Module, tok: Any, prompts: Sequence[str], dev: to
     try:
         for i0 in range(0, len(prompts), bs):
             enc = tok(list(prompts[i0 : i0 + bs]), return_tensors="pt", padding=True, add_special_tokens=True)
-            lg = model(input_ids=enc["input_ids"].to(dev), attention_mask=enc["attention_mask"].to(dev), use_cache=False).logits[:, -1, :]
-            if v_cap is not None:
-                lg = lg[:, :v_cap]
+            ids, mask = enc["input_ids"].to(dev), enc["attention_mask"].to(dev)
+            try:
+                out = model(input_ids=ids, attention_mask=mask, use_cache=False, logits_to_keep=1)
+            except TypeError:
+                out = model(input_ids=ids, attention_mask=mask, use_cache=False)
+            lg = out.logits[:, -1, :v_cap] if v_cap is not None else out.logits[:, -1, :]
             out_l.append(lg.float().cpu())
+            del out, lg, ids, mask
     finally:
         tok.padding_side = old_pad
     return torch.cat(out_l, dim=0)
