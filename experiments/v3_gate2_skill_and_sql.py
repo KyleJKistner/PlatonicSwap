@@ -136,7 +136,9 @@ def format_2hop_prompts(
     query: str,
 ) -> Dict[str, str]:
     """
-    Build IDENTICAL instruction-free recipient prompt + Donor L ("FIRST") & Donor R ("SECOND") prompts!
+    Build IDENTICAL 0-shot instruction-free recipient prompt + 2-shot Donor L ("FIRST") &
+    Donor R ("SECOND") prompts! Demo words (`cat, fox, bee, ant, sun, owl, elk, bat, yes, no,
+    big, odd, fun, joy, shy, sad`) are strictly disjoint from `WORD_CANDIDATES_KEYS` & `VALS`.
     """
     lines = ["Table:"]
     for a, b in hop1_rows:
@@ -146,14 +148,31 @@ def format_2hop_prompts(
     lines.append(f"Query: {query}")
     lines.append("Output:")
     recip_prompt = "\n".join(lines)
-    donor_L_prompt = (
-        "Rule: Look up the Query in the 2-hop Table to find its pair (first, second), "
-        "and output ONLY the FIRST word in the pair.\n\n" + recip_prompt
+
+    demo_L = (
+        "Rule: Follow the 2-hop Table (Query -> middle -> (first, second)) and output ONLY the FIRST word in the pair.\n\n"
+        "Table:\n"
+        "cat -> sun\nfox -> owl\nbee -> elk\nant -> bat\n"
+        "elk -> (big, odd)\nsun -> (yes, no)\nbat -> (fun, joy)\nowl -> (shy, sad)\n"
+        "Query: cat\nOutput: yes\n\n"
+        "Table:\n"
+        "ant -> bat\nbee -> elk\nfox -> owl\ncat -> sun\n"
+        "owl -> (shy, sad)\nbat -> (fun, joy)\nsun -> (yes, no)\nelk -> (big, odd)\n"
+        "Query: fox\nOutput: shy\n\n"
     )
-    donor_R_prompt = (
-        "Rule: Look up the Query in the 2-hop Table to find its pair (first, second), "
-        "and output ONLY the SECOND word in the pair.\n\n" + recip_prompt
+    demo_R = (
+        "Rule: Follow the 2-hop Table (Query -> middle -> (first, second)) and output ONLY the SECOND word in the pair.\n\n"
+        "Table:\n"
+        "cat -> sun\nfox -> owl\nbee -> elk\nant -> bat\n"
+        "elk -> (big, odd)\nsun -> (yes, no)\nbat -> (fun, joy)\nowl -> (shy, sad)\n"
+        "Query: cat\nOutput: no\n\n"
+        "Table:\n"
+        "ant -> bat\nbee -> elk\nfox -> owl\ncat -> sun\n"
+        "owl -> (shy, sad)\nbat -> (fun, joy)\nsun -> (yes, no)\nelk -> (big, odd)\n"
+        "Query: fox\nOutput: sad\n\n"
     )
+    donor_L_prompt = demo_L + recip_prompt
+    donor_R_prompt = demo_R + recip_prompt
     return {
         "recipient_prompt": recip_prompt,
         "donor_L_prompt": donor_L_prompt,
@@ -292,9 +311,16 @@ class SidecarBlock(nn.Module):
         k = self.k_proj(h)
         v = self.v_proj(h)
         pos = torch.arange(T, device=xf.device, dtype=torch.float32)
-        if attention_mask is not None:
+        if attention_mask is not None and attention_mask.shape[0] == B:
+            if attention_mask.shape[1] < T:
+                extra = torch.ones((B, T - attention_mask.shape[1]), device=attention_mask.device, dtype=attention_mask.dtype)
+                attention_mask = torch.cat([attention_mask, extra], dim=1)
+            elif attention_mask.shape[1] > T:
+                attention_mask = attention_mask[:, :T]
             # Handle left-padded sequences cleanly: real positions start at first non-pad token!
             pos = (attention_mask.long().cumsum(dim=-1) - 1).clamp(min=0).float()
+        else:
+            attention_mask = None
         q = apply_rope_half_torch(q, self.inv_freq.to(xf.device), pos)
         k = apply_rope_half_torch(k, self.inv_freq.to(xf.device), pos)
 
@@ -986,11 +1012,12 @@ def _eval_100fact_ood_locality(
     device: torch.device,
     facts: Sequence[Dict[str, Any]],
     base_correct: Optional[List[int]] = None,
+    organ: Optional[Removable2BlockSidecarOrgan] = None,
 ) -> Tuple[Dict[str, Any], List[int]]:
     """Fast 100-fact OOD locality check on `dataset.json` test split."""
     from extract_and_baseline import check_answer_match
 
-    prompts = [f["prompt"] for f in facts]
+    prompts = [f.get("direct_prompt", f.get("prompt", "")) for f in facts]
     ok_vec: List[int] = []
     old_pad = tok.padding_side
     tok.padding_side = "left"
@@ -998,9 +1025,12 @@ def _eval_100fact_ood_locality(
         with torch.no_grad():
             for i0 in range(0, len(prompts), 16):
                 enc = tok(prompts[i0 : i0 + 16], return_tensors="pt", padding=True, add_special_tokens=True)
+                mask = enc["attention_mask"].to(device)
+                if organ is not None:
+                    organ.set_attention_mask(mask)
                 gen = model.generate(
                     input_ids=enc["input_ids"].to(device),
-                    attention_mask=enc["attention_mask"].to(device),
+                    attention_mask=mask,
                     max_new_tokens=8,
                     do_sample=False,
                     use_cache=False,
@@ -1057,7 +1087,14 @@ def run_part_a_2hop(args: argparse.Namespace) -> Dict[str, Any]:
     donor_test_L = _eval_2hop_policy_logits(d_te_L["logits"], test_items, tok_A, "L")
     donor_test_R = _eval_2hop_policy_logits(d_te_R["logits"], test_items, tok_A, "R")
     donor_summary = _joint_swap_summary(donor_test_L, donor_test_R)
-    print(f"  [DONOR 7B SEALED TEST] L_em={donor_summary['left_em']:.3f}, R_em={donor_summary['right_em']:.3f}, joint_swap_em={donor_summary['joint_swap_em']:.3f}")
+    s0_L = tok_A.decode([int(d_te_L["logits"][0].argmax().item())])
+    s0_R = tok_A.decode([int(d_te_R["logits"][0].argmax().item())])
+    print(
+        f"  [DONOR 7B SEALED TEST] L_em={donor_summary['left_em']:.3f}, R_em={donor_summary['right_em']:.3f}, "
+        f"joint_swap_em={donor_summary['joint_swap_em']:.3f} | L_fc={donor_summary['left_fc']:.3f}, "
+        f"R_fc={donor_summary['right_fc']:.3f}, joint_fc={donor_summary['joint_swap_fc']:.3f} | "
+        f"sample0 pred=({s0_L!r}, {s0_R!r}) gold=({test_items[0]['val_L']!r}, {test_items[0]['val_R']!r})"
+    )
 
     # Cross-tokenizer soft teacher distributions (ZERO ground-truth labels!)
     teacher_probs_L = _map_donor_topk_to_recip_probs(d_tr_L["logits"], tok_A, tok_B_pre, top_k=16)
@@ -1122,7 +1159,7 @@ def run_part_a_2hop(args: argparse.Namespace) -> Dict[str, Any]:
     }
     # OOD background MLP keys for Tier 1 locality preservation
     ood_st = _extract_last_tok_logits_and_layers(
-        model_B, tok_B, [f["prompt"] for f in ood_facts[:32]], [lB1, lB2], dev_B, batch_size=8, capture_mlp_mid=True
+        model_B, tok_B, [f.get("direct_prompt", f.get("prompt", "")) for f in ood_facts[:32]], [lB1, lB2], dev_B, batch_size=8, capture_mlp_mid=True
     )
     C_bg_1 = (ood_st["z_down"][lB1].T @ ood_st["z_down"][lB1]) / float(len(ood_st["z_down"][lB1]))
     C_bg_2 = (ood_st["z_down"][lB2].T @ ood_st["z_down"][lB2]) / float(len(ood_st["z_down"][lB2]))
@@ -1188,7 +1225,7 @@ def run_part_a_2hop(args: argparse.Namespace) -> Dict[str, Any]:
         ts0 = time.time()
         organs: Dict[str, Removable2BlockSidecarOrgan] = {}
         eval_pol: Dict[str, Any] = {}
-        ood_prompts_reg = [f["prompt"] for f in ood_facts[:16]]
+        ood_prompts_reg = [f.get("direct_prompt", f.get("prompt", "")) for f in ood_facts[:16]]
         ood_ids_reg, ood_mask_reg = _tokenize_batch(tok_B, ood_prompts_reg, dev_B)
 
         for pol in ("L", "R"):
@@ -1245,8 +1282,8 @@ def run_part_a_2hop(args: argparse.Namespace) -> Dict[str, Any]:
                     te_logits_l.append(model_B(input_ids=ids, attention_mask=mask, use_cache=False).logits[:, -1, :].float().cpu())
             eval_pol[pol] = _eval_2hop_policy_logits(torch.cat(te_logits_l, dim=0), test_items, tok_B, pol)
             if pol == "L":
+                arm_loc, _ = _eval_100fact_ood_locality(model_B, tok_B, dev_B, ood_facts, base_correct=base_loc_ok, organ=organ)
                 organ.set_attention_mask(None)
-                arm_loc, _ = _eval_100fact_ood_locality(model_B, tok_B, dev_B, ood_facts, base_correct=base_loc_ok)
             organ.detach()
             organs[pol] = organ
 
