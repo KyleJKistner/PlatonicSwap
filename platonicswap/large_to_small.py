@@ -409,26 +409,26 @@ class HierarchicalRoutedFactBank(nn.Module):
         _, _, Vt = sla.svd(K_norm, full_matrices=False)
         dk = min(int(d_key), Vt.shape[0], D_B)
         P = Vt[:dk]  # (dk, D_B)
-        Z = K_norm @ P.T  # (N, dk)
-        Z = Z / (np.linalg.norm(Z, axis=1, keepdims=True) + 1e-12)
+        Z = K_norm @ P.T  # (N, dk) — keep exact projected norm (stored keys ~1.0, OOD orthogonal ~0.25!)
+        Z_unit = Z / (np.linalg.norm(Z, axis=1, keepdims=True) + 1e-12)
 
         G = n_groups if n_groups is not None else max(1, min(80, int(round(math.sqrt(N)))))
         # Simple deterministic spherical k-means into G groups
         rng = np.random.default_rng(seed)
         init_idx = rng.choice(N, size=min(G, N), replace=False)
-        C = Z[init_idx].copy()
+        C = Z_unit[init_idx].copy()
         if len(C) < G:
             C = np.vstack([C, np.zeros((G - len(C), dk))])
         for _ in range(15):
-            sims = Z @ C.T
+            sims = Z_unit @ C.T
             assign = np.argmax(sims, axis=1)
             for g in range(G):
                 m = assign == g
                 if np.any(m):
-                    c_new = Z[m].mean(axis=0)
+                    c_new = Z_unit[m].mean(axis=0)
                     C[g] = c_new / (np.linalg.norm(c_new) + 1e-12)
 
-        assign = np.argmax(Z @ C.T, axis=1)
+        assign = np.argmax(Z_unit @ C.T, axis=1)
         group_lists = [np.where(assign == g)[0] for g in range(G)]
         K_max = max(max(len(gl) for gl in group_lists), 2)
 
@@ -437,7 +437,7 @@ class HierarchicalRoutedFactBank(nn.Module):
         valid = np.zeros((G, K_max), dtype=bool)
         for g, idxs in enumerate(group_lists):
             for slot, orig_i in enumerate(idxs):
-                E[g, slot] = Z[orig_i]
+                E[g, slot] = Z_unit[orig_i]
                 V[g, slot] = V_mat[orig_i]
                 valid[g, slot] = True
 
@@ -446,11 +446,12 @@ class HierarchicalRoutedFactBank(nn.Module):
     def score_tokens(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         """
         Given `x` of shape `(B, T, D_B)`, returns `(best_score, margin, best_g, best_k)` each `(B, T)`.
-        Checks top-2 coarse groups to avoid boundary misses!
+        Does NOT re-normalize after projecting onto `P` so OOD tokens orthogonal to the key
+        subspace stay near ~0.2-0.4 while stored keys score ~0.95-1.00!
         """
         xf = x.float()
         x_hat = F.normalize(xf, dim=-1, eps=1e-8)
-        q = F.normalize(torch.matmul(x_hat, self.P.t()), dim=-1, eps=1e-8)  # (B, T, dk)
+        q = torch.matmul(x_hat, self.P.t())  # (B, T, dk) — exact cosine in full D_B space!
         # Coarse group scores: (B, T, G)
         g_scores = torch.matmul(q, self.C.t())
         top_g_k = min(2, self.n_groups)
@@ -488,6 +489,8 @@ class HierarchicalRoutedFactBank(nn.Module):
         if valid_token_mask is not None:
             fire = fire & valid_token_mask.to(fire.device)
         if not torch.any(fire):
+            if self.V.requires_grad:
+                return torch.zeros_like(x) + (0.0 * self.V.sum()).to(x.dtype)
             return torch.zeros_like(x)
         # Emit winning write vector only at firing positions
         v_emit = self.V[best_g, best_k]  # (B, T, D_B)

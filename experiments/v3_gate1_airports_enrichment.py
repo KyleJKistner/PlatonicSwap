@@ -1018,14 +1018,29 @@ def run_gate1_airports(args: argparse.Namespace) -> Dict[str, Any]:
     n_7b_3of3 = sum(1 for h in donor_hits if h == 3)
     print(f"  [Stage 1A | {DONOR_KEY}] 3/3 exact IATA: {n_7b_3of3}/{len(airports)} ({100.0 * n_7b_3of3 / max(len(airports), 1):.1f}%)")
 
-    # Extract Donor 7B states ONCE on all 7B-3/3 airports (phrasing p0) BEFORE unloading 7B!
+    # Extract Donor 7B states ONCE on ALL screened airports (p0, p1, p2 -> 3,000+ states!) PLUS 1,200 general concepts
+    # BEFORE unloading 7B, so the 3584->2048 bridge is FULL-RANK (N > D_A = 3584, strictly excluding blindspots)!
     idx_7b_ok = [i for i, h in enumerate(donor_hits) if h == 3]
     airports_7b_ok = [airports[i] for i in idx_7b_ok]
     donor_states_p0 = extract_multilayer_airport_states(
-        model_A, tok_A, dev_A, airports_7b_ok, phrasing_idx=0, layer_indices=donor_layers, capture_mlp_in=False, batch_size=args.batch_size
+        model_A, tok_A, dev_A, airports, phrasing_idx=0, layer_indices=donor_layers, capture_mlp_in=False, batch_size=args.batch_size
     )
-    # Map airport iata -> index inside donor_states_p0
-    iata_to_didx = {ap["iata"]: idx for idx, ap in enumerate(airports_7b_ok)}
+    donor_states_p1 = extract_multilayer_airport_states(
+        model_A, tok_A, dev_A, airports, phrasing_idx=1, layer_indices=donor_layers, capture_mlp_in=False, batch_size=args.batch_size
+    )
+    donor_states_p2 = extract_multilayer_airport_states(
+        model_A, tok_A, dev_A, airports, phrasing_idx=2, layer_indices=donor_layers, capture_mlp_in=False, batch_size=args.batch_size
+    )
+    # Also extract 1,200 task-blind universal concept states from Donor 7B for full-rank conditioning
+    import platonic_organ_engine as poe_v1
+    cw_v1 = poe_v1.build_universal_concept_write_corpus()
+    donor_cw_states = {}
+    for lA in donor_layers:
+        donor_cw_states[lA] = poe_v1.extract_entity_states(
+            model_A, tok_A, dev_A, cw_v1["prompts"], cw_v1["spans"], lA, all_subtokens=False, batch_size=args.batch_size
+        )["h_out"].astype(np.float32)
+    # Map airport iata -> index inside donor_states_p0 (all screened airports!)
+    iata_to_didx = {ap["iata"]: idx for idx, ap in enumerate(airports)}
 
     l2s.unload_model_strict(model_A)
     del model_A
@@ -1071,16 +1086,56 @@ def run_gate1_airports(args: argparse.Namespace) -> Dict[str, Any]:
         base_probe_logits = model_B(input_ids=probe_ids, attention_mask=probe_attn, use_cache=False).logits.detach().cpu()
 
     # -------------------------------------------------------------------------
-    # STAGE 2: Gate 1a — Contrast Bridge Fit on Shared-Known + Dev Layer Sweep + Eval Test
+    # STAGE 2: Gate 1a — Full-Rank Contrast Bridge (N >= 4,000 > D_A=3584, 0 Blindspot Leakage!) + Dev Sweep
     # -------------------------------------------------------------------------
-    recip_cal_states = extract_multilayer_airport_states(model_B, tok_B, dev_B, shared_cal, 0, recip_layers, capture_mlp_in=False, batch_size=args.batch_size)
+    blind_iatas = {ap["iata"] for ap in dev_blind} | {ap["iata"] for ap in eval_blind}
+    bridge_airports = [ap for ap in airports if ap["iata"] not in blind_iatas]  # strictly 0 blindspot leakage!
+    shared_iatas = {ap["iata"] for ap in shared_cal}
+
+    recip_br_p0 = extract_multilayer_airport_states(model_B, tok_B, dev_B, bridge_airports, 0, recip_layers, capture_mlp_in=False, batch_size=args.batch_size)
+    recip_br_p1 = extract_multilayer_airport_states(model_B, tok_B, dev_B, bridge_airports, 1, recip_layers, capture_mlp_in=False, batch_size=args.batch_size)
+    recip_br_p2 = extract_multilayer_airport_states(model_B, tok_B, dev_B, bridge_airports, 2, recip_layers, capture_mlp_in=False, batch_size=args.batch_size)
+    recip_cw_states = {}
+    for lB in recip_layers:
+        recip_cw_states[lB] = poe_v1.extract_entity_states(
+            model_B, tok_B, dev_B, cw_v1["prompts"], cw_v1["spans"], lB, all_subtokens=False, batch_size=args.batch_size
+        )["h_out"].astype(np.float32)
+
     recip_dev_states = extract_multilayer_airport_states(model_B, tok_B, dev_B, dev_blind, 0, recip_layers, capture_mlp_in=True, batch_size=args.batch_size)
     recip_eval_states = extract_multilayer_airport_states(model_B, tok_B, dev_B, eval_blind, 0, recip_layers, capture_mlp_in=True, batch_size=args.batch_size)
 
-    def _gather_donor(aps: Sequence[Dict[str, Any]], lA: int, site: str) -> np.ndarray:
+    def _gather_donor(aps: Sequence[Dict[str, Any]], lA: int, site: str, p_dict: Optional[Dict] = None) -> np.ndarray:
+        src = donor_states_p0 if p_dict is None else p_dict
         key = f"h_{site}"
         idxs = [iata_to_didx[ap["iata"]] for ap in aps]
-        return donor_states_p0[lA][key][idxs].astype(np.float64)
+        return src[lA][key][idxs].astype(np.float64)
+
+    def _build_fullrank_bridge(lA: int, lB: int, site: str, mode: str) -> Tuple[np.ndarray, np.ndarray, np.ndarray, Dict[str, Any]]:
+        # Combine non-blindspot airports (3 phrasings = ~2,700 pairs) + 1,200 general concepts (~3,900 > D_A=3584!)
+        hA_ap = np.vstack([
+            _gather_donor(bridge_airports, lA, site, donor_states_p0),
+            _gather_donor(bridge_airports, lA, site, donor_states_p1),
+            _gather_donor(bridge_airports, lA, site, donor_states_p2),
+        ])
+        hB_ap = np.vstack([
+            recip_br_p0[lB][f"h_{site}"].astype(np.float64),
+            recip_br_p1[lB][f"h_{site}"].astype(np.float64),
+            recip_br_p2[lB][f"h_{site}"].astype(np.float64),
+        ])
+        hA_cw = donor_cw_states[lA].astype(np.float64)
+        hB_cw = recip_cw_states[lB].astype(np.float64)
+        # Center each domain separately so contrasts are clean same-template differences!
+        muA_ap, muB_ap = hA_ap.mean(axis=0), hB_ap.mean(axis=0)
+        dA = np.vstack([hA_ap - muA_ap, hA_cw - hA_cw.mean(axis=0)])
+        dB = np.vstack([hB_ap - muB_ap, hB_cw - hB_cw.mean(axis=0)])
+        # Upweight shared-known airports 4x, other non-blindspot airports 2x, general concepts 1x
+        w_ap = np.array([4.0 if ap["iata"] in shared_iatas else 2.0 for ap in bridge_airports] * 3, dtype=np.float64)
+        w_cw = np.ones(len(hA_cw), dtype=np.float64)
+        w = np.concatenate([w_ap, w_cw])
+        M, b_info = l2s.fit_contrast_bridge(dA, dB, weights=w, mode=mode)
+        b_info["n_pairs"] = int(len(dA))
+        b_info["mode"] = mode
+        return M, muA_ap, muB_ap, b_info
 
     dev_sweep: List[Dict[str, Any]] = []
     best_cfg: Optional[Dict[str, Any]] = None
@@ -1088,20 +1143,17 @@ def run_gate1_airports(args: argparse.Namespace) -> Dict[str, Any]:
 
     for lA, lB in CANDIDATE_LAYER_PAIRS:
         for site in ("airport_last", "prompt_last"):
-            hA_cal = _gather_donor(shared_cal, lA, site)
-            hB_cal = recip_cal_states[lB][f"h_{site}"].astype(np.float64)
-            mu_A = hA_cal.mean(axis=0)
-            mu_B = hB_cal.mean(axis=0)
-            M, b_info = l2s.fit_contrast_bridge(hA_cal - mu_A, hB_cal - mu_B, mode="ridge")
-            hA_dev = _gather_donor(dev_blind, lA, site)
-            patched_dev = mu_B[None, :] + (hA_dev - mu_A[None, :]) @ M.T
-            res_d = eval_patched_airports_gate1a(model_B, tok_B, dev_B, dev_blind, 0, lB, site, patched_dev, batch_size=args.batch_size)
-            row = {"lA": lA, "lB": lB, "site": site, "bridge": b_info, "dev_acc": res_d["acc"], "dev_k": res_d["k"], "dev_n": res_d["n"]}
-            dev_sweep.append(row)
-            print(f"  [Gate1a Dev Sweep] (L{lA}->L{lB}, {site:12s}) bridge_cos={b_info['train_mean_cos']:.3f} -> dev EM={res_d['acc']:.3f} ({res_d['k']}/{res_d['n']})")
-            if res_d["acc"] > best_dev_acc:
-                best_dev_acc = res_d["acc"]
-                best_cfg = {"lA": lA, "lB": lB, "site": site, "M": M, "mu_A": mu_A, "mu_B": mu_B, "bridge": b_info}
+            for bmode in ("stiefel", "ridge"):
+                M, mu_A, mu_B, b_info = _build_fullrank_bridge(lA, lB, site, bmode)
+                hA_dev = _gather_donor(dev_blind, lA, site)
+                patched_dev = mu_B[None, :] + (hA_dev - mu_A[None, :]) @ M.T
+                res_d = eval_patched_airports_gate1a(model_B, tok_B, dev_B, dev_blind, 0, lB, site, patched_dev, batch_size=args.batch_size)
+                row = {"lA": lA, "lB": lB, "site": site, "mode": bmode, "bridge": b_info, "dev_acc": res_d["acc"], "dev_k": res_d["k"], "dev_n": res_d["n"]}
+                dev_sweep.append(row)
+                print(f"  [Gate1a Dev Sweep] (L{lA}->L{lB}, {site:12s}, {bmode:7s}, N={b_info['n_pairs']}) cos={b_info['train_mean_cos']:.3f} -> dev EM={res_d['acc']:.3f} ({res_d['k']}/{res_d['n']})")
+                if res_d["acc"] > best_dev_acc:
+                    best_dev_acc = res_d["acc"]
+                    best_cfg = {"lA": lA, "lB": lB, "site": site, "mode": bmode, "M": M, "mu_A": mu_A, "mu_B": mu_B, "bridge": b_info}
 
     assert best_cfg is not None
     lA_star, lB_star, site_star = best_cfg["lA"], best_cfg["lB"], best_cfg["site"]
@@ -1178,10 +1230,8 @@ def run_gate1_airports(args: argparse.Namespace) -> Dict[str, Any]:
     t_1b = time.time()
     hB_eval_al = recip_eval_states[lB_star]["h_airport_last"].astype(np.float64)
     hA_eval_al = _gather_donor(eval_blind, lA_star, "airport_last")
-    hA_cal_al = _gather_donor(shared_cal, lA_star, "airport_last")
-    hB_cal_al = recip_cal_states[lB_star]["h_airport_last"].astype(np.float64)
-    M_al, _ = l2s.fit_contrast_bridge(hA_cal_al - hA_cal_al.mean(0), hB_cal_al - hB_cal_al.mean(0), mode="ridge")
-    V_init_1b = (hB_cal_al.mean(0)[None, :] + (hA_eval_al - hA_cal_al.mean(0)[None, :]) @ M_al.T) - hB_eval_al
+    M_al, muA_al, muB_al, _ = _build_fullrank_bridge(lA_star, lB_star, "airport_last", best_cfg["mode"])
+    V_init_1b = (muB_al[None, :] + (hA_eval_al - muA_al[None, :]) @ M_al.T) - hB_eval_al
 
     bank_1b = l2s.HierarchicalRoutedFactBank.from_keys_and_writes(hB_eval_al, V_init_1b, d_key=64, tau_abs=0.80, margin_min=0.02).to(dev_B)
     cal_1b = bank_1b.calibrate_joint_max_threshold(ood_h_seqs, alpha_seq=0.005, margin_safety=0.01)
