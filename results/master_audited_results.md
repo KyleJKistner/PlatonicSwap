@@ -1,34 +1,34 @@
 # PlatonicSwap — Master Programmatically Audited Results (`v1.0`)
 
-> **Auto-generated** by `experiments/build_repo_tables.py` at `2026-11-26 13:14:29` directly from JSON artifacts in `results/` (zero hand-typed numbers; strict column-count and no-bare-pipe assertions enforced).
+> **Auto-generated** by `experiments/build_repo_tables.py` at `2026-11-27 21:55:35` directly from JSON artifacts in `results/` (zero hand-typed numbers; strict column-count and no-bare-pipe assertions enforced).
 
-### Artifact Manifest (24/24 present)
+### v1.0 Serialized Artifact Manifest (24/24 present — file-presence & hash index, not independent GPU replay; v2–v5.1 JSONs are documented in `docs/V*.md`)
 | File | Status | Size | Modified | SHA-256 (12) |
 | --- | --- | --- | --- | --- |
-| `results_baseline.json` | AUDITED | 1360 KB | 2026-11-26 13:09:52 | `894ecd527e98` |
-| `results_referee_controls.json` | AUDITED | 452 KB | 2026-11-26 13:09:52 | `7055c5d86eb1` |
-| `results_systems.json` | AUDITED | 5662 KB | 2026-11-26 13:09:52 | `8ea3fae3f3e7` |
-| `results_pilot0.json` | AUDITED | 220 KB | 2026-11-26 09:07:16 | `e854ee31fe38` |
-| `results_pilot1.json` | AUDITED | 70 KB | 2026-11-26 09:07:16 | `1162e3e485e3` |
-| `results_pilot1_qwen2.5-3b_to_granite-3.1-2b.json` | AUDITED | 70 KB | 2026-11-26 09:07:16 | `3be8102838da` |
-| `results_pilot1_falcon3-3b_to_smollm2-1.7b.json` | AUDITED | 70 KB | 2026-11-26 09:07:16 | `e7aae20e5c7c` |
-| `results_pilot1b_qwen2.5-3b_to_smollm2-1.7b.json` | AUDITED | 63 KB | 2026-11-26 09:07:16 | `615f3c8a0210` |
-| `results_pilot1b_qwen2.5-3b_to_granite-3.1-2b.json` | AUDITED | 76 KB | 2026-11-26 09:07:16 | `17b726a30867` |
-| `results_pilot1b_falcon3-3b_to_smollm2-1.7b.json` | AUDITED | 61 KB | 2026-11-26 09:07:16 | `4c801c269186` |
-| `results_organs_p0.json` | AUDITED | 57 KB | 2026-11-26 09:07:16 | `76600948ea10` |
-| `results_organs_multifamily.json` | AUDITED | 118 KB | 2026-11-26 12:13:35 | `87aa28879370` |
-| `results_pilot2_fullrank.json` | AUDITED | 457 KB | 2026-11-26 09:07:16 | `3f00e6eddcd0` |
-| `results_pilot2_gated.json` | AUDITED | 16 KB | 2026-11-26 09:07:16 | `24ccc69e0cb4` |
-| `results_pilot3.json` | AUDITED | 81 KB | 2026-11-26 09:07:16 | `dbdebe4af48e` |
-| `results_pilot3_qwen2.5-1.5b.json` | AUDITED | 62 KB | 2026-11-26 09:07:16 | `21fc13a9de82` |
-| `results_pilot3_granite-3.1-2b.json` | AUDITED | 62 KB | 2026-11-26 09:07:16 | `a565ae98228a` |
-| `results_pilot3_falcon3-3b.json` | AUDITED | 62 KB | 2026-11-26 09:07:16 | `98bfcb22f407` |
-| `results_graft_falsify.json` | AUDITED | 170 KB | 2026-11-26 09:07:16 | `112f55c05a77` |
-| `results_graft_t3_gap.json` | AUDITED | 25 KB | 2026-11-26 09:07:16 | `edbd378112e0` |
-| `results_graft_t3_gap_scaled.json` | AUDITED | 80 KB | 2026-11-26 12:13:35 | `b074324cd458` |
-| `results_graft_t3_gap_scaled_granite.json` | AUDITED | 66 KB | 2026-11-26 12:13:35 | `d442da0713e3` |
-| `results_cap1_channel_pushforward.json` | AUDITED | 128 KB | 2026-11-26 12:13:35 | `bcf2dc70997e` |
-| `results_bio_ripple_sealed.json` | AUDITED | 580 KB | 2026-11-26 12:13:35 | `cd6c3c02a088` |
+| `results_baseline.json` | PRESENT | 1360 KB | 2026-11-26 13:09:52 | `894ecd527e98` |
+| `results_referee_controls.json` | PRESENT | 452 KB | 2026-11-26 13:09:52 | `7055c5d86eb1` |
+| `results_systems.json` | PRESENT | 5662 KB | 2026-11-26 13:09:52 | `8ea3fae3f3e7` |
+| `results_pilot0.json` | PRESENT | 220 KB | 2026-11-26 09:07:16 | `e854ee31fe38` |
+| `results_pilot1.json` | PRESENT | 70 KB | 2026-11-26 09:07:16 | `1162e3e485e3` |
+| `results_pilot1_qwen2.5-3b_to_granite-3.1-2b.json` | PRESENT | 70 KB | 2026-11-26 09:07:16 | `3be8102838da` |
+| `results_pilot1_falcon3-3b_to_smollm2-1.7b.json` | PRESENT | 70 KB | 2026-11-26 09:07:16 | `e7aae20e5c7c` |
+| `results_pilot1b_qwen2.5-3b_to_smollm2-1.7b.json` | PRESENT | 63 KB | 2026-11-26 09:07:16 | `615f3c8a0210` |
+| `results_pilot1b_qwen2.5-3b_to_granite-3.1-2b.json` | PRESENT | 76 KB | 2026-11-26 09:07:16 | `17b726a30867` |
+| `results_pilot1b_falcon3-3b_to_smollm2-1.7b.json` | PRESENT | 61 KB | 2026-11-26 09:07:16 | `4c801c269186` |
+| `results_organs_p0.json` | PRESENT | 57 KB | 2026-11-26 09:07:16 | `76600948ea10` |
+| `results_organs_multifamily.json` | PRESENT | 118 KB | 2026-11-26 12:13:35 | `87aa28879370` |
+| `results_pilot2_fullrank.json` | PRESENT | 457 KB | 2026-11-26 09:07:16 | `3f00e6eddcd0` |
+| `results_pilot2_gated.json` | PRESENT | 16 KB | 2026-11-26 09:07:16 | `24ccc69e0cb4` |
+| `results_pilot3.json` | PRESENT | 81 KB | 2026-11-26 09:07:16 | `dbdebe4af48e` |
+| `results_pilot3_qwen2.5-1.5b.json` | PRESENT | 62 KB | 2026-11-26 09:07:16 | `21fc13a9de82` |
+| `results_pilot3_granite-3.1-2b.json` | PRESENT | 62 KB | 2026-11-26 09:07:16 | `a565ae98228a` |
+| `results_pilot3_falcon3-3b.json` | PRESENT | 62 KB | 2026-11-26 09:07:16 | `98bfcb22f407` |
+| `results_graft_falsify.json` | PRESENT | 170 KB | 2026-11-26 09:07:16 | `112f55c05a77` |
+| `results_graft_t3_gap.json` | PRESENT | 25 KB | 2026-11-26 09:07:16 | `edbd378112e0` |
+| `results_graft_t3_gap_scaled.json` | PRESENT | 80 KB | 2026-11-26 12:13:35 | `b074324cd458` |
+| `results_graft_t3_gap_scaled_granite.json` | PRESENT | 66 KB | 2026-11-26 12:13:35 | `d442da0713e3` |
+| `results_cap1_channel_pushforward.json` | PRESENT | 128 KB | 2026-11-26 12:13:35 | `bcf2dc70997e` |
+| `results_bio_ripple_sealed.json` | PRESENT | 580 KB | 2026-11-26 12:13:35 | `cd6c3c02a088` |
 
 ## Pillar 1: Zero-QA Geometry, $N \gg D$ Scaling, $O(d)$ vs. $GL(d)$, and Attention-Knockout Decomposition
 ### Table 1.0 — Plato's Key 20-Pair Protocol Replication (`results_baseline.json`)

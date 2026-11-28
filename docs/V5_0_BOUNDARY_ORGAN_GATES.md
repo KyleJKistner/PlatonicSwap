@@ -1,8 +1,8 @@
 # PlatonicSwap v5.0 Stage 1 — Boundary-First Causal Organ Gates (`G0 → G1 → G2`)
 
 **Status:** Completed on Colab NVIDIA L4 (`1,116.7 s`, `0.62 CUs`, `Active assignments: 0`)  
-**Decision:** **`STOP_BEFORE_G3_NO_PASSING_ORGAN`** (Clean Stop before Stage 2 Native Compilation)  
-**Grading Council:** Pre-GPU `PASS / PASS` · Post-GPU `PASS / PASS` (Astra 6.2 Ultra + Gemini 4 Neon High)  
+**Decision:** **`STOP_BEFORE_G3_NO_PASSING_ORGAN`** (Transfer Failed — Clean Stop before Stage 2 Native Compilation)  
+**Execution/Compliance Review:** Pre-GPU `PASS / PASS` · Post-GPU `PASS / PASS` (Astra 6.2 Ultra + Gemini 4 Neon High — protocol compliance sign-off on a negative stop, NOT transfer success)  
 **Script:** [`experiments/v5_0_boundary_organ_gates_g0_g2.py`](../experiments/v5_0_boundary_organ_gates_g0_g2.py) (`ed4d32c`)  
 **Results:** [`results/results_v5_0_boundary_organ_gates_g0_g2.json`](../results/results_v5_0_boundary_organ_gates_g0_g2.json)  
 **Constraints Honored:** Strict **ZERO SGD** (`strict_zero_sgd = true`), **ZERO task-target-fitted writers** (`zero_task_fitted_writers = true`), single-model GPU phases (`Phase 0: 1.5B`, `Phase 1: 7B`, `Phase 2: 1.5B`), post-unload VRAM `0.009 GiB < 1.0 GiB` across all three phases.
@@ -65,7 +65,7 @@ Following the v4.4.1 private-lane falsifier (`KILL`), v5.0 tested the unanimous 
 | `L27_MLP` (2-Hop code) | 59.93 | **3,591.58** | 1,402.39 | 14.03× (native) / 5.47× (clamped) |
 | `L26_MLP` (Airports code) | 89.51 | **8,012.03** | 4,005.11 | 31.29× (native) / 15.64× (clamped) |
 
-- This directly quantifies Fable's slicing barrier and explains why `v4.4.1`'s 256-neuron copied writer exploded to `−2.6543`. (The width-compression ladder was correctly skipped because whole-MLP G1 did not pass.)
+- This quantifies the random-component-sampling upper error bound `(χ² - 1) / k` under naive neuron sampling (it is an upper bound on random sampling, not a universal impossibility proof against deterministic, cancellation-aware, or low-rank compression). The width-compression ladder was skipped because whole-MLP G1 did not pass.
 
 ---
 
@@ -90,5 +90,5 @@ Following the v4.4.1 private-lane falsifier (`KILL`), v5.0 tested the unanimous 
 
 ## 5. Conclusion & Next-Step Guidance
 
-1. **Why Stage 2 (Gate G3) was NOT run:** The `STOP_BEFORE_G3_NO_PASSING_ORGAN` stop is unanimously certified by the Post-GPU 2-Model Grading Council (`PASS / PASS`). Even before behavioral compilation, **both** the generic L27 output bridge (`T_raw = 64.51% < 80%`) **and** every ingress site's held-out demand-weighted linear supply (`κ_rep = 0.41–0.77 < 0.85`, worst mode `ρ² <= −0.07 < 0.80`) fail the minimal mathematical conditions for strict 0-SGD verbatim Depth-1 organ compilation on `Qwen2.5-7B → Qwen2.5-1.5B`.
+1. **Why Stage 2 (Gate G3) was NOT run:** The `STOP_BEFORE_G3_NO_PASSING_ORGAN` stop was signed off for execution compliance (`PASS / PASS`). Under the tested Depth-1 linear boundary family on `Qwen2.5-7B → Qwen2.5-1.5B`, **both** the generic L27 output bridge (`T_raw = 64.51% < 80%`) **and** every ingress site's held-out demand-weighted linear supply (`κ_rep = 0.41–0.77 < 0.85`, worst mode `ρ² <= −0.07 < 0.80`) failed our project-declared G0/G2 thresholds (which justify stopping this tested implementation, without constituting a universal impossibility theorem). Note: `WIR` throughout is a ratio of average answer-minus-foil margin changes on originally wrong items, not the fraction of mistakes fixed.
 2. **What would be required for any future behavioral follow-up:** A prompt-format study using identical 1-shot/2-shot or chat-formatted prompts (pilot-selected, saving per-item completions) would be needed to certify G0 behavioral mastery on both tasks — and even then, overcoming the `64.5%` output bridge and `0.41–0.77` linear supply walls points beyond strict 0-SGD linear boundary plugs (e.g., toward tiny-budget native adaptation / Tier 2 polish or deeper architectural changes).

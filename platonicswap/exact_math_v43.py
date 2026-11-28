@@ -10,13 +10,12 @@ in-weights translation (`Qwen/Qwen2.5-7B-Instruct` -> `Qwen/Qwen2.5-1.5B-Instruc
   1. Streaming FP64 Second-Moment Calibration (`N_fit = 60,000+`, `N_val >= 5,000`, ZERO RAM bloat!):
      Accumulates exact uncentered `S_AA`, `S_BB`, `S_BA` in FP64 across batches, with ridge `λ`
      scaled relative to the **median** eigenvalue and selected strictly on template-disjoint `N_val`.
-  2. Exact Per-Reader Observability Score `o_j` via Schur Complement `S_{A|B}`:
+  2. Regularized Per-Reader Observability Diagnostic `o_j` via Uncentered Second-Moment Schur Complement:
        `Pt = solve(S_BB + lam*I, S_BA, assume_a='pos')`
-       `S_AgB = S_AA - S_BA.T @ Pt`
+       `S_AgB = S_AA - S_BA.T @ Pt`  (note: `= E[(A - B Pt)^T(A - B Pt)] + lam * Pt^T Pt`)
        `o_j = 1.0 - ((R_A @ S_AgB) * R_A).sum(1) / ((R_A @ S_AA) * R_A).sum(1)`
-     Used to score SwiGLU `(gate, up)` neurons and Attention `(Q, K, V)` heads jointly with task
-     salience so `Tier 1B` NEVER transplants deaf 7B units!
-  3. Exact Zero-Data Shared-Vocabulary Bridge `M_U` at Final Layer `L27` (ZERO `V x V` matrix!):
+     Used as a regularized empirical diagnostic for SwiGLU `(gate, up)` neurons and Attention `(Q, K, V)` heads.
+  3. Task-Label-Free Shared-Vocabulary Fisher Bridge `M_U` at Final Layer `L27` (uses unlabeled calibration logits, ZERO `V x V` matrix!):
      Uses exact Fisher metrics `G_B`, `G_BA`, `G_A` streamed from Donor 7B calibration softmax `p_n`:
        `QA[n] = U_A^T p_n`, `QB[n] = U_B^T p_n`
        `G_B  = U_B^T diag(pbar) U_B - QB^T QB / N`
@@ -201,8 +200,13 @@ def compute_schur_complement_s_agb(
     lam_abs: float,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Exact Fable+Astra pullback `Pt = (S_BB + lam*I)^{-1} S_BA` (`P = Pt.T`) and Schur complement:
-      `S_AgB = S_AA - S_BA.T @ Pt` (residual unobservable covariance of Donor A given Recipient B!).
+    Regularized ridge pullback `Pt = (S_BB + lam*I)^{-1} S_BA` (`P = Pt.T`) and regularized
+    Schur-complement diagnostic on uncentered second moments:
+      `S_AgB_reg = S_AA - S_BA.T @ Pt`
+    Note (Audit F18): `S_AgB_reg` equals the exact residual second moment
+    `E[(A - B Pt)^T (A - B Pt)]` PLUS the ridge penalty term `lam * Pt.T @ Pt`, and operates on
+    uncentered second moments rather than centered covariances. It is a regularized empirical
+    diagnostic, not an exact unregularized measure of absent information.
     """
     D_B = S_BB.shape[0]
     Pt = sla.solve(S_BB + float(lam_abs) * np.eye(D_B, dtype=np.float64), S_BA, assume_a="pos")  # (D_B, D_A)

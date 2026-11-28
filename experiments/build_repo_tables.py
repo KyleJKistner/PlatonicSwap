@@ -1176,10 +1176,10 @@ def main() -> None:
             n_present += 1
             st = p.stat()
             ts = datetime.datetime.fromtimestamp(st.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
-            man_rows.append([f"`{fn}`", "AUDITED", f"{st.st_size // 1024} KB", ts, f"`{sha256_short(p)}`"])
+            man_rows.append([f"`{fn}`", "PRESENT", f"{st.st_size // 1024} KB", ts, f"`{sha256_short(p)}`"])
         else:
-            man_rows.append([f"`{fn}`", "**PENDING**", "—", "—", "—"])
-    sections.append(f"### Artifact Manifest ({n_present}/{len(tracked_jsons)} present)")
+            man_rows.append([f"`{fn}`", "**MISSING**", "—", "—", "—"])
+    sections.append(f"### v1.0 Serialized Artifact Manifest ({n_present}/{len(tracked_jsons)} present — file-presence & hash index, not independent GPU replay; v2–v5.1 JSONs are documented in `docs/V*.md`)")
     sections.append(md_table(["File", "Status", "Size", "Modified", "SHA-256 (12)"], man_rows))
     sections.append("")
 

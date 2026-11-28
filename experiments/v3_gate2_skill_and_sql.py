@@ -938,8 +938,11 @@ def _eval_2hop_policy_logits(
     tok: Any,
     policy: str,  # "L" or "R"
 ) -> Dict[str, Any]:
-    """Score exact next-token greedy EM and forced-choice (val_L vs val_R) for Policy L or R."""
-    em_vec, fc_vec = [], []
+    """Score exact next-token greedy EM and ALL-LEAF forced-choice (fc8: target vs all candidate
+    leaves across all rows in hop2_rows, closing the F05 query-independent column shortcut!).
+    Legacy 2-way same-row FC is retained separately as `fc_2way_legacy` for historical comparison only.
+    """
+    em_vec, fc_vec, fc2_vec = [], [], []
     for i, it in enumerate(items):
         tid_L = tok.encode(" " + it["val_L"], add_special_tokens=False)[0]
         tid_R = tok.encode(" " + it["val_R"], add_special_tokens=False)[0]
@@ -948,19 +951,29 @@ def _eval_2hop_policy_logits(
         tgt_id = tid_L if policy == "L" else tid_R
         oth_id = tid_R if policy == "L" else tid_L
         em_vec.append(1 if pred_id == tgt_id else 0)
-        fc_vec.append(1 if float(row[tgt_id].item()) > float(row[oth_id].item()) else 0)
+        fc2_vec.append(1 if float(row[tgt_id].item()) > float(row[oth_id].item()) else 0)
+        # All candidate leaves across all rows in the table (requires solving BOTH hop 1 and hop 2!)
+        all_leaf_ids = []
+        for _mid, vL, vR in it["hop2_rows"]:
+            all_leaf_ids.append(tok.encode(" " + vL, add_special_tokens=False)[0])
+            all_leaf_ids.append(tok.encode(" " + vR, add_special_tokens=False)[0])
+        tgt_val = float(row[tgt_id].item())
+        other_vals = [float(row[lid].item()) for lid in all_leaf_ids if lid != tgt_id]
+        fc_vec.append(1 if (not other_vals or tgt_val > max(other_vals)) else 0)
     return {
         "em": round(float(np.mean(em_vec)), 4),
         "fc": round(float(np.mean(fc_vec)), 4),
+        "fc_2way_legacy": round(float(np.mean(fc2_vec)), 4),
         "_em_vec": em_vec,
         "_fc_vec": fc_vec,
+        "_fc2_vec": fc2_vec,
     }
 
 
 def _joint_swap_summary(res_L: Dict[str, Any], res_R: Dict[str, Any]) -> Dict[str, float]:
     eL, eR = np.asarray(res_L["_em_vec"]), np.asarray(res_R["_em_vec"])
     fL, fR = np.asarray(res_L["_fc_vec"]), np.asarray(res_R["_fc_vec"])
-    return {
+    out = {
         "left_em": res_L["em"],
         "right_em": res_R["em"],
         "joint_swap_em": round(float(np.mean((eL == 1) & (eR == 1))), 4),
@@ -968,6 +981,10 @@ def _joint_swap_summary(res_L: Dict[str, Any], res_R: Dict[str, Any]) -> Dict[st
         "right_fc": res_R["fc"],
         "joint_swap_fc": round(float(np.mean((fL == 1) & (fR == 1))), 4),
     }
+    if "_fc2_vec" in res_L and "_fc2_vec" in res_R:
+        f2L, f2R = np.asarray(res_L["_fc2_vec"]), np.asarray(res_R["_fc2_vec"])
+        out["joint_swap_fc_2way_legacy"] = round(float(np.mean((f2L == 1) & (f2R == 1))), 4)
+    return out
 
 
 def _map_donor_topk_to_recip_probs(

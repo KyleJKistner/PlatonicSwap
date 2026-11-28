@@ -790,8 +790,17 @@ def solve_2constraint_kkt(
         cands.sort(key=lambda t: t[0])
         return cands[0][1]
 
-    # Degenerate collinear fallback
-    return (m1 / max(a11, 1e-18)) * u1 + (m2 / max(a22, 1e-18)) * u2
+    # Degenerate collinear case: accept only if a collinear candidate satisfies BOTH constraints.
+    for cand_w in (
+        (m1 / max(a11, 1e-18)) * u1 if a11 > 1e-18 else None,
+        (m2 / max(a22, 1e-18)) * u2 if a22 > 1e-18 else None,
+    ):
+        if cand_w is not None and float(cand_w @ d1) >= m1 - 1e-9 and float(cand_w @ d2) >= m2 - 1e-9:
+            return cand_w
+    raise ValueError(
+        f"Infeasible 2-constraint KKT QP: constraints w^T d1 >= {m1} and w^T d2 >= {m2} "
+        f"cannot be simultaneously satisfied (a11={a11:.3e}, a12={a12:.3e}, a22={a22:.3e})."
+    )
 
 
 def compile_channel_pushforward_organ(
@@ -904,7 +913,9 @@ def compile_channel_pushforward_organ(
     rule_reports: List[Dict[str, Any]] = []
     any_abstained = False
     n_ev = len(Xb_ev_r)
-    k_conf = min(n_ev, int(math.ceil((n_ev + 1) * (1.0 - alpha))))
+    k_conf_raw = int(math.ceil((n_ev + 1) * (1.0 - alpha)))
+    conformal_n_ok = k_conf_raw <= n_ev
+    k_conf = min(n_ev, k_conf_raw)
     Xb_pred_ev = None if (is_native or Xa_ev_r is None) else (mu_B + (Xa_ev_r - mu_A) @ G.T)
     if Xb_pred_ev is not None:
         ss_res_ev = float(np.sum((Xb_ev_r - Xb_pred_ev) ** 2))
@@ -919,9 +930,9 @@ def compile_channel_pushforward_organ(
         Xn_A = np.asarray(r["X_neg_dom_A"], dtype=np.float64)
         v_A = np.asarray(r["v_A"], dtype=np.float64)
 
-        # 1. Mandatory Frame-Counterbalance Certificate
+        # 1. Mandatory Frame-Counterbalance Certificate (enforced in abstention below!)
         f_auroc = compute_frame_only_auroc(r["pos_frame_ids"], r["neg_frame_ids"])
-        frame_ok = abs(f_auroc - 0.5) <= 0.15
+        frame_ok = abs(f_auroc - 0.5) <= 1e-6
 
         # 2. Push donor states forward through generative channel G into B coordinates!
         if is_native:
@@ -937,11 +948,20 @@ def compile_channel_pushforward_organ(
         w_c = solve_2constraint_kkt(S_bg, Xp_sim.mean(axis=0) - Xn_sim.mean(axis=0), Xp_sim.mean(axis=0) - mu_B, m1, m2)
         w_c = w_c / max(float(np.linalg.norm(w_c)), 1e-12)
 
-        # 4. Exact Real-B Conformal Threshold & Untouched Held-Out Channel Diagnostics!
+        # 4. Exact Real-B Conformal Threshold on the ACTUAL Compiled Gate Event!
+        # In biasfree mode, the compiled lower gate fires iff (w_c - t1 * c_B)^T x > 0, which equals
+        # (w_c^T x) / (c_B^T x) > t1 whenever c_B^T x > 0 (rows with c_B^T x <= 0 are conservatively +inf).
         z_real_B = Xb_ev_r @ w_c
         std_real_c = float(np.std(z_real_B)) + 1e-12
-        q_real_B = float(np.sort(z_real_B)[k_conf - 1])
         m_real = float(np.mean(z_real_B))
+        if mode == "biasfree":
+            pin_ev = Xb_ev_r @ c_B
+            cal_scores = np.where(pin_ev > 1e-12, z_real_B / np.where(pin_ev > 1e-12, pin_ev, 1.0), np.inf)
+        else:
+            cal_scores = z_real_B
+        q_real_B = float(np.sort(cal_scores)[k_conf - 1]) if conformal_n_ok else float("inf")
+        finite_cal = cal_scores[np.isfinite(cal_scores)]
+        std_cal = float(np.std(finite_cal)) + 1e-12 if len(finite_cal) > 1 else std_real_c
 
         if Xb_pred_ev is not None:
             z_pred_r = Xb_pred_ev @ w_c
@@ -960,9 +980,9 @@ def compile_channel_pushforward_organ(
             e_cal_1d = None
             m_pred = m_real
 
-        # Exact Real-B Conformal Threshold (t1 = Q_{1-alpha}(z_real_B)) & 1-sigma Ramp (Gamma = std(z_real_B))!
+        # Exact Real-B Conformal Threshold (t1 = Q_{1-alpha}(cal_scores)) & 1-sigma Ramp (Gamma = std_cal)!
         t1 = q_real_B
-        Gamma = std_real_c
+        Gamma = std_cal
         t2 = t1 + Gamma
         beta = min(SILU_NEG_MAX / (delta * Gamma), 100.0 / Gamma)
 
@@ -973,17 +993,22 @@ def compile_channel_pushforward_organ(
         else:
             rng_d = np.random.default_rng(NOISE_SEEDS[0])
             zp_diag = np.tile(m_real + a_emp * (z_pos_raw - m_pred), 4) + e_cal_1d[rng_d.integers(0, len(e_cal_1d), size=4 * len(z_pos_raw))]
-        pred_hit_rate = float(np.mean(zp_diag >= 0.5 * (t1 + t2)))
+        pred_hit_rate = float(np.mean(zp_diag >= 0.5 * (t1 + t2))) if np.isfinite(t1) else 0.0
         sig_pool = math.sqrt(0.5 * float(np.var(zp_diag)) + 0.5 * float(np.var(z_real_B)) + 1e-12)
         pred_dprime = float((np.mean(zp_diag) - m_real) / sig_pool)
 
-        # 5. Unlabeled Abstention Certificate (catches broken/shuffled channels unconditionally!)
-        abstained = (not is_native) and ((r2_chan_ev <= 0.0) or (r_dir <= 0.25) or (a_emp <= 0.15))
+        # 5. Mandatory Frame, Conformal-Sample-Size & Unlabeled Channel Abstention Certificates
+        channel_abstained = (not is_native) and ((r2_chan_ev <= 0.0) or (r_dir <= 0.25) or (a_emp <= 0.15))
+        abstained = (not frame_ok) or (not conformal_n_ok) or (not np.isfinite(t1)) or channel_abstained
         if abstained:
             any_abstained = True
 
         if abstained and not force_abstained:
-            if r2_chan_ev <= 0.0:
+            if not frame_ok:
+                abstain_reason = f"frame_cert_failed(auroc={f_auroc:.4f})"
+            elif not conformal_n_ok or not np.isfinite(t1):
+                abstain_reason = f"conformal_insufficient_n(n_ev={n_ev},alpha={alpha})"
+            elif r2_chan_ev <= 0.0:
                 abstain_reason = "r2_chan_ev<=0"
             elif r_dir <= 0.25:
                 abstain_reason = "r_dir<=0.25"
@@ -1949,15 +1974,21 @@ def run_cpu_unit_tests() -> None:
             pert = wk + 0.05 * rng.standard_normal(24)
             if pert @ d_a >= m1_t and pert @ d_b >= m2_t:
                 assert float(pert @ (S_lw @ pert)) >= obj0 - 1e-10
-    print(f"  [PASS 2/7] Analytical Ledoit-Wolf (<1e-12) + 2-Constraint KKT global optimality across all 3 active sets verified (shrink={sh_lw:.5f})!")
+    # Verify contradictory collinear constraints raise ValueError (Audit F21 fix!)
+    try:
+        solve_2constraint_kkt(np.eye(2), np.array([1.0, 0.0]), np.array([-1.0, 0.0]), 1.0, 1.0)
+        raise AssertionError("Infeasible KKT failed to raise ValueError!")
+    except ValueError:
+        pass
+    print(f"  [PASS 2/7] Analytical Ledoit-Wolf (<1e-12) + 2-Constraint KKT optimality & infeasibility rejection verified (shrink={sh_lw:.5f})!")
 
     # 3. Rectangular Generative Channel Pushforward (2048->3072 UP & 2048->1536 DOWN, scaled 64->96 & 64->48)
     for D_A, D_B in [(64, 96), (64, 48), (96, 64)]:
         G_true = random_stiefel((D_B, D_A), rng) * 1.15
         X_A_f = rng.standard_normal((500, D_A)) * 0.8 + rng.standard_normal(D_A)
         X_B_f = rng.standard_normal(D_B) + (X_A_f - X_A_f.mean(0)) @ G_true.T + rng.standard_normal((500, D_B)) * 0.15
-        X_A_r = rng.standard_normal((400, D_A)) * 0.8 + X_A_f.mean(0)
-        X_B_r = X_B_f.mean(0) + (X_A_r - X_A_f.mean(0)) @ G_true.T + rng.standard_normal((400, D_B)) * 0.15
+        X_A_r = rng.standard_normal((1200, D_A)) * 0.8 + X_A_f.mean(0)
+        X_B_r = X_B_f.mean(0) + (X_A_r - X_A_f.mean(0)) @ G_true.T + rng.standard_normal((1200, D_B)) * 0.15
         # Add massive outlier tokens to H_A_f to prove RMS-normalization bounds them with ZERO 2.5x filter!
         H_A_f = X_A_f.copy() * 4.0
         H_A_f[:10] *= 500.0
@@ -2018,15 +2049,21 @@ def run_cpu_unit_tests() -> None:
     comp_srf = compile_channel_pushforward_organ([rule], ch, rm_B=1.0, mode="biasfree", shuffle_read_seed=999, force_abstained=True)
     w_rand = comp_srf["rules"][0]["w_c"]
     t1_rand = comp_srf["rules"][0]["t1"]
+    # Evaluate ACTUAL compiled bias-free gate firing rate (Audit F20 fix — not raw w_c!)
     X_B_fresh = X_B_f.mean(0) + (rng.standard_normal((5000, D_A)) * 0.8) @ G_true.T + rng.standard_normal((5000, D_B)) * 0.15
-    emp_ff = float(np.mean((X_B_fresh @ w_rand) > t1_rand))
-    assert emp_ff < 0.02, f"Conformal false-fire violated on fresh tokens: {emp_ff}"
-    print(f"  [PASS 4/7] Automatic ABSTAIN on SHUFFLED_R (R2={r2_shuf:+.3f}, r_dir={r_shuf:+.4f}, a_emp={a_shuf:.4f}) & conformal fresh ff={emp_ff:.4f} verified!")
+    emp_ff = float(np.mean((X_B_fresh @ comp_srf["weights"]["W_g"].T > 0.0).any(axis=1)))
+    assert emp_ff < 0.01, f"Compiled-gate conformal false-fire violated on fresh tokens: {emp_ff}"
+    print(f"  [PASS 4/7] Automatic ABSTAIN on SHUFFLED_R (R2={r2_shuf:+.3f}, r_dir={r_shuf:+.4f}, a_emp={a_shuf:.4f}) & compiled-gate conformal fresh ff={emp_ff:.4f} verified!")
 
-    # 5. Frame-Counterbalance Certificate Catches Imbalanced Templates!
+    # 5. Frame-Counterbalance Certificate Enforces ABSTAIN on Confounded Templates (Audit F19 fix!)
     assert abs(compute_frame_only_auroc([0, 0, 1, 1], [0, 0, 1, 1]) - 0.5) < 1e-12
     assert compute_frame_only_auroc([0, 0, 0, 0], [1, 1, 1, 1]) == 1.0
-    print("  [PASS 5/7] Frame-Counterbalance Certificate verified (balanced=0.5000, confounded=1.0000)!")
+    conf_rule = dict(rule, pos_frame_ids=np.zeros(60, dtype=int), neg_frame_ids=np.ones(60, dtype=int))
+    comp_conf = compile_channel_pushforward_organ([conf_rule], ch, rm_B=1.0, mode="biasfree")
+    assert comp_conf["status"] == "ABSTAIN" and comp_conf["weights"] is None and not comp_conf["rules"][0]["frame_cert_pass"], (
+        f"Confounded frame IDs failed to force ABSTAIN: {comp_conf['rules']}"
+    )
+    print("  [PASS 5/7] Frame-Counterbalance Certificate enforced (balanced=0.5000 -> COMPILED, confounded=1.0000 -> ABSTAIN)!")
 
     # 6. Real HF LlamaMLP, GraniteMLP (rm=0.22), & Qwen2MLP + Exact torch.equal State-Dict & Output Unlearning!
     from transformers.models.llama.configuration_llama import LlamaConfig

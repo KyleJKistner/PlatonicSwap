@@ -13,17 +13,22 @@ pip install -r requirements-lock.txt
 Verifies frozen engine SHA-256 provenance, mathematical invariants (Ledoit-Wolf shrinkage, exact 2-constraint KKT optimality, rectangular Stiefel channels, Cauchy-weighted write bridges, conformal false-fire bounds, automatic `ABSTAIN` on shuffled channels, exact `frame_only_auroc == 0.5000`, `SEALED CAP-2 SHA-256`, Cap-1/Cap-2/dataset overlap checks, and `torch.equal` bit-identical modular removal), and regenerates `results/master_audited_results.md`:
 
 ```bash
-shasum -a 256 experiments/platonic_organ_engine.py platonicswap/platonic_organ_engine.py
-# Both must match: 22ef57c9d196e12f2cd3c9ecc79ec0813803df43d5a6009f5422904948802306
+shasum -a 256 experiments/platonic_organ_engine.py
+# Frozen v1.0 archival engine must match: 22ef57c9d196e12f2cd3c9ecc79ec0813803df43d5a6009f5422904948802306
+# Note: platonicswap/platonic_organ_engine.py contains the v1.0.1 audit fixes (F19/F20/F21).
 
 PYTHONPATH=platonicswap:experiments python -B experiments/platonic_organ_engine.py --unit-test
+PYTHONPATH=platonicswap:experiments python -B platonicswap/platonic_organ_engine.py --unit-test
 PYTHONPATH=platonicswap:experiments python -B experiments/bio_ripple_sealed.py --unit-test
 PYTHONPATH=platonicswap:experiments python -B experiments/pilot_graft_t3_gap_scaled.py --unit-test
+PYTHONPATH=platonicswap:experiments python -B experiments/verify_audit_fixes.py
 python experiments/build_repo_tables.py
 ```
 
+> **Offline Tokenizer Check Caveat (Audit F25):** `experiments/bio_ripple_sealed.py` is SHA-256 locked (`001d296b…`) and skips local tokenizer checks if `experiments/hf_cache` is not yet downloaded; download models in Section 3 before treating tokenizer checks as verified.
+
 ## 3. Model Downloads (Required for MPS Runs)
-All experiment scripts load checkpoints strictly offline (`local_files_only=True`) from `experiments/hf_cache/<key>` (override via `PLATONICSWAP_HF_CACHE`). Download all 5 ungated base models once:
+All experiment scripts load checkpoints strictly offline (`local_files_only=True`) from `experiments/hf_cache/<key>` (override via `PLATONICSWAP_HF_CACHE`). Pin exact HuggingFace commit hashes with `--revision <commit_sha>` for bit-reproducible fresh clones:
 
 ```bash
 mkdir -p experiments/hf_cache

@@ -5,9 +5,9 @@
 **Canonical Results JSON:** `results/results_v5_1_input_barrier_falsifier.json` (`219,365` bytes; `0` NaN/Inf)  
 **Hardware / Runtime:** Colab `NVIDIA A100-SXM4-40GB` | Wall time: `3248.9s` (`54.1 min`) | Host peak RSS: `36.668 GiB`  
 **GPU VRAM Hygiene (Single-Model Phases):** Phase 0 peak `3.346 GiB` (post-unload `0.0079 GiB`), Phase 1 peak `16.138 GiB` (post-unload `0.0079 GiB`), Phase 2 peak `13.779 GiB` (post-unload `0.0079 GiB`)  
-**Strict Compliance:** `zero_sgd_strict = true`, `zero_task_fitted_writers = true`  
-**Grading Council:** Pre-GPU unanimous **`PASS / PASS`** (Gemini 4 Neon High + Astra 6.2 Ultra); Post-GPU unanimous **`PASS / PASS`** (Gemini 4 Neon High + Astra 6.2 Ultra)  
-**Final Decision:** **`STOP_BEFORE_G3`** (Do **not** launch Stage-2 native G3 compilation under the late-layer student readout recipe.)
+**Optimization / Fit Scope:** `zero_sgd_strict = true`, `zero_task_fitted_writers = true` *(Note, Audit F06: zero SGD and zero full-model backpropagation; attention calibration uses deterministic `L-BFGS-B` with `jac=True` on generic data, folded into Q/K matrices.)*  
+**Execution/Compliance Review:** Pre-GPU `PASS / PASS`; Post-GPU `PASS / PASS` (Gemini 4 Neon High + Astra 6.2 Ultra — protocol compliance on a negative run, NOT transfer success)  
+**Final Decision:** **`STOP_BEFORE_G3`** (Autonomous student-fed transfer **FAILED**; do **not** launch Stage-2 native G3 compilation under the late-layer student readout recipe.)
 
 ---
 
@@ -31,12 +31,12 @@
 
 ### Bottom-Line Diagnosis
 
-1. **Late-layer recipient-to-donor readout is decisively falsified (`STOP_BEFORE_G3`).** Across 1-Hop, 2-Hop Policy, and 2-Hop Binding, every zero-SGD late-layer student arm (`Arm 0`, `Arm 1a`, `Arm 1b`, `Arm 2a`, `Arm 2b`, `Arm 2c`) collapses (`Q_outlet <= 0.034`, `WIR <= 0.022`, live EM lift `-0.75 pp` to `+2.50 pp`).
-2. **The failure is a multiplicative double-wall in BOTH content routing (`Q, K`) and value supply (`V`) — NOT BOS calibration alone.** Restoring exact donor BOS sink mass alone (`S1_donor_sink_only`) yields virtually zero recovery (`WIR = -0.0132 / 0.0199 / 0.0012`). Even supplying exact donor attention weights (`S3_donor_attn_student_V = QA_KA_VB`) recovers only `~25%` of oracle `WIR` (`0.1296` vs `0.5222` on 1-Hop; `0.0880` vs `0.3344` on 2-Hop Policy; `0.0705` vs `0.2793` on 2-Hop Binding). Independently, cached paired right-minus-left writes already exhibit student/donor norm ratios of `0.100` (1-Hop) and `0.249` (2-Hop) and pooled cosines of `0.214` and `0.066` *before* applying `T_raw`.
-3. **Three concrete breakthroughs open a new architectural path for `v5.2`:**
-   - **Outlet bridge `T_raw` is live on 2-Hop Policy:** With true donor head outputs (`outlet_oracle_2A`), just 5 heads (`L26H17, L26H26, L27H24, L26H3, L25H9`) lift `1.5B` live greedy EM by **`+20.00 pp`** (`11.75% -> 31.75%`, `127/400` vs `47/400`, `Q_outlet = 0.5056`, `R2_c = 0.3978`, `WIR = 0.3344`), and by **`+14.00 pp`** on 2-Hop Binding (`9.50% -> 23.50%`, `Q_outlet = 0.4934`, null leakage `0.0974` matching donor's `0.0915`). *(See Section 6 for important oracle ceiling caveats on 1-Hop EM and 2-Hop Binding `WIR`/`R2_c`.)*
-   - **Arm 3c solves native `L0` tied-embedding ingress in real Qwen2.5-1.5B weights:** `K = 64` private channels at `alpha = 2^-6` pass post-`LN_0` at `kappa = 0.999988`, `generic_kl = 0.00117`, with exact parameter, norm-epsilon, and logit rollback.
-   - **Arm 3a + Arm 3b locate the upstream bottleneck and expose an ultra-sparse `L20_MLP` policy circuit:** `L20_MLP` solo mean-ablation destroys `54.91%` of 7B's 2-Hop policy margin (`4.3738 -> 1.9722`, `mean_dla = 0.0129`). Generic linearization fails (`-8.60%`) and generic cancellation is massive (`chi_nl = 93.92`, `chi_nl^2 = 8820.41`), yet retaining only **`k = 16` (`0.08%`) or `k = 64` (`0.34%`)** `disc`-ranked SwiGLU neurons on disjoint `eval` recovers **`67.55%` / `83.93%`** of the `L20_MLP` policy margin and **`75.75%` / `78.75%`** `tok0_acc` (vs `75.25%` intact, `57.00%` mean-ablated).
+1. **Autonomous student-fed late-layer readout FAILED (`STOP_BEFORE_G3`).** Across 1-Hop, 2-Hop Policy, and 2-Hop Binding, every tested late-layer student arm (`Arm 0`, `Arm 1a`, `Arm 1b`, `Arm 2a`, `Arm 2b`, `Arm 2c`) failed the behavioral gates (`Q_outlet <= 0.034`, `WIR <= 0.022`; selected `Arm_2a_multitap_L0` scored `51/400 = 12.75%` on 2-Hop Policy, tying the strongest shuffled control `51/400`, and dropped 1-Hop from `265` to `262/400`).
+2. **Within the tested late-layer adapter family, failure occurs in BOTH content routing (`Q, K`) and value supply (`V`) — NOT BOS calibration alone.** Restoring exact donor BOS sink mass alone (`S1_donor_sink_only`) yields virtually zero recovery (`WIR = -0.0132 / 0.0199 / 0.0012`). Even supplying exact donor attention weights (`S3_donor_attn_student_V = QA_KA_VB`) recovers only `~25%` of oracle `WIR` (`0.1296` vs `0.5222` on 1-Hop; `0.0880` vs `0.3344` on 2-Hop Policy; `0.0705` vs `0.2793` on 2-Hop Binding). *(Metric note, Audit F22: `c_true` is a direct-write final-residual subtraction surrogate, not full downstream ablation; `WIR` is a ratio of average wrong-item margin changes, not the fraction of wrong items flipped — e.g., two-hop oracle `WIR = 0.3344` corresponds to `25.21%` formerly-wrong first-token accuracy.)*
+3. **Three bounded diagnostic findings (NOT autonomous organ transfer):**
+   - **Donor-assisted outlet oracle (`outlet_oracle_2A`, donor computation required):** Injecting cached outputs from actual Donor 7B forward passes on the eval prompts for 5 heads (`L26H17, L26H26, L27H24, L26H3, L25H9`) via `T_raw` lifts `1.5B` live greedy EM by **`+20.00 pp`** (`11.75% -> 31.75%`, `127/400` vs `47/400`, `Q_outlet = 0.5056`, `R2_c = 0.3978`, `WIR = 0.3344`), and by **`+14.00 pp`** on 2-Hop Binding (`9.50% -> 23.50%`). This validates that the recipient can exploit donor-computed outlet signals; it is **not** an installed autonomous reasoning organ.
+   - **Arm 3c — Copied-coordinate `L0` tied-embedding storage/readback check:** Installing projected donor embedding coordinates into `K = 64` added student embedding columns at `alpha = 2^-6` and reading them back immediately after `LN_0` passes at `kappa = 0.999988`, `generic_kl = 0.00117`, with bit-exact rollback. No downstream attention/MLP organ reads these channels yet.
+   - **Arm 3a + Arm 3b — Last-token donor mediation inside intact 7B (untested for autonomous extraction/transfer):** Replacing ONLY the last token's activation vector in `L20_MLP` with generic mean activations drops 7B's 2-Hop policy margin (`4.3557 -> 1.5342`, while ablated 7B still answers `57.00%` correctly). Retaining `k = 16` (`0.08%`) or `k = 64` (`0.34%`) `disc`-ranked neurons at that last position inside the intact full donor recovers `67.55%` / `83.93%` of that margin drop (`75.75%` / `78.75%` `tok0_acc`), with negative binding recovery at `k=16` (`-13.82%`), `23.53%` at `k=64`, and no matched random-neuron control.
 
 ---
 
@@ -52,7 +52,7 @@
 - **Incremental Multi-Tap Ladder (`L26H17`, held-out `report`):**
   - `L_org_only` (`1536-D`): `q_r2 = 0.5469`, `v_r2 = 0.3566`.
   - `+L0_exact_donor_emb` (`1600-D`): `q_r2 = 0.5485` (`+0.0016`), **`v_r2 = 0.4155` (`+0.0589`)** — the single `64-D` `L0` donor embedding lift adds more `v_r2` than all four mid-layer taps (`L23, L19, L14, L8`) combined (`+0.0290`).
-  - Full 5-tap (`+L0+L23+L19+L14+L8`, `2112-D`): `q_r2 = 0.5683` (`+0.0214` total), `v_r2 = 0.4445` (`+0.0879` total). Over `43%` of `Q` variance and `55%` of `V` variance remain linearly unreachable from any recipient layer.
+  - Full 5-tap (`+L0+L23+L19+L14+L8`, `2112-D` using 128-D PCA taps): `q_r2 = 0.5683` (`+0.0214` total), `v_r2 = 0.4445` (`+0.0879` total). Within this tested linear multi-tap 128-D PCA estimator, over `43%` of `Q` variance and `55%` of `V` variance remain unpredicted (this diagnoses a linear-probe gap, not an information-theoretic proof of absence under arbitrary nonlinear readouts).
 
 ---
 
@@ -133,7 +133,7 @@ On generic `val_tune`, BOS calibration worked cleanly (`0.5714` student vs `0.57
 - **Upstream Heads:** Among ISA-ranked heads, live solo ablations on `disc` show positive causal drops for **`L22H1`** (`+0.6694` policy, `+0.7001` binding), **`L23H11`** (`+0.3236` policy, `+0.4431` binding), and **`L22H24`** (`+0.6359` binding), whereas `#1` ISA head `L22H25` had `-0.0003` policy and `-1.4471` binding drops (highlighting that ISA is a candidate ranking requiring independent mediation verification).
 
 ### 5.2 Arm 3b — `L20_MLP` Linearization vs Goodfire/Anthropic Sparse `J`-Lens Community (`M = 18,944`)
-- **Generic Cancellation Constant:** `chi_nl = 93.917`, `chi_nl^2 = 8820.41`, `nl_energy_frac = 0.5534` (`slicing_rel_err_bound_k256 = 34.45`), proving generic SVD/random slicing of `L20_MLP` suffers catastrophic cancellation.
+- **Generic Cancellation Constant:** `chi_nl = 93.917`, `chi_nl^2 = 8820.41`, `nl_energy_frac = 0.5534` (`slicing_rel_err_bound_k256 = 34.45` — an upper bound for naive random component sampling, not a universal lower bound against deterministic subsets, cancellation-aware methods, or SVD).
 - **Disjoint `eval` Evaluation (zero eval leakage; neuron ranking computed strictly on `disc` contrasts, common generic baseline `mean_silu_u_gen`):**
 
 | Condition on `L20_MLP` (Donor 7B) | Policy Margin (`tok0_acc`) | Policy Recovery | Binding Margin (`tok0_acc`) | Binding Recovery |
@@ -170,6 +170,6 @@ Both Post-GPU Council seats (**Gemini 4 Neon High** and **Astra 6.2 Ultra**) iss
 
 ## 7. Next-Step Implication (`v5.2` Pivot)
 
-Keep **G3 closed** for late-layer-only readout organs. `v5.1` proves that transplanting late readout heads (`L25–L27`) onto `1.5B`'s late residual fails because `1.5B` never executed the upstream `7B` intermediate computation (`L20_MLP` + `L22–L23` heads). The direct path forward for `v5.2` (using CUDA FP64 linalg and batched GPU replay per the new GPU Efficiency Policy) is:
+Keep **G3 closed** for the tested late-layer-only linear readout recipe. Within the tested late-layer linear multi-tap adapter family (`L25–L27`), student-fed readout failed on `1.5B` (this motivates pivoting upstream rather than proving autonomous transfer impossible). *(Reproducibility note, Audit F25: the original `v5.1` run cached intermediate `.npz` tensors in `/tmp/pswap_v51_eval_cache_*.npz` outside git; the script now defaults to `experiments/cache/` via `PLATONICSWAP_CACHE_DIR`.)* The next-step hypothesis for `v5.2` is:
 1. Verify frozen sparse `L20_MLP` (`k=16/64`) + `L22_MLP` / `L22H1, L22H24, L23H11` multi-stage donor circuits with matched random-subset controls and binding-specific readout heads, and
 2. Test whether carrying the **upstream nonlinear + attention sub-circuit** through the now-verified **native `L0` tied-embedding private lane** (`kappa = 0.999988`) breaks the multiplicative `Q/K/V` input wall without SGD.

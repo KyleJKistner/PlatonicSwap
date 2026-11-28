@@ -3438,7 +3438,9 @@ def run_phase2_recipient_v51(
             F.linear(torch.from_numpy(v_bar_prim[lh]).to(dev, dtype=Wo_prim_dev[hi].dtype), Wo_prim_dev[hi]).float().cpu().numpy()
             for hi, lh in enumerate(prim_heads)
         ], axis=0)  # (H, D_A)
-        eval_cache_path = Path(f"/tmp/pswap_v51_eval_cache_{tname}.npz")
+        eval_cache_dir = Path(os.environ.get("PLATONICSWAP_CACHE_DIR", str(Path(__file__).resolve().parent / "cache")))
+        eval_cache_dir.mkdir(parents=True, exist_ok=True)
+        eval_cache_path = eval_cache_dir / f"pswap_v51_eval_cache_{tname}.npz"
         np.savez_compressed(
             eval_cache_path,
             head_output_center=per_head_centers.astype(np.float32),
